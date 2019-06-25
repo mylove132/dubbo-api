@@ -72,6 +72,7 @@ public class ScheduleJobUtil extends QuartzJobBean {
 			scheduleJobLog.setStatus(SchedulerConstant.EXECUTE_FAILED);
 			scheduleJobLog.setError(StringUtils.substring(e.toString(), 0, 2000));
 		} finally {
+			log.info("***添加日志记录*****"+scheduleJobLog.toString());
 			scheduleJobLogService.insertSelective(scheduleJobLog);
 		}
     }

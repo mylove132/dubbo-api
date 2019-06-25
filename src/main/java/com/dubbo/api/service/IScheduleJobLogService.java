@@ -1,10 +1,11 @@
 package com.dubbo.api.service;
 
 
+import com.dubbo.api.common.bean.BaseResponse;
 import com.dubbo.api.model.ScheduleJobLog;
 
 public interface IScheduleJobLogService {
 
-    void insertSelective(ScheduleJobLog log);
+    BaseResponse insertSelective(ScheduleJobLog log);
 
 }

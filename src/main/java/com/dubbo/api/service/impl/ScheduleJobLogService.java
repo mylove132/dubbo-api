@@ -1,5 +1,7 @@
 package com.dubbo.api.service.impl;
 
+import com.dubbo.api.common.bean.BaseResponse;
+import com.dubbo.api.common.bean.SuccessResponse;
 import com.dubbo.api.dao.ScheduleJobLogMapper;
 import com.dubbo.api.model.ScheduleJobLog;
 import com.dubbo.api.service.IScheduleJobLogService;
@@ -15,7 +17,8 @@ public class ScheduleJobLogService implements IScheduleJobLogService {
     private ScheduleJobLogMapper scheduleJobLogMapper;
 
     @Override
-    public void insertSelective(ScheduleJobLog log) {
+    public BaseResponse insertSelective(ScheduleJobLog log) {
         scheduleJobLogMapper.insertSelective(log);
+        return new SuccessResponse(0);
     }
 }

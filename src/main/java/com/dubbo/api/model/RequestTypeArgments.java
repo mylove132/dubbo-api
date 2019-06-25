@@ -1,6 +1,5 @@
 package com.dubbo.api.model;
-
-import com.dubbo.api.service.JsonUtils;
+import com.dubbo.api.util.JsonUtils;
 import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
