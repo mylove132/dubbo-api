@@ -15,9 +15,8 @@
  * limitations under the License.
  */
 package com.dubbo.api.util;
-
-import com.dubbo.api.vo.RequestTypeArgments;
-import com.google.gson.reflect.TypeToken;
+import com.dubbo.api.model.RequestTypeArgments;
+import com.google.common.reflect.TypeToken;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Method;

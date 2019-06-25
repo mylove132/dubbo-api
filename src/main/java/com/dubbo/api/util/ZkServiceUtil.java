@@ -4,8 +4,8 @@ import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.ReferenceConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
 import com.alibaba.dubbo.rpc.service.GenericService;
-import com.dubbo.api.vo.DubboEntity;
-import com.dubbo.api.vo.RequestTypeArgments;
+import com.dubbo.api.model.DubboEntity;
+import com.dubbo.api.model.RequestTypeArgments;
 
 import java.util.ArrayList;
 import java.util.List;
