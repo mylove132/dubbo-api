@@ -68,8 +68,7 @@ public interface ScheduleJobMapper {
 	/**
 	 * 根据条件查询
 	 *
-	 * @param params
 	 * @return
 	 */
-	List<ScheduleJob> selectByParams(Map<String, Object> params);
+	List<ScheduleJob> selectByParams();
 }

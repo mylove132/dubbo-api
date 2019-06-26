@@ -10,8 +10,6 @@ import com.dubbo.api.common.util.ScheduleUtils;
 import com.dubbo.api.dao.ScheduleJobMapper;
 import com.dubbo.api.model.ScheduleJob;
 import com.dubbo.api.service.IScheduleJobService;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.CronTrigger;
@@ -64,33 +62,12 @@ public class ScheduleJobService implements IScheduleJobService {
 	/**
 	 * 定时任务列表查询
 	 *
-	 * @param params
 	 * @return
 	 */
 	@Override
-	public BaseResponse selectByQuery(Map<String, Object> params) {
-		if(null == params || params.isEmpty()) {
-			TableData<ScheduleJob> data = new TableData<>();
-			return new SuccessResponse<>(data);
-		}
-
-		// 分页参数
-		int page = 1;
-		int limit = 10;
-		if(null != params.get("page")) {
-			page = Integer.parseInt(params.get("page").toString());
-			params.remove("page");
-		}
-		if(null != params.get("limit")) {
-			limit = Integer.parseInt(params.get("limit").toString());
-			params.remove("limit");
-		}
-
-		// 查询条件
-		Page<Object> result = PageHelper.startPage(page, limit);
-		List<ScheduleJob> list = scheduleJobMapper.selectByParams(params);
-		TableData<ScheduleJob> data = new TableData<>(result.getTotal(), list);
-		return new SuccessResponse(data);
+	public BaseResponse selectByQuery() {
+		List<ScheduleJob> list = scheduleJobMapper.selectByParams();
+		return new SuccessResponse(list);
 	}
 
 	/**

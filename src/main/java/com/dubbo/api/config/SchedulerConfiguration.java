@@ -10,10 +10,17 @@ import java.util.Properties;
 @Configuration
 public class SchedulerConfiguration {
 
+    private JobFactory jobFactory;
+
+    public SchedulerConfiguration(JobFactory jobFactory){
+        this.jobFactory = jobFactory;
+    }
+
     @Bean
     public SchedulerFactoryBean schedulerFactoryBean(DataSource dataSource) {
         SchedulerFactoryBean factory = new SchedulerFactoryBean();
         factory.setDataSource(dataSource);
+        factory.setJobFactory(jobFactory);
 
         //quartz参数
         Properties prop = new Properties();
@@ -36,13 +43,12 @@ public class SchedulerConfiguration {
 
         factory.setSchedulerName("DemoScheduler");
         //延时启动
-        factory.setStartupDelay(30);
+        factory.setStartupDelay(0);
         factory.setApplicationContextSchedulerContextKey("applicationContextKey");
         //可选，QuartzScheduler 启动时更新己存在的Job，这样就不用每次修改targetObject后删除qrtz_job_details表对应记录了
         factory.setOverwriteExistingJobs(true);
         //设置自动启动，默认为true
         factory.setAutoStartup(true);
-
         return factory;
     }
 

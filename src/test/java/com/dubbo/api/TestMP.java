@@ -33,32 +33,20 @@ public class TestMP {
     }
 
         public static void main(String[] args) {
-            List<Integer> list = new ArrayList<>();
-            String zz = "abcabcdabcdeabab";
-            for (int i = 0; i < zz.length(); i++) {
-                if (i < zz.length() - 1) {
-                    if ((zz.charAt(i + 1) - zz.charAt(i) != 1)) {
-                        list.add(i);
-                    }
-                }
-            }
-            List<String> result = new ArrayList<>();
-            result.add(zz.substring(0, list.get(0) + 1));
-            result.add(zz.substring(list.get(list.size()-1)+1));
-            for (int i = 0; i < list.size(); i++) {
-                if (i < list.size() - 1) {
-                    result.add(zz.substring(list.get(i) + 1, list.get(i + 1) + 1));
-                }
-            }
-            for (String s : result){
-                System.out.println(s);
-            }
-            java.util.Collections.sort(result, new Comparator<String>() {
-                @Override
-                public int compare(String o1, String o2) {
-                    return new Integer(o2.length()).compareTo(new Integer(o1.length()));
-                }
-            });
-            System.out.println(result.get(0));
+           List<Integer> result = new ArrayList<>();
+           for (int i = 1;i<=4;i++){
+               for(int j = 1;j<=4;j++){
+                   for (int k = 1;k<=4;k++){
+                       if (i != j&& j != k && i!= k){
+                           result.add(i*100+j*10+k);
+                       }
+                   }
+               }
+           }
+            System.out.print(result.size()+" ");
+           for (int a = 0;a<result.size();a++){
+               System.out.print(result.get(a)+" ");
+
+           }
         }
 }

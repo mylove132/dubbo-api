@@ -1,10 +1,12 @@
 package com.dubbo.api.common.util;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.dubbo.api.common.constant.SchedulerConstant;
 import com.dubbo.api.model.ScheduleJob;
 import com.dubbo.api.model.ScheduleJobLog;
 import com.dubbo.api.service.IScheduleJobLogService;
+import com.dubbo.api.service.impl.ScheduleJobLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.JobExecutionContext;
@@ -72,8 +74,14 @@ public class ScheduleJobUtil extends QuartzJobBean {
 			scheduleJobLog.setStatus(SchedulerConstant.EXECUTE_FAILED);
 			scheduleJobLog.setError(StringUtils.substring(e.toString(), 0, 2000));
 		} finally {
-			log.info("***添加日志记录*****"+scheduleJobLog.toString());
-			scheduleJobLogService.insertSelective(scheduleJobLog);
+			try {
+				System.out.println("实力："+scheduleJobLogService);
+				log.info("执行的日志信息:"+JSONObject.toJSONString(scheduleJobLog));
+				scheduleJobLogService.insertSelective(scheduleJobLog);
+			}catch (Exception e){
+				e.printStackTrace();
+			}
+
 		}
     }
 }

@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface IScheduleJobService {
 
-    BaseResponse selectByQuery(Map<String, Object> params);
+    BaseResponse selectByQuery();
 
     BaseResponse add(ScheduleJob scheduleJob);
 

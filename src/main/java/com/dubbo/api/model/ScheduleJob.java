@@ -59,4 +59,9 @@ public class ScheduleJob {
 	private String crtUser;
 
 	private String crtName;
+
+	/**
+	 * 脚本外键
+	 */
+	private Integer scriptId;
 }

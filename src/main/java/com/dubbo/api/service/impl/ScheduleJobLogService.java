@@ -18,6 +18,7 @@ public class ScheduleJobLogService implements IScheduleJobLogService {
 
     @Override
     public BaseResponse insertSelective(ScheduleJobLog log) {
+        System.out.println("添加的日志信息:"+log);
         scheduleJobLogMapper.insertSelective(log);
         return new SuccessResponse(0);
     }

@@ -30,7 +30,7 @@ public class ScheduleJobController {
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	@ResponseBody
 	public BaseResponse list(@RequestParam Map<String, Object> params){
-		return scheduleJobService.selectByQuery(params);
+		return scheduleJobService.selectByQuery();
 	}
 
 	/**
@@ -64,9 +64,9 @@ public class ScheduleJobController {
 	 * @param ids
 	 * @return
 	 */
-	@RequestMapping(value = "/batchDel",method = RequestMethod.DELETE)
+	@RequestMapping(value = "/batchDel/{ids}",method = RequestMethod.DELETE)
 	@ResponseBody
-	public BaseResponse delete(@RequestBody List<Integer> ids){
+	public BaseResponse delete(@PathVariable List<Integer> ids){
 		return scheduleJobService.deleteBatch(ids);
 	}
 
@@ -76,9 +76,9 @@ public class ScheduleJobController {
 	 * @param ids
 	 * @return
 	 */
-	@RequestMapping(value = "/run",method = RequestMethod.POST)
+	@RequestMapping(value = "/run/{ids}",method = RequestMethod.GET)
 	@ResponseBody
-	public BaseResponse run(@RequestBody List<Integer> ids){
+	public BaseResponse run(@PathVariable List<Integer> ids){
 		return scheduleJobService.run(ids);
 	}
 
@@ -88,9 +88,9 @@ public class ScheduleJobController {
 	 * @param ids
 	 * @return
 	 */
-	@RequestMapping(value = "/pause",method = RequestMethod.POST)
+	@RequestMapping(value = "/pause/{ids}",method = RequestMethod.GET)
 	@ResponseBody
-	public BaseResponse pause(@RequestBody List<Integer> ids){
+	public BaseResponse pause(@PathVariable List<Integer> ids){
 		return scheduleJobService.pause(ids);
 	}
 
@@ -100,9 +100,9 @@ public class ScheduleJobController {
 	 * @param ids
 	 * @return
 	 */
-	@RequestMapping(value = "/resume",method = RequestMethod.POST)
+	@RequestMapping(value = "/resume/{ids}",method = RequestMethod.GET)
 	@ResponseBody
-	public BaseResponse resume(@RequestBody List<Integer> ids){
+	public BaseResponse resume(@PathVariable List<Integer> ids){
 		return scheduleJobService.resume(ids);
 	}
 
