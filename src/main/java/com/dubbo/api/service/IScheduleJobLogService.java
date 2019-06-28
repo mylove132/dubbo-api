@@ -2,7 +2,7 @@ package com.dubbo.api.service;
 
 
 import com.dubbo.api.common.bean.BaseResponse;
-import com.dubbo.api.model.ScheduleJobLog;
+import com.dubbo.api.vo.ScheduleJobLog;
 
 public interface IScheduleJobLogService {
 

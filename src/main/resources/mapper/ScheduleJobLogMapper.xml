@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dubbo.api.dao.ScheduleJobLogMapper">
-	<resultMap id="BaseResultMap" type="com.dubbo.api.model.ScheduleJobLog">
+	<resultMap id="BaseResultMap" type="com.dubbo.api.vo.ScheduleJobLog">
 		<id column="id" jdbcType="INTEGER" property="id" />
 		<result column="job_id" jdbcType="INTEGER" property="jobId" />
 		<result column="bean_name" jdbcType="VARCHAR" property="beanName" />
@@ -16,7 +16,7 @@
 		id, job_id, bean_name, method_name, params, status, error, times, crt_time
 	</sql>
 
-	<insert id="insertSelective" parameterType="com.dubbo.api.model.ScheduleJobLog">
+	<insert id="insertSelective" parameterType="com.dubbo.api.vo.ScheduleJobLog">
 		insert into schedule_job_log
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">

@@ -1,11 +1,10 @@
 package com.dubbo.api.dao;
 
-import com.dubbo.api.model.ScheduleJob;
+import com.dubbo.api.vo.ScheduleJob;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface ScheduleJobMapper {

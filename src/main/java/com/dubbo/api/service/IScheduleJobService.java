@@ -1,10 +1,9 @@
 package com.dubbo.api.service;
 
 import com.dubbo.api.common.bean.BaseResponse;
-import com.dubbo.api.model.ScheduleJob;
+import com.dubbo.api.vo.ScheduleJob;
 
 import java.util.List;
-import java.util.Map;
 
 public interface IScheduleJobService {
 

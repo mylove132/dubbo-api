@@ -1,12 +1,10 @@
 package com.dubbo.api.controller;
 
 import com.dubbo.api.common.bean.BaseResponse;
-import com.dubbo.api.model.ScheduleJobLog;
+import com.dubbo.api.vo.ScheduleJobLog;
 import com.dubbo.api.service.impl.ScheduleJobLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 /**
  * 定时任务日志

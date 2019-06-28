@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dubbo.api.dao.ScriptMapper">
+  <resultMap id="BaseResultMap" type="com.dubbo.api.vo.Script">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="pre_number" jdbcType="INTEGER" property="preNumber" />
+    <result column="pre_time" jdbcType="INTEGER" property="preTime" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="time_out" jdbcType="INTEGER" property="timeOut" />
+    <result column="request_type" jdbcType="INTEGER" property="requestType" />
+    <result column="protocol" jdbcType="INTEGER" property="protocol" />
+    <result column="ins" jdbcType="VARCHAR" property="ins" />
+    <result column="assert_text" jdbcType="VARCHAR" property="assertText" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="params" jdbcType="VARCHAR" property="params" />
+    <result column="param_type" jdbcType="VARCHAR" property="paramType" />
+    <result column="cookie" jdbcType="VARCHAR" property="cookie" />
+    <result column="header" jdbcType="VARCHAR" property="header" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="version" jdbcType="VARCHAR" property="version" />
+    <result column="project_id" jdbcType="INTEGER" property="projectId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="port" jdbcType="INTEGER" property="port" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, pre_number, pre_time, url, time_out, request_type, protocol, ins, assert_text, 
+    method, params, param_type, cookie, header, create_time, update_time, version, project_id, 
+    user_id, ip, port
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from entity_script
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from entity_script
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dubbo.api.vo.Script">
+    insert into entity_script (id, name, pre_number, 
+      pre_time, url, time_out, 
+      request_type, protocol, ins, 
+      assert_text, method, params, 
+      param_type, cookie, header, 
+      create_time, update_time, version, 
+      project_id, user_id, ip, 
+      port)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{preNumber,jdbcType=INTEGER}, 
+      #{preTime,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{timeOut,jdbcType=INTEGER}, 
+      #{requestType,jdbcType=INTEGER}, #{protocol,jdbcType=INTEGER}, #{ins,jdbcType=VARCHAR}, 
+      #{assertText,jdbcType=VARCHAR}, #{method,jdbcType=VARCHAR}, #{params,jdbcType=VARCHAR}, 
+      #{paramType,jdbcType=VARCHAR}, #{cookie,jdbcType=VARCHAR}, #{header,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{version,jdbcType=VARCHAR}, 
+      #{projectId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, 
+      #{port,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dubbo.api.vo.Script">
+    insert into entity_script
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="preNumber != null">
+        pre_number,
+      </if>
+      <if test="preTime != null">
+        pre_time,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="timeOut != null">
+        time_out,
+      </if>
+      <if test="requestType != null">
+        request_type,
+      </if>
+      <if test="protocol != null">
+        protocol,
+      </if>
+      <if test="ins != null">
+        ins,
+      </if>
+      <if test="assertText != null">
+        assert_text,
+      </if>
+      <if test="method != null">
+        method,
+      </if>
+      <if test="params != null">
+        params,
+      </if>
+      <if test="paramType != null">
+        param_type,
+      </if>
+      <if test="cookie != null">
+        cookie,
+      </if>
+      <if test="header != null">
+        header,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="port != null">
+        port,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="preNumber != null">
+        #{preNumber,jdbcType=INTEGER},
+      </if>
+      <if test="preTime != null">
+        #{preTime,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="timeOut != null">
+        #{timeOut,jdbcType=INTEGER},
+      </if>
+      <if test="requestType != null">
+        #{requestType,jdbcType=INTEGER},
+      </if>
+      <if test="protocol != null">
+        #{protocol,jdbcType=INTEGER},
+      </if>
+      <if test="ins != null">
+        #{ins,jdbcType=VARCHAR},
+      </if>
+      <if test="assertText != null">
+        #{assertText,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null">
+        #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="paramType != null">
+        #{paramType,jdbcType=VARCHAR},
+      </if>
+      <if test="cookie != null">
+        #{cookie,jdbcType=VARCHAR},
+      </if>
+      <if test="header != null">
+        #{header,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        #{port,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dubbo.api.vo.Script">
+    update entity_script
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="preNumber != null">
+        pre_number = #{preNumber,jdbcType=INTEGER},
+      </if>
+      <if test="preTime != null">
+        pre_time = #{preTime,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="timeOut != null">
+        time_out = #{timeOut,jdbcType=INTEGER},
+      </if>
+      <if test="requestType != null">
+        request_type = #{requestType,jdbcType=INTEGER},
+      </if>
+      <if test="protocol != null">
+        protocol = #{protocol,jdbcType=INTEGER},
+      </if>
+      <if test="ins != null">
+        ins = #{ins,jdbcType=VARCHAR},
+      </if>
+      <if test="assertText != null">
+        assert_text = #{assertText,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        method = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null">
+        params = #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="paramType != null">
+        param_type = #{paramType,jdbcType=VARCHAR},
+      </if>
+      <if test="cookie != null">
+        cookie = #{cookie,jdbcType=VARCHAR},
+      </if>
+      <if test="header != null">
+        header = #{header,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        port = #{port,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dubbo.api.vo.Script">
+    update entity_script
+    set name = #{name,jdbcType=VARCHAR},
+      pre_number = #{preNumber,jdbcType=INTEGER},
+      pre_time = #{preTime,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      time_out = #{timeOut,jdbcType=INTEGER},
+      request_type = #{requestType,jdbcType=INTEGER},
+      protocol = #{protocol,jdbcType=INTEGER},
+      ins = #{ins,jdbcType=VARCHAR},
+      assert_text = #{assertText,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      params = #{params,jdbcType=VARCHAR},
+      param_type = #{paramType,jdbcType=VARCHAR},
+      cookie = #{cookie,jdbcType=VARCHAR},
+      header = #{header,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=VARCHAR},
+      project_id = #{projectId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      ip = #{ip,jdbcType=VARCHAR},
+      port = #{port,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

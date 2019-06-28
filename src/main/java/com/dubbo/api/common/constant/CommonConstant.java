@@ -6,7 +6,8 @@ package com.dubbo.api.common.constant;
 public enum CommonConstant {
 
     OP_SUCCESS(0, "operation.success"),
-    OP_FAILED(1, "operation.failed");
+    OP_FAILED(1, "operation.failed"),
+    AUTH_FAILED(3001,"认证失败");
 
 
     CommonConstant(Integer code, String message) {

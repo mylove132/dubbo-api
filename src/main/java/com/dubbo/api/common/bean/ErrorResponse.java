@@ -10,6 +10,10 @@ public class ErrorResponse extends BaseResponse {
         this.setMessage(message);
     }
 
+    public ErrorResponse(CommonConstant commonConstant){
+        this.setCode(commonConstant.getCode());
+        this.setMessage(commonConstant.getMessage());
+    }
     public ErrorResponse(String message) {
         this.setCode(CommonConstant.OP_FAILED.getCode());
         this.setMessage(message);

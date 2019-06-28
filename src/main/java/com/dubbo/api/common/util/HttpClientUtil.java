@@ -1,5 +1,5 @@
-package com.dubbo.api.task;
-import com.dubbo.api.common.util.RequestClientInterface;
+package com.dubbo.api.common.util;
+
 import org.apache.rocketmq.common.utils.HttpTinyClient;
 
 import java.util.HashMap;
@@ -8,21 +8,24 @@ import java.util.Map;
 /**
  * @Author: liuzhanhui
  * @Decription:
- * @Date: Created in 2019-06-25:14:18
- * Modify date: 2019-06-25:14:18
+ * @Date: Created in 2019-06-26:14:44
+ * Modify date: 2019-06-26:14:44
  */
-public class ExecJmeterScript {
+public class HttpClientUtil {
 
-    public void execJmeterScript(String userAndId){
-        String user = userAndId.split(",")[0];
-        String id = userAndId.split(",")[1];
-        String url = "http://127.0.0.1:8000/api/exec/script";
+    public static void main(String[] args) {
         RequestClientInterface http = new RequestClientInterface();
+        String url = "https://sso-hotfix.xk12.cn/login?service=https://jiaoshi-hotfix.xk12.cn/";
         Map<String, Object> map = new HashMap<>();
-        map.put("user",user);
-        map.put("id",id);
+        map.put("username","61104096");
+        map.put("password","123456");
         try {
-            HttpTinyClient.HttpResult response = http.doPost(url,map);
+            HttpTinyClient.HttpResult response = null;
+            try {
+                response = http.doPost(url,map);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
             System.out.println("返回code码："+response.code);
             System.out.println("返回内容："+response.content);
             System.out.println("返回内容-----："+response.toString());

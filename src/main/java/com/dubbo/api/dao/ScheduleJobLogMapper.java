@@ -1,5 +1,5 @@
 package com.dubbo.api.dao;
-import com.dubbo.api.model.ScheduleJobLog;
+import com.dubbo.api.vo.ScheduleJobLog;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

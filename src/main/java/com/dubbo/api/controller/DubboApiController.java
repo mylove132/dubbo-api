@@ -1,13 +1,13 @@
 package com.dubbo.api.controller;
 
 import com.alibaba.dubbo.rpc.service.GenericService;
-import com.dubbo.api.model.DubboEntity;
-import com.dubbo.api.model.RequestTypeArgments;
-import com.dubbo.api.response.CommonResponse;
-import com.dubbo.api.response.ErrorCode;
-import com.dubbo.api.response.Response;
-import com.dubbo.api.util.ClassUtils;
-import com.dubbo.api.util.ZkServiceUtil;
+import com.dubbo.api.common.bean.BaseResponse;
+import com.dubbo.api.common.bean.ErrorResponse;
+import com.dubbo.api.common.bean.SuccessResponse;
+import com.dubbo.api.common.util.ClassUtils;
+import com.dubbo.api.common.util.ZkServiceUtil;
+import com.dubbo.api.vo.DubboEntity;
+import com.dubbo.api.vo.RequestTypeArgments;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,30 +28,30 @@ public class DubboApiController {
 
     ZkServiceUtil zkServiceUtil = new ZkServiceUtil();
     @RequestMapping(value = "/dubboTest", method = RequestMethod.POST)
-    public Response testDubboInterface(@RequestBody DubboEntity entity) {
+    public BaseResponse testDubboInterface(@RequestBody DubboEntity entity) {
         if (entity.getInterfaceName() == null || entity.getInterfaceName().equals("")) {
-            return CommonResponse.makeRsp(ErrorCode.REQUEST_PARAM_NULL.setMsg("接口不能为空"));
+            return new ErrorResponse(10001,"接口不能为空",null);
         }
         if (entity.getMethodName() == null || entity.getMethodName().equals("")) {
-            return CommonResponse.makeRsp(ErrorCode.REQUEST_PARAM_NULL.setMsg("方法不能为空"));
+            return new ErrorResponse(10002,"方法不能为空",null);
         }
         List<RequestTypeArgments> requestTypeArgments = entity.getRequestParamTypeArgs();
         List<String> paramTypeList = new ArrayList<>();
         List<Object> paramValueList = new ArrayList<>();
         for (RequestTypeArgments typeArgments : requestTypeArgments) {
             if (typeArgments.getParamType() == null || typeArgments.getParamType().equals("")) {
-                return CommonResponse.makeRsp(ErrorCode.REQUEST_PARAM_NULL.setMsg("参数类型不能为空"));
+                return new ErrorResponse(10003,"参数类型不能为空",null);
             }
             if (typeArgments.getParamValue() == null || typeArgments.getParamValue().equals("")) {
-                return CommonResponse.makeRsp(ErrorCode.REQUEST_PARAM_NULL.setMsg("参数值不能为空"));
+                return new ErrorResponse(10004,"参数值不能为空",null);
             }
             ClassUtils.parseParameter(paramTypeList, paramValueList, typeArgments);
         }
         if (entity.getAddress() == null || entity.getAddress().equals("")) {
-            return CommonResponse.makeRsp(ErrorCode.REQUEST_PARAM_NULL.setMsg("协议地址不能为空"));
+            return new ErrorResponse(10005,"协议地址不能为空",null);
         }
         if (entity.getProtocol() == null || entity.getProtocol().equals("")) {
-            return CommonResponse.makeRsp(ErrorCode.REQUEST_PARAM_NULL.setMsg("协议不能为空"));
+            return new ErrorResponse(10005,"协议不能为空",null);
         }
         if (entity.getTimeOut() == 0) {
             entity.setTimeOut(5000);
@@ -68,7 +68,7 @@ public class DubboApiController {
         Object result = service.$invoke(entity.getMethodName(),
                 paramTypeList.toArray(new String[paramTypeList.size()]),
                 paramValueList.toArray(new Object[paramValueList.size()]));
-        return CommonResponse.makeOKRsp(result);
+        return new SuccessResponse(result);
     }
 
 }

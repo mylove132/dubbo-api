@@ -2,13 +2,12 @@ package com.dubbo.api.service.impl;
 
 import com.dubbo.api.common.bean.BaseResponse;
 import com.dubbo.api.common.bean.SuccessResponse;
-import com.dubbo.api.common.bean.TableData;
 import com.dubbo.api.common.util.MessageUtil;
 import com.dubbo.api.common.bean.ErrorResponse;
 import com.dubbo.api.common.constant.SchedulerConstant;
 import com.dubbo.api.common.util.ScheduleUtils;
 import com.dubbo.api.dao.ScheduleJobMapper;
-import com.dubbo.api.model.ScheduleJob;
+import com.dubbo.api.vo.ScheduleJob;
 import com.dubbo.api.service.IScheduleJobService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -23,7 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.PostConstruct;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @Service

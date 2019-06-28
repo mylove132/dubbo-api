@@ -1,7 +1,7 @@
 package com.dubbo.api.controller;
 
 import com.dubbo.api.common.bean.BaseResponse;
-import com.dubbo.api.model.ScheduleJob;
+import com.dubbo.api.vo.ScheduleJob;
 import com.dubbo.api.service.IScheduleJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

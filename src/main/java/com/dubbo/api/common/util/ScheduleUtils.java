@@ -2,7 +2,7 @@ package com.dubbo.api.common.util;
 
 import com.alibaba.fastjson.JSON;
 import com.dubbo.api.common.constant.SchedulerConstant;
-import com.dubbo.api.model.ScheduleJob;
+import com.dubbo.api.vo.ScheduleJob;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 
