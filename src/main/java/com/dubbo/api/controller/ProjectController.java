@@ -40,6 +40,8 @@ public class ProjectController {
     @Autowired
     private ProjectTypeMapper projectTypeMapper;
 
+
+    @AuthPermission(PermissionConstant.COMMON_USER)
     @RequestMapping(value = "",method = RequestMethod.GET)
     public BaseResponse projectListController(){
         log.info("获取项目列表");
@@ -68,6 +70,7 @@ public class ProjectController {
         return new SuccessResponse(listMap);
     }
 
+    @AuthPermission(PermissionConstant.VIP)
     @RequestMapping(value = "",method = RequestMethod.POST)
     public BaseResponse addProjectController(Project project){
         log.info("添加项目");
@@ -111,6 +114,12 @@ public class ProjectController {
     public BaseResponse deleteProjectController(@PathVariable Integer id){
         log.info("删除项目id:"+id);
         return new SuccessResponse(projectService.deleteProjectService(id));
+    }
+
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    public BaseResponse getProjectController(@PathVariable Integer id){
+        log.info("根据项目id:"+id+"获取项目信息");
+        return new SuccessResponse(projectService.getProjectByIdService(id));
     }
 
     @RequestMapping(value = "/filter",method = RequestMethod.GET)
@@ -163,7 +172,6 @@ public class ProjectController {
         return new SuccessResponse(listMap);
     }
 
-    @AuthPermission
     @RequestMapping(value = "/search",method = RequestMethod.GET)
     public BaseResponse searchProjectListController(String keyword){
         log.info("搜索项目列表");

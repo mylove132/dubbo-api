@@ -1,9 +1,12 @@
 package com.dubbo.api.common.util;
 
+import org.apache.http.Header;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
@@ -36,9 +39,13 @@ public class RequestClientInterface {
      * @return
      * @throws Exception
      */
-    public  HttpTinyClient.HttpResult doPost(String url, Map<String, Object> map) throws Exception {
+    public  HttpTinyClient.HttpResult doPost(Map<String,Object> headers,Map<String,Object> cookies, String url, Map<String, Object> map) throws Exception {
         // 声明httpPost请求
         HttpPost httpPost = new HttpPost(url);
+        CookieStore cookieStore = new BasicCookieStore();
+        for (Map.Entry<String,Object> entry:headers.entrySet()){
+            httpPost.setHeader(entry.getKey(),entry.getValue().toString());
+        }
 
         // 判断map不为空
         if (map != null) {

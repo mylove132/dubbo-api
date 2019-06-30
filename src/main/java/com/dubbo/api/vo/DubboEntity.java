@@ -99,21 +99,4 @@ public class DubboEntity implements Serializable {
                 '}';
     }
 
-    public static void main(String[] args) {
-        DubboEntity dubboEntity = new DubboEntity();
-        dubboEntity.setGroup(null);
-        dubboEntity.setVersion(null);
-        dubboEntity.setTimeOut(null);
-        dubboEntity.setAddress("172.18.4.48:2181");
-        dubboEntity.setProtocol("zookeeper");
-        dubboEntity.setInterfaceName("com.noriental.adminsvr.service.teaching.ChapterService");
-        dubboEntity.setMethodName("findByIds");
-        List<RequestTypeArgments> requestTypeArgments = new ArrayList<>();
-        RequestTypeArgments typeArgments = new RequestTypeArgments("com.noriental.adminsvr.response.ResponseEntity","");
-
-        requestTypeArgments.add(typeArgments);
-        dubboEntity.setRequestParamTypeArgs(requestTypeArgments);
-        System.out.println(dubboEntity.toString());
-
-    }
 }

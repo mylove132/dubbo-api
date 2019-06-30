@@ -10,6 +10,8 @@ public interface IProjectService {
 
     int deleteProjectService(Integer id);
 
+    Project getProjectByIdService(Integer projectId);
+
     List<Project> getProjectListService();
 
     List<Project> filterUserProjectListService(Integer userId);

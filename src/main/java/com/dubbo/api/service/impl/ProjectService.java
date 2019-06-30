@@ -28,6 +28,11 @@ public class ProjectService implements IProjectService {
     }
 
     @Override
+    public Project getProjectByIdService(Integer projectId) {
+        return projectMapper.getProjectById(projectId);
+    }
+
+    @Override
     public List<Project> getProjectListService() {
         return projectMapper.projectList();
     }

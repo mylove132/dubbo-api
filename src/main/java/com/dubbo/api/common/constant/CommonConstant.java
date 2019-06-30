@@ -11,7 +11,8 @@ public enum CommonConstant {
     USER_PASSWORD_ERROR(4001,"用户名密码错误"),
     ADD_TOKEN_FAILED(4003,"添加token失败"),
     UPDATE_TOKEN_FAILED(4004,"更新token失败"),
-    ADD_PROJECT_FAIL(5001,"添加项目失败");
+    ADD_PROJECT_FAIL(5001,"添加项目失败"),
+    ADD_SCRIPT_FAIL(6001,"添加脚本失败");
 
 
     CommonConstant(Integer code, String message) {

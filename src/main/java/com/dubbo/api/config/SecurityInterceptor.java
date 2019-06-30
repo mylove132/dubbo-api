@@ -82,6 +82,8 @@ public class SecurityInterceptor implements HandlerInterceptor {
                             response.sendError(HttpStatus.FORBIDDEN.value(), "用户角色无权限");
                             return false;
                         }else {
+                            tk.setUpdateTime(new Date());
+                            tokenMapper.updateByPrimaryKeySelective(tk);
                             return true;
                         }
                     }
