@@ -13,6 +13,10 @@ public interface TokenMapper {
 
     Token selectByPrimaryKey(Integer id);
 
+    Token selectByToken(String token);
+
+    Token selectByUserId(Integer userId);
+
     int updateByPrimaryKeySelective(Token record);
 
     int updateByPrimaryKey(Token record);

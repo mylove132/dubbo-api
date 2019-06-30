@@ -15,9 +15,9 @@ public class Script {
 
     private Integer timeOut;
 
-    private Integer requestType;
+    private Integer requestTypeId;
 
-    private Integer protocol;
+    private Integer protocolId;
 
     private String ins;
 
@@ -95,20 +95,20 @@ public class Script {
         this.timeOut = timeOut;
     }
 
-    public Integer getRequestType() {
-        return requestType;
+    public Integer getRequestTypeId() {
+        return requestTypeId;
     }
 
-    public void setRequestType(Integer requestType) {
-        this.requestType = requestType;
+    public void setRequestTypeId(Integer requestTypeId) {
+        this.requestTypeId = requestTypeId;
     }
 
-    public Integer getProtocol() {
-        return protocol;
+    public Integer getProtocolId() {
+        return protocolId;
     }
 
-    public void setProtocol(Integer protocol) {
-        this.protocol = protocol;
+    public void setProtocolId(Integer protocolId) {
+        this.protocolId = protocolId;
     }
 
     public String getIns() {

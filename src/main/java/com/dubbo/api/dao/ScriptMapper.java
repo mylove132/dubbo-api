@@ -3,6 +3,8 @@ package com.dubbo.api.dao;
 import com.dubbo.api.vo.Script;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface ScriptMapper {
     int deleteByPrimaryKey(Integer id);
@@ -16,4 +18,9 @@ public interface ScriptMapper {
     int updateByPrimaryKeySelective(Script record);
 
     int updateByPrimaryKey(Script record);
+
+    List<Script> listScript();
+
+    List<Script> listScriptByProjectId(Integer projectId);
+
 }

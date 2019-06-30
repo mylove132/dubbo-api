@@ -1,8 +1,9 @@
 package com.dubbo.api.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Project {
+public class Project implements Serializable {
     private Integer id;
 
     private String name;
@@ -11,7 +12,7 @@ public class Project {
 
     private Integer type;
 
-    private String desc;
+    private String descption;
 
     private Date ctime;
 
@@ -51,12 +52,12 @@ public class Project {
         this.type = type;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescption() {
+        return descption;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setDescption(String descption) {
+        this.descption = descption == null ? null : descption.trim();
     }
 
     public Date getCtime() {
@@ -81,5 +82,19 @@ public class Project {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", env=" + env +
+                ", type=" + type +
+                ", descption='" + descption + '\'' +
+                ", ctime=" + ctime +
+                ", updateTime=" + updateTime +
+                ", userId=" + userId +
+                '}';
     }
 }

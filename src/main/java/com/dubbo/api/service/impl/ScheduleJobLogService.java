@@ -5,10 +5,12 @@ import com.dubbo.api.common.bean.SuccessResponse;
 import com.dubbo.api.dao.ScheduleJobLogMapper;
 import com.dubbo.api.vo.ScheduleJobLog;
 import com.dubbo.api.service.IScheduleJobLogService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class ScheduleJobLogService implements IScheduleJobLogService {

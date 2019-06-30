@@ -2,6 +2,7 @@ package com.dubbo.api.dao;
 
 import com.dubbo.api.vo.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -23,5 +24,5 @@ public interface UserMapper {
 
     List<User> getUserList();
 
-    User getUserByEmailAndPassword(String email,String password);
+    User getUserByEmailAndPassword(@Param("email") String email, @Param("password") String password);
 }
