@@ -5,6 +5,8 @@ public class ProjectEnv {
 
     private String name;
 
+    private String zk;
+
     public Integer getId() {
         return id;
     }
@@ -19,5 +21,13 @@ public class ProjectEnv {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getZk() {
+        return zk;
+    }
+
+    public void setZk(String zk) {
+        this.zk = zk == null ? null : zk.trim();
     }
 }

@@ -1,7 +1,10 @@
 package com.dubbo.api;
 
+import com.dubbo.api.common.util.HttpClientUtil;
+
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -33,20 +36,16 @@ public class TestMP {
     }
 
         public static void main(String[] args) {
-           List<Integer> result = new ArrayList<>();
-           for (int i = 1;i<=4;i++){
-               for(int j = 1;j<=4;j++){
-                   for (int k = 1;k<=4;k++){
-                       if (i != j&& j != k && i!= k){
-                           result.add(i*100+j*10+k);
-                       }
-                   }
-               }
-           }
-            System.out.print(result.size()+" ");
-           for (int a = 0;a<result.size();a++){
-               System.out.print(result.get(a)+" ");
-
-           }
+            HashMap<String,String> formMap = new HashMap<>();
+            formMap.put("requestid","2132133121");
+            formMap.put("token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxMzA3MjciLCJzeXN0ZW1JZCI6IjgxOTUxMDk2NjA5Iiwib3JnSWQiOiI4MCIsInRpbWVzdGFtcCI6IjE1NjA5MzAyMDY4NDUifQ.bNoV9ARuwTsHr9Z7uQlE6-7CN7XIfwwoM3LaEBhFMtQ");
+            formMap.put("Content-Type","application/json");
+            String url = "http://stupad-hotfix.xk12.cn/api/pad/xiaoyun/knowledge";
+            String params = "{\n" +
+                    "    \"ktype\": 1,\n" +
+                    "    \"klevel\": 2\n" +
+                    "}";
+            String a = HttpClientUtil.doPostJson(formMap, null, 2000, url, params);
+            System.out.println(a);
         }
 }

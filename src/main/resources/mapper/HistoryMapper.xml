@@ -12,6 +12,22 @@
   <sql id="Base_Column_List">
     id, create_time, md5, status, script_id, user_id
   </sql>
+
+  <select id="listHistory" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from entity_history
+    ORDER BY create_time DESC
+  </select>
+
+  <select id="listHistoryByScriptId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from entity_history
+    where script_id = #{scriptId,jdbcType=INTEGER}
+    ORDER BY create_time DESC
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

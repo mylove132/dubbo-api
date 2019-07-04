@@ -4,8 +4,12 @@ import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.ReferenceConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
 import com.alibaba.dubbo.rpc.service.GenericService;
+import com.dubbo.api.dao.ProjectEnvMapper;
 import com.dubbo.api.vo.DubboEntity;
+import com.dubbo.api.vo.ProjectEnv;
 import com.dubbo.api.vo.RequestTypeArgments;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,21 +20,14 @@ import java.util.List;
  * @Date: Created in 2019-01-02:10:56
  * Modify date: 2019-01-02:10:56
  */
+@Slf4j
 public class ZkServiceUtil {
 
+
+
     public GenericService getGenericService(DubboEntity entity) {
-        String address = "";
-        if(entity.getAddress().equals("1")){
-            address = "10.10.6.3:2181";
-        }else if(entity.getAddress().equals("2")){
-            address = "172.18.4.48:2181";
-        }else if(entity.getAddress().equals("3")){
-            address = "10.10.1.7:2181";
-        }else {
-            address = "10.10.6.3:2181";
-        }
         RegistryConfig registry = new RegistryConfig();
-        registry.setAddress(address);
+        registry.setAddress(entity.getAddress());
         registry.setProtocol(entity.getProtocol());
         registry.setGroup(entity.getGroup());
         ReferenceConfig<GenericService> reference = new ReferenceConfig<GenericService>();
@@ -61,9 +58,6 @@ public class ZkServiceUtil {
         List<String> paramTypeList = new ArrayList<>();
         List<Object> paramValueList = new ArrayList<>();
         ClassUtils.parseParameter(paramTypeList, paramValueList, typeArgments);
-        System.out.println("测试数据"+paramTypeList);
-        System.out.println("测试数据"+paramValueList);
-        System.out.println(dubboEntity.getMethodName());
         dubboEntity.setRequestParamTypeArgs(requestTypeArgments);
         try {
             Object result = util.getGenericService(dubboEntity).$invoke("findResPackage",

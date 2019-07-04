@@ -1,17 +1,22 @@
 package com.dubbo.api.vo;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 public class TestRequest implements Serializable {
 
+    @NotBlank(message = "url不能为空")
     private String url;
 
+    @Max(value = 3,message = "用户协议（1～3）")
     private Integer protocolId;
 
     private String cookie;
 
     private String header;
 
+    @Max(value = 3,message = "请求方式（1～3）")
     private Integer requestTypeId;
 
     private String params;
@@ -72,5 +77,18 @@ public class TestRequest implements Serializable {
 
     public void setTimeOut(Integer timeOut) {
         this.timeOut = timeOut;
+    }
+
+    @Override
+    public String toString() {
+        return "TestRequest{" +
+                "url='" + url + '\'' +
+                ", protocolId=" + protocolId +
+                ", cookie='" + cookie + '\'' +
+                ", header='" + header + '\'' +
+                ", requestTypeId=" + requestTypeId +
+                ", params='" + params + '\'' +
+                ", timeOut=" + timeOut +
+                '}';
     }
 }

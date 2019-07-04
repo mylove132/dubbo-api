@@ -29,6 +29,9 @@ import org.apache.http.util.EntityUtils;
 public class HttpClientUtil {
 
     public static String doGet(Map<String,String> headers, Map<String,String> cookies, Integer connTime, String url, Map<String, String> param) {
+        if (connTime == null){
+            connTime = 1000;
+        }
         // 创建Httpclient对象
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String cookValues = "";
@@ -70,9 +73,12 @@ public class HttpClientUtil {
             // 执行请求
             response = httpclient.execute(HttpGet);
             resultString = EntityUtils.toString(response.getEntity(), "UTF-8");
-            log.info("请求url,返回结果："+resultString);
+            if (response.getStatusLine().getStatusCode() == 302){
+                resultString = "返回code:"+response.getStatusLine().getStatusCode();
+            }
         } catch (Exception e) {
             e.printStackTrace();
+            resultString = e.getMessage();
         } finally {
             try {
                 if (response != null) {
@@ -81,8 +87,10 @@ public class HttpClientUtil {
                 httpclient.close();
             } catch (IOException e) {
                 e.printStackTrace();
+                resultString = e.getMessage();
             }
         }
+        log.info("http get 请求结果："+resultString);
         return resultString;
     }
 
@@ -104,6 +112,9 @@ public class HttpClientUtil {
 
 
     public static String doPost(Map<String,String> headers, Map<String,String> cookies, Integer connTime,String url, Map<String, String> param) {
+        if (connTime == null){
+            connTime = 1000;
+        }
         // 创建Httpclient对象
         String cookValues = "";
         if (cookies != null){
@@ -142,6 +153,9 @@ public class HttpClientUtil {
             // 执行http请求
             response = httpClient.execute(httpPost);
             resultString = EntityUtils.toString(response.getEntity(), "utf-8");
+            if (response.getStatusLine().getStatusCode() == 302){
+                resultString = "返回code:"+response.getStatusLine().getStatusCode();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -150,9 +164,10 @@ public class HttpClientUtil {
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
+                resultString = e.getMessage();
             }
         }
-
+        log.info("http post 请求结果："+resultString);
         return resultString;
     }
 
@@ -173,6 +188,9 @@ public class HttpClientUtil {
     }
 
     public static String doPostJson(Map<String,String> headers,Map<String,String> cookies,Integer connTime,String url, String json) {
+        if (connTime == null){
+            connTime = 1000;
+        }
         String cookValues = "";
         if (cookies != null){
             for (Map.Entry<String,String> entry : cookies.entrySet()) {
@@ -204,8 +222,12 @@ public class HttpClientUtil {
             // 执行http请求
             response = httpClient.execute(httpPost);
             resultString = EntityUtils.toString(response.getEntity(), "utf-8");
+            if (response.getStatusLine().getStatusCode() == 302){
+                resultString = "返回code:"+response.getStatusLine().getStatusCode();
+            }
         } catch (Exception e) {
             e.printStackTrace();
+            resultString = e.getMessage();
         } finally {
             try {
                 response.close();
@@ -214,7 +236,7 @@ public class HttpClientUtil {
                 e.printStackTrace();
             }
         }
-
+        log.info("http post json请求结果："+resultString);
         return resultString;
     }
 
@@ -224,11 +246,5 @@ public class HttpClientUtil {
 
     public static String doPostJsonCookies(Map<String,String> cookies,String url,String json){
         return doPostJson(null,cookies,5000,url,json);
-    }
-
-    public static void main(String[] args) {
-        Map<String,String> headers = new HashMap<>();
-        headers.put("token","4b323d4d2bfc7288ce40cbdf1511c8ac");
-        doGet(headers,"http://127.0.0.1:8901/api/project");
     }
 }

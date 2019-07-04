@@ -3,6 +3,8 @@ package com.dubbo.api.common.exception;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.validation.ConstraintViolationException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +14,18 @@ public class MyControllerAdvice {
     @ResponseBody
     @ExceptionHandler(value = UnknowException.class)
     public Map<String,Object> myExceptionHandler(UnknowException myex){
+        Map<String,Object> map  = new HashMap<String,Object>();
+        map.put("code",myex.getCode());
+        map.put("message",myex.getMessage());
+        map.put("method",myex.getMethod());
+        map.put("info",myex.getDescinfo());
+        return map;
+    }
+
+    @ResponseBody
+    @ExceptionHandler(value = ConstraintViolationException.class)
+    public Map<String,Object> exceptionHandler(UnknowException myex){
+
         Map<String,Object> map  = new HashMap<String,Object>();
         map.put("code",myex.getCode());
         map.put("message",myex.getMessage());

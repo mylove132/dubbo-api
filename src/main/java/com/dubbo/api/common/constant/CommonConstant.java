@@ -12,7 +12,13 @@ public enum CommonConstant {
     ADD_TOKEN_FAILED(4003,"添加token失败"),
     UPDATE_TOKEN_FAILED(4004,"更新token失败"),
     ADD_PROJECT_FAIL(5001,"添加项目失败"),
-    ADD_SCRIPT_FAIL(6001,"添加脚本失败");
+    ADD_SCRIPT_FAIL(6001,"添加脚本失败"),
+    PARAM_NULL_FAIL(10001,"参数不能为空"),
+    EXEC_FILE_EXIST(8001,"执行的jmeter文件已存在"),
+    EXEC_COUNT_MAX(8002,"执行的jmeter文件最多同时执行2个"),
+    CREATE_JMETER_FILE_FAIL(8003,"创建jmeter文件失败"),
+    REPORT_LOG_NOT_EXIST(8004,"日志文件不存在，可能已删除"),
+    REPORT_GENERATE_FAIL(8005,"日志文件生成失败，请重试");
 
 
     CommonConstant(Integer code, String message) {
