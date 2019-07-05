@@ -64,4 +64,8 @@ public class ScheduleJob {
 	 * 脚本外键
 	 */
 	private Integer scriptId;
+	/**
+	 * 创建用户外键
+	 */
+	private Integer userId;
 }

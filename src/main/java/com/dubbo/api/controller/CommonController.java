@@ -177,6 +177,7 @@ public class CommonController {
                                 String cmd = "%s -n -t %s -l %s -j %s";
                                 cmd = String.format(cmd, jmeterConfig.getJmeterBinPath(), jmxFilePath, jmeterConfig.getRunLogPath() + md5 + ".log",
                                         jmeterConfig.getJtlFilePath() + md5 + ".jtl");
+                                log.info("cmd命令行:"+cmd);
                                 String[] listCmd = cmd.split(" ");
                                 Process process = Runtime.getRuntime().exec(listCmd);
                                 process.waitFor();

@@ -1,6 +1,8 @@
 package com.dubbo.api.controller;
 
 import com.dubbo.api.common.bean.BaseResponse;
+import com.dubbo.api.common.constant.PermissionConstant;
+import com.dubbo.api.config.AuthPermission;
 import com.dubbo.api.vo.ScheduleJob;
 import com.dubbo.api.service.IScheduleJobService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,7 @@ public class ScheduleJobController {
 	 * @param scheduleJob
 	 * @return
 	 */
+	@AuthPermission(PermissionConstant.VIP)
 	@RequestMapping(value = "",method = RequestMethod.POST)
 	@ResponseBody
 	public BaseResponse add(@RequestBody ScheduleJob scheduleJob){

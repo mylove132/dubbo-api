@@ -31,6 +31,7 @@
         name LIKE concat(concat('%',#{search}),'%')
       </if>
     </where>
+    ORDER BY update_time DESC
   </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -46,6 +47,7 @@
     where type = #{typeId,jdbcType=INTEGER}
     and env = #{envId,jdbcType=INTEGER}
     and user_id = #{userId,jdbcType=INTEGER}
+    ORDER BY update_time DESC
   </select>
 
   <select id="filterUserProjectList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -53,6 +55,7 @@
     <include refid="Base_Column_List" />
     from entity_project
     where user_id = #{userId,jdbcType=INTEGER}
+    ORDER BY update_time DESC
   </select>
 
   <select id="filterTypeProjectList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -60,6 +63,7 @@
     <include refid="Base_Column_List" />
     from entity_project
     where type = #{typeId,jdbcType=INTEGER}
+    ORDER BY update_time DESC
   </select>
 
   <select id="filterEnvProjectList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -67,6 +71,7 @@
     <include refid="Base_Column_List" />
     from entity_project
     where env = #{envId,jdbcType=INTEGER}
+    ORDER BY update_time DESC
   </select>
 
 
@@ -76,6 +81,7 @@
     from entity_project
     where env = #{envId,jdbcType=INTEGER}
     and user_id = #{userId,jdbcType=INTEGER}
+    ORDER BY update_time DESC
   </select>
 
   <select id="filterUserAndTypeProjectList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -84,6 +90,7 @@
     from entity_project
     where type = #{typeId,jdbcType=INTEGER}
     and user_id = #{userId,jdbcType=INTEGER}
+    ORDER BY update_time DESC
   </select>
 
   <select id="filterEnvAndTypeProjectList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -92,12 +99,14 @@
     from entity_project
     where type = #{typeId,jdbcType=INTEGER}
     and env = #{envId,jdbcType=INTEGER}
+    ORDER BY update_time DESC
   </select>
 
   <select id="projectList" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from entity_project
+    ORDER BY update_time DESC
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

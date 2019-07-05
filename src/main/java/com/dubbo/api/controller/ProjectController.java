@@ -203,7 +203,7 @@ public class ProjectController {
         return new SuccessResponse(listMap);
     }
 
-    @RequestMapping(value = "?typeId={typeId}",method = RequestMethod.GET)
+    @RequestMapping(value = "/typeId/{typeId}",method = RequestMethod.GET)
     public BaseResponse getListProjectByType(@PathVariable Integer typeId){
         return new SuccessResponse(projectService.filtertypeProjectListService(typeId));
     }

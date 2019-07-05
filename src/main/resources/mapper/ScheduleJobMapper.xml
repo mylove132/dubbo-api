@@ -13,9 +13,10 @@
 		<result column="crt_user" jdbcType="VARCHAR" property="crtUser" />
 		<result column="crt_name" jdbcType="VARCHAR" property="crtName" />
 		<result column="script_id" jdbcType="VARCHAR" property="scriptId" />
+		<result column="user_id" jdbcType="VARCHAR" property="userId" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, bean_name, method_name, params, cron_expression, status, remark, crt_time, crt_user, crt_name,script_id
+		id, bean_name, method_name, params, cron_expression, status, remark, crt_time, crt_user, crt_name,script_id,user_id
 	</sql>
 
 	<insert id="insertSelective" useGeneratedKeys="true" keyProperty="id"
@@ -52,6 +53,9 @@
 			<if test="scriptId != null">
 				script_id,
 			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="beanName != null">
@@ -83,6 +87,9 @@
 			</if>
 			<if test="scriptId != null">
 				#{scriptId,jdbcType=TINYINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=TINYINT},
 			</if>
 		</trim>
 	</insert>
@@ -118,7 +125,10 @@
 				crt_name = #{crtName,jdbcType=VARCHAR},
 			</if>
 			<if test="scriptId != null">
-				#{scriptId,jdbcType=TINYINT},
+				script_id = #{scriptId,jdbcType=TINYINT},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=TINYINT},
 			</if>
 		</set>
 		where id = #{id,jdbcType=INTEGER}
@@ -183,5 +193,6 @@
 				and remark like concat('%', #{cronExpression}, '%')
 			</if>
 		</where>
+		ORDER BY crt_time DESC
 	</select>
 </mapper>

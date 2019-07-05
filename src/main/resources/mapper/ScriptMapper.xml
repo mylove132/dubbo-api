@@ -36,6 +36,7 @@
     <include refid="Base_Column_List" />
     from entity_script
     where user_id = #{UserId,jdbcType=INTEGER}
+    ORDER BY update_time DESC
   </select>
 
   <select id="filterScriptListByProtocolId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -43,6 +44,7 @@
     <include refid="Base_Column_List" />
     from entity_script
     where protocol_id = #{protocolId,jdbcType=INTEGER}
+    ORDER BY update_time DESC
   </select>
 
   <select id="filterScriptListByProjectId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -50,6 +52,7 @@
     <include refid="Base_Column_List" />
     from entity_script
     where project_id = #{projectId,jdbcType=INTEGER}
+    ORDER BY update_time DESC
   </select>
 
   <select id="searchScriptByKeyWord" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -61,6 +64,7 @@
         name LIKE concat(concat('%',#{keyword}),'%')
       </if>
     </where>
+    ORDER BY update_time DESC
   </select>
 
 
@@ -70,6 +74,7 @@
     from entity_script
     where user_id = #{userId,jdbcType=INTEGER}
     and protocol_id = #{protocolId,jdbcType=INTEGER}
+    ORDER BY update_time DESC
   </select>
 
   <select id="filterScriptListByUserIdAndProjectId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -78,6 +83,7 @@
     from entity_script
     where user_id = #{userId,jdbcType=INTEGER}
     and project_id = #{projectId,jdbcType=INTEGER}
+    ORDER BY update_time DESC
   </select>
 
   <select id="filterScriptListByProjectIdAndProtocolId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -86,6 +92,7 @@
     from entity_script
     where protocol_id = #{protocolId,jdbcType=INTEGER}
     and project_id = #{projectId,jdbcType=INTEGER}
+    ORDER BY update_time DESC
   </select>
 
   <select id="filterScriptListByProjectIdAndProtocolIdAndUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -95,6 +102,7 @@
     where protocol_id = #{protocolId,jdbcType=INTEGER}
     and project_id = #{projectId,jdbcType=INTEGER}
     and user_id = #{userId,jdbcType=INTEGER}
+    ORDER BY update_time DESC
   </select>
 
 
@@ -102,6 +110,7 @@
     select
     <include refid="Base_Column_List" />
     from entity_script
+    ORDER BY update_time DESC
   </select>
 
   <select id="listScriptByProjectId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -109,6 +118,7 @@
     <include refid="Base_Column_List" />
     from entity_script
     where project_id = #{projectId,jdbcType=INTEGER}
+    ORDER BY update_time DESC
   </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

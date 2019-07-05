@@ -213,6 +213,11 @@ public class HttpJmeterScript {
         Matcher matcher = p.matcher(url);
         matcher.find();
         String domain = matcher.group();
+        if (domain.contains("http://")){
+            domain = domain.split("http://")[1].replace("/","");
+        }else if (domain.contains("https://")){
+            domain = domain.split("https://")[1].replace("/","");
+        }
         String tmp = " <elementProp name=\"%s\" elementType=\"Cookie\" testname=\"%s\">\n" +
                 "                <stringProp name=\"Cookie.value\">%s</stringProp>\n" +
                 "                <stringProp name=\"Cookie.domain\">%s</stringProp>\n" +
