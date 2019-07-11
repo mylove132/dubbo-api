@@ -19,37 +19,120 @@ public class DubboJmeterScript {
 
     public static String startSetting(){
         String text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                "<jmeterTestPlan version=\"1.2\" properties=\"3.1\" jmeter=\"3.1 r1770033\">\n" +
+                "<jmeterTestPlan version=\"1.2\" properties=\"5.0\" jmeter=\"5.1.1 r1855137\">\n" +
                 "  <hashTree>\n" +
-                "    <TestPlan guiclass=\"TestPlanGui\" testclass=\"TestPlan\" testname=\"测试计划\" enabled=\"true\">\n" +
+                "    <TestPlan guiclass=\"TestPlanGui\" testclass=\"TestPlan\" testname=\"Test Plan\" enabled=\"true\">\n" +
                 "      <stringProp name=\"TestPlan.comments\"></stringProp>\n" +
                 "      <boolProp name=\"TestPlan.functional_mode\">false</boolProp>\n" +
+                "      <boolProp name=\"TestPlan.tearDown_on_shutdown\">true</boolProp>\n" +
                 "      <boolProp name=\"TestPlan.serialize_threadgroups\">false</boolProp>\n" +
-                "      <elementProp name=\"TestPlan.user_defined_variables\" elementType=\"Arguments\" guiclass=\"ArgumentsPanel\" testclass=\"Arguments\" testname=\"用户定义的变量\" enabled=\"true\">\n" +
+                "      <elementProp name=\"TestPlan.user_defined_variables\" elementType=\"Arguments\" guiclass=\"ArgumentsPanel\" testclass=\"Arguments\" testname=\"User Defined Variables\" enabled=\"true\">\n" +
                 "        <collectionProp name=\"Arguments.arguments\"/>\n" +
                 "      </elementProp>\n" +
                 "      <stringProp name=\"TestPlan.user_define_classpath\"></stringProp>\n" +
-                "    </TestPlan>";
+                "    </TestPlan>\n";
         return text;
     }
 
     public static String crontrolSetting(Integer preNumber,Integer preTime){
-        String text = "    <hashTree>\n" +
-                "      <ThreadGroup guiclass=\"ThreadGroupGui\" testclass=\"ThreadGroup\" testname=\"线程组\" enabled=\"true\">\n" +
+        String text = " <hashTree>\n" +
+                "      <ThreadGroup guiclass=\"ThreadGroupGui\" testclass=\"ThreadGroup\" testname=\"Thread Group\" enabled=\"true\">\n" +
                 "        <stringProp name=\"ThreadGroup.on_sample_error\">continue</stringProp>\n" +
-                "        <elementProp name=\"ThreadGroup.main_controller\" elementType=\"LoopController\" guiclass=\"LoopControlPanel\" testclass=\"LoopController\" testname=\"循环控制器\" enabled=\"true\">\n" +
+                "        <elementProp name=\"ThreadGroup.main_controller\" elementType=\"LoopController\" guiclass=\"LoopControlPanel\" testclass=\"LoopController\" testname=\"Loop Controller\" enabled=\"true\">\n" +
                 "          <boolProp name=\"LoopController.continue_forever\">false</boolProp>\n" +
                 "          <intProp name=\"LoopController.loops\">-1</intProp>\n" +
                 "        </elementProp>\n" +
                 "        <stringProp name=\"ThreadGroup.num_threads\">%d</stringProp>\n" +
                 "        <stringProp name=\"ThreadGroup.ramp_time\">1</stringProp>\n" +
-                "        <longProp name=\"ThreadGroup.start_time\">1559613505000</longProp>\n" +
-                "        <longProp name=\"ThreadGroup.end_time\">1559613505000</longProp>\n" +
                 "        <boolProp name=\"ThreadGroup.scheduler\">true</boolProp>\n" +
                 "        <stringProp name=\"ThreadGroup.duration\">%d</stringProp>\n" +
                 "        <stringProp name=\"ThreadGroup.delay\"></stringProp>\n" +
                 "      </ThreadGroup>";
         return String.format(text,preNumber,preTime);
+    }
+
+    public static String resultTreeSetting(){
+        String text = "<hashTree>\n" +
+                "          <ResultCollector guiclass=\"ViewResultsFullVisualizer\" testclass=\"ResultCollector\" testname=\"View Results Tree\" enabled=\"true\">\n" +
+                "            <boolProp name=\"ResultCollector.error_logging\">false</boolProp>\n" +
+                "            <objProp>\n" +
+                "              <name>saveConfig</name>\n" +
+                "              <value class=\"SampleSaveConfiguration\">\n" +
+                "                <time>true</time>\n" +
+                "                <latency>true</latency>\n" +
+                "                <timestamp>true</timestamp>\n" +
+                "                <success>true</success>\n" +
+                "                <label>true</label>\n" +
+                "                <code>true</code>\n" +
+                "                <message>true</message>\n" +
+                "                <threadName>true</threadName>\n" +
+                "                <dataType>true</dataType>\n" +
+                "                <encoding>false</encoding>\n" +
+                "                <assertions>true</assertions>\n" +
+                "                <subresults>true</subresults>\n" +
+                "                <responseData>true</responseData>\n" +
+                "                <samplerData>false</samplerData>\n" +
+                "                <xml>true</xml>\n" +
+                "                <fieldNames>true</fieldNames>\n" +
+                "                <responseHeaders>false</responseHeaders>\n" +
+                "                <requestHeaders>false</requestHeaders>\n" +
+                "                <responseDataOnError>false</responseDataOnError>\n" +
+                "                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>\n" +
+                "                <assertionsResultsToSave>0</assertionsResultsToSave>\n" +
+                "                <bytes>true</bytes>\n" +
+                "                <sentBytes>true</sentBytes>\n" +
+                "                <url>true</url>\n" +
+                "                <hostname>true</hostname>\n" +
+                "                <threadCounts>true</threadCounts>\n" +
+                "                <idleTime>true</idleTime>\n" +
+                "                <connectTime>true</connectTime>\n" +
+                "              </value>\n" +
+                "            </objProp>\n" +
+                "            <stringProp name=\"filename\"></stringProp>\n" +
+                "          </ResultCollector>";
+        return text;
+    }
+
+    public static String aggregateReportSetting(){
+        String text = "<hashTree/>\n" +
+                "          <ResultCollector guiclass=\"StatVisualizer\" testclass=\"ResultCollector\" testname=\"Aggregate Report\" enabled=\"true\">\n" +
+                "            <boolProp name=\"ResultCollector.error_logging\">false</boolProp>\n" +
+                "            <objProp>\n" +
+                "              <name>saveConfig</name>\n" +
+                "              <value class=\"SampleSaveConfiguration\">\n" +
+                "                <time>true</time>\n" +
+                "                <latency>true</latency>\n" +
+                "                <timestamp>true</timestamp>\n" +
+                "                <success>true</success>\n" +
+                "                <label>true</label>\n" +
+                "                <code>true</code>\n" +
+                "                <message>true</message>\n" +
+                "                <threadName>true</threadName>\n" +
+                "                <dataType>true</dataType>\n" +
+                "                <encoding>false</encoding>\n" +
+                "                <assertions>true</assertions>\n" +
+                "                <subresults>true</subresults>\n" +
+                "                <responseData>true</responseData>\n" +
+                "                <samplerData>false</samplerData>\n" +
+                "                <xml>true</xml>\n" +
+                "                <fieldNames>true</fieldNames>\n" +
+                "                <responseHeaders>false</responseHeaders>\n" +
+                "                <requestHeaders>false</requestHeaders>\n" +
+                "                <responseDataOnError>false</responseDataOnError>\n" +
+                "                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>\n" +
+                "                <assertionsResultsToSave>0</assertionsResultsToSave>\n" +
+                "                <bytes>true</bytes>\n" +
+                "                <sentBytes>true</sentBytes>\n" +
+                "                <url>true</url>\n" +
+                "                <hostname>true</hostname>\n" +
+                "                <threadCounts>true</threadCounts>\n" +
+                "                <idleTime>true</idleTime>\n" +
+                "                <connectTime>true</connectTime>\n" +
+                "              </value>\n" +
+                "            </objProp>\n" +
+                "            <stringProp name=\"filename\"></stringProp>\n" +
+                "          </ResultCollector>\n";
+        return text;
     }
 
     public static String dubboSetting(String interfaceName,String zkAddress,String timeOut,String version,
@@ -176,177 +259,78 @@ public class DubboJmeterScript {
         return String.format(text, assertText);
     }
 
-    public static String rtotReportSetting(){
+    public static String preProccessorSetting(){
         String text = "<hashTree/>\n" +
-                "          <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass=\"kg.apc.jmeter.vizualizers.ResponseTimesOverTimeGui\" testclass=\"kg.apc.jmeter.vizualizers.CorrectedResultCollector\" testname=\"jp@gc - Response Times Over Time\" enabled=\"true\">\n" +
-                "            <boolProp name=\"ResultCollector.error_logging\">false</boolProp>\n" +
-                "            <objProp>\n" +
-                "              <name>saveConfig</name>\n" +
-                "              <value class=\"SampleSaveConfiguration\">\n" +
-                "                <time>true</time>\n" +
-                "                <latency>true</latency>\n" +
-                "                <timestamp>true</timestamp>\n" +
-                "                <success>true</success>\n" +
-                "                <label>true</label>\n" +
-                "                <code>true</code>\n" +
-                "                <message>true</message>\n" +
-                "                <threadName>true</threadName>\n" +
-                "                <dataType>true</dataType>\n" +
-                "                <encoding>false</encoding>\n" +
-                "                <assertions>true</assertions>\n" +
-                "                <subresults>true</subresults>\n" +
-                "                <responseData>false</responseData>\n" +
-                "                <samplerData>false</samplerData>\n" +
-                "                <xml>false</xml>\n" +
-                "                <fieldNames>true</fieldNames>\n" +
-                "                <responseHeaders>false</responseHeaders>\n" +
-                "                <requestHeaders>false</requestHeaders>\n" +
-                "                <responseDataOnError>false</responseDataOnError>\n" +
-                "                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>\n" +
-                "                <assertionsResultsToSave>0</assertionsResultsToSave>\n" +
-                "                <bytes>true</bytes>\n" +
-                "                <sentBytes>true</sentBytes>\n" +
-                "                <threadCounts>true</threadCounts>\n" +
-                "                <idleTime>true</idleTime>\n" +
-                "                <connectTime>true</connectTime>\n" +
-                "              </value>\n" +
-                "            </objProp>\n" +
+                "          <JSR223PreProcessor guiclass=\"TestBeanGUI\" testclass=\"JSR223PreProcessor\" testname=\"JSR223 PreProcessor\" enabled=\"true\">\n" +
+                "            <stringProp name=\"cacheKey\">true</stringProp>\n" +
                 "            <stringProp name=\"filename\"></stringProp>\n" +
-                "            <longProp name=\"interval_grouping\">500</longProp>\n" +
-                "            <boolProp name=\"graph_aggregated\">false</boolProp>\n" +
-                "            <stringProp name=\"include_sample_labels\"></stringProp>\n" +
-                "            <stringProp name=\"exclude_sample_labels\"></stringProp>\n" +
-                "            <stringProp name=\"start_offset\"></stringProp>\n" +
-                "            <stringProp name=\"end_offset\"></stringProp>\n" +
-                "            <boolProp name=\"include_checkbox_state\">false</boolProp>\n" +
-                "            <boolProp name=\"exclude_checkbox_state\">false</boolProp>\n" +
-                "          </kg.apc.jmeter.vizualizers.CorrectedResultCollector>";
+                "            <stringProp name=\"parameters\"></stringProp>\n" +
+                "            <stringProp name=\"script\">import java.util.UUID;\n" +
+                " \n" +
+                " String uuid = UUID.randomUUID().toString();\n" +
+                "        uuid = uuid.substring(0, 8)+uuid.substring(9,13)+uuid.substring(14,18)+uuid.substring(19,23)+uuid.substring(24);\n" +
+                "        StringBuffer stringBuffer = new StringBuffer();\n" +
+                "        for (int i=0;i&lt;uuid.length();i++){\n" +
+                "            if (!Character.isDigit(uuid.charAt(i))){\n" +
+                "                int value = uuid.charAt(i);\n" +
+                "                stringBuffer.append(value);\n" +
+                "                continue;\n" +
+                "            }\n" +
+                "            stringBuffer.append(uuid.charAt(i));\n" +
+                "        }\n" +
+                "   uuid = stringBuffer.toString().substring(5,14);     \n" +
+                "vars.put(&quot;requestid&quot;, uuid);  </stringProp>\n" +
+                "            <stringProp name=\"scriptLanguage\">groovy</stringProp>\n" +
+                "          </JSR223PreProcessor>";
+        return text;
+    }
+    public static String backendListenerSetting(){
+        String text = " <hashTree/>\n" +
+                "          <BackendListener guiclass=\"BackendListenerGui\" testclass=\"BackendListener\" testname=\"Backend Listener\" enabled=\"true\">\n" +
+                "            <elementProp name=\"arguments\" elementType=\"Arguments\" guiclass=\"ArgumentsPanel\" testclass=\"Arguments\" enabled=\"true\">\n" +
+                "              <collectionProp name=\"Arguments.arguments\">\n" +
+                "                <elementProp name=\"graphiteMetricsSender\" elementType=\"Argument\">\n" +
+                "                  <stringProp name=\"Argument.name\">graphiteMetricsSender</stringProp>\n" +
+                "                  <stringProp name=\"Argument.value\">org.apache.jmeter.visualizers.backend.graphite.TextGraphiteMetricsSender</stringProp>\n" +
+                "                  <stringProp name=\"Argument.metadata\">=</stringProp>\n" +
+                "                </elementProp>\n" +
+                "                <elementProp name=\"graphiteHost\" elementType=\"Argument\">\n" +
+                "                  <stringProp name=\"Argument.name\">graphiteHost</stringProp>\n" +
+                "                  <stringProp name=\"Argument.value\"></stringProp>\n" +
+                "                  <stringProp name=\"Argument.metadata\">=</stringProp>\n" +
+                "                </elementProp>\n" +
+                "                <elementProp name=\"graphitePort\" elementType=\"Argument\">\n" +
+                "                  <stringProp name=\"Argument.name\">graphitePort</stringProp>\n" +
+                "                  <stringProp name=\"Argument.value\">2003</stringProp>\n" +
+                "                  <stringProp name=\"Argument.metadata\">=</stringProp>\n" +
+                "                </elementProp>\n" +
+                "                <elementProp name=\"rootMetricsPrefix\" elementType=\"Argument\">\n" +
+                "                  <stringProp name=\"Argument.name\">rootMetricsPrefix</stringProp>\n" +
+                "                  <stringProp name=\"Argument.value\">jmeter.</stringProp>\n" +
+                "                  <stringProp name=\"Argument.metadata\">=</stringProp>\n" +
+                "                </elementProp>\n" +
+                "                <elementProp name=\"summaryOnly\" elementType=\"Argument\">\n" +
+                "                  <stringProp name=\"Argument.name\">summaryOnly</stringProp>\n" +
+                "                  <stringProp name=\"Argument.value\">true</stringProp>\n" +
+                "                  <stringProp name=\"Argument.metadata\">=</stringProp>\n" +
+                "                </elementProp>\n" +
+                "                <elementProp name=\"samplersList\" elementType=\"Argument\">\n" +
+                "                  <stringProp name=\"Argument.name\">samplersList</stringProp>\n" +
+                "                  <stringProp name=\"Argument.value\"></stringProp>\n" +
+                "                  <stringProp name=\"Argument.metadata\">=</stringProp>\n" +
+                "                </elementProp>\n" +
+                "                <elementProp name=\"percentiles\" elementType=\"Argument\">\n" +
+                "                  <stringProp name=\"Argument.name\">percentiles</stringProp>\n" +
+                "                  <stringProp name=\"Argument.value\">90;95;99</stringProp>\n" +
+                "                  <stringProp name=\"Argument.metadata\">=</stringProp>\n" +
+                "                </elementProp>\n" +
+                "              </collectionProp>\n" +
+                "            </elementProp>\n" +
+                "            <stringProp name=\"classname\">org.apache.jmeter.visualizers.backend.graphite.GraphiteBackendListenerClient</stringProp>\n" +
+                "          </BackendListener>";
         return text;
     }
 
-    public static String tpsSetting(){
-        String text = "<hashTree/>\n" +
-                "          <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass=\"kg.apc.jmeter.vizualizers.TransactionsPerSecondGui\" testclass=\"kg.apc.jmeter.vizualizers.CorrectedResultCollector\" testname=\"jp@gc - Transactions per Second\" enabled=\"true\">\n" +
-                "            <boolProp name=\"ResultCollector.error_logging\">false</boolProp>\n" +
-                "            <objProp>\n" +
-                "              <name>saveConfig</name>\n" +
-                "              <value class=\"SampleSaveConfiguration\">\n" +
-                "                <time>true</time>\n" +
-                "                <latency>true</latency>\n" +
-                "                <timestamp>true</timestamp>\n" +
-                "                <success>true</success>\n" +
-                "                <label>true</label>\n" +
-                "                <code>true</code>\n" +
-                "                <message>true</message>\n" +
-                "                <threadName>true</threadName>\n" +
-                "                <dataType>true</dataType>\n" +
-                "                <encoding>false</encoding>\n" +
-                "                <assertions>true</assertions>\n" +
-                "                <subresults>true</subresults>\n" +
-                "                <responseData>false</responseData>\n" +
-                "                <samplerData>false</samplerData>\n" +
-                "                <xml>false</xml>\n" +
-                "                <fieldNames>true</fieldNames>\n" +
-                "                <responseHeaders>false</responseHeaders>\n" +
-                "                <requestHeaders>false</requestHeaders>\n" +
-                "                <responseDataOnError>false</responseDataOnError>\n" +
-                "                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>\n" +
-                "                <assertionsResultsToSave>0</assertionsResultsToSave>\n" +
-                "                <bytes>true</bytes>\n" +
-                "                <sentBytes>true</sentBytes>\n" +
-                "                <threadCounts>true</threadCounts>\n" +
-                "                <idleTime>true</idleTime>\n" +
-                "                <connectTime>true</connectTime>\n" +
-                "              </value>\n" +
-                "            </objProp>\n" +
-                "            <stringProp name=\"filename\"></stringProp>\n" +
-                "            <longProp name=\"interval_grouping\">1000</longProp>\n" +
-                "            <boolProp name=\"graph_aggregated\">false</boolProp>\n" +
-                "            <stringProp name=\"include_sample_labels\"></stringProp>\n" +
-                "            <stringProp name=\"exclude_sample_labels\"></stringProp>\n" +
-                "            <stringProp name=\"start_offset\"></stringProp>\n" +
-                "            <stringProp name=\"end_offset\"></stringProp>\n" +
-                "            <boolProp name=\"include_checkbox_state\">false</boolProp>\n" +
-                "            <boolProp name=\"exclude_checkbox_state\">false</boolProp>\n" +
-                "          </kg.apc.jmeter.vizualizers.CorrectedResultCollector>";
-        return text;
-    }
-
-    public static String pmcSetting(boolean isOpenServerMonitor,String host,String port) {
-        String text = "<hashTree/>\n" +
-                "          <kg.apc.jmeter.perfmon.PerfMonCollector guiclass=\"kg.apc.jmeter.vizualizers.PerfMonGui\" testclass=\"kg.apc.jmeter.perfmon.PerfMonCollector\" testname=\"jp@gc - PerfMon Metrics Collector\" enabled=\"%s\">\n" +
-                "            <boolProp name=\"ResultCollector.error_logging\">false</boolProp>\n" +
-                "            <objProp>\n" +
-                "              <name>saveConfig</name>\n" +
-                "              <value class=\"SampleSaveConfiguration\">\n" +
-                "                <time>true</time>\n" +
-                "                <latency>true</latency>\n" +
-                "                <timestamp>true</timestamp>\n" +
-                "                <success>true</success>\n" +
-                "                <label>true</label>\n" +
-                "                <code>true</code>\n" +
-                "                <message>true</message>\n" +
-                "                <threadName>true</threadName>\n" +
-                "                <dataType>true</dataType>\n" +
-                "                <encoding>false</encoding>\n" +
-                "                <assertions>true</assertions>\n" +
-                "                <subresults>true</subresults>\n" +
-                "                <responseData>false</responseData>\n" +
-                "                <samplerData>false</samplerData>\n" +
-                "                <xml>false</xml>\n" +
-                "                <fieldNames>true</fieldNames>\n" +
-                "                <responseHeaders>false</responseHeaders>\n" +
-                "                <requestHeaders>false</requestHeaders>\n" +
-                "                <responseDataOnError>false</responseDataOnError>\n" +
-                "                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>\n" +
-                "                <assertionsResultsToSave>0</assertionsResultsToSave>\n" +
-                "                <bytes>true</bytes>\n" +
-                "                <sentBytes>true</sentBytes>\n" +
-                "                <threadCounts>true</threadCounts>\n" +
-                "                <idleTime>true</idleTime>\n" +
-                "                <connectTime>true</connectTime>\n" +
-                "              </value>\n" +
-                "            </objProp>\n" +
-                "            <stringProp name=\"filename\"></stringProp>\n" +
-                "            <longProp name=\"interval_grouping\">1000</longProp>\n" +
-                "            <boolProp name=\"graph_aggregated\">false</boolProp>\n" +
-                "            <stringProp name=\"include_sample_labels\"></stringProp>\n" +
-                "            <stringProp name=\"exclude_sample_labels\"></stringProp>\n" +
-                "            <stringProp name=\"start_offset\"></stringProp>\n" +
-                "            <stringProp name=\"end_offset\"></stringProp>\n" +
-                "            <boolProp name=\"include_checkbox_state\">false</boolProp>\n" +
-                "            <boolProp name=\"exclude_checkbox_state\">false</boolProp>\n" +
-                "            <collectionProp name=\"metricConnections\">\n" +
-                "              <collectionProp name=\"917712290\">\n" +
-                "                <stringProp name=\"-1204607085\">%s</stringProp>\n" +
-                "                <stringProp name=\"1600768\">%s</stringProp>\n" +
-                "                <stringProp name=\"66952\">CPU</stringProp>\n" +
-                "                <stringProp name=\"0\"></stringProp>\n" +
-                "              </collectionProp>\n" +
-                "              <collectionProp name=\"-723468740\">\n" +
-                "                <stringProp name=\"-1204607085\">%s</stringProp>\n" +
-                "                <stringProp name=\"1600768\">%s</stringProp>\n" +
-                "                <stringProp name=\"2590131\">Swap</stringProp>\n" +
-                "                <stringProp name=\"0\"></stringProp>\n" +
-                "              </collectionProp>\n" +
-                "              <collectionProp name=\"-1383002031\">\n" +
-                "                <stringProp name=\"-1204607085\">%s</stringProp>\n" +
-                "                <stringProp name=\"1600768\">%s</stringProp>\n" +
-                "                <stringProp name=\"-1993889503\">Memory</stringProp>\n" +
-                "                <stringProp name=\"0\"></stringProp>\n" +
-                "              </collectionProp>\n" +
-                "              <collectionProp name=\"-1270662015\">\n" +
-                "                <stringProp name=\"-1204607085\">%s</stringProp>\n" +
-                "                <stringProp name=\"1600768\">%s</stringProp>\n" +
-                "                <stringProp name=\"-274342153\">Network I/O</stringProp>\n" +
-                "                <stringProp name=\"0\"></stringProp>\n" +
-                "              </collectionProp>\n" +
-                "            </collectionProp>\n" +
-                "          </kg.apc.jmeter.perfmon.PerfMonCollector>";
-
-        return String.format(text,String.valueOf(isOpenServerMonitor),host,port,host,port,host,port,host,port);
-
-    }
 
     public static String endSetting(){
         String text = "<hashTree/>\n" +
@@ -356,26 +340,5 @@ public class DubboJmeterScript {
                 "  </hashTree>\n" +
                 "</jmeterTestPlan>";
         return text;
-    }
-
-    public static void main(String[] args) {
-        String start = startSetting();
-        String cron = crontrolSetting(200,200);
-        String dubbo = dubboSetting("测试dubbo接口","10.10.6.3:2181","3000",
-                "3.0.0","com.noriental.lessonsvr.rservice.LessonService","fetchLessonDetail","com.noriental.lessonsvr.entity.request.LongRequest","{\"id\":110}");
-        String watch = watchReportSetting();
-        String jh = jhReportSetting();
-        String rtot = rtotReportSetting();
-        String tps = tpsSetting();
-        String pmc = pmcSetting(false,"10.10.6.1","4444");
-        String end = endSetting();
-        String result = start+cron+dubbo+watch+jh+responseAssertSetting("\"code\":0")+rtot+tps+pmc+end;
-        try {
-            OutputStream os = new FileOutputStream(new File("/Users/liuzhanhui/Documents/test4.jmx"));
-            os.write(result.getBytes("utf-8"));
-            os.close();
-        }catch (IOException e){
-            log.error("jmx文件写入错误");
-        }
     }
 }

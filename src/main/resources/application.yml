@@ -35,6 +35,12 @@ spring:
     testOnBorrow: true
   #在空闲时检查有效性, 默认false
     testWhileIdle: true
+  rabbitmq:
+    host: 10.10.6.3
+    port: 5555
+    username: admin
+    password: dsjw2014
+
 
 
 server:

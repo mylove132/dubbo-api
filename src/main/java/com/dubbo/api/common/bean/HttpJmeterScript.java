@@ -21,32 +21,31 @@ import java.util.regex.Pattern;
 public class HttpJmeterScript {
     public static String headerSetting() {
         String text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                "        <jmeterTestPlan version=\"1.2\" properties=\"3.1\" jmeter=\"3.1 r1770033\">\n" +
-                "        <hashTree>\n" +
-                "            <TestPlan guiclass=\"TestPlanGui\" testclass=\"TestPlan\" testname=\"测试计划\" enabled=\"true\">\n" +
-                "            <stringProp name=\"TestPlan.comments\"></stringProp>\n" +
-                "            <boolProp name=\"TestPlan.functional_mode\">false</boolProp>\n" +
-                "            <boolProp name=\"TestPlan.serialize_threadgroups\">false</boolProp>\n" +
-                "            <elementProp name=\"TestPlan.user_defined_variables\" elementType=\"Arguments\" guiclass=\"ArgumentsPanel\" testclass=\"Arguments\" testname=\"用户定义的变量\" enabled=\"true\">\n" +
-                "            <collectionProp name=\"Arguments.arguments\"/>\n" +
-                "          </elementProp>\n" +
-                "          <stringProp name=\"TestPlan.user_define_classpath\"></stringProp>\n" +
-                "        </TestPlan>";
+                "<jmeterTestPlan version=\"1.2\" properties=\"5.0\" jmeter=\"5.1.1 r1855137\">\n" +
+                "  <hashTree>\n" +
+                "    <TestPlan guiclass=\"TestPlanGui\" testclass=\"TestPlan\" testname=\"Test Plan\" enabled=\"true\">\n" +
+                "      <stringProp name=\"TestPlan.comments\"></stringProp>\n" +
+                "      <boolProp name=\"TestPlan.functional_mode\">false</boolProp>\n" +
+                "      <boolProp name=\"TestPlan.tearDown_on_shutdown\">true</boolProp>\n" +
+                "      <boolProp name=\"TestPlan.serialize_threadgroups\">false</boolProp>\n" +
+                "      <elementProp name=\"TestPlan.user_defined_variables\" elementType=\"Arguments\" guiclass=\"ArgumentsPanel\" testclass=\"Arguments\" testname=\"User Defined Variables\" enabled=\"true\">\n" +
+                "        <collectionProp name=\"Arguments.arguments\"/>\n" +
+                "      </elementProp>\n" +
+                "      <stringProp name=\"TestPlan.user_define_classpath\"></stringProp>\n" +
+                "    </TestPlan>\n";
         return text;
     }
 
     public static String crontrolSetting(Integer preNumber, Integer preTime) {
         String text = "<hashTree>\n" +
-                "      <ThreadGroup guiclass=\"ThreadGroupGui\" testclass=\"ThreadGroup\" testname=\"线程组\" enabled=\"true\">\n" +
+                "      <ThreadGroup guiclass=\"ThreadGroupGui\" testclass=\"ThreadGroup\" testname=\"首评心智\" enabled=\"true\">\n" +
                 "        <stringProp name=\"ThreadGroup.on_sample_error\">continue</stringProp>\n" +
-                "        <elementProp name=\"ThreadGroup.main_controller\" elementType=\"LoopController\" guiclass=\"LoopControlPanel\" testclass=\"LoopController\" testname=\"循环控制器\" enabled=\"true\">\n" +
+                "        <elementProp name=\"ThreadGroup.main_controller\" elementType=\"LoopController\" guiclass=\"LoopControlPanel\" testclass=\"LoopController\" testname=\"Loop Controller\" enabled=\"true\">\n" +
                 "          <boolProp name=\"LoopController.continue_forever\">false</boolProp>\n" +
                 "          <intProp name=\"LoopController.loops\">-1</intProp>\n" +
                 "        </elementProp>\n" +
                 "        <stringProp name=\"ThreadGroup.num_threads\">%d</stringProp>\n" +
                 "        <stringProp name=\"ThreadGroup.ramp_time\">1</stringProp>\n" +
-                "        <longProp name=\"ThreadGroup.start_time\">1562062093000</longProp>\n" +
-                "        <longProp name=\"ThreadGroup.end_time\">1562062093000</longProp>\n" +
                 "        <boolProp name=\"ThreadGroup.scheduler\">true</boolProp>\n" +
                 "        <stringProp name=\"ThreadGroup.duration\">%d</stringProp>\n" +
                 "        <stringProp name=\"ThreadGroup.delay\"></stringProp>\n" +
@@ -60,7 +59,6 @@ public class HttpJmeterScript {
         if (url.contains("&")) {
             url = url.replace("&", "&amp;");
         }
-
         String paramskeyText = "<hashTree>\n" +
                 "        <HTTPSamplerProxy guiclass=\"HttpTestSampleGui\" testclass=\"HTTPSamplerProxy\" testname=\"%s\" enabled=\"true\">\n" +
                 "          <elementProp name=\"HTTPsampler.Arguments\" elementType=\"Arguments\" guiclass=\"HTTPArgumentsPanel\" testclass=\"Arguments\" testname=\"用户定义的变量\" enabled=\"true\">\n" +
@@ -182,11 +180,12 @@ public class HttpJmeterScript {
                 "              </elementProp>";
 
         String text = " <hashTree>\n" +
-                "          <HeaderManager guiclass=\"HeaderPanel\" testclass=\"HeaderManager\" testname=\"HTTP信息头管理器\" enabled=\"true\">\n" +
+                "          <HeaderManager guiclass=\"HeaderPanel\" testclass=\"HeaderManager\" testname=\"HTTP Header Manager\" enabled=\"true\">\n" +
                 "            <collectionProp name=\"HeaderManager.headers\">\n" +
-                "     +%s" +
+                "              %s"+
                 "            </collectionProp>\n" +
-                "          </HeaderManager>";
+                "          </HeaderManager>\n" +
+                "          <hashTree/>";
         if (StringUtils.isNoneBlank(header)) {
             if (header.contains("headerKey") && header.contains("headerValue")) {
                 JSONArray json = JSON.parseArray(header);
@@ -227,15 +226,13 @@ public class HttpJmeterScript {
                 "                <boolProp name=\"Cookie.path_specified\">true</boolProp>\n" +
                 "                <boolProp name=\"Cookie.domain_specified\">true</boolProp>\n" +
                 "              </elementProp>";
-        String text = "<hashTree/>\n" +
-                "          <CookieManager guiclass=\"CookiePanel\" testclass=\"CookieManager\" testname=\"HTTP Cookie 管理器\" enabled=\"true\">\n" +
+        String text = "<CookieManager guiclass=\"CookiePanel\" testclass=\"CookieManager\" testname=\"HTTP Cookie Manager\" enabled=\"true\">\n" +
                 "            <collectionProp name=\"CookieManager.cookies\">\n" +
-                "              %s\n" +
+                "              %s" +
                 "            </collectionProp>\n" +
                 "            <boolProp name=\"CookieManager.clearEachIteration\">false</boolProp>\n" +
-                "            <stringProp name=\"CookieManager.policy\">standard</stringProp>\n" +
-                "            <stringProp name=\"CookieManager.implementation\">org.apache.jmeter.protocol.http.control.HC4CookieHandler</stringProp>\n" +
-                "          </CookieManager>";
+                "          </CookieManager>\n" +
+                "<hashTree/>\n";
         Map<String, String> formMap = new HashMap<>();
         if (StringUtils.isNoneBlank(cookie) && cookie != null) {
             if (cookie.contains("cookieKey") && cookie.contains("cookieValue")) {
@@ -255,45 +252,32 @@ public class HttpJmeterScript {
         return String.format(text, "");
     }
 
-    public static String jhReportSetting() {
-        String tedxt = "<hashTree/>\n" +
-                "          <ResultCollector guiclass=\"StatVisualizer\" testclass=\"ResultCollector\" testname=\"聚合报告\" enabled=\"true\">\n" +
-                "            <boolProp name=\"ResultCollector.error_logging\">false</boolProp>\n" +
-                "            <objProp>\n" +
-                "              <name>saveConfig</name>\n" +
-                "              <value class=\"SampleSaveConfiguration\">\n" +
-                "                <time>true</time>\n" +
-                "                <latency>true</latency>\n" +
-                "                <timestamp>true</timestamp>\n" +
-                "                <success>true</success>\n" +
-                "                <label>true</label>\n" +
-                "                <code>true</code>\n" +
-                "                <message>true</message>\n" +
-                "                <threadName>true</threadName>\n" +
-                "                <dataType>true</dataType>\n" +
-                "                <encoding>false</encoding>\n" +
-                "                <assertions>true</assertions>\n" +
-                "                <subresults>true</subresults>\n" +
-                "                <responseData>false</responseData>\n" +
-                "                <samplerData>false</samplerData>\n" +
-                "                <xml>false</xml>\n" +
-                "                <fieldNames>true</fieldNames>\n" +
-                "                <responseHeaders>false</responseHeaders>\n" +
-                "                <requestHeaders>false</requestHeaders>\n" +
-                "                <responseDataOnError>false</responseDataOnError>\n" +
-                "                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>\n" +
-                "                <assertionsResultsToSave>0</assertionsResultsToSave>\n" +
-                "                <bytes>true</bytes>\n" +
-                "                <sentBytes>true</sentBytes>\n" +
-                "                <threadCounts>true</threadCounts>\n" +
-                "                <idleTime>true</idleTime>\n" +
-                "                <connectTime>true</connectTime>\n" +
-                "              </value>\n" +
-                "            </objProp>\n" +
+    public static String preProcessorSetting(){
+        String text = "<JSR223PreProcessor guiclass=\"TestBeanGUI\" testclass=\"JSR223PreProcessor\" testname=\"JSR223 PreProcessor\" enabled=\"true\">\n" +
+                "            <stringProp name=\"cacheKey\">true</stringProp>\n" +
                 "            <stringProp name=\"filename\"></stringProp>\n" +
-                "          </ResultCollector>";
-        return tedxt;
+                "            <stringProp name=\"parameters\"></stringProp>\n" +
+                "            <stringProp name=\"script\">import java.util.UUID;\n" +
+                " \n" +
+                " String uuid = UUID.randomUUID().toString();\n" +
+                "        uuid = uuid.substring(0, 8)+uuid.substring(9,13)+uuid.substring(14,18)+uuid.substring(19,23)+uuid.substring(24);\n" +
+                "        StringBuffer stringBuffer = new StringBuffer();\n" +
+                "        for (int i=0;i&lt;uuid.length();i++){\n" +
+                "            if (!Character.isDigit(uuid.charAt(i))){\n" +
+                "                int value = uuid.charAt(i);\n" +
+                "                stringBuffer.append(value);\n" +
+                "                continue;\n" +
+                "            }\n" +
+                "            stringBuffer.append(uuid.charAt(i));\n" +
+                "        }\n" +
+                "   uuid = stringBuffer.toString().substring(5,14);     \n" +
+                "vars.put(&quot;requestid&quot;, uuid);</stringProp>\n" +
+                "            <stringProp name=\"scriptLanguage\">groovy</stringProp>\n" +
+                "          </JSR223PreProcessor>\n" +
+                "          <hashTree/>";
+        return text;
     }
+
 
     public static String responseAssertSetting(String assertText) {
         String text = "<hashTree/>\n" +
@@ -304,16 +288,16 @@ public class HttpJmeterScript {
                 "            <stringProp name=\"Assertion.test_field\">Assertion.response_data</stringProp>\n" +
                 "            <boolProp name=\"Assertion.assume_success\">false</boolProp>\n" +
                 "            <intProp name=\"Assertion.test_type\">16</intProp>\n" +
-                "          </ResponseAssertion>";
+                "          </ResponseAssertion>\n"+
+                "<hashTree/>";
         if (assertText.contains("\"")) {
             assertText = assertText.replace("\"", "&quot;");
         }
         return String.format(text, assertText);
     }
 
-    public static String rtotSetting() {
-        String text = "<hashTree/>\n" +
-                "          <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass=\"kg.apc.jmeter.vizualizers.ResponseTimesOverTimeGui\" testclass=\"kg.apc.jmeter.vizualizers.CorrectedResultCollector\" testname=\"jp@gc - Response Times Over Time\" enabled=\"true\">\n" +
+    public static String resultTreeSetting(){
+        String text = " <ResultCollector guiclass=\"ViewResultsFullVisualizer\" testclass=\"ResultCollector\" testname=\"View Results Tree\" enabled=\"true\">\n" +
                 "            <boolProp name=\"ResultCollector.error_logging\">false</boolProp>\n" +
                 "            <objProp>\n" +
                 "              <name>saveConfig</name>\n" +
@@ -341,27 +325,20 @@ public class HttpJmeterScript {
                 "                <assertionsResultsToSave>0</assertionsResultsToSave>\n" +
                 "                <bytes>true</bytes>\n" +
                 "                <sentBytes>true</sentBytes>\n" +
+                "                <url>true</url>\n" +
                 "                <threadCounts>true</threadCounts>\n" +
                 "                <idleTime>true</idleTime>\n" +
                 "                <connectTime>true</connectTime>\n" +
                 "              </value>\n" +
                 "            </objProp>\n" +
                 "            <stringProp name=\"filename\"></stringProp>\n" +
-                "            <longProp name=\"interval_grouping\">500</longProp>\n" +
-                "            <boolProp name=\"graph_aggregated\">false</boolProp>\n" +
-                "            <stringProp name=\"include_sample_labels\"></stringProp>\n" +
-                "            <stringProp name=\"exclude_sample_labels\"></stringProp>\n" +
-                "            <stringProp name=\"start_offset\"></stringProp>\n" +
-                "            <stringProp name=\"end_offset\"></stringProp>\n" +
-                "            <boolProp name=\"include_checkbox_state\">false</boolProp>\n" +
-                "            <boolProp name=\"exclude_checkbox_state\">false</boolProp>\n" +
-                "          </kg.apc.jmeter.vizualizers.CorrectedResultCollector>";
+                "          </ResultCollector>\n";
         return text;
     }
 
-    public static String tpsSetting() {
-        String text = "<hashTree/>\n" +
-                "          <kg.apc.jmeter.vizualizers.CorrectedResultCollector guiclass=\"kg.apc.jmeter.vizualizers.TransactionsPerSecondGui\" testclass=\"kg.apc.jmeter.vizualizers.CorrectedResultCollector\" testname=\"jp@gc - Transactions per Second\" enabled=\"true\">\n" +
+    public static String aggregateGraphSetting(){
+        String text = " <hashTree/>\n" +
+                "          <ResultCollector guiclass=\"StatGraphVisualizer\" testclass=\"ResultCollector\" testname=\"Aggregate Graph\" enabled=\"true\">\n" +
                 "            <boolProp name=\"ResultCollector.error_logging\">false</boolProp>\n" +
                 "            <objProp>\n" +
                 "              <name>saveConfig</name>\n" +
@@ -389,54 +366,7 @@ public class HttpJmeterScript {
                 "                <assertionsResultsToSave>0</assertionsResultsToSave>\n" +
                 "                <bytes>true</bytes>\n" +
                 "                <sentBytes>true</sentBytes>\n" +
-                "                <threadCounts>true</threadCounts>\n" +
-                "                <idleTime>true</idleTime>\n" +
-                "                <connectTime>true</connectTime>\n" +
-                "              </value>\n" +
-                "            </objProp>\n" +
-                "            <stringProp name=\"filename\"></stringProp>\n" +
-                "            <longProp name=\"interval_grouping\">1000</longProp>\n" +
-                "            <boolProp name=\"graph_aggregated\">false</boolProp>\n" +
-                "            <stringProp name=\"include_sample_labels\"></stringProp>\n" +
-                "            <stringProp name=\"exclude_sample_labels\"></stringProp>\n" +
-                "            <stringProp name=\"start_offset\"></stringProp>\n" +
-                "            <stringProp name=\"end_offset\"></stringProp>\n" +
-                "            <boolProp name=\"include_checkbox_state\">false</boolProp>\n" +
-                "            <boolProp name=\"exclude_checkbox_state\">false</boolProp>\n" +
-                "          </kg.apc.jmeter.vizualizers.CorrectedResultCollector>";
-        return text;
-    }
-
-    public static String watchResultSetting() {
-        String text = "<hashTree/>\n" +
-                "          <ResultCollector guiclass=\"ViewResultsFullVisualizer\" testclass=\"ResultCollector\" testname=\"察看结果树\" enabled=\"true\">\n" +
-                "            <boolProp name=\"ResultCollector.error_logging\">false</boolProp>\n" +
-                "            <objProp>\n" +
-                "              <name>saveConfig</name>\n" +
-                "              <value class=\"SampleSaveConfiguration\">\n" +
-                "                <time>true</time>\n" +
-                "                <latency>true</latency>\n" +
-                "                <timestamp>true</timestamp>\n" +
-                "                <success>true</success>\n" +
-                "                <label>true</label>\n" +
-                "                <code>true</code>\n" +
-                "                <message>true</message>\n" +
-                "                <threadName>true</threadName>\n" +
-                "                <dataType>true</dataType>\n" +
-                "                <encoding>false</encoding>\n" +
-                "                <assertions>true</assertions>\n" +
-                "                <subresults>true</subresults>\n" +
-                "                <responseData>false</responseData>\n" +
-                "                <samplerData>false</samplerData>\n" +
-                "                <xml>false</xml>\n" +
-                "                <fieldNames>true</fieldNames>\n" +
-                "                <responseHeaders>false</responseHeaders>\n" +
-                "                <requestHeaders>false</requestHeaders>\n" +
-                "                <responseDataOnError>false</responseDataOnError>\n" +
-                "                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>\n" +
-                "                <assertionsResultsToSave>0</assertionsResultsToSave>\n" +
-                "                <bytes>true</bytes>\n" +
-                "                <sentBytes>true</sentBytes>\n" +
+                "                <url>true</url>\n" +
                 "                <threadCounts>true</threadCounts>\n" +
                 "                <idleTime>true</idleTime>\n" +
                 "                <connectTime>true</connectTime>\n" +
@@ -447,114 +377,60 @@ public class HttpJmeterScript {
         return text;
     }
 
-    public static String pmcSetting(boolean isOpenServerMonitor,String host,String port) {
-        String text = "<hashTree/>\n" +
-                "          <kg.apc.jmeter.perfmon.PerfMonCollector guiclass=\"kg.apc.jmeter.vizualizers.PerfMonGui\" testclass=\"kg.apc.jmeter.perfmon.PerfMonCollector\" testname=\"jp@gc - PerfMon Metrics Collector\" enabled=\"%s\">\n" +
-                "            <boolProp name=\"ResultCollector.error_logging\">false</boolProp>\n" +
-                "            <objProp>\n" +
-                "              <name>saveConfig</name>\n" +
-                "              <value class=\"SampleSaveConfiguration\">\n" +
-                "                <time>true</time>\n" +
-                "                <latency>true</latency>\n" +
-                "                <timestamp>true</timestamp>\n" +
-                "                <success>true</success>\n" +
-                "                <label>true</label>\n" +
-                "                <code>true</code>\n" +
-                "                <message>true</message>\n" +
-                "                <threadName>true</threadName>\n" +
-                "                <dataType>true</dataType>\n" +
-                "                <encoding>false</encoding>\n" +
-                "                <assertions>true</assertions>\n" +
-                "                <subresults>true</subresults>\n" +
-                "                <responseData>false</responseData>\n" +
-                "                <samplerData>false</samplerData>\n" +
-                "                <xml>false</xml>\n" +
-                "                <fieldNames>true</fieldNames>\n" +
-                "                <responseHeaders>false</responseHeaders>\n" +
-                "                <requestHeaders>false</requestHeaders>\n" +
-                "                <responseDataOnError>false</responseDataOnError>\n" +
-                "                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>\n" +
-                "                <assertionsResultsToSave>0</assertionsResultsToSave>\n" +
-                "                <bytes>true</bytes>\n" +
-                "                <sentBytes>true</sentBytes>\n" +
-                "                <threadCounts>true</threadCounts>\n" +
-                "                <idleTime>true</idleTime>\n" +
-                "                <connectTime>true</connectTime>\n" +
-                "              </value>\n" +
-                "            </objProp>\n" +
-                "            <stringProp name=\"filename\"></stringProp>\n" +
-                "            <longProp name=\"interval_grouping\">1000</longProp>\n" +
-                "            <boolProp name=\"graph_aggregated\">false</boolProp>\n" +
-                "            <stringProp name=\"include_sample_labels\"></stringProp>\n" +
-                "            <stringProp name=\"exclude_sample_labels\"></stringProp>\n" +
-                "            <stringProp name=\"start_offset\"></stringProp>\n" +
-                "            <stringProp name=\"end_offset\"></stringProp>\n" +
-                "            <boolProp name=\"include_checkbox_state\">false</boolProp>\n" +
-                "            <boolProp name=\"exclude_checkbox_state\">false</boolProp>\n" +
-                "            <collectionProp name=\"metricConnections\">\n" +
-                "              <collectionProp name=\"917712290\">\n" +
-                "                <stringProp name=\"-1204607085\">%s</stringProp>\n" +
-                "                <stringProp name=\"1600768\">%s</stringProp>\n" +
-                "                <stringProp name=\"66952\">CPU</stringProp>\n" +
-                "                <stringProp name=\"0\"></stringProp>\n" +
+    public static String backendListener(boolean isActive){
+        String text = "<BackendListener guiclass=\"BackendListenerGui\" testclass=\"BackendListener\" testname=\"Backend Listener\" enabled=\"%s\">\n" +
+                "            <elementProp name=\"arguments\" elementType=\"Arguments\" guiclass=\"ArgumentsPanel\" testclass=\"Arguments\" enabled=\"true\">\n" +
+                "              <collectionProp name=\"Arguments.arguments\">\n" +
+                "                <elementProp name=\"graphiteMetricsSender\" elementType=\"Argument\">\n" +
+                "                  <stringProp name=\"Argument.name\">graphiteMetricsSender</stringProp>\n" +
+                "                  <stringProp name=\"Argument.value\">org.apache.jmeter.visualizers.backend.graphite.TextGraphiteMetricsSender</stringProp>\n" +
+                "                  <stringProp name=\"Argument.metadata\">=</stringProp>\n" +
+                "                </elementProp>\n" +
+                "                <elementProp name=\"graphiteHost\" elementType=\"Argument\">\n" +
+                "                  <stringProp name=\"Argument.name\">graphiteHost</stringProp>\n" +
+                "                  <stringProp name=\"Argument.value\">localhost</stringProp>\n" +
+                "                  <stringProp name=\"Argument.metadata\">=</stringProp>\n" +
+                "                </elementProp>\n" +
+                "                <elementProp name=\"graphitePort\" elementType=\"Argument\">\n" +
+                "                  <stringProp name=\"Argument.name\">graphitePort</stringProp>\n" +
+                "                  <stringProp name=\"Argument.value\">2003</stringProp>\n" +
+                "                  <stringProp name=\"Argument.metadata\">=</stringProp>\n" +
+                "                </elementProp>\n" +
+                "                <elementProp name=\"rootMetricsPrefix\" elementType=\"Argument\">\n" +
+                "                  <stringProp name=\"Argument.name\">rootMetricsPrefix</stringProp>\n" +
+                "                  <stringProp name=\"Argument.value\">jmeter.</stringProp>\n" +
+                "                  <stringProp name=\"Argument.metadata\">=</stringProp>\n" +
+                "                </elementProp>\n" +
+                "                <elementProp name=\"summaryOnly\" elementType=\"Argument\">\n" +
+                "                  <stringProp name=\"Argument.name\">summaryOnly</stringProp>\n" +
+                "                  <stringProp name=\"Argument.value\">true</stringProp>\n" +
+                "                  <stringProp name=\"Argument.metadata\">=</stringProp>\n" +
+                "                </elementProp>\n" +
+                "                <elementProp name=\"samplersList\" elementType=\"Argument\">\n" +
+                "                  <stringProp name=\"Argument.name\">samplersList</stringProp>\n" +
+                "                  <stringProp name=\"Argument.value\"></stringProp>\n" +
+                "                  <stringProp name=\"Argument.metadata\">=</stringProp>\n" +
+                "                </elementProp>\n" +
+                "                <elementProp name=\"percentiles\" elementType=\"Argument\">\n" +
+                "                  <stringProp name=\"Argument.name\">percentiles</stringProp>\n" +
+                "                  <stringProp name=\"Argument.value\">90;95;99</stringProp>\n" +
+                "                  <stringProp name=\"Argument.metadata\">=</stringProp>\n" +
+                "                </elementProp>\n" +
                 "              </collectionProp>\n" +
-                "              <collectionProp name=\"-723468740\">\n" +
-                "                <stringProp name=\"-1204607085\">%s</stringProp>\n" +
-                "                <stringProp name=\"1600768\">%s</stringProp>\n" +
-                "                <stringProp name=\"2590131\">Swap</stringProp>\n" +
-                "                <stringProp name=\"0\"></stringProp>\n" +
-                "              </collectionProp>\n" +
-                "              <collectionProp name=\"-1383002031\">\n" +
-                "                <stringProp name=\"-1204607085\">%s</stringProp>\n" +
-                "                <stringProp name=\"1600768\">%s</stringProp>\n" +
-                "                <stringProp name=\"-1993889503\">Memory</stringProp>\n" +
-                "                <stringProp name=\"0\"></stringProp>\n" +
-                "              </collectionProp>\n" +
-                "              <collectionProp name=\"-1270662015\">\n" +
-                "                <stringProp name=\"-1204607085\">%s</stringProp>\n" +
-                "                <stringProp name=\"1600768\">%s</stringProp>\n" +
-                "                <stringProp name=\"-274342153\">Network I/O</stringProp>\n" +
-                "                <stringProp name=\"0\"></stringProp>\n" +
-                "              </collectionProp>\n" +
-                "            </collectionProp>\n" +
-                "          </kg.apc.jmeter.perfmon.PerfMonCollector>";
-
-        return String.format(text,String.valueOf(isOpenServerMonitor),host,port,host,port,host,port,host,port);
+                "            </elementProp>\n" +
+                "            <stringProp name=\"classname\">org.apache.jmeter.visualizers.backend.graphite.GraphiteBackendListenerClient</stringProp>\n" +
+                "          </BackendListener>";
+        return String.format(text,String.valueOf(isActive));
 
     }
 
-    public static String endSetting() {
-        String text = "<hashTree/>\n" +
+    public static String endSetting(){
+        return "<hashTree/>\n" +
                 "        </hashTree>\n" +
                 "      </hashTree>\n" +
                 "    </hashTree>\n" +
                 "  </hashTree>\n" +
                 "</jmeterTestPlan>";
-        return text;
-    }
-
-    public static String executeLinuxCmd(String cmd) {
-        Runtime run = Runtime.getRuntime();
-        try {
-            Process process = run.exec(cmd);
-            InputStream in = process.getInputStream();
-            BufferedReader bs = new BufferedReader(new InputStreamReader(in));
-            // System.out.println("[check] now size \n"+bs.readLine());
-        StringBuffer out = new StringBuffer();
-        byte[] b = new byte[8192];
-        for (int n; (n = in.read(b)) != -1;) {
-            out.append(new String(b, 0, n));
-        }
-            log.info("job result [" + out.toString() + "]");
-            in.close();
-            // process.waitFor();
-            process.destroy();
-            return out.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-            log.info("连接服务器错误："+e.getMessage());
-        }
-        return null;
     }
 
     public static void main(String[] args) throws IOException {
@@ -568,14 +444,15 @@ public class HttpJmeterScript {
                         "}", "1000");
         String hds = headerSetting("[{\"headerKey\":\"requestid\",\"headerValue\":\"2132133121\"},{\"headerKey\":\"token\",\"headerValue\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxMzA3MjciLCJzeXN0ZW1JZCI6IjgxOTUxMDk2NjA5Iiwib3JnSWQiOiI4MCIsInRpbWVzdGFtcCI6IjE1NjA5MzAyMDY4NDUifQ.bNoV9ARuwTsHr9Z7uQlE6-7CN7XIfwwoM3LaEBhFMtQ\"},{\"headerKey\":\"Content-Type\",\"headerValue\":\"application/json\"}]");
         String cookie = cookieSetting(null,"http://stupad-hotfix.xk12.cn/api/pad/xiaoyun/content");
-        String jh = jhReportSetting();
+        String processor = preProcessorSetting();
+        String tree = resultTreeSetting();
+        String jh = aggregateGraphSetting();
         String ast = responseAssertSetting("\"ecode\":0");
-        String rtot = rtotSetting();
-        String tps = tpsSetting();
-        String wa = watchResultSetting();
-        String pbb = pmcSetting(false,"10.10.6.1","4444");
+        String bck = backendListener(true);
         String end = endSetting();
-        String result = hd+ct+a+hds+cookie+jh+ast+rtot+tps+wa+pbb+end;
+        System.out.println(tree);
+        System.out.println(jh);
+        String result = hd+ct+a+hds+cookie+processor+tree+jh+ast+bck+end;
         OutputStream os = new FileOutputStream(new File("/Users/liuzhanhui/Documents/test3.jmx"));
         os.write(result.getBytes("utf-8"));
         os.close();

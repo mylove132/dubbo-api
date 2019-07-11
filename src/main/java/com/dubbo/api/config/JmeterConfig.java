@@ -38,6 +38,18 @@ public class JmeterConfig {
     @Value("${STATIC_SERVER}")
     private String staticServer;
 
+    @Value("${JMX_BUILD_FILE_PATH}")
+    private String jmeterBuildFilePath;
+
+    @Value("${JMETER_PATH}")
+    private String jmeterPath;
+
+    @Value("${JMETER_HTML_PATH}")
+    private String jmeterHtmlPath;
+
+    @Value("${ANT_BIN_PATH}")
+    private String antBinPath;
+
     public String getJmeterBinPath() {
         return jmeterBinPath;
     }
@@ -100,5 +112,37 @@ public class JmeterConfig {
 
     public void setStaticServer(String staticServer) {
         this.staticServer = staticServer;
+    }
+
+    public String getJmeterBuildFilePath() {
+        return jmeterBuildFilePath;
+    }
+
+    public void setJmeterBuildFilePath(String jmeterBuildFilePath) {
+        this.jmeterBuildFilePath = jmeterBuildFilePath;
+    }
+
+    public String getJmeterPath() {
+        return jmeterPath;
+    }
+
+    public void setJmeterPath(String jmeterPath) {
+        this.jmeterPath = jmeterPath;
+    }
+
+    public String getJmeterHtmlPath() {
+        return jmeterHtmlPath;
+    }
+
+    public void setJmeterHtmlPath(String jmeterHtmlPath) {
+        this.jmeterHtmlPath = jmeterHtmlPath;
+    }
+
+    public String getAntBinPath() {
+        return antBinPath;
+    }
+
+    public void setAntBinPath(String antBinPath) {
+        this.antBinPath = antBinPath;
     }
 }
