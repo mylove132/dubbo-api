@@ -11,31 +11,194 @@
  Target Server Version : 50720
  File Encoding         : utf-8
 
- Date: 06/28/2019 18:32:27 PM
+ Date: 07/11/2019 17:50:06 PM
 */
 
 SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
---  Table structure for `QRTZ_BLOB_TRIGGERS`
+--  Table structure for `entity_env`
 -- ----------------------------
-DROP TABLE IF EXISTS `QRTZ_BLOB_TRIGGERS`;
-CREATE TABLE `QRTZ_BLOB_TRIGGERS` (
+DROP TABLE IF EXISTS `entity_env`;
+CREATE TABLE `entity_env` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) DEFAULT NULL,
+  `zk` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `entity_history`
+-- ----------------------------
+DROP TABLE IF EXISTS `entity_history`;
+CREATE TABLE `entity_history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime(6) NOT NULL,
+  `md5` varchar(64) COLLATE utf8_bin NOT NULL,
+  `status` varchar(20) COLLATE utf8_bin NOT NULL,
+  `script_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `entity_history_script_id_77a9580d_fk_entity_script_id` (`script_id`),
+  KEY `entity_history_user_id_ca5b1d79_fk_entity_user_id` (`user_id`),
+  CONSTRAINT `entity_history_script_id_77a9580d_fk_entity_script_id` FOREIGN KEY (`script_id`) REFERENCES `entity_script` (`id`),
+  CONSTRAINT `entity_history_user_id_ca5b1d79_fk_entity_user_id` FOREIGN KEY (`user_id`) REFERENCES `entity_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=218 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+--  Table structure for `entity_project`
+-- ----------------------------
+DROP TABLE IF EXISTS `entity_project`;
+CREATE TABLE `entity_project` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_bin NOT NULL,
+  `env` int(11) NOT NULL,
+  `type` int(11) NOT NULL,
+  `descption` varchar(200) COLLATE utf8_bin NOT NULL,
+  `ctime` datetime(6) NOT NULL,
+  `update_time` datetime(6) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  KEY `entity_project_user_id_db91b8ba_fk_entity_user_id` (`user_id`),
+  KEY `env` (`env`),
+  KEY `type` (`type`),
+  CONSTRAINT `entity_project_ibfk_1` FOREIGN KEY (`env`) REFERENCES `entity_env` (`id`),
+  CONSTRAINT `entity_project_ibfk_2` FOREIGN KEY (`type`) REFERENCES `entity_type` (`id`),
+  CONSTRAINT `entity_project_user_id_db91b8ba_fk_entity_user_id` FOREIGN KEY (`user_id`) REFERENCES `entity_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+--  Table structure for `entity_protocol`
+-- ----------------------------
+DROP TABLE IF EXISTS `entity_protocol`;
+CREATE TABLE `entity_protocol` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `entity_request_type`
+-- ----------------------------
+DROP TABLE IF EXISTS `entity_request_type`;
+CREATE TABLE `entity_request_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `entity_role`
+-- ----------------------------
+DROP TABLE IF EXISTS `entity_role`;
+CREATE TABLE `entity_role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `entity_script`
+-- ----------------------------
+DROP TABLE IF EXISTS `entity_script`;
+CREATE TABLE `entity_script` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) COLLATE utf8_bin NOT NULL,
+  `pre_number` int(11) NOT NULL,
+  `pre_time` int(11) NOT NULL,
+  `url` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `time_out` int(11) NOT NULL,
+  `request_type_id` int(11) NOT NULL,
+  `protocol_id` int(11) NOT NULL,
+  `ins` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `assert_text` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `method` varchar(80) COLLATE utf8_bin DEFAULT NULL,
+  `params` varchar(4096) COLLATE utf8_bin DEFAULT NULL,
+  `param_type` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `cookie` varchar(1024) COLLATE utf8_bin DEFAULT NULL,
+  `header` varchar(800) COLLATE utf8_bin DEFAULT NULL,
+  `create_time` datetime(6) NOT NULL,
+  `update_time` datetime(6) NOT NULL,
+  `version` varchar(10) COLLATE utf8_bin DEFAULT NULL,
+  `project_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `ip` varchar(10) COLLATE utf8_bin DEFAULT NULL,
+  `port` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `entity_script_project_id_d2d23c58_fk_entity_project_id` (`project_id`),
+  KEY `entity_script_user_id_29555dde_fk_entity_user_id` (`user_id`),
+  KEY `entity_script_ibfk_1` (`protocol_id`),
+  KEY `request_type_id` (`request_type_id`),
+  CONSTRAINT `entity_script_ibfk_1` FOREIGN KEY (`protocol_id`) REFERENCES `entity_protocol` (`id`),
+  CONSTRAINT `entity_script_ibfk_2` FOREIGN KEY (`request_type_id`) REFERENCES `entity_request_type` (`id`),
+  CONSTRAINT `entity_script_project_id_d2d23c58_fk_entity_project_id` FOREIGN KEY (`project_id`) REFERENCES `entity_project` (`id`),
+  CONSTRAINT `entity_script_user_id_29555dde_fk_entity_user_id` FOREIGN KEY (`user_id`) REFERENCES `entity_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+--  Table structure for `entity_token`
+-- ----------------------------
+DROP TABLE IF EXISTS `entity_token`;
+CREATE TABLE `entity_token` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `token` varchar(200) COLLATE utf8_bin NOT NULL,
+  `update_time` datetime(6) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `token` (`token`),
+  UNIQUE KEY `user_id` (`user_id`),
+  CONSTRAINT `entity_token_user_id_e53f18b6_fk_entity_user_id` FOREIGN KEY (`user_id`) REFERENCES `entity_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+--  Table structure for `entity_type`
+-- ----------------------------
+DROP TABLE IF EXISTS `entity_type`;
+CREATE TABLE `entity_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+--  Table structure for `entity_user`
+-- ----------------------------
+DROP TABLE IF EXISTS `entity_user`;
+CREATE TABLE `entity_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) COLLATE utf8_bin NOT NULL,
+  `email` varchar(50) COLLATE utf8_bin NOT NULL,
+  `password` varchar(100) COLLATE utf8_bin NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `create_time` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`),
+  UNIQUE KEY `email` (`email`),
+  KEY `user_type` (`role_id`),
+  CONSTRAINT `entity_user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `entity_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- ----------------------------
+--  Table structure for `qrtz_blob_triggers`
+-- ----------------------------
+DROP TABLE IF EXISTS `qrtz_blob_triggers`;
+CREATE TABLE `qrtz_blob_triggers` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `TRIGGER_NAME` varchar(200) NOT NULL,
   `TRIGGER_GROUP` varchar(200) NOT NULL,
   `BLOB_DATA` blob,
   PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
   KEY `SCHED_NAME` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
-  CONSTRAINT `qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `QRTZ_TRIGGERS` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+  CONSTRAINT `qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `QRTZ_CALENDARS`
+--  Table structure for `qrtz_calendars`
 -- ----------------------------
-DROP TABLE IF EXISTS `QRTZ_CALENDARS`;
-CREATE TABLE `QRTZ_CALENDARS` (
+DROP TABLE IF EXISTS `qrtz_calendars`;
+CREATE TABLE `qrtz_calendars` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `CALENDAR_NAME` varchar(200) NOT NULL,
   `CALENDAR` blob NOT NULL,
@@ -43,24 +206,24 @@ CREATE TABLE `QRTZ_CALENDARS` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `QRTZ_CRON_TRIGGERS`
+--  Table structure for `qrtz_cron_triggers`
 -- ----------------------------
-DROP TABLE IF EXISTS `QRTZ_CRON_TRIGGERS`;
-CREATE TABLE `QRTZ_CRON_TRIGGERS` (
+DROP TABLE IF EXISTS `qrtz_cron_triggers`;
+CREATE TABLE `qrtz_cron_triggers` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `TRIGGER_NAME` varchar(200) NOT NULL,
   `TRIGGER_GROUP` varchar(200) NOT NULL,
   `CRON_EXPRESSION` varchar(120) NOT NULL,
   `TIME_ZONE_ID` varchar(80) DEFAULT NULL,
   PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
-  CONSTRAINT `qrtz_cron_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `QRTZ_TRIGGERS` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+  CONSTRAINT `qrtz_cron_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `QRTZ_FIRED_TRIGGERS`
+--  Table structure for `qrtz_fired_triggers`
 -- ----------------------------
-DROP TABLE IF EXISTS `QRTZ_FIRED_TRIGGERS`;
-CREATE TABLE `QRTZ_FIRED_TRIGGERS` (
+DROP TABLE IF EXISTS `qrtz_fired_triggers`;
+CREATE TABLE `qrtz_fired_triggers` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `ENTRY_ID` varchar(95) NOT NULL,
   `TRIGGER_NAME` varchar(200) NOT NULL,
@@ -84,10 +247,10 @@ CREATE TABLE `QRTZ_FIRED_TRIGGERS` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `QRTZ_JOB_DETAILS`
+--  Table structure for `qrtz_job_details`
 -- ----------------------------
-DROP TABLE IF EXISTS `QRTZ_JOB_DETAILS`;
-CREATE TABLE `QRTZ_JOB_DETAILS` (
+DROP TABLE IF EXISTS `qrtz_job_details`;
+CREATE TABLE `qrtz_job_details` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `JOB_NAME` varchar(200) NOT NULL,
   `JOB_GROUP` varchar(200) NOT NULL,
@@ -104,30 +267,30 @@ CREATE TABLE `QRTZ_JOB_DETAILS` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `QRTZ_LOCKS`
+--  Table structure for `qrtz_locks`
 -- ----------------------------
-DROP TABLE IF EXISTS `QRTZ_LOCKS`;
-CREATE TABLE `QRTZ_LOCKS` (
+DROP TABLE IF EXISTS `qrtz_locks`;
+CREATE TABLE `qrtz_locks` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `LOCK_NAME` varchar(40) NOT NULL,
   PRIMARY KEY (`SCHED_NAME`,`LOCK_NAME`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `QRTZ_PAUSED_TRIGGER_GRPS`
+--  Table structure for `qrtz_paused_trigger_grps`
 -- ----------------------------
-DROP TABLE IF EXISTS `QRTZ_PAUSED_TRIGGER_GRPS`;
-CREATE TABLE `QRTZ_PAUSED_TRIGGER_GRPS` (
+DROP TABLE IF EXISTS `qrtz_paused_trigger_grps`;
+CREATE TABLE `qrtz_paused_trigger_grps` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `TRIGGER_GROUP` varchar(200) NOT NULL,
   PRIMARY KEY (`SCHED_NAME`,`TRIGGER_GROUP`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `QRTZ_SCHEDULER_STATE`
+--  Table structure for `qrtz_scheduler_state`
 -- ----------------------------
-DROP TABLE IF EXISTS `QRTZ_SCHEDULER_STATE`;
-CREATE TABLE `QRTZ_SCHEDULER_STATE` (
+DROP TABLE IF EXISTS `qrtz_scheduler_state`;
+CREATE TABLE `qrtz_scheduler_state` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `INSTANCE_NAME` varchar(200) NOT NULL,
   `LAST_CHECKIN_TIME` bigint(13) NOT NULL,
@@ -136,10 +299,10 @@ CREATE TABLE `QRTZ_SCHEDULER_STATE` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `QRTZ_SIMPLE_TRIGGERS`
+--  Table structure for `qrtz_simple_triggers`
 -- ----------------------------
-DROP TABLE IF EXISTS `QRTZ_SIMPLE_TRIGGERS`;
-CREATE TABLE `QRTZ_SIMPLE_TRIGGERS` (
+DROP TABLE IF EXISTS `qrtz_simple_triggers`;
+CREATE TABLE `qrtz_simple_triggers` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `TRIGGER_NAME` varchar(200) NOT NULL,
   `TRIGGER_GROUP` varchar(200) NOT NULL,
@@ -147,14 +310,14 @@ CREATE TABLE `QRTZ_SIMPLE_TRIGGERS` (
   `REPEAT_INTERVAL` bigint(12) NOT NULL,
   `TIMES_TRIGGERED` bigint(10) NOT NULL,
   PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
-  CONSTRAINT `qrtz_simple_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `QRTZ_TRIGGERS` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+  CONSTRAINT `qrtz_simple_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `QRTZ_SIMPROP_TRIGGERS`
+--  Table structure for `qrtz_simprop_triggers`
 -- ----------------------------
-DROP TABLE IF EXISTS `QRTZ_SIMPROP_TRIGGERS`;
-CREATE TABLE `QRTZ_SIMPROP_TRIGGERS` (
+DROP TABLE IF EXISTS `qrtz_simprop_triggers`;
+CREATE TABLE `qrtz_simprop_triggers` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `TRIGGER_NAME` varchar(200) NOT NULL,
   `TRIGGER_GROUP` varchar(200) NOT NULL,
@@ -170,14 +333,14 @@ CREATE TABLE `QRTZ_SIMPROP_TRIGGERS` (
   `BOOL_PROP_1` varchar(1) DEFAULT NULL,
   `BOOL_PROP_2` varchar(1) DEFAULT NULL,
   PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
-  CONSTRAINT `qrtz_simprop_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `QRTZ_TRIGGERS` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+  CONSTRAINT `qrtz_simprop_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
---  Table structure for `QRTZ_TRIGGERS`
+--  Table structure for `qrtz_triggers`
 -- ----------------------------
-DROP TABLE IF EXISTS `QRTZ_TRIGGERS`;
-CREATE TABLE `QRTZ_TRIGGERS` (
+DROP TABLE IF EXISTS `qrtz_triggers`;
+CREATE TABLE `qrtz_triggers` (
   `SCHED_NAME` varchar(120) NOT NULL,
   `TRIGGER_NAME` varchar(200) NOT NULL,
   `TRIGGER_GROUP` varchar(200) NOT NULL,
@@ -207,121 +370,8 @@ CREATE TABLE `QRTZ_TRIGGERS` (
   KEY `IDX_QRTZ_T_NFT_MISFIRE` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`),
   KEY `IDX_QRTZ_T_NFT_ST_MISFIRE` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`,`TRIGGER_STATE`),
   KEY `IDX_QRTZ_T_NFT_ST_MISFIRE_GRP` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`,`TRIGGER_GROUP`,`TRIGGER_STATE`),
-  CONSTRAINT `qrtz_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`) REFERENCES `QRTZ_JOB_DETAILS` (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`)
+  CONSTRAINT `qrtz_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`) REFERENCES `qrtz_job_details` (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
---  Table structure for `entity_history`
--- ----------------------------
-DROP TABLE IF EXISTS `entity_history`;
-CREATE TABLE `entity_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `create_time` datetime(6) NOT NULL,
-  `md5` varchar(64) COLLATE utf8_bin NOT NULL,
-  `status` varchar(20) COLLATE utf8_bin NOT NULL,
-  `script_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `entity_history_script_id_77a9580d_fk_entity_script_id` (`script_id`),
-  KEY `entity_history_user_id_ca5b1d79_fk_entity_user_id` (`user_id`),
-  CONSTRAINT `entity_history_script_id_77a9580d_fk_entity_script_id` FOREIGN KEY (`script_id`) REFERENCES `entity_script` (`id`),
-  CONSTRAINT `entity_history_user_id_ca5b1d79_fk_entity_user_id` FOREIGN KEY (`user_id`) REFERENCES `entity_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
---  Table structure for `entity_project`
--- ----------------------------
-DROP TABLE IF EXISTS `entity_project`;
-CREATE TABLE `entity_project` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) COLLATE utf8_bin NOT NULL,
-  `env` int(11) NOT NULL,
-  `type` int(11) NOT NULL,
-  `desc` varchar(200) COLLATE utf8_bin NOT NULL,
-  `ctime` datetime(6) NOT NULL,
-  `update_time` datetime(6) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `entity_project_user_id_db91b8ba_fk_entity_user_id` (`user_id`),
-  CONSTRAINT `entity_project_user_id_db91b8ba_fk_entity_user_id` FOREIGN KEY (`user_id`) REFERENCES `entity_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
---  Table structure for `entity_role`
--- ----------------------------
-DROP TABLE IF EXISTS `entity_role`;
-CREATE TABLE `entity_role` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `role` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
--- ----------------------------
---  Table structure for `entity_script`
--- ----------------------------
-DROP TABLE IF EXISTS `entity_script`;
-CREATE TABLE `entity_script` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) COLLATE utf8_bin NOT NULL,
-  `pre_number` int(11) NOT NULL,
-  `pre_time` int(11) NOT NULL,
-  `url` varchar(200) COLLATE utf8_bin NOT NULL,
-  `time_out` int(11) NOT NULL,
-  `request_type` int(11) NOT NULL,
-  `protocol` int(11) NOT NULL,
-  `ins` varchar(100) COLLATE utf8_bin NOT NULL,
-  `assert_text` varchar(50) COLLATE utf8_bin NOT NULL,
-  `method` varchar(80) COLLATE utf8_bin NOT NULL,
-  `params` varchar(600) COLLATE utf8_bin NOT NULL,
-  `param_type` varchar(100) COLLATE utf8_bin NOT NULL,
-  `cookie` varchar(800) COLLATE utf8_bin NOT NULL,
-  `header` varchar(800) COLLATE utf8_bin NOT NULL,
-  `create_time` datetime(6) NOT NULL,
-  `update_time` datetime(6) NOT NULL,
-  `version` varchar(10) COLLATE utf8_bin NOT NULL,
-  `project_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `ip` varchar(10) COLLATE utf8_bin NOT NULL,
-  `port` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `entity_script_project_id_d2d23c58_fk_entity_project_id` (`project_id`),
-  KEY `entity_script_user_id_29555dde_fk_entity_user_id` (`user_id`),
-  CONSTRAINT `entity_script_project_id_d2d23c58_fk_entity_project_id` FOREIGN KEY (`project_id`) REFERENCES `entity_project` (`id`),
-  CONSTRAINT `entity_script_user_id_29555dde_fk_entity_user_id` FOREIGN KEY (`user_id`) REFERENCES `entity_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
---  Table structure for `entity_token`
--- ----------------------------
-DROP TABLE IF EXISTS `entity_token`;
-CREATE TABLE `entity_token` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `token` varchar(200) COLLATE utf8_bin NOT NULL,
-  `update_time` datetime(6) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `token` (`token`),
-  UNIQUE KEY `user_id` (`user_id`),
-  CONSTRAINT `entity_token_user_id_e53f18b6_fk_entity_user_id` FOREIGN KEY (`user_id`) REFERENCES `entity_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- ----------------------------
---  Table structure for `entity_user`
--- ----------------------------
-DROP TABLE IF EXISTS `entity_user`;
-CREATE TABLE `entity_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) COLLATE utf8_bin NOT NULL,
-  `email` varchar(50) COLLATE utf8_bin NOT NULL,
-  `password` varchar(100) COLLATE utf8_bin NOT NULL,
-  `role_id` int(11) NOT NULL,
-  `create_time` datetime(6) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
-  UNIQUE KEY `email` (`email`),
-  KEY `user_type` (`role_id`),
-  CONSTRAINT `entity_user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `entity_role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 --  Table structure for `schedule_job`
@@ -338,11 +388,14 @@ CREATE TABLE `schedule_job` (
   `crt_time` datetime DEFAULT NULL,
   `crt_user` varchar(50) DEFAULT NULL,
   `crt_name` varchar(255) DEFAULT NULL,
-  `script_id` int(11) DEFAULT NULL,
+  `script_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `script_id` (`script_id`),
-  CONSTRAINT `schedule_job_ibfk_1` FOREIGN KEY (`script_id`) REFERENCES `entity_script` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定时任务表';
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `schedule_job_ibfk_1` FOREIGN KEY (`script_id`) REFERENCES `entity_script` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `schedule_job_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `entity_user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='定时任务表';
 
 -- ----------------------------
 --  Table structure for `schedule_job_log`
@@ -360,6 +413,6 @@ CREATE TABLE `schedule_job_log` (
   `crt_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `job_id` (`job_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='定时任务日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8 COMMENT='定时任务日志表';
 
 SET FOREIGN_KEY_CHECKS = 1;
