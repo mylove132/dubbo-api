@@ -19,7 +19,7 @@ import java.util.Properties;
 public class ZKPropertiesLoader {
 
     private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-    private static String path = ZKPropertiesLoader.class.getClassLoader().getResource("").getPath() + "/conf/zk.properties";
+    private static String path = System.getProperty("user.dir") + "/conf/zk.properties";
 
     /***
      * 系统 提前 加载配置文件 到系统变量里面
