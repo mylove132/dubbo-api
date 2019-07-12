@@ -1,11 +1,9 @@
 package com.dubbo.api.dao;
 
 import com.dubbo.api.vo.ProjectEnv;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-@Mapper
 public interface ProjectEnvMapper {
     int deleteByPrimaryKey(Integer id);
 
