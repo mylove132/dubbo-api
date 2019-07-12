@@ -68,7 +68,7 @@ public class CommonController {
     @RequestMapping(value = "/env", method = RequestMethod.GET)
     public BaseResponse envListController() {
         log.info("获取环境列表");
-        return new SuccessResponse(projectEnvMapper.envList());
+        return new SuccessResponse(projectEnvMapper.listEnv());
     }
 
     @RequestMapping(value = "/protocol", method = RequestMethod.GET)
@@ -769,6 +769,7 @@ public class CommonController {
             if (result){
                 Map<String,String> map = new HashMap<>();
                 map.put("md5",md5);
+                map.put("staticUrl",jmeterConfig.getStaticServer());
                 return new SuccessResponse(map);
             }
         }

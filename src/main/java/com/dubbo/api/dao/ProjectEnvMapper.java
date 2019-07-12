@@ -19,5 +19,5 @@ public interface ProjectEnvMapper {
 
     int updateByPrimaryKey(ProjectEnv record);
 
-    List<ProjectEnv> envList();
+    List<ProjectEnv> listEnv();
 }

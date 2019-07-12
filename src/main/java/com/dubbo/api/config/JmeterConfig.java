@@ -1,6 +1,7 @@
 package com.dubbo.api.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Component;
  * Modify date: 2019-07-03:13:59
  */
 @Component
-@PropertySource("classpath:jmeter.properties")
+@SpringBootConfiguration
 public class JmeterConfig {
 
     @Value("${JMEMTER_BIN_PATH}")
