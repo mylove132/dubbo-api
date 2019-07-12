@@ -2,7 +2,7 @@
 <configuration debug="false">
 
     <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
-    <property name="LOG_HOME" value="/xdfapp/logs/jmeter-api" />
+    <property name="LOG_HOME" value="/xdfapp/logs/dubbo-api" />
 
     <!--控制台日志， 控制台输出 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -12,7 +12,7 @@
         </encoder>
     </appender>
     <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>/xdfapp/logs/jmeter-api/jmeter-api.log</File>
+        <File>/xdfapp/logs/dubbo-api/jmeter-api.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover -->
             <FileNamePattern>logback.%d{yyyy-MM-dd}.log</FileNamePattern>
