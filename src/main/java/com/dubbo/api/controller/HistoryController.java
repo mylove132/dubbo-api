@@ -2,6 +2,7 @@ package com.dubbo.api.controller;
 
 import com.dubbo.api.common.bean.BaseResponse;
 import com.dubbo.api.common.bean.ErrorResponse;
+import com.dubbo.api.common.bean.PageInfo;
 import com.dubbo.api.common.bean.SuccessResponse;
 import com.dubbo.api.common.constant.CommonConstant;
 import com.dubbo.api.common.util.DateUtil;
@@ -9,16 +10,14 @@ import com.dubbo.api.dao.HistoryMapper;
 import com.dubbo.api.dao.ProjectMapper;
 import com.dubbo.api.dao.ScriptMapper;
 import com.dubbo.api.dao.UserMapper;
+import com.dubbo.api.service.IHistoryService;
 import com.dubbo.api.vo.History;
 import com.dubbo.api.vo.Project;
 import com.dubbo.api.vo.Script;
 import com.dubbo.api.vo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,7 +44,60 @@ public class HistoryController {
     @Autowired
     private ScriptMapper scriptMapper;
 
+    @Autowired
+    private IHistoryService historyService;
+
     @RequestMapping(value = "",method = RequestMethod.GET)
+    public BaseResponse listHisotryCrontroller(@RequestParam(defaultValue = "1",value = "currentPage") Integer pageNum,
+                                               @RequestParam(defaultValue = "10",value = "pageSize") Integer pageSize){
+        List<Map<String,Object>> mapList = new ArrayList<>();
+        List<History> historyList = historyService.findHistoryByPage(pageNum,pageSize);
+        if (historyList != null && historyList.size()>0){
+            for (History history:historyList){
+                Map<String,Object> result = new HashMap<>();
+                Integer userId = history.getUserId();
+                User user = null;
+                Script script = null;
+                Project project = null;
+                if (userId > 0){
+                    user = userMapper.selectByPrimaryKey(userId);
+                }
+                if (user == null){
+                    result.put("userName",null);
+                }else {
+                    result.put("userName",user.getName());
+                }
+                Integer scriptId = history.getScriptId();
+                if (scriptId > 0){
+                    script = scriptMapper.selectByPrimaryKey(scriptId);
+                }
+                if (script == null){
+                    result.put("scriptName",null);
+                }else {
+                    result.put("scriptName",script.getName());
+                }
+                Integer projectId = script.getProjectId();
+                if (projectId > 0){
+                    project = projectMapper.selectByPrimaryKey(projectId);
+                }
+                if (project == null){
+                    result.put("projectName",null);
+                }else {
+                    result.put("projectName",project.getName());
+                }
+                result.put("md5",history.getMd5());
+                result.put("id",history.getId());
+                result.put("status",history.getStatus());
+                result.put("createTime", DateUtil.dateFormate(history.getCreateTime()));
+                mapList.add(result);
+            }
+            PageInfo<List<Map<String,Object>>> pageInfo = new PageInfo(mapList);
+            return new SuccessResponse(pageInfo);
+        }else {
+            return new ErrorResponse(CommonConstant.OP_FAILED);
+        }
+    }
+
     public BaseResponse listHistoryCrontroller(){
         List<Map<String,Object>> mapList = new ArrayList<>();
         List<History> historyList = historyMapper.listHistory();
