@@ -31,34 +31,44 @@
     version, project_id, user_id, ip, port
   </sql>
 
-  <select id="filterScriptListByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from entity_script
+  <select id="filterScriptListByUserId" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+     SELECT tm3.envId,tm3.envName,tm3.projectName,tm3.id,tm3.protocolName,tm3.update_time,eu.name as userName,tm3.user_id FROM
+    (SELECT tm2.envId,tm2.envName,tm2.projectName,tm2.id,tm2.user_id,tm2.update_time,epl.`name` as protocolName  FROM
+    (SELECT tm1.envId,tm1.envName,tm1.projectName,es.id,es.user_id,es.protocol_id,es.update_time FROM entity_script es join
+    (SELECT ep.id as projectId,ep.`name` as projectName,ee.id as envId,ee.name as envName FROM entity_project as ep
+    join entity_env ee on ep.env=ee.id) tm1 on tm1.projectId=es.project_id)
+    tm2 join entity_protocol epl on tm2.protocol_id=epl.id) tm3 JOIN entity_user eu on tm3.user_id=eu.id
     where user_id = #{UserId,jdbcType=INTEGER}
     ORDER BY update_time DESC
   </select>
 
-  <select id="filterScriptListByProtocolId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from entity_script
-    where protocol_id = #{protocolId,jdbcType=INTEGER}
+  <select id="filterScriptListByProtocolId" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+    SELECT tm3.envId,tm3.envName,tm3.projectName,tm3.id,tm3.protocolName,tm3.update_time,eu.name as userName,tm3.user_id,tm3.protocolId FROM
+    (SELECT tm2.envId,tm2.envName,tm2.projectName,tm2.id,tm2.user_id,tm2.update_time,epl.`name` as protocolName,epl.id as protocolId  FROM
+    (SELECT tm1.envId,tm1.envName,tm1.projectName,es.id,es.user_id,es.protocol_id,es.update_time FROM entity_script es join
+    (SELECT ep.id as projectId,ep.`name` as projectName,ee.id as envId,ee.name as envName FROM entity_project as ep
+    join entity_env ee on ep.env=ee.id) tm1 on tm1.projectId=es.project_id)
+    tm2 join entity_protocol epl on tm2.protocol_id=epl.id) tm3 JOIN entity_user eu on tm3.user_id=eu.id
+    where protocolId = #{protocolId,jdbcType=INTEGER}
     ORDER BY update_time DESC
   </select>
 
-  <select id="filterScriptListByProjectId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from entity_script
-    where project_id = #{projectId,jdbcType=INTEGER}
+  <select id="filterScriptListByProjectId" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+   SELECT tm3.envId,tm3.envName,tm3.projectId,tm3.projectName,tm3.id,tm3.protocolName,tm3.update_time,eu.name as userName,tm3.user_id,tm3.protocolId FROM
+    (SELECT tm2.envId,tm2.projectId,tm2.envName,tm2.projectName,tm2.id,tm2.user_id,tm2.update_time,epl.`name` as protocolName,epl.id as protocolId  FROM
+    (SELECT tm1.envId,tm1.projectId,tm1.envName,tm1.projectName,es.id,es.user_id,es.protocol_id,es.update_time FROM entity_script es join
+    (SELECT ep.id as projectId,ep.`name` as projectName,ee.id as envId,ee.name as envName FROM entity_project as ep
+    join entity_env ee on ep.env=ee.id) tm1 on tm1.projectId=es.project_id)
+    tm2 join entity_protocol epl on tm2.protocol_id=epl.id) tm3 JOIN entity_user eu on tm3.user_id=eu.id
+    where projectId = #{projectId,jdbcType=INTEGER}
     ORDER BY update_time DESC
   </select>
 
-  <select id="searchScriptByKeyWord" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from entity_script
+  <select id="searchScriptByKeyWord" parameterType="java.lang.String" resultType="java.util.HashMap">
+    select tm3.userName,tm3.projectName,tm3.update_time,tm3.scriptName,eh.md5,eh.id,eh.`status`,eh.create_time as createTime FROM entity_history eh JOIN
+    (select tm1.id,tm1.projectName,tm2.scriptName,tm2.userName,tm2.update_time FROM
+    (select es.id,ep.name as projectName FROM entity_script es JOIN entity_project ep on es.project_id=ep.id)  tm1 JOIN
+    (select es.id,es.update_time,es.name as scriptName,eu.`name` as userName FROM entity_script es JOIN entity_user eu on es.user_id=eu.id) tm2 on tm1.id=tm2.id) tm3 on eh.script_id=tm3.id
     <where>
       <if test="keyword != null">
         name LIKE concat(concat('%',#{keyword}),'%')
@@ -68,56 +78,74 @@
   </select>
 
 
-  <select id="filterScriptListByUserIdAndProtocolId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from entity_script
-    where user_id = #{userId,jdbcType=INTEGER}
-    and protocol_id = #{protocolId,jdbcType=INTEGER}
+  <select id="filterScriptListByUserIdAndProtocolId" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+    SELECT tm3.envId,tm3.envName,tm3.projectId,tm3.projectName,tm3.id,tm3.protocolName,tm3.update_time,eu.name as userName,tm3.user_id,tm3.protocolId FROM
+    (SELECT tm2.envId,tm2.projectId,tm2.envName,tm2.projectName,tm2.id,tm2.user_id,tm2.update_time,epl.`name` as protocolName,epl.id as protocolId  FROM
+    (SELECT tm1.envId,tm1.projectId,tm1.envName,tm1.projectName,es.id,es.user_id,es.protocol_id,es.update_time FROM entity_script es join
+    (SELECT ep.id as projectId,ep.`name` as projectName,ee.id as envId,ee.name as envName FROM entity_project as ep
+    join entity_env ee on ep.env=ee.id) tm1 on tm1.projectId=es.project_id)
+    tm2 join entity_protocol epl on tm2.protocol_id=epl.id) tm3 JOIN entity_user eu on tm3.user_id=eu.id
+    where protocolId = #{protocolId,jdbcType=INTEGER}
+    AND user_id=#{userId,jdbcType=INTEGER}
     ORDER BY update_time DESC
   </select>
 
-  <select id="filterScriptListByUserIdAndProjectId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from entity_script
-    where user_id = #{userId,jdbcType=INTEGER}
-    and project_id = #{projectId,jdbcType=INTEGER}
+  <select id="filterScriptListByUserIdAndProjectId" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+     SELECT tm3.envId,tm3.envName,tm3.projectId,tm3.projectName,tm3.id,tm3.protocolName,tm3.update_time,eu.name as userName,tm3.user_id,tm3.protocolId FROM
+    (SELECT tm2.envId,tm2.projectId,tm2.envName,tm2.projectName,tm2.id,tm2.user_id,tm2.update_time,epl.`name` as protocolName,epl.id as protocolId  FROM
+    (SELECT tm1.envId,tm1.projectId,tm1.envName,tm1.projectName,es.id,es.user_id,es.protocol_id,es.update_time FROM entity_script es join
+    (SELECT ep.id as projectId,ep.`name` as projectName,ee.id as envId,ee.name as envName FROM entity_project as ep
+    join entity_env ee on ep.env=ee.id) tm1 on tm1.projectId=es.project_id)
+    tm2 join entity_protocol epl on tm2.protocol_id=epl.id) tm3 JOIN entity_user eu on tm3.user_id=eu.id
+    where projectId = #{projectId,jdbcType=INTEGER}
+    AND user_id=#{userId,jdbcType=INTEGER}
     ORDER BY update_time DESC
   </select>
 
-  <select id="filterScriptListByProjectIdAndProtocolId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from entity_script
-    where protocol_id = #{protocolId,jdbcType=INTEGER}
-    and project_id = #{projectId,jdbcType=INTEGER}
+  <select id="filterScriptListByProjectIdAndProtocolId" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+    SELECT tm3.envId,tm3.envName,tm3.projectId,tm3.projectName,tm3.id,tm3.protocolName,tm3.update_time,eu.name as userName,tm3.user_id,tm3.protocolId FROM
+    (SELECT tm2.envId,tm2.projectId,tm2.envName,tm2.projectName,tm2.id,tm2.user_id,tm2.update_time,epl.`name` as protocolName,epl.id as protocolId  FROM
+    (SELECT tm1.envId,tm1.projectId,tm1.envName,tm1.projectName,es.id,es.user_id,es.protocol_id,es.update_time FROM entity_script es join
+    (SELECT ep.id as projectId,ep.`name` as projectName,ee.id as envId,ee.name as envName FROM entity_project as ep
+    join entity_env ee on ep.env=ee.id) tm1 on tm1.projectId=es.project_id)
+    tm2 join entity_protocol epl on tm2.protocol_id=epl.id) tm3 JOIN entity_user eu on tm3.user_id=eu.id
+    where projectId = #{projectId,jdbcType=INTEGER}
+    AND protocolId=#{protocolId,jdbcType=INTEGER}
     ORDER BY update_time DESC
   </select>
 
-  <select id="filterScriptListByProjectIdAndProtocolIdAndUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from entity_script
-    where protocol_id = #{protocolId,jdbcType=INTEGER}
-    and project_id = #{projectId,jdbcType=INTEGER}
-    and user_id = #{userId,jdbcType=INTEGER}
+  <select id="filterScriptListByProjectIdAndProtocolIdAndUserId" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+    SELECT tm3.envId,tm3.envName,tm3.projectId,tm3.projectName,tm3.id,tm3.protocolName,tm3.update_time,eu.name as userName,tm3.user_id,tm3.protocolId FROM
+    (SELECT tm2.envId,tm2.projectId,tm2.envName,tm2.projectName,tm2.id,tm2.user_id,tm2.update_time,epl.`name` as protocolName,epl.id as protocolId  FROM
+    (SELECT tm1.envId,tm1.projectId,tm1.envName,tm1.projectName,es.id,es.user_id,es.protocol_id,es.update_time FROM entity_script es join
+    (SELECT ep.id as projectId,ep.`name` as projectName,ee.id as envId,ee.name as envName FROM entity_project as ep
+    join entity_env ee on ep.env=ee.id) tm1 on tm1.projectId=es.project_id)
+    tm2 join entity_protocol epl on tm2.protocol_id=epl.id) tm3 JOIN entity_user eu on tm3.user_id=eu.id
+    where projectId = #{projectId,jdbcType=INTEGER}
+    AND protocolId=#{protocolId,jdbcType=INTEGER}
+    AND user_id=#{userId,jdbcType=INTEGER}
     ORDER BY update_time DESC
   </select>
 
 
-  <select id="listScript" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from entity_script
+  <select id="listScript" resultType="java.util.HashMap">
+    SELECT tm3.envId,tm3.envName,tm3.projectName,tm3.id,tm3.protocolName,tm3.update_time,eu.name as userName,tm3.user_id FROM
+    (SELECT tm2.envId,tm2.envName,tm2.projectName,tm2.id,tm2.user_id,tm2.update_time,epl.`name` as protocolName  FROM
+    (SELECT tm1.envId,tm1.envName,tm1.projectName,es.id,es.user_id,es.protocol_id,es.update_time FROM entity_script es join
+    (SELECT ep.id as projectId,ep.`name` as projectName,ee.id as envId,ee.name as envName FROM entity_project as ep
+    join entity_env ee on ep.env=ee.id) tm1 on tm1.projectId=es.project_id)
+    tm2 join entity_protocol epl on tm2.protocol_id=epl.id) tm3 JOIN entity_user eu on tm3.user_id=eu.id
     ORDER BY update_time DESC
   </select>
 
-  <select id="listScriptByProjectId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from entity_script
-    where project_id = #{projectId,jdbcType=INTEGER}
+  <select id="listScriptByProjectId" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+    SELECT tm3.envId,tm3.envName,tm3.projectName,tm3.projectId,tm3.id,tm3.protocolName,tm3.update_time,eu.name as userName FROM
+    (SELECT tm2.envId,tm2.envName,tm2.projectId,tm2.projectName,tm2.id,tm2.user_id,tm2.update_time,epl.`name` as protocolName  FROM
+    (SELECT tm1.envId,tm1.envName,tm1.projectId,tm1.projectName,es.id,es.user_id,es.protocol_id,es.update_time FROM entity_script es join
+    (SELECT ep.id as projectId,ep.`name` as projectName,ee.id as envId,ee.name as envName FROM entity_project as ep
+    join entity_env ee on ep.env=ee.id) tm1 on tm1.projectId=es.project_id)
+    tm2 join entity_protocol epl on tm2.protocol_id=epl.id) tm3 JOIN entity_user eu on tm3.user_id=eu.id
+    where tm3.projectId = #{projectId,jdbcType=INTEGER}
     ORDER BY update_time DESC
   </select>
 

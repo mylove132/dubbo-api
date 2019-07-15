@@ -3,6 +3,7 @@ package com.dubbo.api.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.dubbo.api.common.bean.BaseResponse;
 import com.dubbo.api.common.bean.ErrorResponse;
+import com.dubbo.api.common.bean.PageInfo;
 import com.dubbo.api.common.bean.SuccessResponse;
 import com.dubbo.api.common.constant.CommonConstant;
 import com.dubbo.api.common.constant.PermissionConstant;
@@ -13,10 +14,7 @@ import com.dubbo.api.service.IScriptService;
 import com.dubbo.api.vo.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -27,49 +25,12 @@ public class ScriptController {
 
     @Autowired
     private IScriptService scriptService;
-    @Autowired
-    private ProjectMapper projectMapper;
-    @Autowired
-    private RequestTypeMapper requestTypeMapper;
-    @Autowired
-    private ProtocolMapper protocolMapper;
-    @Autowired
-    private UserMapper userMapper;
-    @Autowired
-    private ProjectEnvMapper projectEnvMapper;
 
     @RequestMapping(value = "",method = RequestMethod.GET)
-    public BaseResponse scriptListController(){
-        List<Map> result = new ArrayList<>();
-        Map<String,Object> map = new HashMap<>();
-        List<Script> scripts = scriptService.listScriptService();
-        for (Script script:scripts){
-            String json = JSONObject.toJSONString(script);
-            map = JSONObject.parseObject(json, Map.class);
-            if (script.getProjectId() != 0 && script.getProjectId() != null){
-                Project project = projectMapper.selectByPrimaryKey(script.getProjectId());
-                if (project.getEnv() != 0 && project.getEnv() != null){
-                    ProjectEnv projectEnv = projectEnvMapper.selectByPrimaryKey(project.getEnv());
-                    map.put("envId",projectEnv.getId());
-                    map.put("envName",projectEnv.getName());
-                }
-                map.put("projectName",project.getName());
-            }
-            if (script.getRequestTypeId() != 0 && script.getRequestTypeId() != null){
-                RequestType requestType = requestTypeMapper.selectByPrimaryKey(script.getRequestTypeId());
-                map.put("requestTypeName",requestType.getName());
-            }
-            if (script.getProtocolId() != 0 && script.getProtocolId() != null){
-                Protocol protocol = protocolMapper.selectByPrimaryKey(script.getProtocolId());
-                map.put("protocolName",protocol.getName());
-            }
-            if (script.getUserId() != 0 && script.getUserId() != null){
-                User user = userMapper.selectByPrimaryKey(script.getUserId());
-                map.put("userName",user.getName());
-            }
-            result.add(map);
-        }
-        return new SuccessResponse(result);
+    public BaseResponse scriptListController(@RequestParam(defaultValue = "1",value = "currentPage") Integer pageNum,
+                                             @RequestParam(defaultValue = "10",value = "pageSize") Integer pageSize){
+        List scripts = scriptService.listScriptService(pageNum,pageSize);
+        return new SuccessResponse(new PageInfo(scripts));
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
@@ -90,39 +51,11 @@ public class ScriptController {
     }
 
     @RequestMapping(value = "/orderByProject/{projectId}",method = RequestMethod.GET)
-    public BaseResponse scriptListByProjectIdController(@PathVariable Integer projectId){
+    public BaseResponse scriptListByProjectIdController(@PathVariable Integer projectId,@RequestParam(defaultValue = "1",value = "currentPage") Integer pageNum,
+                                                        @RequestParam(defaultValue = "10",value = "pageSize") Integer pageSize){
         log.info("获取项目下的脚本列表");
-        List<Map> result = new ArrayList<>();
-        Map<String,Object> map = new HashMap<>();
-        List<Script> scripts = scriptService.listScriptByProjectIdService(projectId);
-        for (Script script:scripts){
-            String json = JSONObject.toJSONString(script);
-            map = JSONObject.parseObject(json, Map.class);
-            if (script.getProjectId() != 0 && script.getProjectId() != null){
-                Project project = projectMapper.selectByPrimaryKey(script.getProjectId());
-                if (project.getEnv() != 0 && project.getEnv() != null){
-                    ProjectEnv projectEnv = projectEnvMapper.selectByPrimaryKey(project.getEnv());
-                    log.info("环境:"+projectEnv.getId());
-                    map.put("envId",projectEnv.getId());
-                    map.put("envName",projectEnv.getName());
-                }
-                map.put("projectName",project.getName());
-            }
-            if (script.getRequestTypeId() != 0 && script.getRequestTypeId() != null){
-                RequestType requestType = requestTypeMapper.selectByPrimaryKey(script.getRequestTypeId());
-                map.put("requestTypeName",requestType.getName());
-            }
-            if (script.getProtocolId() != 0 && script.getProtocolId() != null){
-                Protocol protocol = protocolMapper.selectByPrimaryKey(script.getProtocolId());
-                map.put("protocolName",protocol.getName());
-            }
-            if (script.getUserId() != 0 && script.getUserId() != null){
-                User user = userMapper.selectByPrimaryKey(script.getUserId());
-                map.put("userName",user.getName());
-            }
-            result.add(map);
-        }
-        return new SuccessResponse(result);
+        List scripts = scriptService.listScriptByProjectIdService(projectId,pageNum,pageSize);
+        return new SuccessResponse(new PageInfo(scripts));
     }
 
     @AuthPermission(PermissionConstant.VIP)
@@ -146,102 +79,39 @@ public class ScriptController {
     }
 
     @RequestMapping(value = "/filter",method = RequestMethod.GET)
-    public BaseResponse filterScriptListController(Integer projectId, Integer protocolId, Integer userId){
+    public BaseResponse filterScriptListController(Integer projectId, Integer protocolId, Integer userId,@RequestParam(defaultValue = "1",value = "currentPage") Integer pageNum,
+                                                   @RequestParam(defaultValue = "10",value = "pageSize") Integer pageSize){
         log.info("projectId:"+projectId+"protocolId:"+protocolId+"userId:"+userId);
         log.info("获取过滤脚本列表");
-        List<Script> scripts = new ArrayList<>();
+        List scripts = new ArrayList<>();
         if ((projectId == 0)&&(protocolId == 0)&& (userId != 0)){
-            scripts = scriptService.filterScriptListByUserIdService(userId);
+            scripts = scriptService.filterScriptListByUserIdService(userId,pageNum,pageSize);
         }else if ((projectId == 0)&&(protocolId != 0)&&(userId == 0)){
-            scripts = scriptService.filterScriptListByProtocolIdService(protocolId);
+            scripts = scriptService.filterScriptListByProtocolIdService(protocolId,pageNum,pageSize);
         }else if ((projectId != 0)&&(protocolId == 0)&&(userId == 0)){
-            scripts = scriptService.filterScriptListByProjectIdService(projectId);
+            scripts = scriptService.filterScriptListByProjectIdService(projectId,pageNum,pageSize);
         }else if ((projectId != 0)&&(protocolId != 0 )&&( userId == 0)){
-            scripts = scriptService.filterScriptListByProjectIdAndProtocolIdService(projectId, protocolId);
+            scripts = scriptService.filterScriptListByProjectIdAndProtocolIdService(projectId, protocolId,pageNum,pageSize);
         }else if ((projectId != 0)&&(protocolId == 0)&&(userId != 0)){
-            scripts = scriptService.filterScriptListByUserIdAndProjectIdService(userId, projectId);
+            scripts = scriptService.filterScriptListByUserIdAndProjectIdService(userId, projectId,pageNum,pageSize);
         }else if ((projectId == 0)&&(protocolId != 0)&&(userId != 0)){
-            scripts = scriptService.filterScriptListByUserIdAndProtocolIdService(userId, protocolId);
+            scripts = scriptService.filterScriptListByUserIdAndProtocolIdService(userId, protocolId,pageNum,pageSize);
         }else if ((projectId == 0)&&(protocolId == 0)&&(userId == 0)){
-            scripts = scriptService.listScriptService();
+            scripts = scriptService.listScriptService(pageNum,pageSize);
         }
         else {
-            scripts = scriptService.filterScriptListByProjectIdAndProtocolIdAndUserIdService(projectId,protocolId,userId);
+            scripts = scriptService.filterScriptListByProjectIdAndProtocolIdAndUserIdService(projectId,protocolId,userId,pageNum,pageSize);
+        }
 
-        }
-        List<Map> listMap = new ArrayList<>();
-        if (scripts == null){
-            return new SuccessResponse(listMap);
-        }
-        Map<String,Object> map = new HashMap<>();
-        if (scripts.size() > 0){
-            for (Script script:scripts){
-                String json = JSONObject.toJSONString(script);
-                map = JSONObject.parseObject(json, Map.class);
-                if (script.getProjectId() != 0 && script.getProjectId() != null){
-                    Project project = projectMapper.selectByPrimaryKey(script.getProjectId());
-                    if (project.getEnv() != 0 && project.getEnv() != null){
-                        ProjectEnv projectEnv = projectEnvMapper.selectByPrimaryKey(project.getEnv());
-                        map.put("envId",projectEnv.getId());
-                        map.put("envName",projectEnv.getName());
-                    }
-                    map.put("projectName",project.getName());
-                }
-                if (script.getRequestTypeId() != 0 && script.getRequestTypeId() != null){
-                    RequestType requestType = requestTypeMapper.selectByPrimaryKey(script.getRequestTypeId());
-                    map.put("requestTypeName",requestType.getName());
-                }
-                if (script.getProtocolId() != 0 && script.getProtocolId() != null){
-                    Protocol protocol = protocolMapper.selectByPrimaryKey(script.getProtocolId());
-                    map.put("protocolName",protocol.getName());
-                }
-                if (script.getUserId() != 0 && script.getUserId() != null){
-                    User user = userMapper.selectByPrimaryKey(script.getUserId());
-                    map.put("userName",user.getName());
-                }
-                listMap.add(map);
-            }
-        }
-        return new SuccessResponse(listMap);
+        return new SuccessResponse(new PageInfo(scripts));
     }
 
     @RequestMapping(value = "/search",method = RequestMethod.GET)
-    public BaseResponse searchScriptListController(String keyword){
+    public BaseResponse searchScriptListController(String keyword,@RequestParam(defaultValue = "1",value = "currentPage") Integer pageNum,
+                                                   @RequestParam(defaultValue = "10",value = "pageSize") Integer pageSize){
         log.info("关键字搜索脚本列表");
-        List<Map> listMap = new ArrayList<>();
-        List<Script> scripts = scriptService.searchScriptBYKeyWordService(keyword);
-        if (scripts == null){
-            return new SuccessResponse(listMap);
-        }
-        Map<String,Object> map = new HashMap<>();
-        if (scripts.size() > 0){
-            for (Script script:scripts){
-                String json = JSONObject.toJSONString(script);
-                map = JSONObject.parseObject(json, Map.class);
-                if (script.getProjectId() != 0 && script.getProjectId() != null){
-                    Project project = projectMapper.selectByPrimaryKey(script.getProjectId());
-                    if (project.getEnv() != 0 && project.getEnv() != null){
-                        ProjectEnv projectEnv = projectEnvMapper.selectByPrimaryKey(project.getEnv());
-                        map.put("envId",projectEnv.getId());
-                        map.put("envName",projectEnv.getName());
-                    }
-                    map.put("projectName",project.getName());
-                }
-                if (script.getRequestTypeId() != 0 && script.getRequestTypeId() != null){
-                    RequestType requestType = requestTypeMapper.selectByPrimaryKey(script.getRequestTypeId());
-                    map.put("requestTypeName",requestType.getName());
-                }
-                if (script.getProtocolId() != 0 && script.getProtocolId() != null){
-                    Protocol protocol = protocolMapper.selectByPrimaryKey(script.getProtocolId());
-                    map.put("protocolName",protocol.getName());
-                }
-                if (script.getUserId() != 0 && script.getUserId() != null){
-                    User user = userMapper.selectByPrimaryKey(script.getUserId());
-                    map.put("userName",user.getName());
-                }
-                listMap.add(map);
-            }
-        }
-        return new SuccessResponse(listMap);
+        List scripts = scriptService.searchScriptByKeyWord(keyword,pageNum,pageSize);
+
+        return new SuccessResponse(new PageInfo(scripts));
     }
 }

@@ -22,13 +22,16 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
-  <select id="searchProjectList" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from entity_project
+
+  <select id="searchProjectList" parameterType="java.lang.String" resultType="java.util.HashMap">
+    select tm4.id,tm4.typeId,tm4.typeName,tm4.envId,tm4.envName,tm4.`name` as projectName,tm4.ctime,tm4.update_time,tm4.descption,eu.id as userId,eu.`name` as userName FROM
+    (select ep.id,tm3.typeId,tm3.typeName,tm3.envId,tm3.envName,ep.user_id,ep.`name`,ep.ctime,ep.update_time,ep.descption FROM entity_project ep JOIN
+    (SELECT tm1.id,tm1.typeId,tm1.typeName,tm2.envId,tm2.envName FROM
+    (select ep.id,et.id as typeId,et.name as typeName FROM entity_project ep join entity_type et on ep.type=et.id) tm1 JOIN
+    (select ep.id,ee.id as envId, ee.name as envName FROM entity_project ep join entity_env ee on ep.env=ee.id) tm2 on tm1.id=tm2.id) tm3 on ep.id=tm3.id) tm4 JOIN entity_user eu ON tm4.user_id = eu.id
     <where>
       <if test="search != null">
-        name LIKE concat(concat('%',#{search}),'%')
+        projectName LIKE concat(concat('%',#{search}),'%')
       </if>
     </where>
     ORDER BY update_time DESC
@@ -40,72 +43,98 @@
     from entity_project
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="filterProjectList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from entity_project
-    where type = #{typeId,jdbcType=INTEGER}
-    and env = #{envId,jdbcType=INTEGER}
-    and user_id = #{userId,jdbcType=INTEGER}
+
+  <select id="filterUserProjectList" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+    select tm4.id,tm4.typeId,tm4.typeName,tm4.envId,tm4.envName,tm4.`name` as projectName,tm4.ctime,tm4.update_time,tm4.descption,eu.id as userId,eu.`name` as userName FROM
+    (select ep.id,tm3.typeId,tm3.typeName,tm3.envId,tm3.envName,ep.user_id,ep.`name`,ep.ctime,ep.update_time,ep.descption FROM entity_project ep JOIN
+    (SELECT tm1.id,tm1.typeId,tm1.typeName,tm2.envId,tm2.envName FROM
+    (select ep.id,et.id as typeId,et.name as typeName FROM entity_project ep join entity_type et on ep.type=et.id) tm1 JOIN
+    (select ep.id,ee.id as envId, ee.name as envName FROM entity_project ep join entity_env ee on ep.env=ee.id) tm2 on tm1.id=tm2.id) tm3 on ep.id=tm3.id) tm4 JOIN entity_user eu ON tm4.user_id = eu.id
+    where
+    tm4.user_id=#{userId,jdbcType=INTEGER}
     ORDER BY update_time DESC
   </select>
 
-  <select id="filterUserProjectList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from entity_project
-    where user_id = #{userId,jdbcType=INTEGER}
-    ORDER BY update_time DESC
-  </select>
-
-  <select id="filterTypeProjectList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from entity_project
-    where type = #{typeId,jdbcType=INTEGER}
-    ORDER BY update_time DESC
-  </select>
-
-  <select id="filterEnvProjectList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from entity_project
-    where env = #{envId,jdbcType=INTEGER}
+  <select id="filterTypeProjectList" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+    select tm4.id,tm4.typeId,tm4.typeName,tm4.envId,tm4.envName,tm4.`name` as projectName,tm4.ctime,tm4.update_time,tm4.descption,eu.id as userId,eu.`name` as userName FROM
+    (select ep.id,tm3.typeId,tm3.typeName,tm3.envId,tm3.envName,ep.user_id,ep.`name`,ep.ctime,ep.update_time,ep.descption FROM entity_project ep JOIN
+    (SELECT tm1.id,tm1.typeId,tm1.typeName,tm2.envId,tm2.envName FROM
+    (select ep.id,et.id as typeId,et.name as typeName FROM entity_project ep join entity_type et on ep.type=et.id) tm1 JOIN
+    (select ep.id,ee.id as envId, ee.name as envName FROM entity_project ep join entity_env ee on ep.env=ee.id) tm2 on tm1.id=tm2.id) tm3 on ep.id=tm3.id) tm4 JOIN entity_user eu ON tm4.user_id = eu.id
+    where
+    tm4.typeId = #{typeId,jdbcType=INTEGER}
     ORDER BY update_time DESC
   </select>
 
 
-  <select id="filterUserAndEnvProjectList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from entity_project
-    where env = #{envId,jdbcType=INTEGER}
-    and user_id = #{userId,jdbcType=INTEGER}
+  <select id="filterEnvProjectList" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+    select tm4.id,tm4.typeId,tm4.typeName,tm4.envId,tm4.envName,tm4.`name` as projectName,tm4.ctime,tm4.update_time,tm4.descption,eu.id as userId,eu.`name` as userName FROM
+    (select ep.id,tm3.typeId,tm3.typeName,tm3.envId,tm3.envName,ep.user_id,ep.`name`,ep.ctime,ep.update_time,ep.descption FROM entity_project ep JOIN
+    (SELECT tm1.id,tm1.typeId,tm1.typeName,tm2.envId,tm2.envName FROM
+    (select ep.id,et.id as typeId,et.name as typeName FROM entity_project ep join entity_type et on ep.type=et.id) tm1 JOIN
+    (select ep.id,ee.id as envId, ee.name as envName FROM entity_project ep join entity_env ee on ep.env=ee.id) tm2 on tm1.id=tm2.id) tm3 on ep.id=tm3.id) tm4 JOIN entity_user eu ON tm4.user_id = eu.id
+    where
+    tm4.envId = #{envId,jdbcType=INTEGER}
     ORDER BY update_time DESC
   </select>
 
-  <select id="filterUserAndTypeProjectList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from entity_project
-    where type = #{typeId,jdbcType=INTEGER}
-    and user_id = #{userId,jdbcType=INTEGER}
+
+  <select id="filterUserAndEnvProjectList" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+    select tm4.id,tm4.typeId,tm4.typeName,tm4.envId,tm4.envName,tm4.`name` as projectName,tm4.ctime,tm4.update_time,tm4.descption,eu.id as userId,eu.`name` as userName FROM
+    (select ep.id,tm3.typeId,tm3.typeName,tm3.envId,tm3.envName,ep.user_id,ep.`name`,ep.ctime,ep.update_time,ep.descption FROM entity_project ep JOIN
+    (SELECT tm1.id,tm1.typeId,tm1.typeName,tm2.envId,tm2.envName FROM
+    (select ep.id,et.id as typeId,et.name as typeName FROM entity_project ep join entity_type et on ep.type=et.id) tm1 JOIN
+    (select ep.id,ee.id as envId, ee.name as envName FROM entity_project ep join entity_env ee on ep.env=ee.id) tm2 on tm1.id=tm2.id) tm3 on ep.id=tm3.id) tm4 JOIN entity_user eu ON tm4.user_id = eu.id
+    where
+    tm4.envId = #{envId,jdbcType=INTEGER}
+    and tm4.user_id=#{userId,jdbcType=INTEGER}
     ORDER BY update_time DESC
   </select>
 
-  <select id="filterEnvAndTypeProjectList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from entity_project
-    where type = #{typeId,jdbcType=INTEGER}
-    and env = #{envId,jdbcType=INTEGER}
+
+  <select id="filterUserAndTypeProjectList" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+    select tm4.id,tm4.typeId,tm4.typeName,tm4.envId,tm4.envName,tm4.`name` as projectName,tm4.ctime,tm4.update_time,tm4.descption,eu.id as userId,eu.`name` as userName FROM
+    (select ep.id,tm3.typeId,tm3.typeName,tm3.envId,tm3.envName,ep.user_id,ep.`name`,ep.ctime,ep.update_time,ep.descption FROM entity_project ep JOIN
+    (SELECT tm1.id,tm1.typeId,tm1.typeName,tm2.envId,tm2.envName FROM
+    (select ep.id,et.id as typeId,et.name as typeName FROM entity_project ep join entity_type et on ep.type=et.id) tm1 JOIN
+    (select ep.id,ee.id as envId, ee.name as envName FROM entity_project ep join entity_env ee on ep.env=ee.id) tm2 on tm1.id=tm2.id) tm3 on ep.id=tm3.id) tm4 JOIN entity_user eu ON tm4.user_id = eu.id
+    where
+    tm4.typeId = #{typeId,jdbcType=INTEGER}
+    and tm4.user_id=#{userId,jdbcType=INTEGER}
     ORDER BY update_time DESC
   </select>
 
-  <select id="projectList" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from entity_project
+  <select id="filterEnvAndTypeProjectList" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+    select tm4.id,tm4.typeId,tm4.typeName,tm4.envId,tm4.envName,tm4.`name` as projectName,tm4.ctime,tm4.update_time,tm4.descption,eu.id as userId,eu.`name` as userName FROM
+    (select ep.id,tm3.typeId,tm3.typeName,tm3.envId,tm3.envName,ep.user_id,ep.`name`,ep.ctime,ep.update_time,ep.descption FROM entity_project ep JOIN
+    (SELECT tm1.id,tm1.typeId,tm1.typeName,tm2.envId,tm2.envName FROM
+    (select ep.id,et.id as typeId,et.name as typeName FROM entity_project ep join entity_type et on ep.type=et.id) tm1 JOIN
+    (select ep.id,ee.id as envId, ee.name as envName FROM entity_project ep join entity_env ee on ep.env=ee.id) tm2 on tm1.id=tm2.id) tm3 on ep.id=tm3.id) tm4 JOIN entity_user eu ON tm4.user_id = eu.id
+    where
+    tm4.typeId = #{typeId,jdbcType=INTEGER}
+    and tm4.envId = #{envId,jdbcType=INTEGER}
+    ORDER BY update_time DESC
+  </select>
+
+
+  <select id="filterPorject" parameterType="java.lang.Integer" resultType="java.util.HashMap">
+     select tm4.id,tm4.typeId,tm4.typeName,tm4.envId,tm4.envName,tm4.`name` as projectName,tm4.ctime,tm4.update_time,tm4.descption,eu.id as userId,eu.`name` as userName FROM
+      (select ep.id,tm3.typeId,tm3.typeName,tm3.envId,tm3.envName,ep.user_id,ep.`name`,ep.ctime,ep.update_time,ep.descption FROM entity_project ep JOIN
+      (SELECT tm1.id,tm1.typeId,tm1.typeName,tm2.envId,tm2.envName FROM
+      (select ep.id,et.id as typeId,et.name as typeName FROM entity_project ep join entity_type et on ep.type=et.id) tm1 JOIN
+      (select ep.id,ee.id as envId, ee.name as envName FROM entity_project ep join entity_env ee on ep.env=ee.id) tm2 on tm1.id=tm2.id) tm3 on ep.id=tm3.id) tm4 JOIN entity_user eu ON tm4.user_id = eu.id
+    where tm4.typeId = #{typeId,jdbcType=INTEGER}
+    and tm4.envId = #{envId,jdbcType=INTEGER}
+    and tm4.user_id=#{userId,jdbcType=INTEGER}
+    ORDER BY update_time DESC
+  </select>
+
+  <select id="projectList" resultType="java.util.HashMap">
+    select tm4.id,tm4.typeId,tm4.typeName,tm4.envId,tm4.envName,tm4.`name` as projectName,tm4.ctime,tm4.update_time,tm4.descption,eu.id as userId,eu.`name` as userName FROM
+      (select ep.id,tm3.typeId,tm3.typeName,tm3.envId,tm3.envName,ep.user_id,ep.`name`,ep.ctime,ep.update_time,ep.descption FROM entity_project ep JOIN
+      (SELECT tm1.id,tm1.typeId,tm1.typeName,tm2.envId,tm2.envName FROM
+      (select ep.id,et.id as typeId,et.name as typeName FROM entity_project ep join entity_type et on ep.type=et.id) tm1 JOIN
+      (select ep.id,ee.id as envId, ee.name as envName FROM entity_project ep join entity_env ee on ep.env=ee.id) tm2 on tm1.id=tm2.id) tm3 on ep.id=tm3.id) tm4 JOIN entity_user eu ON tm4.user_id = eu.id
     ORDER BY update_time DESC
   </select>
 

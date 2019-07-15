@@ -12,23 +12,23 @@ public interface IProjectService {
 
     Project getProjectByIdService(Integer projectId);
 
-    List<Project> getProjectListService();
+    List getProjectListService(Integer pageNum, Integer pageSize);
 
-    List<Project> filterUserProjectListService(Integer userId);
+    List filterUserProjectListService(Integer userId,Integer pageNum, Integer pageSize);
 
-    List<Project> filtertypeProjectListService(Integer typeId);
+    List filtertypeProjectListService(Integer typeId,Integer pageNum, Integer pageSize);
 
-    List<Project> filterEnvProjectListService(Integer envId);
+    List filterEnvProjectListService(Integer envId,Integer pageNum, Integer pageSize);
 
-    List<Project> filterUserAndEnvProjectListService(Integer userId,Integer envId);
+    List filterUserAndEnvProjectListService(Integer userId,Integer envId,Integer pageNum, Integer pageSize);
 
-    List<Project> filterUserAndTypeProjectListService(Integer userId,Integer typeId);
+    List filterUserAndTypeProjectListService(Integer userId,Integer typeId,Integer pageNum, Integer pageSize);
 
-    List<Project> filterTypeAndEnvProjectListService(Integer typeId,Integer envId);
+    List filterTypeAndEnvProjectListService(Integer typeId,Integer envId,Integer pageNum, Integer pageSize);
 
-    List<Project> filterProjectListService(Integer typeId,Integer envId,Integer userId);
+    List filterProjectListService(Integer typeId,Integer envId,Integer userId,Integer pageNum, Integer pageSize);
 
-    List<Project> searchProject(String search);
+    List searchProject(String search,Integer pageNum, Integer pageSize);
 
     int updateProjectService(Project project);
 

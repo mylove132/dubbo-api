@@ -2,8 +2,10 @@ package com.dubbo.api.dao;
 
 import com.dubbo.api.vo.History;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface HistoryMapper {
@@ -19,7 +21,9 @@ public interface HistoryMapper {
 
     int updateByPrimaryKey(History record);
 
-    List<History> listHistory();
+    List listHistory();
 
-    List<History> listHistoryByScriptId(Integer scriptId);
+    List listHistoryByScriptId(Integer scriptId);
+
+    List searchScriptByKeyWord(@Param("keyword") String keyword);
 }

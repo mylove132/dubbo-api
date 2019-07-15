@@ -1,26 +1,14 @@
 package com.dubbo.api.controller;
 
 import com.dubbo.api.common.bean.BaseResponse;
-import com.dubbo.api.common.bean.ErrorResponse;
 import com.dubbo.api.common.bean.PageInfo;
 import com.dubbo.api.common.bean.SuccessResponse;
-import com.dubbo.api.common.constant.CommonConstant;
-import com.dubbo.api.common.util.DateUtil;
-import com.dubbo.api.dao.HistoryMapper;
-import com.dubbo.api.dao.ProjectMapper;
-import com.dubbo.api.dao.ScriptMapper;
-import com.dubbo.api.dao.UserMapper;
 import com.dubbo.api.service.IHistoryService;
-import com.dubbo.api.vo.History;
-import com.dubbo.api.vo.Project;
-import com.dubbo.api.vo.Script;
-import com.dubbo.api.vo.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,201 +24,30 @@ import java.util.Map;
 public class HistoryController {
 
     @Autowired
-    private HistoryMapper historyMapper;
-    @Autowired
-    private UserMapper userMapper;
-    @Autowired
-    private ProjectMapper projectMapper;
-    @Autowired
-    private ScriptMapper scriptMapper;
-
-    @Autowired
     private IHistoryService historyService;
 
     @RequestMapping(value = "",method = RequestMethod.GET)
     public BaseResponse listHisotryCrontroller(@RequestParam(defaultValue = "1",value = "currentPage") Integer pageNum,
                                                @RequestParam(defaultValue = "10",value = "pageSize") Integer pageSize){
-        List<Map<String,Object>> mapList = new ArrayList<>();
-        List<History> historyList = historyService.findHistoryByPage(pageNum,pageSize);
-        if (historyList != null && historyList.size()>0){
-            for (History history:historyList){
-                Map<String,Object> result = new HashMap<>();
-                Integer userId = history.getUserId();
-                User user = null;
-                Script script = null;
-                Project project = null;
-                if (userId > 0){
-                    user = userMapper.selectByPrimaryKey(userId);
-                }
-                if (user == null){
-                    result.put("userName",null);
-                }else {
-                    result.put("userName",user.getName());
-                }
-                Integer scriptId = history.getScriptId();
-                if (scriptId > 0){
-                    script = scriptMapper.selectByPrimaryKey(scriptId);
-                }
-                if (script == null){
-                    result.put("scriptName",null);
-                }else {
-                    result.put("scriptName",script.getName());
-                }
-                Integer projectId = script.getProjectId();
-                if (projectId > 0){
-                    project = projectMapper.selectByPrimaryKey(projectId);
-                }
-                if (project == null){
-                    result.put("projectName",null);
-                }else {
-                    result.put("projectName",project.getName());
-                }
-                result.put("md5",history.getMd5());
-                result.put("id",history.getId());
-                result.put("status",history.getStatus());
-                result.put("createTime", DateUtil.dateFormate(history.getCreateTime()));
-                mapList.add(result);
-            }
-            PageInfo<List<Map<String,Object>>> pageInfo = new PageInfo(mapList);
-            return new SuccessResponse(pageInfo);
-        }else {
-            return new ErrorResponse(CommonConstant.OP_FAILED);
-        }
+        log.info("请求当前页数："+pageNum+"单页显示数："+pageSize);
+        List historyList = historyService.findHistoryByPage(pageNum,pageSize);
+        return new SuccessResponse(new PageInfo(historyList));
+
     }
 
-    public BaseResponse listHistoryCrontroller(){
-        List<Map<String,Object>> mapList = new ArrayList<>();
-        List<History> historyList = historyMapper.listHistory();
-        if (historyList != null && historyList.size()>0){
-            for (History history:historyList){
-                Map<String,Object> result = new HashMap<>();
-                Integer userId = history.getUserId();
-                User user = null;
-                Script script = null;
-                Project project = null;
-                if (userId > 0){
-                    user = userMapper.selectByPrimaryKey(userId);
-                }
-                if (user == null){
-                    result.put("userName",null);
-                }else {
-                    result.put("userName",user.getName());
-                }
-                Integer scriptId = history.getScriptId();
-                if (scriptId > 0){
-                    script = scriptMapper.selectByPrimaryKey(scriptId);
-                }
-                if (script == null){
-                    result.put("scriptName",null);
-                }else {
-                    result.put("scriptName",script.getName());
-                }
-                Integer projectId = script.getProjectId();
-                if (projectId > 0){
-                    project = projectMapper.selectByPrimaryKey(projectId);
-                }
-                if (project == null){
-                    result.put("projectName",null);
-                }else {
-                    result.put("projectName",project.getName());
-                }
-                result.put("md5",history.getMd5());
-                result.put("id",history.getId());
-                result.put("status",history.getStatus());
-                result.put("createTime", DateUtil.dateFormate(history.getCreateTime()));
-                mapList.add(result);
-            }
-            return new SuccessResponse(mapList);
-        }else {
-            return new ErrorResponse(CommonConstant.OP_FAILED);
-        }
-    }
-    @RequestMapping(method = RequestMethod.GET,value = "/orderByScriptId/{scriptId}")
-    public BaseResponse listHistoryByScriptIdCrontoller(@PathVariable Integer scriptId){
+    @RequestMapping(method = RequestMethod.GET,value = "/orderByScriptId")
+    public BaseResponse listHistoryByScriptIdCrontoller(@RequestParam("scriptId") Integer scriptId,@RequestParam(defaultValue = "1",value = "currentPage") Integer pageNum,
+                                                        @RequestParam(defaultValue = "10",value = "pageSize") Integer pageSize){
         log.info("通过脚本id过滤历史记录");
-        List<Map<String,Object>> mapList = new ArrayList<>();
-        List<History> histories = historyMapper.listHistoryByScriptId(scriptId);
-        for (History history:histories){
-            Map<String,Object> result = new HashMap<>();
-            Integer userId = history.getUserId();
-            User user = null;
-            Script script = null;
-            Project project = null;
-            if (userId > 0){
-                user = userMapper.selectByPrimaryKey(userId);
-            }
-            if (user == null){
-                result.put("userName",null);
-            }else {
-                result.put("userName",user.getName());
-            }
-            if (scriptId > 0){
-                script = scriptMapper.selectByPrimaryKey(scriptId);
-            }
-            if (script == null){
-                result.put("scriptName",null);
-            }else {
-                result.put("scriptName",script.getName());
-            }
-            Integer projectId = script.getProjectId();
-            if (projectId > 0){
-                project = projectMapper.selectByPrimaryKey(projectId);
-            }
-            if (project == null){
-                result.put("projectName",null);
-            }else {
-                result.put("projectName",project.getName());
-            }
-            result.put("md5",history.getMd5());
-            result.put("id",history.getId());
-            result.put("status",history.getStatus());
-            result.put("createTime", DateUtil.dateFormate(history.getCreateTime()));
-            mapList.add(result);
-        }
-        return new SuccessResponse(mapList);
+        List histories = historyService.findHistoryWithScriptIdByPage(scriptId,pageNum,pageSize);
+        return new SuccessResponse(new PageInfo(histories));
     }
 
     @RequestMapping(method = RequestMethod.GET,value = "/search")
-    public BaseResponse searchHistoryCrontoller(String keyword){
+    public BaseResponse searchHistoryCrontoller(String keyword,@RequestParam(defaultValue = "1",value = "currentPage") Integer pageNum,
+                                                @RequestParam(defaultValue = "10",value = "pageSize") Integer pageSize){
         List<Map<String,Object>> mapList = new ArrayList<>();
-        List<Script> scripts = scriptMapper.searchScriptByKeyWord(keyword);
-        if (scripts != null && scripts.size()>0){
-            for (Script script:scripts){
-                Integer scriptId = script.getId();
-                if (scriptId > 0){
-                    List<History> histories = historyMapper.listHistoryByScriptId(scriptId);
-                    for (History history:histories){
-                        Map<String,Object> result = new HashMap<>();
-                        Integer userId = history.getUserId();
-                        User user = null;
-                        Project project = null;
-                        if (userId > 0){
-                            user = userMapper.selectByPrimaryKey(userId);
-                        }
-                        if (user == null){
-                            result.put("userName",null);
-                        }else {
-                            result.put("userName",user.getName());
-                        }
-                        result.put("scriptName",script.getName());
-                        Integer projectId = script.getProjectId();
-                        if (projectId > 0){
-                            project = projectMapper.selectByPrimaryKey(projectId);
-                        }
-                        if (project == null){
-                            result.put("projectName",null);
-                        }else {
-                            result.put("projectName",project.getName());
-                        }
-                        result.put("md5",history.getMd5());
-                        result.put("id",history.getId());
-                        result.put("status",history.getStatus());
-                        result.put("createTime", DateUtil.dateFormate(history.getCreateTime()));
-                        mapList.add(result);
-                    }
-                }
-            }
-        }
-        return new SuccessResponse(mapList);
+        List scripts = historyService.searchScriptWithKeyWordByPage(keyword,pageNum,pageSize);
+        return new SuccessResponse(new PageInfo(scripts));
     }
 }

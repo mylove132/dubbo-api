@@ -7,13 +7,13 @@ import java.util.List;
 
 public interface IScriptService {
 
-    List<Script> searchScriptBYKeyWordService(String keyword);
+    List searchScriptByKeyWord(String keyword,Integer pageNum, Integer pageSize);
 
-    List<Script> listScriptService();
+    List listScriptService(Integer pageNum, Integer pageSize);
 
     Script getScriptByIdService(Integer scriptId);
 
-    List<Script> listScriptByProjectIdService(Integer projectId);
+    List listScriptByProjectIdService(Integer projectId,Integer pageNum, Integer pageSize);
 
     int addScriptService(Script script);
 
@@ -21,17 +21,17 @@ public interface IScriptService {
 
     int deleteScriptService(Integer scriptId);
 
-    List<Script> filterScriptListByUserIdService(Integer userId);
+    List filterScriptListByUserIdService(Integer userId,Integer pageNum, Integer pageSize);
 
-    List<Script> filterScriptListByProtocolIdService(Integer protocolId);
+    List filterScriptListByProtocolIdService(Integer protocolId,Integer pageNum, Integer pageSize);
 
-    List<Script> filterScriptListByProjectIdService(Integer projectId);
+    List filterScriptListByProjectIdService(Integer projectId,Integer pageNum, Integer pageSize);
 
-    List<Script> filterScriptListByUserIdAndProtocolIdService(Integer userId, Integer protocolId);
+    List filterScriptListByUserIdAndProtocolIdService(Integer userId, Integer protocolId,Integer pageNum, Integer pageSize);
 
-    List<Script> filterScriptListByUserIdAndProjectIdService(Integer userId, Integer projectId);
+    List filterScriptListByUserIdAndProjectIdService(Integer userId, Integer projectId,Integer pageNum, Integer pageSize);
 
-    List<Script> filterScriptListByProjectIdAndProtocolIdService(Integer projectId, Integer protocolId);
+    List filterScriptListByProjectIdAndProtocolIdService(Integer projectId, Integer protocolId,Integer pageNum, Integer pageSize);
 
-    List<Script> filterScriptListByProjectIdAndProtocolIdAndUserIdService(Integer projectId, Integer protocolId, Integer userId);
+    List filterScriptListByProjectIdAndProtocolIdAndUserIdService(Integer projectId, Integer protocolId, Integer userId,Integer pageNum, Integer pageSize);
 }

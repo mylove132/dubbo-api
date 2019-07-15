@@ -23,21 +23,21 @@ public interface ProjectMapper {
 
     int updateByPrimaryKey(Project record);
 
-    List<Project> projectList();
+    List projectList();
 
-    List<Project> searchProjectList(@Param("search") String search);
+    List searchProjectList(@Param("search") String search);
 
-    List<Project> filterUserProjectList(@Param("userId") Integer userId);
+    List filterUserProjectList(@Param("userId") Integer userId);
 
-    List<Project> filterTypeProjectList(@Param("typeId") Integer typeId);
+    List filterTypeProjectList(@Param("typeId") Integer typeId);
 
-    List<Project> filterEnvProjectList(@Param("envId") Integer envId);
+    List filterEnvProjectList(@Param("envId") Integer envId);
 
-    List<Project> filterUserAndEnvProjectList(@Param("userId") Integer userId, @Param("envId") Integer envId);
+    List filterUserAndEnvProjectList(@Param("userId") Integer userId, @Param("envId") Integer envId);
 
-    List<Project> filterUserAndTypeProjectList(@Param("userId") Integer userId, @Param("typeId") Integer typeId);
+    List filterUserAndTypeProjectList(@Param("userId") Integer userId, @Param("typeId") Integer typeId);
 
-    List<Project> filterEnvAndTypeProjectList(@Param("envId") Integer envId, @Param("typeId") Integer typeId);
+    List filterEnvAndTypeProjectList(@Param("envId") Integer envId, @Param("typeId") Integer typeId);
 
-    List<Project> filterProjectList(@Param("typeId") Integer typeId,@Param("envId") Integer envId,@Param("userId") Integer userId);
+    List filterPorject(@Param("typeId") Integer typeId,@Param("envId") Integer envId,@Param("userId") Integer userId);
 }

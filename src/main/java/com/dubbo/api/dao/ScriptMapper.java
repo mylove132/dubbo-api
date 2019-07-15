@@ -20,24 +20,24 @@ public interface ScriptMapper {
 
     int updateByPrimaryKey(Script record);
 
-    List<Script> listScript();
+    List listScript();
 
-    List<Script> searchScriptByKeyWord(@Param("keyword") String keyword);
+    List searchScriptByKeyWord(@Param("keyword") String keyword);
 
-    List<Script> listScriptByProjectId(Integer projectId);
+    List listScriptByProjectId(Integer projectId);
 
-    List<Script> filterScriptListByUserId(Integer userId);
+    List filterScriptListByUserId(Integer userId);
 
-    List<Script> filterScriptListByProtocolId(Integer protocolId);
+    List filterScriptListByProtocolId(Integer protocolId);
 
-    List<Script> filterScriptListByProjectId(Integer projectId);
+    List filterScriptListByProjectId(Integer projectId);
 
-    List<Script> filterScriptListByUserIdAndProtocolId(@Param("userId") Integer userId,@Param("protocolId") Integer protocolId);
+    List filterScriptListByUserIdAndProtocolId(@Param("userId") Integer userId,@Param("protocolId") Integer protocolId);
 
-    List<Script> filterScriptListByUserIdAndProjectId(@Param("userId") Integer userId,@Param("projectId") Integer projectId);
+    List filterScriptListByUserIdAndProjectId(@Param("userId") Integer userId,@Param("projectId") Integer projectId);
 
-    List<Script> filterScriptListByProjectIdAndProtocolId(@Param("projectId") Integer projectId,@Param("protocolId") Integer protocolId);
+    List filterScriptListByProjectIdAndProtocolId(@Param("projectId") Integer projectId,@Param("protocolId") Integer protocolId);
 
-    List<Script> filterScriptListByProjectIdAndProtocolIdAndUserId(@Param("projectId") Integer projectId,@Param("protocolId") Integer protocolId,@Param("userId") Integer userId);
+    List filterScriptListByProjectIdAndProtocolIdAndUserId(@Param("projectId") Integer projectId,@Param("protocolId") Integer protocolId,@Param("userId") Integer userId);
 
 }

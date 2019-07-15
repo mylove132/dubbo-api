@@ -13,5 +13,9 @@ logging:
   level:
     com.dubbo.api.dao: DEBUG
 
-
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
 

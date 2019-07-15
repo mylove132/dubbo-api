@@ -3,6 +3,7 @@ package com.dubbo.api.service.impl;
 import com.dubbo.api.dao.ScriptMapper;
 import com.dubbo.api.service.IScriptService;
 import com.dubbo.api.vo.Script;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,12 +17,14 @@ public class ScriptServiceImpl implements IScriptService {
     private ScriptMapper scriptMapper;
 
     @Override
-    public List<Script> searchScriptBYKeyWordService(String keyword) {
+    public List searchScriptByKeyWord(String keyword,Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         return scriptMapper.searchScriptByKeyWord(keyword);
     }
 
     @Override
-    public List<Script> listScriptService() {
+    public List listScriptService(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         return scriptMapper.listScript();
     }
 
@@ -31,7 +34,8 @@ public class ScriptServiceImpl implements IScriptService {
     }
 
     @Override
-    public List<Script> listScriptByProjectIdService(Integer projectId) {
+    public List listScriptByProjectIdService(Integer projectId,Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         return scriptMapper.listScriptByProjectId(projectId);
     }
 
@@ -54,37 +58,45 @@ public class ScriptServiceImpl implements IScriptService {
     }
 
     @Override
-    public List<Script> filterScriptListByUserIdService(Integer userId) {
+    public List<Script> filterScriptListByUserIdService(Integer userId,Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         return scriptMapper.filterScriptListByUserId(userId);
     }
 
     @Override
-    public List<Script> filterScriptListByProtocolIdService(Integer protocolId) {
+    public List<Script> filterScriptListByProtocolIdService(Integer protocolId,Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         return scriptMapper.filterScriptListByProtocolId(protocolId);
     }
 
     @Override
-    public List<Script> filterScriptListByProjectIdService(Integer projectId) {
+    public List<Script> filterScriptListByProjectIdService(Integer projectId,Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         return scriptMapper.filterScriptListByProjectId(projectId);
     }
 
     @Override
-    public List<Script> filterScriptListByUserIdAndProtocolIdService(Integer userId, Integer protocolId) {
+    public List filterScriptListByUserIdAndProtocolIdService(Integer userId, Integer protocolId,Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         return scriptMapper.filterScriptListByUserIdAndProtocolId(userId, protocolId);
     }
 
+
     @Override
-    public List<Script> filterScriptListByUserIdAndProjectIdService(Integer userId, Integer projectId) {
+    public List<Script> filterScriptListByUserIdAndProjectIdService(Integer userId, Integer projectId,Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         return scriptMapper.filterScriptListByUserIdAndProjectId(userId, projectId);
     }
 
     @Override
-    public List<Script> filterScriptListByProjectIdAndProtocolIdService(Integer projectId, Integer protocolId) {
+    public List<Script> filterScriptListByProjectIdAndProtocolIdService(Integer projectId, Integer protocolId,Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         return scriptMapper.filterScriptListByProjectIdAndProtocolId(projectId, protocolId);
     }
 
     @Override
-    public List<Script> filterScriptListByProjectIdAndProtocolIdAndUserIdService(Integer projectId, Integer protocolId, Integer userId) {
+    public List<Script> filterScriptListByProjectIdAndProtocolIdAndUserIdService(Integer projectId, Integer protocolId, Integer userId,Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         return scriptMapper.filterScriptListByProjectIdAndProtocolIdAndUserId(projectId, protocolId, userId);
     }
 

@@ -1,10 +1,9 @@
 package com.dubbo.api.service;
-
-import com.dubbo.api.vo.History;
-
 import java.util.List;
 
 public interface IHistoryService {
 
-    List<History> findHistoryByPage(Integer pageNum, Integer pageSize);
+    List findHistoryByPage(Integer pageNum, Integer pageSize);
+    List findHistoryWithScriptIdByPage(Integer scriptId,Integer pageNum, Integer pageSize);
+    List searchScriptWithKeyWordByPage(String keyword,Integer pageNum, Integer pageSize);
 }
