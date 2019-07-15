@@ -1,6 +1,7 @@
 package com.dubbo.api.service.impl;
 
 import com.dubbo.api.common.bean.BaseResponse;
+import com.dubbo.api.common.bean.PageInfo;
 import com.dubbo.api.common.bean.SuccessResponse;
 import com.dubbo.api.common.util.DateUtil;
 import com.dubbo.api.common.util.MessageUtil;
@@ -13,6 +14,7 @@ import com.dubbo.api.vo.ScheduleJob;
 import com.dubbo.api.service.IScheduleJobService;
 import com.dubbo.api.vo.Script;
 import com.dubbo.api.vo.User;
+import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.CronTrigger;
@@ -22,6 +24,7 @@ import org.quartz.impl.triggers.CronTriggerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
@@ -75,43 +78,10 @@ public class ScheduleJobService implements IScheduleJobService {
 	 * @return
 	 */
 	@Override
-	public BaseResponse selectByQuery() {
-		List<ScheduleJob> list = scheduleJobMapper.selectByParams();
-		List<Map<String,Object>> mapList = new ArrayList<>();
-		if(list!=null&&list.size()>0){
-			for (ScheduleJob scheduleJob:list){
-				Map<String,Object> result = new HashMap<>();
-				if (scheduleJob.getScriptId()>0){
-					Script script = scriptMapper.selectByPrimaryKey(scheduleJob.getScriptId());
-					if (script != null){
-						result.put("scriptName",script.getName());
-						Integer projectId = script.getProjectId();
-						if (projectId > 0){
-							Project project = projectMapper.selectByPrimaryKey(projectId);
-							result.put("projectName",project.getName());
-							result.put("projectId",projectId);
-							if (project.getEnv() > 0){
-								result.put("projectTypeId",project.getType());
-							}
-						}
-					}
-					if (scheduleJob.getUserId() > 0){
-						User user = userMapper.selectByPrimaryKey(scheduleJob.getUserId());
-						if(user!=null){
-							result.put("userName",user.getName());
-						}
-					}
-					result.put("createTime", DateUtil.dateFormate(scheduleJob.getCrtTime()));
-					result.put("cron",scheduleJob.getCronExpression());
-					result.put("description",scheduleJob.getRemark());
-					result.put("status",scheduleJob.getStatus());
-					result.put("id",scheduleJob.getId());
-
-				}
-				mapList.add(result);
-			}
-		}
-		return new SuccessResponse(mapList);
+	public BaseResponse selectByQuery(Integer pageNum, Integer pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
+		List list = scheduleJobMapper.selectByParams();
+		return new SuccessResponse(new PageInfo(list));
 	}
 
 	/**

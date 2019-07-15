@@ -16,7 +16,7 @@ public interface IUserService {
 
     int addUser(User user);
 
-    List<User> getUserList();
+    List<User> getUserList(Integer pageNum, Integer pageSize);
 
     User getUserById(Integer userId);
 

@@ -69,5 +69,5 @@ public interface ScheduleJobMapper {
 	 *
 	 * @return
 	 */
-	List<ScheduleJob> selectByParams();
+	List selectByParams();
 }

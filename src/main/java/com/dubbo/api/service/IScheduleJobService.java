@@ -2,12 +2,13 @@ package com.dubbo.api.service;
 
 import com.dubbo.api.common.bean.BaseResponse;
 import com.dubbo.api.vo.ScheduleJob;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 public interface IScheduleJobService {
 
-    BaseResponse selectByQuery();
+    BaseResponse selectByQuery(Integer pageNum, Integer pageSize);
 
     BaseResponse add(ScheduleJob scheduleJob);
 

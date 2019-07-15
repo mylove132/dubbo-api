@@ -26,13 +26,13 @@ public class ScheduleJobController {
 	/**
 	 * 查询列表
 	 *
-	 * @param params
 	 * @return
 	 */
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	@ResponseBody
-	public BaseResponse list(@RequestParam Map<String, Object> params){
-		return scheduleJobService.selectByQuery();
+	public BaseResponse list(@RequestParam(defaultValue = "1",value = "currentPage") Integer pageNum,
+							 @RequestParam(defaultValue = "10",value = "pageSize") Integer pageSize){
+		return scheduleJobService.selectByQuery(pageNum,pageSize);
 	}
 
 	/**

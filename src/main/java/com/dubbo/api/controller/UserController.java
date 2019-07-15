@@ -1,6 +1,7 @@
 package com.dubbo.api.controller;
 
 import com.dubbo.api.common.bean.ErrorResponse;
+import com.dubbo.api.common.bean.PageInfo;
 import com.dubbo.api.common.constant.CommonConstant;
 import com.dubbo.api.common.constant.PermissionConstant;
 import com.dubbo.api.common.util.MD5Util;
@@ -69,8 +70,9 @@ public class UserController {
 
 
     @RequestMapping(value = "",method = RequestMethod.GET)
-    public BaseResponse userListController(){
-        return new SuccessResponse(userService.getUserList());
+    public BaseResponse userListController(@RequestParam(defaultValue = "1",value = "currentPage") Integer pageNum,
+                                           @RequestParam(defaultValue = "10",value = "pageSize") Integer pageSize){
+        return new SuccessResponse(new PageInfo(userService.getUserList(pageNum,pageSize)));
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)

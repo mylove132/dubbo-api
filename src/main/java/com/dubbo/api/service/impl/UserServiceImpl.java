@@ -3,6 +3,7 @@ package com.dubbo.api.service.impl;
 import com.dubbo.api.dao.UserMapper;
 import com.dubbo.api.service.IUserService;
 import com.dubbo.api.vo.User;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,7 +35,8 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public List<User> getUserList() {
+    public List<User> getUserList(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         return userMapper.getUserList();
     }
 
