@@ -168,9 +168,8 @@
 		select <include refid="Base_Column_List"/>
 		from schedule_job
 	</select>
-
 	<select id="selectByParams" resultType="java.util.HashMap">
-		select sj.id,sj.cron_expression as cron,sj.`status`,sj.crt_time,sj.remark as description,tm2.requestTypeId,tm2.userName,tm2.projectName,tm2.scriptName,tm2.scriptId FROM schedule_job sj join
+		select sj.id,sj.cron_expression as cron,sj.`status`,DATE_FORMAT(sj.crt_time,'%Y-%m-%d %H:%i:%s') as createTime,sj.remark as description,tm2.requestTypeId,tm2.userName,tm2.projectName,tm2.scriptName,tm2.scriptId FROM schedule_job sj join
 			(select ert.id as requestTypeId,tm1.scriptId,tm1.projectName,tm1.userName,tm1.scriptName FROM entity_request_type ert JOIN
 			(SELECT es.id as scriptId,es.`name` as scriptName,eu.name as userName,es.name as projectName,es.request_type_id FROM
 			 entity_script es join entity_user eu on es.user_id=eu.id) tm1 on ert.id=tm1.request_type_id) tm2 on sj.script_id=tm2.scriptId

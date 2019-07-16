@@ -32,7 +32,7 @@
   </sql>
 
   <select id="filterScriptListByUserId" parameterType="java.lang.Integer" resultType="java.util.HashMap">
-     select tm4.envId,tm4.envName,tm4.id,tm4.preNumber,tm4.ip,tm4.pt,tm4.preTime,tm4.projectId,tm4.protocolId,tm4.projectName,tm4.protocolName,tm4.scriptName,tm4.update_time,tm4.userName,tm4.userId,ert.`name` as requestTypeName,ert.id as requestTypeId FROM
+     select tm4.envId,tm4.envName,tm4.id,tm4.preNumber,tm4.ip,tm4.pt,tm4.preTime,tm4.projectId,tm4.protocolId,tm4.projectName,tm4.protocolName,tm4.scriptName,DATE_FORMAT(tm4.update_time,'%Y-%m-%d %H:%i:%s'),tm4.userName,tm4.userId,ert.`name` as requestTypeName,ert.id as requestTypeId FROM
     (SELECT tm3.envId,tm3.ip,tm3.pt,tm3.protocolId,tm3.envName,tm3.projectName,tm3.projectId,tm3.id,tm3.protocolName,tm3.update_time,eu.id as userId,eu.name as userName,tm3.scriptName,tm3.request_type_id,tm3.pre_number as preNumber,tm3.pre_time as preTime  FROM
     (SELECT epl.id as protocolId, tm2.ip as ip,tm2.`port` as pt,tm2.envId,tm2.envName,tm2.projectId,tm2.projectName,tm2.id,tm2.user_id,tm2.update_time,epl.`name` as protocolName,tm2.scriptName,tm2.request_type_id,tm2.pre_number,tm2.pre_time  FROM
     (SELECT tm1.envId,tm1.envName,tm1.projectId,tm1.projectName,es.id,es.user_id,es.protocol_id,es.update_time,es.name as scriptName,es.ip,es.`port`,es.request_type_id,es.pre_number,es.pre_time FROM entity_script es join
@@ -44,7 +44,7 @@
   </select>
 
   <select id="filterScriptListByProtocolId" parameterType="java.lang.Integer" resultType="java.util.HashMap">
-    select tm4.envId,tm4.envName,tm4.id,tm4.preNumber,tm4.ip,tm4.pt,tm4.preTime,tm4.projectId,tm4.protocolId,tm4.projectName,tm4.protocolName,tm4.scriptName,tm4.update_time,tm4.userName,tm4.userId,ert.`name` as requestTypeName,ert.id as requestTypeId FROM
+    select tm4.envId,tm4.envName,tm4.id,tm4.preNumber,tm4.ip,tm4.pt,tm4.preTime,tm4.projectId,tm4.protocolId,tm4.projectName,tm4.protocolName,tm4.scriptName,DATE_FORMAT(tm4.update_time,'%Y-%m-%d %H:%i:%s'),tm4.userName,tm4.userId,ert.`name` as requestTypeName,ert.id as requestTypeId FROM
     (SELECT tm3.envId,tm3.ip,tm3.pt,tm3.protocolId,tm3.envName,tm3.projectName,tm3.projectId,tm3.id,tm3.protocolName,tm3.update_time,eu.id as userId,eu.name as userName,tm3.scriptName,tm3.request_type_id,tm3.pre_number as preNumber,tm3.pre_time as preTime  FROM
     (SELECT epl.id as protocolId, tm2.ip as ip,tm2.`port` as pt,tm2.envId,tm2.envName,tm2.projectId,tm2.projectName,tm2.id,tm2.user_id,tm2.update_time,epl.`name` as protocolName,tm2.scriptName,tm2.request_type_id,tm2.pre_number,tm2.pre_time  FROM
     (SELECT tm1.envId,tm1.envName,tm1.projectId,tm1.projectName,es.id,es.user_id,es.protocol_id,es.update_time,es.name as scriptName,es.ip,es.`port`,es.request_type_id,es.pre_number,es.pre_time FROM entity_script es join
@@ -56,7 +56,7 @@
   </select>
 
   <select id="filterScriptListByProjectId" parameterType="java.lang.Integer" resultType="java.util.HashMap">
-   select tm4.envId,tm4.envName,tm4.id,tm4.preNumber,tm4.ip,tm4.pt,tm4.preTime,tm4.projectId,tm4.protocolId,tm4.projectName,tm4.protocolName,tm4.scriptName,tm4.update_time,tm4.userName,tm4.userId,ert.`name` as requestTypeName,ert.id as requestTypeId FROM
+   select tm4.envId,tm4.envName,tm4.id,tm4.preNumber,tm4.ip,tm4.pt,tm4.preTime,tm4.projectId,tm4.protocolId,tm4.projectName,tm4.protocolName,tm4.scriptName,DATE_FORMAT(tm4.update_time,'%Y-%m-%d %H:%i:%s') as updateTime,tm4.userName,tm4.userId,ert.`name` as requestTypeName,ert.id as requestTypeId FROM
     (SELECT tm3.envId,tm3.ip,tm3.pt,tm3.protocolId,tm3.envName,tm3.projectName,tm3.projectId,tm3.id,tm3.protocolName,tm3.update_time,eu.id as userId,eu.name as userName,tm3.scriptName,tm3.request_type_id,tm3.pre_number as preNumber,tm3.pre_time as preTime  FROM
     (SELECT epl.id as protocolId, tm2.ip as ip,tm2.`port` as pt,tm2.envId,tm2.envName,tm2.projectId,tm2.projectName,tm2.id,tm2.user_id,tm2.update_time,epl.`name` as protocolName,tm2.scriptName,tm2.request_type_id,tm2.pre_number,tm2.pre_time  FROM
     (SELECT tm1.envId,tm1.envName,tm1.projectId,tm1.projectName,es.id,es.user_id,es.protocol_id,es.update_time,es.name as scriptName,es.ip,es.`port`,es.request_type_id,es.pre_number,es.pre_time FROM entity_script es join
@@ -68,7 +68,7 @@
   </select>
 
   <select id="searchScriptByKeyWord" parameterType="java.lang.String" resultType="java.util.HashMap">
-    select tm4.envId,tm4.envName,tm4.id,tm4.preNumber,tm4.ip,tm4.pt,tm4.preTime,tm4.projectId,tm4.protocolId,tm4.projectName,tm4.protocolName,tm4.scriptName,tm4.update_time,tm4.userName,tm4.userId,ert.`name` as requestTypeName,ert.id as requestTypeId FROM
+    select tm4.envId,tm4.envName,tm4.id,tm4.preNumber,tm4.ip,tm4.pt,tm4.preTime,tm4.projectId,tm4.protocolId,tm4.projectName,tm4.protocolName,tm4.scriptName,DATE_FORMAT(tm4.update_time,'%Y-%m-%d %H:%i:%s')  as updateTime,tm4.userName,tm4.userId,ert.`name` as requestTypeName,ert.id as requestTypeId FROM
     (SELECT tm3.envId,tm3.ip,tm3.pt,tm3.protocolId,tm3.envName,tm3.projectName,tm3.projectId,tm3.id,tm3.protocolName,tm3.update_time,eu.id as userId,eu.name as userName,tm3.scriptName,tm3.request_type_id,tm3.pre_number as preNumber,tm3.pre_time as preTime  FROM
     (SELECT epl.id as protocolId, tm2.ip as ip,tm2.`port` as pt,tm2.envId,tm2.envName,tm2.projectId,tm2.projectName,tm2.id,tm2.user_id,tm2.update_time,epl.`name` as protocolName,tm2.scriptName,tm2.request_type_id,tm2.pre_number,tm2.pre_time  FROM
     (SELECT tm1.envId,tm1.envName,tm1.projectId,tm1.projectName,es.id,es.user_id,es.protocol_id,es.update_time,es.name as scriptName,es.ip,es.`port`,es.request_type_id,es.pre_number,es.pre_time FROM entity_script es join
@@ -85,7 +85,7 @@
 
 
   <select id="filterScriptListByUserIdAndProtocolId" parameterType="java.lang.Integer" resultType="java.util.HashMap">
-   select tm4.envId,tm4.envName,tm4.id,tm4.preNumber,tm4.ip,tm4.pt,tm4.preTime,tm4.projectId,tm4.protocolId,tm4.projectName,tm4.protocolName,tm4.scriptName,tm4.update_time,tm4.userName,tm4.userId,ert.`name` as requestTypeName,ert.id as requestTypeId FROM
+   select tm4.envId,tm4.envName,tm4.id,tm4.preNumber,tm4.ip,tm4.pt,tm4.preTime,tm4.projectId,tm4.protocolId,tm4.projectName,tm4.protocolName,tm4.scriptName,DATE_FORMAT(tm4.update_time,'%Y-%m-%d %H:%i:%s')  as updateTime,tm4.userName,tm4.userId,ert.`name` as requestTypeName,ert.id as requestTypeId FROM
     (SELECT tm3.envId,tm3.ip,tm3.pt,tm3.protocolId,tm3.envName,tm3.projectName,tm3.projectId,tm3.id,tm3.protocolName,tm3.update_time,eu.id as userId,eu.name as userName,tm3.scriptName,tm3.request_type_id,tm3.pre_number as preNumber,tm3.pre_time as preTime  FROM
     (SELECT epl.id as protocolId, tm2.ip as ip,tm2.`port` as pt,tm2.envId,tm2.envName,tm2.projectId,tm2.projectName,tm2.id,tm2.user_id,tm2.update_time,epl.`name` as protocolName,tm2.scriptName,tm2.request_type_id,tm2.pre_number,tm2.pre_time  FROM
     (SELECT tm1.envId,tm1.envName,tm1.projectId,tm1.projectName,es.id,es.user_id,es.protocol_id,es.update_time,es.name as scriptName,es.ip,es.`port`,es.request_type_id,es.pre_number,es.pre_time FROM entity_script es join
@@ -98,7 +98,7 @@
   </select>
 
   <select id="filterScriptListByUserIdAndProjectId" parameterType="java.lang.Integer" resultType="java.util.HashMap">
-   select tm4.envId,tm4.envName,tm4.id,tm4.preNumber,tm4.ip,tm4.pt,tm4.preTime,tm4.projectId,tm4.protocolId,tm4.projectName,tm4.protocolName,tm4.scriptName,tm4.update_time,tm4.userName,tm4.userId,ert.`name` as requestTypeName,ert.id as requestTypeId FROM
+   select tm4.envId,tm4.envName,tm4.id,tm4.preNumber,tm4.ip,tm4.pt,tm4.preTime,tm4.projectId,tm4.protocolId,tm4.projectName,tm4.protocolName,tm4.scriptName,DATE_FORMAT(tm4.update_time,'%Y-%m-%d %H:%i:%s')  as updateTime,tm4.userName,tm4.userId,ert.`name` as requestTypeName,ert.id as requestTypeId FROM
     (SELECT tm3.envId,tm3.ip,tm3.pt,tm3.protocolId,tm3.envName,tm3.projectName,tm3.projectId,tm3.id,tm3.protocolName,tm3.update_time,eu.id as userId,eu.name as userName,tm3.scriptName,tm3.request_type_id,tm3.pre_number as preNumber,tm3.pre_time as preTime  FROM
     (SELECT epl.id as protocolId, tm2.ip as ip,tm2.`port` as pt,tm2.envId,tm2.envName,tm2.projectId,tm2.projectName,tm2.id,tm2.user_id,tm2.update_time,epl.`name` as protocolName,tm2.scriptName,tm2.request_type_id,tm2.pre_number,tm2.pre_time  FROM
     (SELECT tm1.envId,tm1.envName,tm1.projectId,tm1.projectName,es.id,es.user_id,es.protocol_id,es.update_time,es.name as scriptName,es.ip,es.`port`,es.request_type_id,es.pre_number,es.pre_time FROM entity_script es join
@@ -111,7 +111,7 @@
   </select>
 
   <select id="filterScriptListByProjectIdAndProtocolId" parameterType="java.lang.Integer" resultType="java.util.HashMap">
-    select tm4.envId,tm4.envName,tm4.id,tm4.preNumber,tm4.ip,tm4.pt,tm4.preTime,tm4.projectId,tm4.protocolId,tm4.projectName,tm4.protocolName,tm4.scriptName,tm4.update_time,tm4.userName,tm4.userId,ert.`name` as requestTypeName,ert.id as requestTypeId FROM
+    select tm4.envId,tm4.envName,tm4.id,tm4.preNumber,tm4.ip,tm4.pt,tm4.preTime,tm4.projectId,tm4.protocolId,tm4.projectName,tm4.protocolName,tm4.scriptName,DATE_FORMAT(tm4.update_time,'%Y-%m-%d %H:%i:%s')  as updateTime,tm4.userName,tm4.userId,ert.`name` as requestTypeName,ert.id as requestTypeId FROM
     (SELECT tm3.envId,tm3.ip,tm3.pt,tm3.protocolId,tm3.envName,tm3.projectName,tm3.projectId,tm3.id,tm3.protocolName,tm3.update_time,eu.id as userId,eu.name as userName,tm3.scriptName,tm3.request_type_id,tm3.pre_number as preNumber,tm3.pre_time as preTime  FROM
     (SELECT epl.id as protocolId, tm2.ip as ip,tm2.`port` as pt,tm2.envId,tm2.envName,tm2.projectId,tm2.projectName,tm2.id,tm2.user_id,tm2.update_time,epl.`name` as protocolName,tm2.scriptName,tm2.request_type_id,tm2.pre_number,tm2.pre_time  FROM
     (SELECT tm1.envId,tm1.envName,tm1.projectId,tm1.projectName,es.id,es.user_id,es.protocol_id,es.update_time,es.name as scriptName,es.ip,es.`port`,es.request_type_id,es.pre_number,es.pre_time FROM entity_script es join
@@ -124,7 +124,7 @@
   </select>
 
   <select id="filterScriptListByProjectIdAndProtocolIdAndUserId" parameterType="java.lang.Integer" resultType="java.util.HashMap">
-   select tm4.envId,tm4.envName,tm4.id,tm4.preNumber,tm4.ip,tm4.pt,tm4.preTime,tm4.projectId,tm4.protocolId,tm4.projectName,tm4.protocolName,tm4.scriptName,tm4.update_time,tm4.userName,tm4.userId,ert.`name` as requestTypeName,ert.id as requestTypeId FROM
+   select tm4.envId,tm4.envName,tm4.id,tm4.preNumber,tm4.ip,tm4.pt,tm4.preTime,tm4.projectId,tm4.protocolId,tm4.projectName,tm4.protocolName,tm4.scriptName,DATE_FORMAT(tm4.update_time,'%Y-%m-%d %H:%i:%s')  as updateTime,tm4.userName,tm4.userId,ert.`name` as requestTypeName,ert.id as requestTypeId FROM
     (SELECT tm3.envId,tm3.ip,tm3.pt,tm3.protocolId,tm3.envName,tm3.projectName,tm3.projectId,tm3.id,tm3.protocolName,tm3.update_time,eu.id as userId,eu.name as userName,tm3.scriptName,tm3.request_type_id,tm3.pre_number as preNumber,tm3.pre_time as preTime  FROM
     (SELECT epl.id as protocolId, tm2.ip as ip,tm2.`port` as pt,tm2.envId,tm2.envName,tm2.projectId,tm2.projectName,tm2.id,tm2.user_id,tm2.update_time,epl.`name` as protocolName,tm2.scriptName,tm2.request_type_id,tm2.pre_number,tm2.pre_time  FROM
     (SELECT tm1.envId,tm1.envName,tm1.projectId,tm1.projectName,es.id,es.user_id,es.protocol_id,es.update_time,es.name as scriptName,es.ip,es.`port`,es.request_type_id,es.pre_number,es.pre_time FROM entity_script es join
@@ -139,7 +139,7 @@
 
 
   <select id="listScript" resultType="java.util.HashMap">
-   select tm4.envId,tm4.envName,tm4.id,tm4.preNumber,tm4.ip,tm4.pt,tm4.preTime,tm4.projectId,tm4.protocolId,tm4.projectName,tm4.protocolName,tm4.scriptName,tm4.update_time,tm4.userName,tm4.userId,ert.`name` as requestTypeName,ert.id as requestTypeId FROM
+   select tm4.envId,tm4.envName,tm4.id,tm4.preNumber,tm4.ip,tm4.pt,tm4.preTime,tm4.projectId,tm4.protocolId,tm4.projectName,tm4.protocolName,tm4.scriptName,DATE_FORMAT(tm4.update_time,'%Y-%m-%d %H:%i:%s')  as updateTime,tm4.userName,tm4.userId,ert.`name` as requestTypeName,ert.id as requestTypeId FROM
     (SELECT tm3.envId,tm3.ip,tm3.pt,tm3.protocolId,tm3.envName,tm3.projectName,tm3.projectId,tm3.id,tm3.protocolName,tm3.update_time,eu.id as userId,eu.name as userName,tm3.scriptName,tm3.request_type_id,tm3.pre_number as preNumber,tm3.pre_time as preTime  FROM
     (SELECT epl.id as protocolId, tm2.ip as ip,tm2.`port` as pt,tm2.envId,tm2.envName,tm2.projectId,tm2.projectName,tm2.id,tm2.user_id,tm2.update_time,epl.`name` as protocolName,tm2.scriptName,tm2.request_type_id,tm2.pre_number,tm2.pre_time  FROM
     (SELECT tm1.envId,tm1.envName,tm1.projectId,tm1.projectName,es.id,es.user_id,es.protocol_id,es.update_time,es.name as scriptName,es.ip,es.`port`,es.request_type_id,es.pre_number,es.pre_time FROM entity_script es join
@@ -150,13 +150,14 @@
   </select>
 
   <select id="listScriptByProjectId" parameterType="java.lang.Integer" resultType="java.util.HashMap">
-    select tm4.envId,tm4.envName,tm4.id,tm4.preNumber,tm4.ip,tm4.pt,tm4.preTime,tm4.projectId,tm4.protocolId,tm4.projectName,tm4.protocolName,tm4.scriptName,tm4.update_time,tm4.userName,tm4.userId,ert.`name` as requestTypeName,ert.id as requestTypeId FROM
+    select tm4.envId,tm4.envName,tm4.id,tm4.preNumber,tm4.ip,tm4.pt,tm4.preTime,tm4.projectId,tm4.protocolId,tm4.projectName,tm4.protocolName,tm4.scriptName,DATE_FORMAT(tm4.update_time,'%Y-%m-%d %H:%i:%s')  as updateTime,tm4.userName,tm4.userId,ert.`name` as requestTypeName,ert.id as requestTypeId FROM
     (SELECT tm3.envId,tm3.ip,tm3.pt,tm3.protocolId,tm3.envName,tm3.projectName,tm3.projectId,tm3.id,tm3.protocolName,tm3.update_time,eu.id as userId,eu.name as userName,tm3.scriptName,tm3.request_type_id,tm3.pre_number as preNumber,tm3.pre_time as preTime  FROM
     (SELECT epl.id as protocolId, tm2.ip as ip,tm2.`port` as pt,tm2.envId,tm2.envName,tm2.projectId,tm2.projectName,tm2.id,tm2.user_id,tm2.update_time,epl.`name` as protocolName,tm2.scriptName,tm2.request_type_id,tm2.pre_number,tm2.pre_time  FROM
     (SELECT tm1.envId,tm1.envName,tm1.projectId,tm1.projectName,es.id,es.user_id,es.protocol_id,es.update_time,es.name as scriptName,es.ip,es.`port`,es.request_type_id,es.pre_number,es.pre_time FROM entity_script es join
     (SELECT ep.id as projectId,ep.`name` as projectName,ee.id as envId,ee.name as envName FROM entity_project as ep
     join entity_env ee on ep.env=ee.id) tm1 on tm1.projectId=es.project_id)
     tm2 join entity_protocol epl on tm2.protocol_id=epl.id) tm3 JOIN entity_user eu on tm3.user_id=eu.id) tm4 join entity_request_type ert on ert.id=tm4.request_type_id
+    where projectId = #{projectId,jdbcType=INTEGER}
     ORDER BY update_time DESC
   </select>
 

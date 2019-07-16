@@ -84,234 +84,6 @@ public class CommonController {
     }
 
 
-//    public BaseResponse execScriptController(@RequestParam("scriptId") Integer scriptId, @RequestParam("userId") Integer userId) {
-//        log.info("执行jmeter脚本id:" + scriptId);
-//        String md5 = MD5Util.encrypt(UUID.randomUUID().toString());
-//        String jmeterRedisId = redisService.get("exec_jmeter_id_" + scriptId);
-//        String jmeterCountRedisId = redisService.get("exec_jmeter_count");
-//        if (jmeterRedisId == null) {
-//            redisService.set("exec_jmeter_id_" + scriptId, String.valueOf(scriptId));
-//        } else {
-//            return new ErrorResponse(CommonConstant.EXEC_FILE_EXIST);
-//        }
-//        if (jmeterCountRedisId == null) {
-//            redisService.set("exec_jmeter_count", String.valueOf(1));
-//        } else if (Integer.parseInt(jmeterCountRedisId) >= 2) {
-//            return new ErrorResponse(CommonConstant.EXEC_COUNT_MAX);
-//        } else {
-//            String value = String.valueOf(Integer.parseInt(redisService.get("exec_jmeter_count")) + 1);
-//            redisService.set("exec_jmeter_count", value);
-//        }
-//        try {
-//            User user = null;
-//            if (userId != null && userId > 0) {
-//                user = userMapper.selectByPrimaryKey(userId);
-//            }
-//            if (user == null) {
-//                return new ErrorResponse(CommonConstant.OP_FAILED);
-//            }
-//            Script script = null;
-//            if (scriptId != null && scriptId > 0) {
-//                script = scriptMapper.selectByPrimaryKey(scriptId);
-//            }
-//            if (script == null) {
-//                return new ErrorResponse(CommonConstant.OP_FAILED);
-//            }
-//            RequestType requestType = null;
-//            Integer requestTypeId = script.getRequestTypeId();
-//            if (requestTypeId != null && requestTypeId > 0) {
-//                requestType = requestTypeMapper.selectByPrimaryKey(requestTypeId);
-//            }
-//            if (requestType == null) {
-//                return new ErrorResponse(CommonConstant.OP_FAILED);
-//            }
-//            String url = script.getUrl();
-//            String name = script.getName();
-//            Integer preNumber = script.getPreNumber();
-//            Integer preTime = script.getPreTime();
-//            String ins = script.getIns();
-//            String method = script.getMethod();
-//            String assertText = script.getAssertText();
-//            String timeOut = script.getTimeOut().toString();
-//            Integer protocolId = script.getProtocolId();
-//            boolean isOpenServerMonitor = false;
-//            if (script.getIp() != null && StringUtils.isNoneBlank(script.getIp())){
-//                isOpenServerMonitor = true;
-//            }
-//            String ip = script.getIp();
-//            String port = null;
-//            try {
-//                port = script.getPort().toString();
-//            }catch (Exception e){
-//                port = null;
-//            }
-//
-//            if (protocolId != null && protocolId > 0) {
-//                if (protocolId == 1) {
-//                    log.info("执行http请求");
-//                    String fileContent = null;
-//                    try {
-//                        fileContent = createHttpJmxFile(preNumber, preTime, name, url, requestType.getName(), script.getParams(),
-//                                script.getTimeOut().toString(), script.getHeader(), script.getCookie(), script.getAssertText(), ip, port);
-//                    }catch (Exception e){
-//                        log.info(e.getMessage());
-//                    }
-//                    String jmxFilePath = jmeterConfig.getJmxFilePath() + md5 + ".jmx";
-//
-//                    log.info("jmx文件地址:"+jmxFilePath);
-//                    try {
-//                        OutputStream os = new FileOutputStream(new File(jmxFilePath));
-//                        os.write(fileContent.getBytes("utf-8"));
-//                        os.close();
-//                    } catch (IOException e) {
-//                        log.error("http jmx文件写入错误");
-//                    }
-//                    File file = new File(jmxFilePath);
-//                    if (!file.exists()) {
-//                        log.error("http jmx文件：" + jmxFilePath + "不存在");
-//                        return new ErrorResponse(CommonConstant.CREATE_JMETER_FILE_FAIL);
-//                    }
-//                    new Thread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            try {
-//                                String cmd = "%s -n -t %s -l %s -j %s";
-//                                cmd = String.format(cmd, jmeterConfig.getJmeterBinPath(), jmxFilePath, jmeterConfig.getRunLogPath() + md5 + ".log",
-//                                        jmeterConfig.getJtlFilePath() + md5 + ".jtl");
-//                                log.info("cmd命令行:"+cmd);
-//                                String[] listCmd = cmd.split(" ");
-//                                Process process = Runtime.getRuntime().exec(listCmd);
-//                                process.waitFor();
-//                                SequenceInputStream sis = new SequenceInputStream(process.getInputStream(), process.getErrorStream());
-//                                BufferedReader br = new BufferedReader(new InputStreamReader(sis, "utf-8"));
-//                                StringBuilder result = new StringBuilder();
-//                                String line;
-//                                while ((line = br.readLine()) != null) {
-//                                   log.info(line);
-//                                }
-//                                if (br != null) {
-//                                    br.close();
-//                                }
-//                                redisService.remove("exec_jmeter_id_" + scriptId);
-//                                String value = String.valueOf(Integer.parseInt(redisService.get("exec_jmeter_count")) - 1);
-//                                redisService.set("exec_jmeter_count", value);
-//                            } catch (IOException e) {
-//                                e.printStackTrace();
-//                            } catch (InterruptedException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                    }).start();
-//                    History history = new History();
-//                    history.setCreateTime(new Date());
-//                    history.setMd5(md5);
-//                    history.setScriptId(scriptId);
-//                    history.setUserId(userId);
-//                    history.setStatus("success");
-//                    historyMapper.insert(history);
-//                    return new SuccessResponse(CommonConstant.OP_SUCCESS);
-//                } else if (protocolId == 2) {
-//                    log.info("执行dubbo请求");
-//                    Integer projectId = script.getProjectId();
-//                    Project project = null;
-//                    if (projectId != null && projectId > 0) {
-//                        project = projectMapper.selectByPrimaryKey(projectId);
-//                    }
-//                    if (project == null) {
-//                        return new ErrorResponse(CommonConstant.OP_FAILED);
-//                    }
-//                    Integer envId = project.getEnv();
-//                    ProjectEnv projectEnv = null;
-//                    if (envId != null && envId > 0) {
-//                        projectEnv = projectEnvMapper.selectByPrimaryKey(envId);
-//                    }
-//                    if (projectEnv == null) {
-//                        return new ErrorResponse(CommonConstant.OP_FAILED);
-//                    }
-//                    String zkAddress = projectEnv.getZk();
-//                    log.info("开始创建文件");
-//                    String fileContent = null;
-//                    try {
-//                        fileContent = DubboJmeterScript.startSetting() + DubboJmeterScript.crontrolSetting(preNumber, preTime) +
-//                                DubboJmeterScript.dubboSetting(name, zkAddress, timeOut.toString(), script.getVersion(), ins, method, script.getParamType(), script.getParams()) +
-//                                DubboJmeterScript.resultTreeSetting() + DubboJmeterScript.aggregateReportSetting()+
-//                                DubboJmeterScript.responseAssertSetting(assertText)+DubboJmeterScript.preProccessorSetting()+
-//                                DubboJmeterScript.backendListenerSetting()+DubboJmeterScript.endSetting();
-//                    }catch (Exception e){
-//                        log.info("创建文件失败");
-//                        log.info(e.getMessage());
-//                    }
-//                    String jmxFilePath = jmeterConfig.getJmxFilePath() + md5 + ".jmx";
-//                    log.info("jmeter file path:"+jmxFilePath);
-//                    try {
-//                        OutputStream os = new FileOutputStream(new File(jmxFilePath));
-//                        os.write(fileContent.getBytes("utf-8"));
-//                        os.close();
-//                    } catch (IOException e) {
-//                        log.error("http jmx文件写入错误");
-//                    }
-//                    File file = new File(jmxFilePath);
-//                    if (!file.exists()) {
-//                        log.error("dubbo jmx文件：" + jmxFilePath + "不存在");
-//                        return new ErrorResponse(CommonConstant.CREATE_JMETER_FILE_FAIL);
-//                    }
-//                    new Thread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            try {
-//                                String cmd = "%s -n -t %s -l %s -j %s";
-//                                cmd = String.format(cmd, jmeterConfig.getJmeterBinPath(), jmxFilePath, jmeterConfig.getRunLogPath() + md5 + ".log",
-//                                        jmeterConfig.getJtlFilePath() + md5 + ".jtl");
-//                                String[] listCmd = cmd.split(" ");
-//                                Process process = Runtime.getRuntime().exec(listCmd);
-//                                process.waitFor();
-//                                SequenceInputStream sis = new SequenceInputStream(process.getInputStream(), process.getErrorStream());
-//                                BufferedReader br = new BufferedReader(new InputStreamReader(sis, "utf-8"));
-//                                StringBuilder result = new StringBuilder();
-//                                String line;
-//                                while ((line = br.readLine()) != null) {
-//                                    log.info(line);
-//                                }
-//                                if (br != null) {
-//                                    br.close();
-//                                }
-//                                redisService.remove("exec_jmeter_id_" + scriptId);
-//                                String value = String.valueOf(Integer.parseInt(redisService.get("exec_jmeter_count")) - 1);
-//                                redisService.set("exec_jmeter_count", value);
-//                            } catch (IOException e) {
-//                                e.printStackTrace();
-//                            } catch (InterruptedException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                    }).start();
-//                    History history = new History();
-//                    history.setCreateTime(new Date());
-//                    history.setMd5(md5);
-//                    history.setScriptId(scriptId);
-//                    history.setUserId(userId);
-//                    history.setStatus("success");
-//                    historyMapper.insert(history);
-//                    return new SuccessResponse(CommonConstant.OP_SUCCESS);
-//                }
-//            }
-//        } catch (Exception e) {
-//            log.error(e.getMessage());
-//            redisService.remove("exec_jmeter_id_" + scriptId);
-//            String value = String.valueOf(Integer.parseInt(redisService.get("exec_jmeter_count")) - 1);
-//            redisService.set("exec_jmeter_count", value);
-//            History history = new History();
-//            history.setCreateTime(new Date());
-//            history.setMd5(md5);
-//            history.setScriptId(scriptId);
-//            history.setUserId(userId);
-//            history.setStatus("fail");
-//            historyMapper.insert(history);
-//            return new ErrorResponse(2001,"执行脚本失败",new Object[]{e.getMessage()});
-//        }
-//        return null;
-//    }
-
     @RequestMapping(value = "/execScript", method = RequestMethod.GET)
     public BaseResponse execJmeterCrontroller(@RequestParam("scriptId") Integer scriptId, @RequestParam("userId") Integer userId) {
         log.info("执行jmeter脚本id:" + scriptId);
@@ -331,7 +103,6 @@ public class CommonController {
             String value = String.valueOf(Integer.parseInt(redisService.get("exec_jmeter_count")) + 1);
             redisService.set("exec_jmeter_count", value);
         }
-        User user = userMapper.selectByPrimaryKey(userId);
         Script script = scriptMapper.selectByPrimaryKey(scriptId);
         String scriptName = script.getName();
         Integer protocolId = script.getProtocolId();
@@ -357,6 +128,8 @@ public class CommonController {
         history.setScriptId(scriptId);
         history.setUserId(userId);
 
+        log.info("创建时间:"+history.getCreateTime().toString());
+
         if (protocolId == 1) {
             log.info("http请求，创建jmx文件");
             String fileContent = createHttpJmxFile(preNumber, preTime, scriptName, url, requestType.getName(), params, script.getTimeOut().toString(),
@@ -377,7 +150,7 @@ public class CommonController {
                 }
                 log.error("http jmx文件：" + jmxFilePath + "创建失败");
                 history.setStatus("fail");
-                historyMapper.insert(history);
+                historyMapper.insertSelective(history);
                 return new ErrorResponse(CommonConstant.CREATE_JMETER_FILE_FAIL);
             }
             File file = new File(jmxFilePath);
@@ -387,21 +160,6 @@ public class CommonController {
                 historyMapper.insert(history);
                 return new ErrorResponse(CommonConstant.CREATE_JMETER_FILE_FAIL);
             }
-//            try {
-//                modifyBuildFile(scriptName, md5);
-//            } catch (Exception e) {
-//                log.error("修改构建文件出错：" + e.getMessage());
-//                redisService.remove("exec_jmeter_id_" + scriptId);
-//                Integer redisExecCount = Integer.parseInt(redisService.get("exec_jmeter_count"));
-//                if (redisExecCount > 0){
-//                    redisService.set("exec_jmeter_count",String.valueOf(redisExecCount-1));
-//                }else {
-//                    redisService.set("exec_jmeter_count","0");
-//                }
-//                history.setStatus("fail");
-//                historyMapper.insert(history);
-//                return new ErrorResponse(CommonConstant.MODIFY_BUILD_FILE);
-//            }
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -476,7 +234,8 @@ public class CommonController {
             }
             try {
                 fileContent = DubboJmeterScript.startSetting() + DubboJmeterScript.crontrolSetting(preNumber, preTime) +
-                        DubboJmeterScript.dubboSetting(script.getName(), zkAddress, script.getTimeOut().toString(), script.getVersion(), script.getIns(), script.getMethod(), script.getParamType(), jsonObject.toJSONString()) +
+                        DubboJmeterScript.dubboSetting(script.getName(), zkAddress, script.getTimeOut().toString(), script.getVersion(),
+                                script.getIns(), script.getMethod(), script.getParamType(), jsonObject.toJSONString()) +
                         DubboJmeterScript.resultTreeSetting() + DubboJmeterScript.aggregateReportSetting()+
                         DubboJmeterScript.responseAssertSetting(script.getAssertText())+DubboJmeterScript.preProccessorSetting()+
                         DubboJmeterScript.backendListenerSetting()+DubboJmeterScript.endSetting();
@@ -502,7 +261,7 @@ public class CommonController {
                 }
                 log.error("dubbo jmx文件：" + jmxFilePath + "创建失败");
                 history.setStatus("fail");
-                historyMapper.insert(history);
+                historyMapper.insertSelective(history);
                 return new ErrorResponse(CommonConstant.CREATE_JMETER_FILE_FAIL);
             }
             File file = new File(jmxFilePath);
@@ -517,23 +276,8 @@ public class CommonController {
                 }
                 log.error("dubbo jmx文件：" + jmxFilePath + "创建失败");
                 history.setStatus("fail");
-                historyMapper.insert(history);
+                historyMapper.insertSelective(history);
                 return new ErrorResponse(CommonConstant.CREATE_JMETER_FILE_FAIL);
-            }
-            try {
-                modifyBuildFile(scriptName, md5);
-            } catch (Exception e) {
-                log.error("修改构建文件出错：" + e.getMessage());
-                redisService.remove("exec_jmeter_id_" + scriptId);
-                Integer redisExecCount = Integer.parseInt(redisService.get("exec_jmeter_count"));
-                if (redisExecCount > 0){
-                    redisService.set("exec_jmeter_count",String.valueOf(redisExecCount-1));
-                }else {
-                    redisService.set("exec_jmeter_count","0");
-                }
-                history.setStatus("fail");
-                historyMapper.insert(history);
-                return new ErrorResponse(CommonConstant.MODIFY_BUILD_FILE);
             }
             new Thread(new Runnable() {
                 @Override
@@ -543,7 +287,8 @@ public class CommonController {
                         jmeterHtmlFilePath.mkdir();
                     }
                     String cmd = "%s -n -t %s -l %s -e -o %s" ;
-                    cmd = String.format(cmd,jmeterConfig.getJmeterBinPath(),jmeterConfig.getJmxFilePath()+md5+".jmx",jmeterConfig.getJtlFilePath()+md5+".jtl",jmeterHtmlFilePath.getAbsolutePath());
+                    cmd = String.format(cmd,jmeterConfig.getJmeterBinPath(),jmeterConfig.getJmxFilePath()+md5+".jmx",
+                            jmeterConfig.getJtlFilePath()+md5+".jtl",jmeterHtmlFilePath.getAbsolutePath());
                     log.info("执行的命令:"+cmd);
                     String[] listCmd = cmd.split(" ");
                     try {
@@ -567,7 +312,7 @@ public class CommonController {
                             }
                         }
                     } catch (Exception e) {
-                        log.error("执行build文件出错：" + e.getMessage());
+                        log.error("执行shell命令出错：" + e.getMessage());
                         redisService.remove("exec_jmeter_id_" + scriptId);
                         Integer redisExecCount = Integer.parseInt(redisService.get("exec_jmeter_count"));
                         if (redisExecCount > 0){
@@ -582,7 +327,7 @@ public class CommonController {
             }).start();
         }
         history.setStatus("success");
-        historyMapper.insert(history);
+        historyMapper.insertSelective(history);
         return new SuccessResponse(CommonConstant.OP_SUCCESS);
     }
 
