@@ -11,7 +11,7 @@ mybatis:
 
 logging:
   level:
-    com.dubbo.api.dao: DEBUG
+    com.dubbo.api.dao: INFO
 
 pagehelper:
     helperDialect: mysql

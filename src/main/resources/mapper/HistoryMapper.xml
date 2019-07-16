@@ -18,18 +18,18 @@
     ORDER BY create_time DESC
   </select>
 
-  <select id="listHistoryByScriptId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="listHistoryByScriptId" parameterType="java.lang.Integer" resultType="java.util.HashMap">
    select eh.id,eh.script_id as scriptId,eh.create_time as createTime,eh.md5,eh.status,eh.user_name as userName,tmp.history_name as scriptName,tmp.project_name as projectName FROM (SELECT eh.id,eh.script_id,eh.create_time,eh.md5,eh.status,eu.name as user_name FROM entity_history eh JOIN entity_user eu on eh.user_id = eu.id) eh JOIN
   (select es.id,es.name as history_name,ep.name as project_name FROM entity_script es JOIN entity_project ep on es.project_id = ep.id) tmp on eh.script_id=tmp.id
-   where script_id = #{scriptId,jdbcType=INTEGER}
-    ORDER BY create_time DESC
+   where eh.script_id = #{scriptId,jdbcType=INTEGER}
+    ORDER BY eh.create_time DESC
   </select>
 
   <select id="searchScriptByKeyWord" parameterType="java.lang.String" resultType="java.util.HashMap">
     select eh.id,eh.script_id as scriptId,eh.create_time as createTime,eh.md5,eh.status,eh.user_name as userName,tmp.history_name as scriptName,tmp.update_time,tmp.project_name as projectName FROM (SELECT eh.id,eh.script_id,eh.create_time,eh.md5,eh.status,eu.name as user_name FROM entity_history eh JOIN entity_user eu on eh.user_id = eu.id) eh JOIN
     (select es.id,es.update_time,es.name as history_name,ep.name as project_name FROM entity_script es JOIN entity_project ep on es.project_id = ep.id) tmp on eh.script_id=tmp.id
     <where>
-      tmp.history_name LIKE concat(concat('%',${keyword}),'%')
+      history_name LIKE concat(concat('%',#{keyword}),'%')
     </where>
     ORDER BY update_time DESC
   </select>
