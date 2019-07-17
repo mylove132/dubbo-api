@@ -20,7 +20,8 @@ public enum CommonConstant {
     CREATE_JMETER_FILE_FAIL(8003,"创建jmeter文件失败"),
     MODIFY_BUILD_FILE(8006,"修改构建文件失败"),
     REPORT_LOG_NOT_EXIST(8004,"日志文件不存在，可能已删除"),
-    REPORT_GENERATE_FAIL(8005,"日志文件生成失败，请重试");
+    REPORT_GENERATE_FAIL(8005,"日志文件生成失败，请重试"),
+    UPLOAD_FAIL(9001,"上传失败");
 
 
     CommonConstant(Integer code, String message) {

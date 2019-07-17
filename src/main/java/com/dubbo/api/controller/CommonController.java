@@ -17,15 +17,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.quartz.impl.triggers.CronTriggerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.*;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Slf4j
 @RestController
@@ -573,6 +571,28 @@ public class CommonController {
             }
         }
         return "下载失败";
+    }
+
+    @RequestMapping(value = "/upload",method = RequestMethod.POST)
+    public BaseResponse upload(@RequestParam("image") MultipartFile fileUpload){
+        //获取文件名
+        String fileName = fileUpload.getOriginalFilename();
+        //获取文件后缀名
+        String suffixName = fileName.substring(fileName.lastIndexOf("."));
+        //重新生成文件名
+        fileName = UUID.randomUUID()+suffixName;
+        //指定本地文件夹存储图片
+        String filePath = jmeterConfig.getImgSavePath();
+        try {
+            //将图片保存到static文件夹里
+            fileUpload.transferTo(new File(filePath+fileName));
+            Map<String,String> result = new HashMap<>();
+            result.put("url",jmeterConfig.getImgStaticServer()+"/"+fileName);
+            return new SuccessResponse(result);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ErrorResponse(CommonConstant.UPLOAD_FAIL);
+        }
     }
 
     @RequestMapping(method = RequestMethod.GET,value = "/checkCron")

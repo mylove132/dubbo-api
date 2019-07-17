@@ -51,6 +51,24 @@ public class JmeterConfig {
     @Value("${ANT_BIN_PATH}")
     private String antBinPath;
 
+    @Value("${IMG_PATH}")
+    private String imgSavePath;
+
+    @Value("${IMG_STATIC_URL}")
+    private String imgStaticServer;
+
+    @Value("${BUCKET}")
+    private String BUCKET;
+
+    @Value("${ACCESSKEY}")
+    private String ACCESSKEY;
+
+    @Value("${PATH}")
+    private String PATH;
+
+    @Value("${SECRETKEY}")
+    private String SECRETKEY;
+
     public String getJmeterBinPath() {
         return jmeterBinPath;
     }
@@ -145,5 +163,53 @@ public class JmeterConfig {
 
     public void setAntBinPath(String antBinPath) {
         this.antBinPath = antBinPath;
+    }
+
+    public String getImgSavePath() {
+        return imgSavePath;
+    }
+
+    public void setImgSavePath(String imgSavePath) {
+        this.imgSavePath = imgSavePath;
+    }
+
+    public String getImgStaticServer() {
+        return imgStaticServer;
+    }
+
+    public void setImgStaticServer(String imgStaticServer) {
+        this.imgStaticServer = imgStaticServer;
+    }
+
+    public String getBUCKET() {
+        return BUCKET;
+    }
+
+    public void setBUCKET(String BUCKET) {
+        this.BUCKET = BUCKET;
+    }
+
+    public String getACCESSKEY() {
+        return ACCESSKEY;
+    }
+
+    public void setACCESSKEY(String ACCESSKEY) {
+        this.ACCESSKEY = ACCESSKEY;
+    }
+
+    public String getPATH() {
+        return PATH;
+    }
+
+    public void setPATH(String PATH) {
+        this.PATH = PATH;
+    }
+
+    public String getSECRETKEY() {
+        return SECRETKEY;
+    }
+
+    public void setSECRETKEY(String SECRETKEY) {
+        this.SECRETKEY = SECRETKEY;
     }
 }
