@@ -24,6 +24,9 @@ public class JmeterConfig {
     @Value("${JTL_FILE_PATH}")
     private String jtlFilePath;
 
+    @Value("${server.url}")
+    private String serverUrl;
+
 //    @Value("${RUN_LOG_PATH}")
 //    private String runLogPath;
 
@@ -68,6 +71,9 @@ public class JmeterConfig {
 
     @Value("${SECRETKEY}")
     private String SECRETKEY;
+
+    @Value("${server.port}")
+    private String port;
 
     public String getJmeterBinPath() {
         return jmeterBinPath;
@@ -155,5 +161,23 @@ public class JmeterConfig {
 
     public void setJmxFilePath(String jmxFilePath) {
         this.jmxFilePath = jmxFilePath;
+    }
+
+
+
+    public String getServerUrl() {
+        return serverUrl;
+    }
+
+    public void setServerUrl(String serverUrl) {
+        this.serverUrl = serverUrl;
+    }
+
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        this.port = port;
     }
 }
