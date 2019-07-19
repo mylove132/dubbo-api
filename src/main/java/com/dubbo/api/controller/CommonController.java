@@ -54,8 +54,7 @@ public class CommonController {
 
     @Autowired
     private ProjectMapper projectMapper;
-    @Autowired
-    private UserMapper userMapper;
+
     @Autowired
     private HistoryMapper historyMapper;
 
