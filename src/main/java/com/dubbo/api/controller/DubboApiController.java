@@ -36,6 +36,8 @@ public class DubboApiController {
     private ProjectEnvMapper projectEnvMapper;
 
     ZkServiceUtil zkServiceUtil = new ZkServiceUtil();
+
+
     @RequestMapping(value = "/dubboTest", method = RequestMethod.POST)
     public BaseResponse testDubboInterface(@RequestBody DubboEntity entity) {
         log.info("dubbo接口请求参数:"+entity.toString());

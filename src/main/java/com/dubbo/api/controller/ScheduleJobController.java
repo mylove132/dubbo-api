@@ -55,6 +55,7 @@ public class ScheduleJobController {
 	 * @param scheduleJob
 	 * @return
 	 */
+	@AuthPermission(PermissionConstant.VIP)
 	@RequestMapping(value = "/{id}",method = RequestMethod.PUT)
 	@ResponseBody
 	public BaseResponse update(@PathVariable int id, @RequestBody ScheduleJob scheduleJob){
@@ -67,6 +68,7 @@ public class ScheduleJobController {
 	 * @param ids
 	 * @return
 	 */
+	@AuthPermission(PermissionConstant.VIP)
 	@RequestMapping(value = "/batchDel/{ids}",method = RequestMethod.DELETE)
 	@ResponseBody
 	public BaseResponse delete(@PathVariable List<Integer> ids){
@@ -79,6 +81,7 @@ public class ScheduleJobController {
 	 * @param ids
 	 * @return
 	 */
+	@AuthPermission(PermissionConstant.VIP)
 	@RequestMapping(value = "/run/{ids}",method = RequestMethod.GET)
 	@ResponseBody
 	public BaseResponse run(@PathVariable List<Integer> ids){
@@ -91,6 +94,7 @@ public class ScheduleJobController {
 	 * @param ids
 	 * @return
 	 */
+	@AuthPermission(PermissionConstant.VIP)
 	@RequestMapping(value = "/pause/{ids}",method = RequestMethod.GET)
 	@ResponseBody
 	public BaseResponse pause(@PathVariable List<Integer> ids){
@@ -103,6 +107,7 @@ public class ScheduleJobController {
 	 * @param ids
 	 * @return
 	 */
+	@AuthPermission(PermissionConstant.VIP)
 	@RequestMapping(value = "/resume/{ids}",method = RequestMethod.GET)
 	@ResponseBody
 	public BaseResponse resume(@PathVariable List<Integer> ids){

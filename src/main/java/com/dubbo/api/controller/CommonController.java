@@ -4,9 +4,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.dubbo.api.common.bean.*;
 import com.dubbo.api.common.constant.CommonConstant;
+import com.dubbo.api.common.constant.PermissionConstant;
 import com.dubbo.api.common.util.HttpClientUtil;
 import com.dubbo.api.common.util.MD5Util;
 import com.dubbo.api.common.util.XmlUtil;
+import com.dubbo.api.config.AuthPermission;
 import com.dubbo.api.config.JmeterConfig;
 import com.dubbo.api.dao.*;
 import com.dubbo.api.service.RedisService;
@@ -82,6 +84,7 @@ public class CommonController {
     }
 
 
+    @AuthPermission(PermissionConstant.VIP)
     @RequestMapping(value = "/execScript", method = RequestMethod.GET)
     public BaseResponse execJmeterCrontroller(@RequestParam("scriptId") Integer scriptId, @RequestParam("userId") Integer userId) {
         log.info("执行jmeter脚本id:" + scriptId);
@@ -329,20 +332,21 @@ public class CommonController {
         return new SuccessResponse(CommonConstant.OP_SUCCESS);
     }
 
-    private void modifyBuildFile(String resultTitle,String md5){
-        Map<String,String> result = new HashMap<>();
-        result.put("jmeter.home",jmeterConfig.getJmeterPath());
-        result.put("report.title",resultTitle);
-        result.put("jmeter.result.jtl.dir",jmeterConfig.getJtlFilePath());
-        result.put("jmeter.result.html.dir",jmeterConfig.getJmeterHtmlPath());
-        result.put("ReportName",md5);
-        result.put("jmeter.result.html.dir",jmeterConfig.getJmeterHtmlPath());
-        XmlUtil.modifyNodeXml(jmeterConfig.getJmeterBuildFilePath(),result);
-        Map<String,String> selectMap = new HashMap<>();
-        selectMap.put("dir",jmeterConfig.getJmxFilePath());
-        selectMap.put("includes",md5+".jmx");
-        XmlUtil.modifySelectNodeXml(jmeterConfig.getJmeterBuildFilePath(),selectMap);
-    }
+//    private void modifyBuildFile(String resultTitle,String md5){
+//        Map<String,String> result = new HashMap<>();
+//        result.put("jmeter.home",jmeterConfig.getJmeterPath());
+//        result.put("report.title",resultTitle);
+//        result.put("jmeter.result.jtl.dir",jmeterConfig.getJtlFilePath());
+//        result.put("jmeter.result.html.dir",jmeterConfig.getJmeterHtmlPath());
+//        result.put("ReportName",md5);
+//        result.put("jmeter.result.html.dir",jmeterConfig.getJmeterHtmlPath());
+//        XmlUtil.modifyNodeXml(jmeterConfig.getJmeterBuildFilePath(),result);
+//        Map<String,String> selectMap = new HashMap<>();
+//        selectMap.put("dir",jmeterConfig.getJmxFilePath());
+//        selectMap.put("includes",md5+".jmx");
+//        XmlUtil.modifySelectNodeXml(jmeterConfig.getJmeterBuildFilePath(),selectMap);
+//    }
+
 
     @RequestMapping(value = "/testRequest", method = RequestMethod.GET)
     public BaseResponse testRequest(@Valid TestRequest testRequest) {
@@ -610,66 +614,66 @@ public class CommonController {
         return new SuccessResponse(flag);
     }
 
-    @RequestMapping(value = "generateReport",method = RequestMethod.GET)
-    public BaseResponse generateReportCrontroller(HttpServletRequest request) {
-        log.info("请求生成日志文件");
-        Integer id = Integer.parseInt(request.getParameter("id"));
-        String md5 = request.getParameter("md5");
-        History history = historyMapper.selectByPrimaryKey(id);
-        if (history == null){
-            return new ErrorResponse(6003,"需生成的日志文件不存在",null);
-        }
-        if (!history.getMd5().equals(request.getParameter("md5"))){
-            return new ErrorResponse(6003,"需生成的日志文件不存在",null);
-        }
-        String csvContent = "";
-        String rtotPath = jmeterConfig.getReportImgPath()+md5+"_rtot.png";
-        String tpsPath = jmeterConfig.getReportImgPath()+md5+"_tps.png";
-        String csvPath = jmeterConfig.getReportCsvPath()+md5+".csv";
-        boolean rtotFlag = timerTaskNoSleep(rtotPath);
-        boolean tpsFlag = timerTaskNoSleep(tpsPath);
-        boolean csvFlag = timerTaskNoSleep(csvPath);
-        if (rtotFlag && tpsFlag && csvFlag){
-            Map<String,Object> resultMap = new HashMap<>();
-            resultMap.put("tps",jmeterConfig.getStaticServer()+md5+"_tps.png");
-            resultMap.put("rtot",jmeterConfig.getStaticServer()+md5+"_rtot.png");
-            csvContent = readToString(csvPath);
-            resultMap.put("aggregate",csvContent);
-            return new SuccessResponse(resultMap);
-        }
-        try {
-            String cmd = "sh %s %s";
-            cmd = String.format(cmd, jmeterConfig.getGenerateScriptPath(),md5);
-            String[] listCmd = cmd.split(" ");
-            Process process = Runtime.getRuntime().exec(listCmd);
-            process.waitFor();
-            SequenceInputStream sis = new SequenceInputStream(process.getInputStream(), process.getErrorStream());
-            BufferedReader br = new BufferedReader(new InputStreamReader(sis, "utf-8"));
-            String line;
-            while ((line = br.readLine()) != null) {
-                log.info(line);
-            }
-            if (br != null) {
-                log.info("命令执行完成");
-                rtotFlag = timerTask(rtotPath);
-                tpsFlag = timerTask(tpsPath);
-                csvFlag = timerTask(csvPath);
-                }
-                if (!(rtotFlag && tpsFlag && csvFlag)){
-                    return new ErrorResponse(CommonConstant.REPORT_GENERATE_FAIL);
-                }
-                csvContent = readToString(csvPath);
-                br.close();
-        }catch (Exception e){
-            return new ErrorResponse(CommonConstant.REPORT_GENERATE_FAIL);
-        }
-
-        Map<String,Object> resultMap = new HashMap<>();
-        resultMap.put("tps",jmeterConfig.getStaticServer()+md5+"_tps.png");
-        resultMap.put("rtot",jmeterConfig.getStaticServer()+md5+"_rtot.png");
-        resultMap.put("aggregate",csvContent);
-        return new SuccessResponse(resultMap);
-    }
+//    @RequestMapping(value = "generateReport",method = RequestMethod.GET)
+//    public BaseResponse generateReportCrontroller(HttpServletRequest request) {
+//        log.info("请求生成日志文件");
+//        Integer id = Integer.parseInt(request.getParameter("id"));
+//        String md5 = request.getParameter("md5");
+//        History history = historyMapper.selectByPrimaryKey(id);
+//        if (history == null){
+//            return new ErrorResponse(6003,"需生成的日志文件不存在",null);
+//        }
+//        if (!history.getMd5().equals(request.getParameter("md5"))){
+//            return new ErrorResponse(6003,"需生成的日志文件不存在",null);
+//        }
+//        String csvContent = "";
+//        String rtotPath = jmeterConfig.getReportImgPath()+md5+"_rtot.png";
+//        String tpsPath = jmeterConfig.getReportImgPath()+md5+"_tps.png";
+//        String csvPath = jmeterConfig.getReportCsvPath()+md5+".csv";
+//        boolean rtotFlag = timerTaskNoSleep(rtotPath);
+//        boolean tpsFlag = timerTaskNoSleep(tpsPath);
+//        boolean csvFlag = timerTaskNoSleep(csvPath);
+//        if (rtotFlag && tpsFlag && csvFlag){
+//            Map<String,Object> resultMap = new HashMap<>();
+//            resultMap.put("tps",jmeterConfig.getStaticServer()+md5+"_tps.png");
+//            resultMap.put("rtot",jmeterConfig.getStaticServer()+md5+"_rtot.png");
+//            csvContent = readToString(csvPath);
+//            resultMap.put("aggregate",csvContent);
+//            return new SuccessResponse(resultMap);
+//        }
+//        try {
+//            String cmd = "sh %s %s";
+//            cmd = String.format(cmd, jmeterConfig.getGenerateScriptPath(),md5);
+//            String[] listCmd = cmd.split(" ");
+//            Process process = Runtime.getRuntime().exec(listCmd);
+//            process.waitFor();
+//            SequenceInputStream sis = new SequenceInputStream(process.getInputStream(), process.getErrorStream());
+//            BufferedReader br = new BufferedReader(new InputStreamReader(sis, "utf-8"));
+//            String line;
+//            while ((line = br.readLine()) != null) {
+//                log.info(line);
+//            }
+//            if (br != null) {
+//                log.info("命令执行完成");
+//                rtotFlag = timerTask(rtotPath);
+//                tpsFlag = timerTask(tpsPath);
+//                csvFlag = timerTask(csvPath);
+//                }
+//                if (!(rtotFlag && tpsFlag && csvFlag)){
+//                    return new ErrorResponse(CommonConstant.REPORT_GENERATE_FAIL);
+//                }
+//                csvContent = readToString(csvPath);
+//                br.close();
+//        }catch (Exception e){
+//            return new ErrorResponse(CommonConstant.REPORT_GENERATE_FAIL);
+//        }
+//
+//        Map<String,Object> resultMap = new HashMap<>();
+//        resultMap.put("tps",jmeterConfig.getStaticServer()+md5+"_tps.png");
+//        resultMap.put("rtot",jmeterConfig.getStaticServer()+md5+"_rtot.png");
+//        resultMap.put("aggregate",csvContent);
+//        return new SuccessResponse(resultMap);
+//    }
 
     public static boolean timerTask(String csvPath){
         boolean csvFlag = false;
