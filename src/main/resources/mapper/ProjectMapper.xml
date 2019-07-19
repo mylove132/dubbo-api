@@ -31,7 +31,7 @@
     (select ep.id,ee.id as envId, ee.name as envName FROM entity_project ep join entity_env ee on ep.env=ee.id) tm2 on tm1.id=tm2.id) tm3 on ep.id=tm3.id) tm4 JOIN entity_user eu ON tm4.user_id = eu.id
     <where>
       <if test="search != null">
-        projectName LIKE concat(concat('%',#{search}),'%')
+        tm4.name LIKE concat(concat('%',#{search}),'%')
       </if>
     </where>
     ORDER BY update_time DESC
