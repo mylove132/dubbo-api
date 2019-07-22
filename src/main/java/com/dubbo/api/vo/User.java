@@ -1,8 +1,9 @@
 package com.dubbo.api.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
     private Integer id;
 
     private String name;
@@ -61,5 +62,17 @@ public class User {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", roleId=" + roleId +
+                ", createTime=" + createTime +
+                '}';
     }
 }

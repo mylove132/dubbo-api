@@ -7,6 +7,7 @@ public enum CommonConstant {
 
     OP_SUCCESS(0, "operation.success"),
     OP_FAILED(-1, "operation.failed"),
+    USER_EXIST(4005,"邮箱已存在"),
     USER_PASSWORD_NULL(4000,"用户名或密码为空"),
     USER_PASSWORD_ERROR(4001,"用户名密码错误"),
     ADD_TOKEN_FAILED(4003,"添加token失败"),

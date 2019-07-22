@@ -39,15 +39,23 @@ public class UserController {
     @Autowired
     private TokenMapper tokenMapper;
 
-    @AuthPermission(PermissionConstant.ADMINISTRATOR)
     @RequestMapping(value = "",method = RequestMethod.POST)
-    public BaseResponse addUserController(@RequestBody User user){
+    public BaseResponse addUserController(User user){
+        System.out.println(user.getName());
+        System.out.println(user.getPassword());
         log.info("添加用户信息："+user.toString());
+        if (userService.getUserByEmail(user.getEmail()) != null){
+            return new ErrorResponse(CommonConstant.USER_EXIST);
+        }
+        if (user.getRoleId() == null){
+            user.setRoleId(1);
+        }
         if (user.getCreateTime() == null){
             user.setCreateTime(new Date());
         }
         try {
             log.info("添加用户成功");
+            log.info("添加用户信息："+user.toString());
             return new SuccessResponse(userService.addUser(user));
         }catch (UnknowException e){
             throw new UnknowException("addUserController",e.getMessage());
@@ -56,7 +64,7 @@ public class UserController {
 
     @AuthPermission(PermissionConstant.ADMINISTRATOR)
     @RequestMapping(value = "",method = RequestMethod.PUT)
-    public BaseResponse updateUserController(@RequestBody User user){
+    public BaseResponse updateUserController(User user){
         log.info("修改用户信息："+user.toString());
         if (user.getCreateTime() == null){
             user.setCreateTime(new Date());
