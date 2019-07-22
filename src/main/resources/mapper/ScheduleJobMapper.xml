@@ -169,11 +169,11 @@
 		from schedule_job
 	</select>
 	<select id="selectByParams" resultType="java.util.HashMap">
-		select sj.id,sj.cron_expression as cron,sj.`status`,DATE_FORMAT(sj.crt_time,'%Y-%m-%d %H:%i:%s') as createTime,sj.remark as description,tm2.typeId,tm2.userName,tm2.projectName,tm2.scriptName,tm2.scriptId ,tm2.projectId FROM schedule_job sj join
+		SELECT tm3.id,tm3.cron,tm3.status,tm3.createTime,tm3.description,tm3.typeId,tm3.userName,tm3.projectName,tm3.scriptName,tm3.scriptId,tm3.projectId,eu.`name` as createName FROM
+(select sj.id,sj.user_id,sj.cron_expression as cron,sj.`status`,DATE_FORMAT(sj.crt_time,'%Y-%m-%d %H:%i:%s') as createTime,sj.remark as description,tm2.typeId,tm2.userName,tm2.projectName,tm2.scriptName,tm2.scriptId ,tm2.projectId FROM schedule_job sj join
 (select tm1.scriptId,tm1.scriptName,tm1.userName,tm1.projectName,ep.type as typeId,ep.id as projectId FROM
 (SELECT es.id as scriptId,es.`name` as scriptName,eu.name as userName,es.name as projectName,es.project_id FROM
-			 entity_script es join entity_user eu on es.user_id=eu.id) tm1 join  entity_project ep on tm1.project_id=ep.id) tm2 on tm2.scriptId=sj.script_id
-
-		ORDER BY crt_time DESC
+			 entity_script es join entity_user eu on es.user_id=eu.id) tm1 join  entity_project ep on tm1.project_id=ep.id) tm2 on tm2.scriptId=sj.script_id) tm3 JOIN entity_user eu on tm3.user_id=eu.id;
+		ORDER BY createTime DESC
 	</select>
 </mapper>
