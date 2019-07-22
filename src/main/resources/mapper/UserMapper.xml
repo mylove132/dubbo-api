@@ -24,6 +24,12 @@
     <include refid="Base_Column_List" />
     from entity_user
   </select>
+  <select id="selectByAccount" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from entity_user
+    where name = #{account,jdbcType=VARCHAR}
+  </select>
   <select id="selectByEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

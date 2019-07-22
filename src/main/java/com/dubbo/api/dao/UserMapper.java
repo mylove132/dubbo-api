@@ -25,4 +25,6 @@ public interface UserMapper {
     List<User> getUserList();
 
     User getUserByEmailAndPassword(@Param("email") String email, @Param("password") String password);
+
+    User selectByAccount(@Param("account") String account);
 }

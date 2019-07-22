@@ -21,6 +21,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
+
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @Author: liuzhanhui
  * @Decription:
@@ -94,17 +97,23 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public BaseResponse login(String email, String password){
-        log.info("请求的用户名："+email+",密码："+password);
-        if (email == null || password == null || StringUtils.isBlank(email) || StringUtils.isBlank(password)){
-            return new ErrorResponse(CommonConstant.USER_PASSWORD_NULL);
+    public BaseResponse login(HttpServletRequest request){
+        String account = request.getParameter("account");
+        String password = request.getParameter("passwd");
+        log.info("请求的用户名："+account+",密码："+password);
+        User u1 = userService.getUserByAccount(account);
+        User user = new User();
+        if (u1 == null){
+            user.setRoleId(1);
+            user.setCreateTime(new Date());
+            user.setEmail(account+"@okay.cn");
+            user.setPassword("123456");
+            user.setName(account);
+            userService.addUser(user);
+            user = userService.getUserByAccount(account);
+        }else {
+            user = u1;
         }
-        User user = userService.getUserByEmailAndPassword(email, password);
-        if (user == null){
-            log.info("用户不存在");
-            return new ErrorResponse(CommonConstant.USER_PASSWORD_ERROR);
-        }
-        log.info("用户："+user.getName()+"登录成功");
         String md5 = MD5Util.encrypt(user.getName());
         Token token = tokenMapper.selectByUserId(user.getId());
         if (token == null){

@@ -22,6 +22,8 @@ public interface IUserService {
 
     User getUserByEmail(String email);
 
+    User getUserByAccount(String account);
+
     User getUserByEmailAndPassword(String email, String password);
 
     int updateUser(User user);
