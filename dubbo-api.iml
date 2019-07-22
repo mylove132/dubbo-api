@@ -24,6 +24,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/conf" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources/conf" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources/profile/dev" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources/profile/prd" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
