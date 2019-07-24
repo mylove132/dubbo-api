@@ -27,4 +27,8 @@ public interface UserMapper {
     User getUserByEmailAndPassword(@Param("email") String email, @Param("password") String password);
 
     User selectByAccount(@Param("account") String account);
+
+    List usersWithRole();
+
+    List searchUsersWithRole(@Param("keyword") String keyword);
 }

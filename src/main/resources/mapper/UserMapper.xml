@@ -19,6 +19,19 @@
     where email = #{email,jdbcType=VARCHAR}
     AND password = #{password,jdbcType=VARCHAR}
   </select>
+
+  <select id="usersWithRole"  resultType="java.util.HashMap">
+    select eu.id, eu.name as userName,er.id as roleId,er.role FROM entity_user eu join entity_role er on eu.role_id=er.id
+  </select>
+  <select id="searchUsersWithRole" parameterType="java.lang.String" resultType="java.util.HashMap">
+    select eu.id, eu.name as userName,er.id as roleId,er.role FROM entity_user eu join entity_role er on eu.role_id=er.id
+    <where>
+      <if test="keyword != null">
+        eu.name LIKE concat(concat('%',#{keyword}),'%')
+      </if>
+    </where>
+  </select>
+
   <select id="getUserList" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

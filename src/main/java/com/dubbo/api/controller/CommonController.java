@@ -13,6 +13,7 @@ import com.dubbo.api.config.JmeterConfig;
 import com.dubbo.api.dao.*;
 import com.dubbo.api.service.RedisService;
 import com.dubbo.api.vo.*;
+import com.dubbo.api.vo.request.UserRoles;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -44,6 +45,12 @@ public class CommonController {
     private ProjectEnvMapper projectEnvMapper;
 
     @Autowired
+    private RoleMapper roleMapper;
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
     private ProtocolMapper protocolMapper;
 
     @Autowired
@@ -63,11 +70,54 @@ public class CommonController {
         log.info("获取平台列表");
         return new SuccessResponse(projectTypeMapper.projectTypeList());
     }
+    @AuthPermission(PermissionConstant.VIP)
+    @RequestMapping(value = "/platform", method = RequestMethod.POST)
+    public BaseResponse addPlatformController(ProjectType projectType) {
+        log.info("添加平台列表");
+        int result = projectTypeMapper.insertSelective(projectType);
+        return new SuccessResponse(result);
+    }
+    @AuthPermission(PermissionConstant.VIP)
+    @RequestMapping(value = "/platform/{projectTypeId}", method = RequestMethod.DELETE)
+    public BaseResponse delPlatformController(@PathVariable Integer projectTypeId) {
+        log.info("删除平台列表："+projectTypeId);
+        int result = projectTypeMapper.deleteByPrimaryKey(projectTypeId);
+        return new SuccessResponse(result);
+    }
+    @AuthPermission(PermissionConstant.VIP)
+    @RequestMapping(value = "/platform", method = RequestMethod.PUT)
+    public BaseResponse editPlatformController(ProjectType projectType) {
+        log.info("更新平台列表");
+        int result = projectTypeMapper.updateByPrimaryKey(projectType);
+        return new SuccessResponse(result);
+    }
 
     @RequestMapping(value = "/env", method = RequestMethod.GET)
     public BaseResponse envListController() {
         log.info("获取环境列表");
         return new SuccessResponse(projectEnvMapper.listEnv());
+    }
+
+    @AuthPermission(PermissionConstant.VIP)
+    @RequestMapping(value = "/env", method = RequestMethod.POST)
+    public BaseResponse addEnvController(ProjectEnv projectEnv) {
+        log.info("添加环境列表");
+        int result = projectEnvMapper.insertSelective(projectEnv);
+        return new SuccessResponse(result);
+    }
+    @AuthPermission(PermissionConstant.VIP)
+    @RequestMapping(value = "/env/{projectEnvId}", method = RequestMethod.DELETE)
+    public BaseResponse delEnvController(@PathVariable Integer projectEnvId) {
+        log.info("删除环境列表："+projectEnvId);
+        int result = projectEnvMapper.deleteByPrimaryKey(projectEnvId);
+        return new SuccessResponse(result);
+    }
+    @AuthPermission(PermissionConstant.VIP)
+    @RequestMapping(value = "/env", method = RequestMethod.PUT)
+    public BaseResponse delEnvController(ProjectEnv projectEnv) {
+        log.info("更新环境列表");
+        int result = projectEnvMapper.updateByPrimaryKey(projectEnv);
+        return new SuccessResponse(result);
     }
 
     @RequestMapping(value = "/protocol", method = RequestMethod.GET)
@@ -80,6 +130,68 @@ public class CommonController {
     public BaseResponse requestTypeListController() {
         log.info("获取请求方式列表");
         return new SuccessResponse(requestTypeMapper.requestTypeList());
+    }
+
+    @AuthPermission(PermissionConstant.VIP)
+    @RequestMapping(value = "/reqeustType", method = RequestMethod.POST)
+    public BaseResponse addRequestTypeController(RequestType requestType) {
+        log.info("添加请求方式");
+        int result = requestTypeMapper.insertSelective(requestType);
+        return new SuccessResponse(result);
+    }
+
+    @AuthPermission(PermissionConstant.VIP)
+    @RequestMapping(value = "/reqeustType", method = RequestMethod.PUT)
+    public BaseResponse editRequestTypeController(RequestType requestType) {
+        log.info("更新请求方式");
+        int result = requestTypeMapper.updateByPrimaryKey(requestType);
+        return new SuccessResponse(result);
+    }
+
+    @AuthPermission(PermissionConstant.VIP)
+    @RequestMapping(value = "/reqeustType/{requestTypeId}", method = RequestMethod.DELETE)
+    public BaseResponse delRequestTypeController(@PathVariable Integer requestTypeId) {
+        log.info("删除请求方式");
+        int result = requestTypeMapper.deleteByPrimaryKey(requestTypeId);
+        return new SuccessResponse(result);
+    }
+
+    @RequestMapping(value = "/roleList", method = RequestMethod.GET)
+    public BaseResponse rolesListController() {
+        log.info("获取权限列表");
+        return new SuccessResponse(roleMapper.listRole());
+    }
+
+    @RequestMapping(value = "/roles", method = RequestMethod.GET)
+    public BaseResponse userRoleListController() {
+        log.info("获取权限用户列表");
+        return new SuccessResponse(userMapper.usersWithRole());
+    }
+
+
+    @RequestMapping(value = "/roles/{userId}", method = RequestMethod.GET)
+    public BaseResponse getRoleByUserIdController(@PathVariable Integer userId) {
+        log.info("获取权限用户列表");
+        User user = userMapper.selectByPrimaryKey(userId);
+        return new SuccessResponse(user.getRoleId());
+    }
+
+    @RequestMapping(value = "/roles/update/{userId}/{roleId}", method = RequestMethod.GET)
+    public BaseResponse editRoleController(@PathVariable("userId") Integer userId,@PathVariable("roleId") Integer roleId) {
+        log.info("修改用户权限");
+        log.info("请求实体:"+userId+roleId);
+        User user = userMapper.selectByPrimaryKey(userId);
+        user.setRoleId(roleId);
+        Integer result = userMapper.updateByPrimaryKey(user);
+        return new SuccessResponse(result);
+    }
+
+    @RequestMapping(value = "/roles/search", method = RequestMethod.GET)
+    public BaseResponse searchRoleController(@RequestParam("keyword") String keyword) {
+        log.info("修改用户权限");
+        log.info("关键字:"+keyword);
+        List ls = userMapper.searchUsersWithRole(keyword);
+        return new SuccessResponse(ls);
     }
 
 
