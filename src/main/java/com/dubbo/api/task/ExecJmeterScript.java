@@ -315,10 +315,5 @@ public class ExecJmeterScript {
         return fileContent;
     }
 
-    public static void main(String[] args) {
-        String url = "http://127.0.0.1:8901/api/common/execScript?scriptId="+30+"&userId="+1;
-        System.out.println(url);
-        String result = HttpClientUtil.doGet(url);
-        System.out.println(result);
-    }
+
 }

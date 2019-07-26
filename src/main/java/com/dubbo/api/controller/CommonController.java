@@ -5,10 +5,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.dubbo.api.common.bean.*;
 import com.dubbo.api.common.constant.CommonConstant;
 import com.dubbo.api.common.constant.PermissionConstant;
-import com.dubbo.api.common.util.HttpClientUtil;
 import com.dubbo.api.common.util.MD5Util;
 import com.dubbo.api.common.util.XmlUtil;
 import com.dubbo.api.config.AuthPermission;
+import com.dubbo.api.config.HttpClientUtil;
 import com.dubbo.api.config.JmeterConfig;
 import com.dubbo.api.dao.*;
 import com.dubbo.api.service.RedisService;
@@ -17,6 +17,8 @@ import com.dubbo.api.vo.request.UserRoles;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.quartz.impl.triggers.CronTriggerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.*;
+import java.net.URISyntaxException;
 import java.util.*;
 
 @Slf4j
@@ -459,8 +462,8 @@ public class CommonController {
 //    }
 
 
-    @RequestMapping(value = "/testRequest", method = RequestMethod.GET)
-    public BaseResponse testRequest(@Valid TestRequest testRequest) {
+    @RequestMapping(value = "/testRequest", method = RequestMethod.POST)
+    public BaseResponse testRequest(@Valid TestRequest testRequest) throws URISyntaxException {
         log.info("测试接口请求参数：" + testRequest.toString());
         String headers = testRequest.getHeader();
         String cookies = testRequest.getCookie();
@@ -484,9 +487,9 @@ public class CommonController {
         }
 
 
-        Map<String, String> formMap = new HashMap<>();
+        Map<String, String> headerMap = new HashMap<>();
         Map<String, String> cookieMap = new HashMap<>();
-        Map<String, String> paramMap = new HashMap<>();
+        List<NameValuePair> paramMap = new ArrayList<>();
         String jsonResult = "";
 
         if (StringUtils.isNotBlank(headers)) {
@@ -496,7 +499,7 @@ public class CommonController {
                     Map<String, String> js = (Map<String, String>) json.get(i);
                     String headerKey = js.get("headerKey");
                     String headerValue = js.get("headerValue");
-                    formMap.put(headerKey, headerValue);
+                    headerMap.put(headerKey, headerValue);
                 }
             } else {
                 headers = null;
@@ -524,7 +527,8 @@ public class CommonController {
                     Map<String, String> js = (Map<String, String>) json.get(i);
                     String paramskey = js.get("paramskey");
                     String paramsvalue = js.get("paramsvalue");
-                    paramMap.put(paramskey, paramsvalue);
+                    NameValuePair np = new BasicNameValuePair(paramskey,paramsvalue);
+                    paramMap.add(np);
                 }
             }
         }
@@ -533,19 +537,20 @@ public class CommonController {
             case "HTTP":
                 switch (requestTypeName.toUpperCase()) {
                     case "GET":
-                        result = HttpClientUtil.doGet(formMap, cookieMap, timeOut, url, paramMap);
+                        result = HttpClientUtil.getRequest(headerMap, cookieMap, url,timeOut, paramMap);
                         break;
                     case "POST":
-                        if (MapUtils.isNotEmpty(paramMap) && paramMap != null) {
-                            result = HttpClientUtil.doPost(formMap, cookieMap, timeOut, url, paramMap);
+                        if (paramMap != null && paramMap.size()> 0) {
+                            result = HttpClientUtil.postForm(url,paramMap,headerMap, cookieMap, timeOut);
                         } else if (StringUtils.isNoneBlank(params)) {
-                            result = HttpClientUtil.doPostJson(formMap, cookieMap, timeOut, url, params);
+                            log.info("json格式请求接口:"+params);
+                            result = HttpClientUtil.postJSON(url,params,headerMap, cookieMap, timeOut);
                         } else {
-                            result = HttpClientUtil.doPost(formMap, cookieMap, timeOut, url, paramMap);
+                            result = HttpClientUtil.postForm(url,paramMap,headerMap, cookieMap, timeOut);
                         }
                         break;
                     default:
-                        result = HttpClientUtil.doGet(formMap, cookieMap, timeOut, url, paramMap);
+                        result = HttpClientUtil.getRequest(headerMap, cookieMap, url,timeOut, paramMap);
                         break;
 
                 }

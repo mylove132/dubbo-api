@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2d5aad6e-fe86-43cb-8479-2e708b805cf8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/dubbo/api/vo/request/UserRoles.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/dubbo/api/config/HttpClientUtil.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_5.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_6.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_5.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dubbo-api.iml" afterPath="$PROJECT_DIR$/dubbo-api.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dubbo/api/common/util/HttpClientUtil.java" afterPath="$PROJECT_DIR$/src/main/java/com/dubbo/api/common/util/HttpClientUtil.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dubbo/api/controller/CommonController.java" afterPath="$PROJECT_DIR$/src/main/java/com/dubbo/api/controller/CommonController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dubbo/api/dao/RoleMapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/dubbo/api/dao/RoleMapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dubbo/api/dao/UserMapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/dubbo/api/dao/UserMapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/RoleMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/RoleMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dubbo/api/task/ExecJmeterScript.java" afterPath="$PROJECT_DIR$/src/main/java/com/dubbo/api/task/ExecJmeterScript.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -24,29 +26,23 @@
       <file leaf-file-name="CommonController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/dubbo/api/controller/CommonController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="153" column="27" lean-forward="true" selection-start-line="153" selection-start-column="27" selection-end-line="153" selection-end-column="27" />
-              <folding />
+            <state relative-caret-position="241">
+              <caret line="546" column="60" lean-forward="false" selection-start-line="546" selection-start-column="52" selection-end-line="546" selection-end-column="60" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProjectType.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/dubbo/api/vo/ProjectType.java">
+      <file leaf-file-name="HttpClientUtil.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/dubbo/api/config/HttpClientUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProjectEnv.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/dubbo/api/vo/ProjectEnv.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="23" />
-              <folding />
+            <state relative-caret-position="-226">
+              <caret line="88" column="40" lean-forward="false" selection-start-line="88" selection-start-column="40" selection-end-line="88" selection-end-column="40" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -63,8 +59,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>listScript</find>
-      <find>filterScriptListByUserIdAndProtocolIdService</find>
       <find>filterScriptListByProtocolId</find>
       <find>filterScriptListByProjectId</find>
       <find>searchScriptWithKeyWordByPage</find>
@@ -93,6 +87,8 @@
       <find>commonController</find>
       <find>searchUsersWithRole</find>
       <find>sear</find>
+      <find>testRequest</find>
+      <find>postRequest</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/main/java/com/dubbo/api/vo</dir>
@@ -109,8 +105,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/dubbo/api/service/IProjectService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/dubbo/api/service/impl/ProjectService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dubbo/api/dao/ProjectMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dubbo/api/controller/ProjectController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dubbo/api/service/IScriptService.java" />
@@ -144,10 +138,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/dubbo/api/controller/ArticleCrontroller.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dubbo/api/controller/DubboApiController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dubbo/api/controller/ScheduleJobController.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/ProjectMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/dubbo/api/config/JmeterConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/dubbo/api/task/ExecJmeterScript.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dubbo/api/vo/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dubbo/api/common/constant/CommonConstant.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/ScheduleJobMapper.xml" />
@@ -159,7 +151,11 @@
         <option value="$PROJECT_DIR$/src/main/java/com/dubbo/api/vo/request/UserRoles.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mapper/UserMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/dubbo/api/dao/UserMapper.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dubbo/api/config/HttpClientUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dubbo/api/common/util/HttpClientUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/dubbo/api/controller/CommonController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dubbo/api/task/ExecJmeterScript.java" />
       </list>
     </option>
   </component>
@@ -207,9 +203,9 @@
     <option name="vmOptions" value="-DarchetypeCatalog=local" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1493" />
-    <option name="y" value="-1013" />
-    <option name="width" value="2001" />
+    <option name="x" value="1471" />
+    <option name="y" value="-1031" />
+    <option name="width" value="1513" />
     <option name="height" value="859" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -381,6 +377,34 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dubbo-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dubbo-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dubbo-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dubbo-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dubbo-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dubbo-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -390,34 +414,18 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="dubbo-api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dubbo-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="mapper" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="dubbo-api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="dubbo-api" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="profile" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
       <pane id="Scratches" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="nodejs_interpreter_path" value="node" />
-    <property name="settings.editor.selected.configurable" value="spring.boot" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -433,8 +441,12 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/profile/dev" />
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src/main/resources/profile/prd" />
+      <recent name="$PROJECT_DIR$/src/main" />
+      <recent name="$PROJECT_DIR$/target/conf" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.dubbo.api.controller" />
@@ -443,12 +455,8 @@
       <recent name="com.dubbo.api.project.config" />
       <recent name="com.dubbo.api.project.controller" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/profile/dev" />
-      <recent name="$PROJECT_DIR$/src/main/resources" />
-      <recent name="$PROJECT_DIR$/src/main/resources/profile/prd" />
-      <recent name="$PROJECT_DIR$/src/main" />
-      <recent name="$PROJECT_DIR$/target/conf" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -681,11 +689,12 @@
       <workItem from="1563327437463" duration="20806000" />
       <workItem from="1563500487855" duration="11086000" />
       <workItem from="1563761121292" duration="30590000" />
+      <workItem from="1564127358615" duration="4594000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="465914000" />
+    <option name="totallyTimeSpent" value="470508000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -697,8 +706,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1493" y="-1013" width="2001" height="859" extended-state="0" />
-    <editor active="true" />
+    <frame x="1471" y="-1031" width="1513" height="859" extended-state="0" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37055215" sideWeight="0.51148546" order="7" side_tool="true" content_ui="tabs" />
@@ -711,16 +719,16 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48588958" sideWeight="0.4911479" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32920793" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31752872" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48560208" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32979977" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.46989527" sideWeight="0.4915803" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908162" sideWeight="0.49804142" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42408377" sideWeight="0.4915803" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36925286" sideWeight="0.48851454" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1898928" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24473147" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -799,72 +807,11 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dubbo/api/common/util/QiniuUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="63" column="17" lean-forward="true" selection-start-line="63" selection-start-column="17" selection-end-line="63" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dubbo/api/service/IArticleService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="1" lean-forward="true" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dubbo/api/service/impl/HistoryServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="20" column="48" lean-forward="true" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dubbo/api/service/impl/ArticleService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="24" column="48" lean-forward="false" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/HistoryMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="14" column="25" lean-forward="false" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="25" />
-          <folding>
-            <marker date="1563357959000" expanded="true" signature="840:1395" ph="select eh.id... id" />
-            <marker date="1563357959000" expanded="true" signature="1052:1195" ph="SELECT eh.id... entity_history" />
-            <marker date="1563357959000" expanded="true" signature="1208:1338" ph="select es.id... entity_script" />
-            <marker date="1563357959000" expanded="true" signature="1366:1395" ph="select eh.id... id" />
-            <marker date="1563357959000" expanded="true" signature="1515:2122" ph="select eh.id... id" />
-            <marker date="1563357959000" expanded="true" signature="1726:1869" ph="SELECT eh.id... entity_history" />
-            <marker date="1563357959000" expanded="true" signature="1882:2012" ph="select es.id... entity_script" />
-            <marker date="1563357959000" expanded="true" signature="2242:2913" ph="select eh.id... id" />
-            <marker date="1563357959000" expanded="true" signature="2469:2612" ph="SELECT eh.id... entity_history" />
-            <marker date="1563357959000" expanded="true" signature="2627:2772" ph="select es.id... entity_script" />
-            <marker date="1563357959000" expanded="true" signature="3026:3136" ph="select from entity_history" />
-            <marker date="1563357959000" expanded="true" signature="3222:3286" ph="delete from " />
-            <marker date="1563357959000" expanded="true" signature="3367:3653" ph="insert into entity_history... " />
-            <marker date="1563357959000" expanded="true" signature="4861:5405" ph="update entit... " />
-            <marker date="1563357959000" expanded="true" signature="5498:5784" ph="update entit... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/ArticleMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-94">
           <caret line="22" column="27" lean-forward="false" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
-          <folding>
-            <marker date="1563357971000" expanded="true" signature="1104:1627" ph="SELECT tm1.i... id" />
-            <marker date="1563357971000" expanded="true" signature="1248:1544" ph="select ea.id... entity_article" />
-            <marker date="1563357971000" expanded="true" signature="1744:1901" ph="select , fro... " />
-            <marker date="1563357971000" expanded="true" signature="1987:2051" ph="delete from " />
-            <marker date="1563357971000" expanded="true" signature="2132:2479" ph="insert into entity_article... " />
-            <marker date="1563357971000" expanded="true" signature="3872:4540" ph="update entit... " />
-            <marker date="1563357971000" expanded="true" signature="4642:4996" ph="update entit... " />
-            <marker date="1563357971000" expanded="true" signature="5089:5394" ph="update entit... " />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -872,14 +819,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="24" lean-forward="false" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-          <folding>
-            <marker date="1563358388000" expanded="true" signature="515:587" ph="select from entity_category" />
-            <marker date="1563358388000" expanded="true" signature="699:810" ph="select from entity_category" />
-            <marker date="1563358388000" expanded="true" signature="896:961" ph="delete from " />
-            <marker date="1563358388000" expanded="true" signature="1043:1143" ph="insert into entity_category... " />
-            <marker date="1563358388000" expanded="true" signature="1761:1926" ph="update entit... " />
-            <marker date="1563358388000" expanded="true" signature="2020:2120" ph="update entit... " />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -958,19 +898,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="210" column="49" lean-forward="true" selection-start-line="210" selection-start-column="49" selection-end-line="210" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/profile/prd/logback.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-482">
           <caret line="4" column="59" lean-forward="false" selection-start-line="4" selection-start-column="50" selection-end-line="4" selection-end-column="59" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -999,7 +930,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="248">
           <caret line="82" column="43" lean-forward="false" selection-start-line="82" selection-start-column="43" selection-end-line="82" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1041,14 +971,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/dubbo/api/task/ExecJmeterScript.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="43">
-          <caret line="302" column="9" lean-forward="false" selection-start-line="302" selection-start-column="9" selection-end-line="302" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/dubbo/api/config/WebConfigurer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="116">
@@ -1069,7 +991,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="86">
           <caret line="9" column="14" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1085,16 +1006,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="632">
           <caret line="179" column="0" lean-forward="false" selection-start-line="179" selection-start-column="0" selection-end-line="179" selection-end-column="0" />
-          <folding>
-            <marker date="1563782928000" expanded="true" signature="3059:4078" ph="update sched... " />
-            <marker date="1563782928000" expanded="true" signature="4527:4606" ph="select from schedule_job" />
-            <marker date="1563782928000" expanded="true" signature="4920:4982" ph="select from schedule_job" />
-            <marker date="1563782928000" expanded="true" signature="5057:5929" ph="SELECT tm3.i... id" />
-            <marker date="1563782928000" expanded="true" signature="5234:5856" ph="select sj.id... schedule_job" />
-            <marker date="1563782928000" expanded="true" signature="5491:5822" ph="select tm1.s... id" />
-            <marker date="1563782928000" expanded="true" signature="5598:5769" ph="SELECT es.id... entity_script" />
-            <marker date="1563782928000" expanded="true" signature="5902:5929" ph="select from schedule_job" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1110,10 +1022,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
           <caret line="54" column="16" lean-forward="false" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
-          <folding>
-            <element signature="e#1028#1029#0" expanded="false" />
-            <element signature="e#1064#1065#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1121,11 +1029,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="129">
           <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding>
-            <element signature="e#878#879#0" expanded="false" />
-            <element signature="e#1363#1364#0" expanded="false" />
-            <element signature="e#1421#1422#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1141,7 +1044,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
           <caret line="28" column="30" lean-forward="true" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1149,7 +1051,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="106">
           <caret line="249" column="44" lean-forward="false" selection-start-line="249" selection-start-column="44" selection-end-line="249" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1157,61 +1058,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
           <caret line="35" column="12" lean-forward="true" selection-start-line="31" selection-start-column="3" selection-end-line="35" selection-end-column="12" />
-          <folding>
-            <marker date="1563517481000" expanded="true" signature="1015:1124" ph="select from entity_project" />
-            <marker date="1563517481000" expanded="true" signature="1241:2205" ph="select tm4.i... id" />
-            <marker date="1563517481000" expanded="true" signature="1509:2001" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="1659:1980" ph="SELECT tm1.i... id" />
-            <marker date="1563517481000" expanded="true" signature="1729:1837" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="1853:1958" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="2049:2205" ph="select from entity_project" />
-            <marker date="1563517481000" expanded="true" signature="2318:2428" ph="select from entity_project" />
-            <marker date="1563517481000" expanded="true" signature="2549:3440" ph="select tm4.i... id" />
-            <marker date="1563517481000" expanded="true" signature="2817:3309" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="2967:3288" ph="SELECT tm1.i... id" />
-            <marker date="1563517481000" expanded="true" signature="3037:3145" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="3161:3266" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="3561:4453" ph="select tm4.i... id" />
-            <marker date="1563517481000" expanded="true" signature="3829:4321" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="3979:4300" ph="SELECT tm1.i... id" />
-            <marker date="1563517481000" expanded="true" signature="4049:4157" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="4173:4278" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="4574:5464" ph="select tm4.i... id" />
-            <marker date="1563517481000" expanded="true" signature="4842:5334" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="4992:5313" ph="SELECT tm1.i... id" />
-            <marker date="1563517481000" expanded="true" signature="5062:5170" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="5186:5291" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="5592:6529" ph="select tm4.i... id" />
-            <marker date="1563517481000" expanded="true" signature="5860:6352" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="6010:6331" ph="SELECT tm1.i... id" />
-            <marker date="1563517481000" expanded="true" signature="6080:6188" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="6204:6309" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="6658:7597" ph="select tm4.i... id" />
-            <marker date="1563517481000" expanded="true" signature="6926:7418" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="7076:7397" ph="SELECT tm1.i... id" />
-            <marker date="1563517481000" expanded="true" signature="7146:7254" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="7270:7375" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="7724:8662" ph="select tm4.i... id" />
-            <marker date="1563517481000" expanded="true" signature="7992:8484" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="8142:8463" ph="SELECT tm1.i... id" />
-            <marker date="1563517481000" expanded="true" signature="8212:8320" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="8336:8441" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="8776:9766" ph="select from entity_project" />
-            <marker date="1563517481000" expanded="true" signature="8777:9766" ph="select tm4.i... id" />
-            <marker date="1563517481000" expanded="true" signature="9047:9545" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="9199:9524" ph="SELECT tm1.i... id" />
-            <marker date="1563517481000" expanded="true" signature="9271:9379" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="9397:9502" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="9843:10689" ph="select from entity_project" />
-            <marker date="1563517481000" expanded="true" signature="10113:10611" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="10265:10590" ph="SELECT tm1.i... id" />
-            <marker date="1563517481000" expanded="true" signature="10337:10445" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="10463:10568" ph="select ep.id... entity_project" />
-            <marker date="1563517481000" expanded="true" signature="10776:10840" ph="delete from " />
-            <marker date="1563517481000" expanded="true" signature="10921:11272" ph="insert into entity_project... " />
-            <marker date="1563517481000" expanded="true" signature="12749:13462" ph="update entit... " />
-            <marker date="1563517481000" expanded="true" signature="13555:13920" ph="update entit... " />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1219,7 +1066,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1227,14 +1073,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="138">
           <caret line="11" column="22" lean-forward="false" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="22" />
-          <folding>
-            <marker date="1563868408000" expanded="true" signature="502:570" ph="select from entity_role" />
-            <marker date="1563868408000" expanded="true" signature="682:789" ph="select from entity_role" />
-            <marker date="1563868408000" expanded="true" signature="875:936" ph="delete from " />
-            <marker date="1563868408000" expanded="true" signature="1014:1110" ph="insert into entity_role... " />
-            <marker date="1563868408000" expanded="true" signature="1716:1877" ph="update entit... " />
-            <marker date="1563868408000" expanded="true" signature="1967:2063" ph="update entit... " />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1242,7 +1081,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="21" column="23" lean-forward="false" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1258,7 +1096,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
           <caret line="33" column="24" lean-forward="false" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1266,16 +1103,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="32" column="18" lean-forward="false" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
-          <folding>
-            <element signature="e#321#322#0" expanded="true" />
-            <element signature="e#350#351#0" expanded="true" />
-            <element signature="e#395#396#0" expanded="true" />
-            <element signature="e#431#432#0" expanded="true" />
-            <element signature="e#465#466#0" expanded="true" />
-            <element signature="e#494#495#0" expanded="true" />
-            <element signature="e#539#540#0" expanded="true" />
-            <element signature="e#575#576#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1283,19 +1110,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="290">
           <caret line="29" column="48" lean-forward="false" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="48" />
-          <folding>
-            <marker date="1563879565000" expanded="true" signature="876:1036" ph="select from entity_user" />
-            <marker date="1563879565000" expanded="true" signature="1116:1233" ph="select from entity_user" />
-            <marker date="1563879565000" expanded="true" signature="1350:1594" ph="select eu.id... entity_user" />
-            <marker date="1563879565000" expanded="true" signature="1666:1734" ph="select from entity_user" />
-            <marker date="1563879565000" expanded="true" signature="1842:1955" ph="select from entity_user" />
-            <marker date="1563879565000" expanded="true" signature="2061:2173" ph="select from entity_user" />
-            <marker date="1563879565000" expanded="true" signature="2285:2391" ph="select from entity_user" />
-            <marker date="1563879565000" expanded="true" signature="2477:2538" ph="delete from " />
-            <marker date="1563879565000" expanded="true" signature="2616:2896" ph="insert into entity_user... " />
-            <marker date="1563879565000" expanded="true" signature="4094:4634" ph="update entit... " />
-            <marker date="1563879565000" expanded="true" signature="4724:5006" ph="update entit... " />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1303,7 +1118,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="24" column="29" lean-forward="true" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1319,15 +1133,77 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding>
+            <marker date="1564127337000" expanded="false" signature="376:382" ph=" }" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dubbo/api/vo/TestRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-171">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/Documents/maven/.m2/repertory/org/apache/httpcomponents/httpcore/4.4.9/httpcore-4.4.9.jar!/org/apache/http/entity/ContentType.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="42" column="36" lean-forward="false" selection-start-line="42" selection-start-column="36" selection-end-line="42" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-178">
+          <caret line="104" column="17" lean-forward="false" selection-start-line="104" selection-start-column="17" selection-end-line="104" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/Documents/maven/.m2/repertory/org/apache/httpcomponents/httpcore/4.4.9/httpcore-4.4.9.jar!/org/apache/http/NameValuePair.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="7" column="17" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dubbo/api/task/ExecJmeterScript.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2462">
+          <caret line="317" column="3" lean-forward="false" selection-start-line="317" selection-start-column="3" selection-end-line="317" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dubbo/api/common/util/HttpClientUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="470">
+          <caret line="232" column="19" lean-forward="true" selection-start-line="232" selection-start-column="19" selection-end-line="232" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dubbo/api/config/HttpClientUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-226">
+          <caret line="88" column="40" lean-forward="false" selection-start-line="88" selection-start-column="40" selection-end-line="88" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/dubbo/api/controller/CommonController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="153" column="27" lean-forward="true" selection-start-line="153" selection-start-column="27" selection-end-line="153" selection-end-column="27" />
-          <folding />
+        <state relative-caret-position="241">
+          <caret line="546" column="60" lean-forward="false" selection-start-line="546" selection-start-column="52" selection-end-line="546" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
