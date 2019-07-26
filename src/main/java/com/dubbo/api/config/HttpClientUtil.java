@@ -14,7 +14,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
@@ -32,6 +34,8 @@ import java.util.Map;
 public class HttpClientUtil {
     // 发送GET请求
     public static String getRequest(Map<String,String> headers,Map<String,String> cookies, String path,Integer connTime, List<NameValuePair> parametersBody) throws URISyntaxException {
+        if (connTime == null)
+            connTime = 1000;
         URIBuilder uriBuilder = new URIBuilder(path);
         uriBuilder.setParameters(parametersBody);
         HttpGet get = new HttpGet(uriBuilder.build());
@@ -72,19 +76,26 @@ public class HttpClientUtil {
 
     // 发送POST请求（普通表单形式）
     public static String postForm(String path, List<NameValuePair> parametersBody,Map<String,String> headers,Map<String,String> cookies,Integer connTime) {
+        if (connTime == null)
+            connTime = 1000;
         HttpEntity entity = new UrlEncodedFormEntity(parametersBody, Charsets.UTF_8);
         return postRequest(headers,cookies,connTime,path, "application/x-www-form-urlencoded", entity);
     }
 
     // 发送POST请求（JSON形式）
     public static String postJSON(String path, String json,Map<String,String> headers,Map<String,String> cookies,Integer connTime)  {
+        if (connTime == null)
+            connTime = 1000;
         StringEntity entity = new StringEntity(json, Charsets.UTF_8);
+        entity.setContentType("application/json");
         return postRequest(headers,cookies,connTime,path, "application/json", entity);
     }
 
     // 发送POST请求
     public static String postRequest(Map<String,String> headers,Map<String,String> cookies,Integer connTime,String path, String mediaType, HttpEntity entity) {
         log.info("[postRequest] resourceUrl: {}", path);
+        if (connTime == null)
+            connTime = 1000;
         HttpPost post = new HttpPost(path);
         post.addHeader("Content-Type", mediaType);
         post.addHeader("Accept", "application/json");
@@ -106,7 +117,7 @@ public class HttpClientUtil {
         }
         post.setEntity(entity);
         try {
-            HttpClient client = HttpClientBuilder.create().build();
+            CloseableHttpClient client = HttpClients.createDefault();
             HttpResponse response = client.execute(post);
             int code = response.getStatusLine().getStatusCode();
             if (code >= 400)
