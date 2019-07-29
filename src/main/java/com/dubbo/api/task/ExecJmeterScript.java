@@ -615,7 +615,7 @@ public class ExecJmeterScript {
                 HttpJmeterScript.httpRequestSetting(interfaceName, url, requestType, params, timeOut) + HttpJmeterScript.headerSetting(header) +
                 HttpJmeterScript.cookieSetting(cookie, url) + HttpJmeterScript.preProcessorSetting() +
                 HttpJmeterScript.resultTreeSetting()+HttpJmeterScript.aggregateGraphSetting()+HttpJmeterScript.responseAssertSetting(assertText)+
-                HttpJmeterScript.backendListener(true)+HttpJmeterScript.endSetting() ;
+                HttpJmeterScript.backendListener(false)+HttpJmeterScript.endSetting() ;
         return fileContent;
     }
 

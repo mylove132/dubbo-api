@@ -6,19 +6,23 @@ import com.alibaba.fastjson.JSONObject;
 import com.dubbo.api.common.bean.*;
 import com.dubbo.api.common.constant.CommonConstant;
 import com.dubbo.api.common.constant.PermissionConstant;
+import com.dubbo.api.common.util.HttpCasClient;
 import com.dubbo.api.common.util.MD5Util;
 import com.dubbo.api.common.util.XmlUtil;
 import com.dubbo.api.config.AuthPermission;
-import com.dubbo.api.config.HttpClientUtil;
+import com.dubbo.api.common.util.HttpClientUtil;
 import com.dubbo.api.config.JmeterConfig;
 import com.dubbo.api.dao.*;
 import com.dubbo.api.service.RedisService;
 import com.dubbo.api.vo.*;
+import com.dubbo.api.vo.request.HttpRequestEntity;
 import com.dubbo.api.vo.request.UserRoles;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.NameValuePair;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.quartz.impl.triggers.CronTriggerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -591,65 +595,163 @@ public class CommonController {
             }
         }
         String result = "";
-        switch (protocolName.toUpperCase()) {
-            case "HTTP":
-                switch (requestTypeName.toUpperCase()) {
-                    case "GET":
-                        try {
-                            result = HttpClientUtil.getRequest(headerMap, cookieMap, url, timeOut, paramMap);
-
-                        } catch (URISyntaxException e) {
-                            result = e.getMessage();
-                            break;
-                        } catch (RuntimeException e) {
-                            result = e.getMessage();
-                            break;
-                        }
-                        break;
-                    case "POST":
-                        if (paramMap != null && paramMap.size() > 0) {
+        if (!(testRequest.getIsCas() == null) && testRequest.getIsCas().equals("true")){
+            switch (protocolName.toUpperCase()) {
+                case "HTTP":
+                    switch (requestTypeName.toUpperCase()) {
+                        case "GET":
                             try {
-                                result = HttpClientUtil.postForm(url, paramMap, headerMap, cookieMap, timeOut);
+                                HttpRequestEntity entity = new HttpRequestEntity();
+                                entity.setUrl(url);
+                                entity.setUsername(testRequest.getUsername());
+                                entity.setPassword(testRequest.getPassword());
+                                DefaultHttpClient client = HttpCasClient.casLogin(entity);
+                                result = HttpCasClient.getRequest(client,headerMap, cookieMap, url, timeOut, paramMap);
+                            } catch (URISyntaxException e) {
+                                result = e.getMessage();
+                                break;
+                            } catch (RuntimeException e) {
+                                result = e.getMessage();
+                                break;
+                            } catch (Exception e) {
+                                result = e.getMessage();
+                                break;
+                            }
+                            break;
+                        case "POST":
+                            if (paramMap != null && paramMap.size() > 0) {
+                                try {
+                                    HttpRequestEntity entity = new HttpRequestEntity();
+                                    entity.setUrl(url);
+                                    entity.setUsername(testRequest.getUsername());
+                                    entity.setPassword(testRequest.getPassword());
+                                    DefaultHttpClient client = HttpCasClient.casLogin(entity);
+                                    result = HttpCasClient.postForm(client,url, paramMap, headerMap, cookieMap, timeOut);
+                                } catch (RuntimeException e) {
+                                    result = e.getMessage();
+                                    break;
+                                } catch (Exception e) {
+                                    result = e.getMessage();
+                                    break;
+                                }
+                            } else if (StringUtils.isNoneBlank(params)) {
+                                log.info("json格式请求接口:" + params);
+                                try {
+                                    HttpRequestEntity entity = new HttpRequestEntity();
+                                    entity.setUrl(url);
+                                    entity.setUsername(testRequest.getUsername());
+                                    entity.setPassword(testRequest.getPassword());
+                                    DefaultHttpClient client = HttpCasClient.casLogin(entity);
+                                    result = HttpCasClient.postJSON(client,url, params, headerMap, cookieMap, timeOut);
+                                } catch (RuntimeException e) {
+                                    result = e.getMessage();
+                                    break;
+                                } catch (Exception e) {
+                                    result = e.getMessage();
+                                    break;
+                                }
+                            } else {
+                                try {
+                                    HttpRequestEntity entity = new HttpRequestEntity();
+                                    entity.setUrl(url);
+                                    entity.setUsername(testRequest.getUsername());
+                                    entity.setPassword(testRequest.getPassword());
+                                    DefaultHttpClient client = HttpCasClient.casLogin(entity);
+                                    result = HttpCasClient.postForm(client,url, paramMap, headerMap, cookieMap, timeOut);
+                                } catch (RuntimeException e) {
+                                    result = e.getMessage();
+                                    break;
+                                } catch (Exception e) {
+                                    result = e.getMessage();
+                                    break;
+                                }
+                            }
+                            break;
+                        default:
+                            try {
+                                HttpRequestEntity entity = new HttpRequestEntity();
+                                entity.setUrl(url);
+                                entity.setUsername(testRequest.getUsername());
+                                entity.setPassword(testRequest.getPassword());
+                                DefaultHttpClient client = HttpCasClient.casLogin(entity);
+                                result = HttpCasClient.postForm(client,url, paramMap, headerMap, cookieMap, timeOut);
+                            } catch (URISyntaxException e) {
+                                result = e.getMessage();
+                                break;
+                            } catch (RuntimeException e) {
+                                result = e.getMessage();
+                                break;
+                            } catch (Exception e) {
+                                result = e.getMessage();
+                                break;
+                            }
+                            break;
 
+                    }
+                    break;
+                case "DUBBO":
+                    break;
+
+            }
+        }else {
+            switch (protocolName.toUpperCase()) {
+                case "HTTP":
+                    switch (requestTypeName.toUpperCase()) {
+                        case "GET":
+                            try {
+                                result = HttpClientUtil.getRequest(headerMap, cookieMap, url, timeOut, paramMap);
+                            } catch (URISyntaxException e) {
+                                result = e.getMessage();
+                                break;
                             } catch (RuntimeException e) {
                                 result = e.getMessage();
                                 break;
                             }
-                        } else if (StringUtils.isNoneBlank(params)) {
-                            log.info("json格式请求接口:" + params);
+                            break;
+                        case "POST":
+                            if (paramMap != null && paramMap.size() > 0) {
+                                try {
+                                    result = HttpClientUtil.postForm(url, paramMap, headerMap, cookieMap, timeOut);
+                                } catch (RuntimeException e) {
+                                    result = e.getMessage();
+                                    break;
+                                }
+                            } else if (StringUtils.isNoneBlank(params)) {
+                                log.info("json格式请求接口:" + params);
+                                try {
+                                    result = HttpClientUtil.postJSON(url, params, headerMap, cookieMap, timeOut);
+                                } catch (RuntimeException e) {
+                                    result = e.getMessage();
+                                    break;
+                                }
+                            } else {
+                                try {
+                                    result = HttpClientUtil.postForm(url, paramMap, headerMap, cookieMap, timeOut);
+                                } catch (RuntimeException e) {
+                                    result = e.getMessage();
+                                    break;
+                                }
+                            }
+                            break;
+                        default:
                             try {
-                                result = HttpClientUtil.postJSON(url, params, headerMap, cookieMap, timeOut);
+                                result = HttpClientUtil.getRequest(headerMap, cookieMap, url, timeOut, paramMap);
+
+                            } catch (URISyntaxException e) {
+                                result = e.getMessage();
+                                break;
                             } catch (RuntimeException e) {
                                 result = e.getMessage();
                                 break;
                             }
-                        } else {
-                            try {
-                                result = HttpClientUtil.postForm(url, paramMap, headerMap, cookieMap, timeOut);
-                            } catch (RuntimeException e) {
-                                result = e.getMessage();
-                                break;
-                            }
-                        }
-                        break;
-                    default:
-                        try {
-                            result = HttpClientUtil.getRequest(headerMap, cookieMap, url, timeOut, paramMap);
-
-                        } catch (URISyntaxException e) {
-                            result = e.getMessage();
                             break;
-                        } catch (RuntimeException e) {
-                            result = e.getMessage();
-                            break;
-                        }
-                        break;
 
-                }
-                break;
-            case "DUBBO":
-                break;
+                    }
+                    break;
+                case "DUBBO":
+                    break;
 
+            }
         }
         log.info("测试结果:" + result);
         return new SuccessResponse(result);

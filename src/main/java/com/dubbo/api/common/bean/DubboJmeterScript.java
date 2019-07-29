@@ -286,7 +286,7 @@ public class DubboJmeterScript {
     }
     public static String backendListenerSetting(){
         String text = " <hashTree/>\n" +
-                "          <BackendListener guiclass=\"BackendListenerGui\" testclass=\"BackendListener\" testname=\"Backend Listener\" enabled=\"true\">\n" +
+                "          <BackendListener guiclass=\"BackendListenerGui\" testclass=\"BackendListener\" testname=\"Backend Listener\" enabled=\"false\">\n" +
                 "            <elementProp name=\"arguments\" elementType=\"Arguments\" guiclass=\"ArgumentsPanel\" testclass=\"Arguments\" enabled=\"true\">\n" +
                 "              <collectionProp name=\"Arguments.arguments\">\n" +
                 "                <elementProp name=\"graphiteMetricsSender\" elementType=\"Argument\">\n" +

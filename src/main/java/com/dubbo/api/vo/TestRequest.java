@@ -9,6 +9,13 @@ public class TestRequest implements Serializable {
     @NotBlank(message = "url不能为空")
     private String url;
 
+    //是否是单点登录
+    private String isCas;
+
+    private String username;
+
+    private String password;
+
     @Max(value = 3,message = "用户协议（1～3）")
     private Integer protocolId;
 
@@ -79,10 +86,37 @@ public class TestRequest implements Serializable {
         this.timeOut = timeOut;
     }
 
+    public String getIsCas() {
+        return isCas;
+    }
+
+    public void setIsCas(String isCas) {
+        this.isCas = isCas;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "TestRequest{" +
                 "url='" + url + '\'' +
+                ", isCas=" + isCas +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
                 ", protocolId=" + protocolId +
                 ", cookie='" + cookie + '\'' +
                 ", header='" + header + '\'' +
