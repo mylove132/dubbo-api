@@ -3,6 +3,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.dubbo.api.common.bean.DubboJmeterScript;
 import com.dubbo.api.common.bean.ErrorResponse;
 import com.dubbo.api.common.bean.HttpJmeterScript;
+import com.dubbo.api.common.bean.SuccessResponse;
 import com.dubbo.api.common.constant.CommonConstant;
 import com.dubbo.api.common.util.HttpClientUtil;
 import com.dubbo.api.common.util.MD5Util;
@@ -56,25 +57,315 @@ public class ExecJmeterScript {
         String userId = userAndId.split(",")[0];
         String scriptId = userAndId.split(",")[1];
         log.info("执行jmeter脚本id:" + scriptId);
+//        String md5 = MD5Util.encrypt(UUID.randomUUID().toString());
+//        String jmeterRedisId = redisService.get("exec_jmeter_id_" + scriptId);
+//        String jmeterCountRedisId = redisService.get("exec_jmeter_count");
+//        if (jmeterRedisId == null) {
+//            redisService.set("exec_jmeter_id_" + scriptId, String.valueOf(scriptId));
+//        } else {
+//            log.error("执行的jmeter脚本"+scriptId+"已经在执行");
+//            return;
+//        }
+//        if (jmeterCountRedisId == null) {
+//            redisService.set("exec_jmeter_count", String.valueOf(1));
+//        } else if (Integer.parseInt(jmeterCountRedisId) >= 2) {
+//            log.error("执行的jmeter脚本"+scriptId+"已经在执行");
+//            return;
+//        } else {
+//            String value = String.valueOf(Integer.parseInt(redisService.get("exec_jmeter_count")) + 1);
+//            redisService.set("exec_jmeter_count", value);
+//        }
+//        Script script = scriptMapper.selectByPrimaryKey(Integer.parseInt(scriptId));
+//        String scriptName = script.getName();
+//        Integer protocolId = script.getProtocolId();
+//        Integer preNumber = script.getPreNumber();
+//        Integer preTime = script.getPreTime();
+//        String url = script.getUrl();
+//        Integer requestTypeid = script.getRequestTypeId();
+//        RequestType requestType = null;
+//        if (requestTypeid > 0) {
+//            requestType = requestTypeMapper.selectByPrimaryKey(requestTypeid);
+//        }
+//        String port = "";
+//        try {
+//            port = script.getPort().toString();
+//        }catch (Exception e){
+//            port = null;
+//        }
+//
+//        String params = script.getParams();
+//        History history = new History();
+//        history.setCreateTime(new Date());
+//        history.setMd5(md5);
+//        history.setScriptId(Integer.parseInt(scriptId));
+//        history.setUserId(Integer.parseInt(userId));
+//
+//        log.info("创建时间:"+history.getCreateTime().toString());
+//
+//        if (protocolId == 1) {
+//            log.info("http请求，创建jmx文件");
+//            String fileContent = createHttpJmxFile(preNumber, preTime, scriptName, url, requestType.getName(), params, script.getTimeOut().toString(),
+//                    script.getHeader(), script.getCookie(), script.getAssertText(), script.getIp(), port);
+//            String jmxFilePath = jmeterConfig.getJmxFilePath() + md5 + ".jmx";
+//            try {
+//                OutputStream os = new FileOutputStream(new File(jmxFilePath));
+//                os.write(fileContent.getBytes("utf-8"));
+//                os.close();
+//            } catch (IOException e) {
+//                log.error("创建jmx文件出错：" + e.getMessage());
+//                redisService.remove("exec_jmeter_id_" + scriptId);
+//                Integer redisExecCount = Integer.parseInt(redisService.get("exec_jmeter_count"));
+//                if (redisExecCount > 0){
+//                    redisService.set("exec_jmeter_count",String.valueOf(redisExecCount-1));
+//                }else {
+//                    redisService.set("exec_jmeter_count","0");
+//                }
+//                log.error("http jmx文件：" + jmxFilePath + "创建失败");
+//                history.setStatus("fail");
+//                historyMapper.insertSelective(history);
+//                log.error("创建meter文件失败");
+//                return;
+//            }
+//            File file = new File(jmxFilePath);
+//            if (!file.exists()) {
+//                log.error("http jmx文件：" + jmxFilePath + "不存在");
+//                history.setStatus("fail");
+//                historyMapper.insert(history);
+//                log.error("执行的meter文件不存在："+md5+".jmx");
+//                return;
+//            }
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    File jmeterHtmlFilePath = new File(jmeterConfig.getJmeterHtmlPath()+md5);
+//                    if (!(jmeterHtmlFilePath.exists() && jmeterHtmlFilePath.isDirectory())){
+//                        jmeterHtmlFilePath.mkdir();
+//                    }
+//                    String cmd = "%s -n -t %s -l %s -e -o %s" ;
+//                    cmd = String.format(cmd,jmeterConfig.getJmeterBinPath(),jmeterConfig.getJmxFilePath()+md5+".jmx",jmeterConfig.getJtlFilePath()+md5+".jtl",jmeterHtmlFilePath.getAbsolutePath());
+//                    log.info("执行的命令:"+cmd);
+//                    String[] listCmd = cmd.split(" ");
+//                    try {
+//                        Process process = Runtime.getRuntime().exec(listCmd);
+//                        process.waitFor();
+//                        SequenceInputStream sis = new SequenceInputStream(process.getInputStream(), process.getErrorStream());
+//                        BufferedReader br = new BufferedReader(new InputStreamReader(sis, "utf-8"));
+//                        StringBuilder result = new StringBuilder();
+//                        String line;
+//                        while ((line = br.readLine()) != null) {
+//                            log.info(line);
+//                        }
+//                        if (br != null) {
+//                            br.close();
+//                            redisService.remove("exec_jmeter_id_" + scriptId);
+//                            Integer redisExecCount = Integer.parseInt(redisService.get("exec_jmeter_count"));
+//                            if (redisExecCount > 0){
+//                                redisService.set("exec_jmeter_count",String.valueOf(redisExecCount-1));
+//                            }else {
+//                                redisService.set("exec_jmeter_count","0");
+//                            }
+//                        }
+//                    } catch (Exception e) {
+//                        log.error("执行build文件出错：" + e.getMessage());
+//                        redisService.remove("exec_jmeter_id_" + scriptId);
+//                        Integer redisExecCount = Integer.parseInt(redisService.get("exec_jmeter_count"));
+//                        if (redisExecCount > 0){
+//                            redisService.set("exec_jmeter_count",String.valueOf(redisExecCount-1));
+//                        }else {
+//                            redisService.set("exec_jmeter_count","0");
+//                        }
+//                        log.error("执行jmx文件出错:" + jmeterConfig.getJmxFilePath() + md5 + ".jmx");
+//                    }
+//
+//                }
+//            }).start();
+//        }else if (protocolId == 2){
+//            Integer projectId = script.getProjectId();
+//            Project project = null;
+//            if (projectId != null && projectId > 0) {
+//                project = projectMapper.selectByPrimaryKey(projectId);
+//            }
+//            if (project == null) {
+//                return;
+//            }
+//            Integer envId = project.getEnv();
+//            ProjectEnv projectEnv = null;
+//            if (envId != null && envId > 0) {
+//                projectEnv = projectEnvMapper.selectByPrimaryKey(envId);
+//            }
+//            if (projectEnv == null) {
+//                return;
+//            }
+//            String zkAddress = projectEnv.getZk();
+//            log.info("开始创建文件");
+//            String fileContent = null;
+//            JSONObject jsonObject = JSONObject.parseObject(params);
+//            if (!jsonObject.isEmpty()){
+//                String requestId = jsonObject.getString("reqId");
+//                if (requestId == null||requestId == ""){
+//                    jsonObject.put("reqId","qa_${requestid}");
+//                }
+//            }
+//            try {
+//                fileContent = DubboJmeterScript.startSetting() + DubboJmeterScript.crontrolSetting(preNumber, preTime) +
+//                        DubboJmeterScript.dubboSetting(script.getName(), zkAddress, script.getTimeOut().toString(), script.getVersion(),
+//                                script.getIns(), script.getMethod(), script.getParamType(), jsonObject.toJSONString()) +
+//                        DubboJmeterScript.resultTreeSetting() + DubboJmeterScript.aggregateReportSetting()+
+//                        DubboJmeterScript.responseAssertSetting(script.getAssertText())+DubboJmeterScript.preProccessorSetting()+
+//                        DubboJmeterScript.backendListenerSetting()+DubboJmeterScript.endSetting();
+//            }catch (Exception e){
+//                log.info("创建文件失败");
+//                log.info(e.getMessage());
+//            }
+//            String jmxFilePath = jmeterConfig.getJmxFilePath() + md5 + ".jmx";
+//            log.info("jmeter file path:"+jmxFilePath);
+//            try {
+//                OutputStream os = new FileOutputStream(new File(jmxFilePath));
+//                os.write(fileContent.getBytes("utf-8"));
+//                os.close();
+//            } catch (IOException e) {
+//                log.error("dubbo jmx文件写入错误");
+//                log.error("创建jmx文件出错：" + e.getMessage());
+//                redisService.remove("exec_jmeter_id_" + scriptId);
+//                Integer redisExecCount = Integer.parseInt(redisService.get("exec_jmeter_count"));
+//                if (redisExecCount > 0){
+//                    redisService.set("exec_jmeter_count",String.valueOf(redisExecCount-1));
+//                }else {
+//                    redisService.set("exec_jmeter_count","0");
+//                }
+//                log.error("dubbo jmx文件：" + jmxFilePath + "创建失败");
+//                history.setStatus("fail");
+//                historyMapper.insertSelective(history);
+//                log.error("创建meter文件失败");
+//                return;
+//            }
+//            File file = new File(jmxFilePath);
+//            if (!file.exists()) {
+//                log.error("dubbo jmx文件不存在");
+//                redisService.remove("exec_jmeter_id_" + scriptId);
+//                Integer redisExecCount = Integer.parseInt(redisService.get("exec_jmeter_count"));
+//                if (redisExecCount > 0){
+//                    redisService.set("exec_jmeter_count",String.valueOf(redisExecCount-1));
+//                }else {
+//                    redisService.set("exec_jmeter_count","0");
+//                }
+//                log.error("dubbo jmx文件：" + jmxFilePath + "创建失败");
+//                history.setStatus("fail");
+//                historyMapper.insertSelective(history);
+//                log.error("执行meter文件不存在");
+//                return;
+//            }
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    File jmeterHtmlFilePath = new File(jmeterConfig.getJmeterHtmlPath()+md5);
+//                    if (!(jmeterHtmlFilePath.exists() && jmeterHtmlFilePath.isDirectory())){
+//                        jmeterHtmlFilePath.mkdir();
+//                    }
+//                    String cmd = "%s -n -t %s -l %s -e -o %s" ;
+//                    cmd = String.format(cmd,jmeterConfig.getJmeterBinPath(),jmeterConfig.getJmxFilePath()+md5+".jmx",
+//                            jmeterConfig.getJtlFilePath()+md5+".jtl",jmeterHtmlFilePath.getAbsolutePath());
+//                    log.info("执行的命令:"+cmd);
+//                    String[] listCmd = cmd.split(" ");
+//                    try {
+//                        Process process = Runtime.getRuntime().exec(listCmd);
+//                        process.waitFor();
+//                        SequenceInputStream sis = new SequenceInputStream(process.getInputStream(), process.getErrorStream());
+//                        BufferedReader br = new BufferedReader(new InputStreamReader(sis, "utf-8"));
+//                        StringBuilder result = new StringBuilder();
+//                        String line;
+//                        while ((line = br.readLine()) != null) {
+//                            log.info(line);
+//                        }
+//                        if (br != null) {
+//                            br.close();
+//                            redisService.remove("exec_jmeter_id_" + scriptId);
+//                            Integer redisExecCount = Integer.parseInt(redisService.get("exec_jmeter_count"));
+//                            if (redisExecCount > 0){
+//                                redisService.set("exec_jmeter_count",String.valueOf(redisExecCount-1));
+//                            }else {
+//                                redisService.set("exec_jmeter_count","0");
+//                            }
+//                        }
+//                    } catch (Exception e) {
+//                        log.error("执行shell命令出错：" + e.getMessage());
+//                        redisService.remove("exec_jmeter_id_" + scriptId);
+//                        Integer redisExecCount = Integer.parseInt(redisService.get("exec_jmeter_count"));
+//                        if (redisExecCount > 0){
+//                            redisService.set("exec_jmeter_count",String.valueOf(redisExecCount-1));
+//                        }else {
+//                            redisService.set("exec_jmeter_count","0");
+//                        }
+//                        log.error("执行jmx文件出错:" + jmeterConfig.getJmxFilePath() + md5 + ".jmx");
+//                    }
+//
+//                }
+//            }).start();
+//        }
+//        history.setStatus("success");
+//        historyMapper.insertSelective(history);
+        log.info("执行jmeter脚本id:" + scriptId);
+        Script script = scriptMapper.selectByPrimaryKey(Integer.parseInt(scriptId));
         String md5 = MD5Util.encrypt(UUID.randomUUID().toString());
+        History history = new History();
+        history.setCreateTime(new Date());
+        history.setMd5(md5);
+        history.setScriptId(Integer.parseInt(scriptId));
+        history.setUserId(Integer.parseInt(userId));
+        history.setStrategy(Byte.valueOf("1"));
         String jmeterRedisId = redisService.get("exec_jmeter_id_" + scriptId);
         String jmeterCountRedisId = redisService.get("exec_jmeter_count");
         if (jmeterRedisId == null) {
             redisService.set("exec_jmeter_id_" + scriptId, String.valueOf(scriptId));
+            redisService.expire("exec_jmeter_id_" + scriptId,script.getPreTime()+100);
         } else {
-            log.error("执行的jmeter脚本"+scriptId+"已经在执行");
+            history.setStatus("fail");
+            historyMapper.insertSelective(history);
             return;
         }
         if (jmeterCountRedisId == null) {
             redisService.set("exec_jmeter_count", String.valueOf(1));
+            redisService.expire("exec_jmeter_count", script.getPreTime()+100);
         } else if (Integer.parseInt(jmeterCountRedisId) >= 2) {
-            log.error("执行的jmeter脚本"+scriptId+"已经在执行");
-            return;
+            String cmd = "ps -ef|grep %s | grep -v grep|awk '{print $2}'";
+            cmd = String.format(cmd,jmeterConfig.getJmeterBinPath());
+            log.info("执行的命令行："+cmd);
+            String[] listCmd = cmd.split(" ");
+            Process process = null;
+            try {
+                process = Runtime.getRuntime().exec(listCmd);
+                process.waitFor();
+                SequenceInputStream sis = new SequenceInputStream(process.getInputStream(), process.getErrorStream());
+                BufferedReader br = new BufferedReader(new InputStreamReader(sis, "utf-8"));
+                StringBuilder result = new StringBuilder();
+                String line;
+                while ((line = br.readLine()) != null) {
+                    log.info("获取进程号："+line);
+                    result.append(line);
+                }
+                String[] resultList = null;
+                if (result != null){
+                    resultList = result.toString().split("\n");
+                }
+                if (resultList == null || resultList.length == 0){
+                    redisService.remove("exec_jmeter_count");
+                }else if (resultList.length == 1){
+                    redisService.set("exec_jmeter_count",String.valueOf(1));
+                }else {
+                    history.setStatus("fail");
+                    historyMapper.insertSelective(history);
+                    return;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         } else {
             String value = String.valueOf(Integer.parseInt(redisService.get("exec_jmeter_count")) + 1);
             redisService.set("exec_jmeter_count", value);
         }
-        Script script = scriptMapper.selectByPrimaryKey(Integer.parseInt(scriptId));
+
         String scriptName = script.getName();
         Integer protocolId = script.getProtocolId();
         Integer preNumber = script.getPreNumber();
@@ -88,24 +379,37 @@ public class ExecJmeterScript {
         String port = "";
         try {
             port = script.getPort().toString();
-        }catch (Exception e){
+        } catch (Exception e) {
             port = null;
         }
 
         String params = script.getParams();
-        History history = new History();
-        history.setCreateTime(new Date());
-        history.setMd5(md5);
-        history.setScriptId(Integer.parseInt(scriptId));
-        history.setUserId(Integer.parseInt(userId));
 
-        log.info("创建时间:"+history.getCreateTime().toString());
+
+        log.info("创建时间:" + history.getCreateTime().toString());
 
         if (protocolId == 1) {
             log.info("http请求，创建jmx文件");
-            String fileContent = createHttpJmxFile(preNumber, preTime, scriptName, url, requestType.getName(), params, script.getTimeOut().toString(),
-                    script.getHeader(), script.getCookie(), script.getAssertText(), script.getIp(), port);
+            String fileContent = null;
             String jmxFilePath = jmeterConfig.getJmxFilePath() + md5 + ".jmx";
+            try {
+                fileContent = createHttpJmxFile(preNumber, preTime, scriptName, url, requestType.getName(), params, script.getTimeOut().toString(),
+                        script.getHeader(), script.getCookie(), script.getAssertText(), script.getIp(), port);
+                log.info("文件内容："+fileContent);
+            }catch (RuntimeException e){
+                log.error("创建jmx文件出错：" + e.getMessage());
+                redisService.remove("exec_jmeter_id_" + scriptId);
+                Integer redisExecCount = Integer.parseInt(redisService.get("exec_jmeter_count"));
+                if (redisExecCount > 0) {
+                    redisService.set("exec_jmeter_count", String.valueOf(redisExecCount - 1));
+                } else {
+                    redisService.set("exec_jmeter_count", "0");
+                }
+                history.setStatus("fail");
+                historyMapper.insertSelective(history);
+                return;
+            }
+
             try {
                 OutputStream os = new FileOutputStream(new File(jmxFilePath));
                 os.write(fileContent.getBytes("utf-8"));
@@ -114,35 +418,33 @@ public class ExecJmeterScript {
                 log.error("创建jmx文件出错：" + e.getMessage());
                 redisService.remove("exec_jmeter_id_" + scriptId);
                 Integer redisExecCount = Integer.parseInt(redisService.get("exec_jmeter_count"));
-                if (redisExecCount > 0){
-                    redisService.set("exec_jmeter_count",String.valueOf(redisExecCount-1));
-                }else {
-                    redisService.set("exec_jmeter_count","0");
+                if (redisExecCount > 0) {
+                    redisService.set("exec_jmeter_count", String.valueOf(redisExecCount - 1));
+                } else {
+                    redisService.set("exec_jmeter_count", "0");
                 }
                 log.error("http jmx文件：" + jmxFilePath + "创建失败");
                 history.setStatus("fail");
                 historyMapper.insertSelective(history);
-                log.error("创建meter文件失败");
                 return;
             }
             File file = new File(jmxFilePath);
             if (!file.exists()) {
                 log.error("http jmx文件：" + jmxFilePath + "不存在");
                 history.setStatus("fail");
-                historyMapper.insert(history);
-                log.error("执行的meter文件不存在："+md5+".jmx");
+                historyMapper.insertSelective(history);
                 return;
             }
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    File jmeterHtmlFilePath = new File(jmeterConfig.getJmeterHtmlPath()+md5);
-                    if (!(jmeterHtmlFilePath.exists() && jmeterHtmlFilePath.isDirectory())){
+                    File jmeterHtmlFilePath = new File(jmeterConfig.getJmeterHtmlPath() + md5);
+                    if (!(jmeterHtmlFilePath.exists() && jmeterHtmlFilePath.isDirectory())) {
                         jmeterHtmlFilePath.mkdir();
                     }
-                    String cmd = "%s -n -t %s -l %s -e -o %s" ;
-                    cmd = String.format(cmd,jmeterConfig.getJmeterBinPath(),jmeterConfig.getJmxFilePath()+md5+".jmx",jmeterConfig.getJtlFilePath()+md5+".jtl",jmeterHtmlFilePath.getAbsolutePath());
-                    log.info("执行的命令:"+cmd);
+                    String cmd = "%s -n -t %s -l %s -e -o %s";
+                    cmd = String.format(cmd, jmeterConfig.getJmeterBinPath(), jmeterConfig.getJmxFilePath() + md5 + ".jmx", jmeterConfig.getJtlFilePath() + md5 + ".jtl", jmeterHtmlFilePath.getAbsolutePath());
+                    log.info("执行的命令:" + cmd);
                     String[] listCmd = cmd.split(" ");
                     try {
                         Process process = Runtime.getRuntime().exec(listCmd);
@@ -158,33 +460,35 @@ public class ExecJmeterScript {
                             br.close();
                             redisService.remove("exec_jmeter_id_" + scriptId);
                             Integer redisExecCount = Integer.parseInt(redisService.get("exec_jmeter_count"));
-                            if (redisExecCount > 0){
-                                redisService.set("exec_jmeter_count",String.valueOf(redisExecCount-1));
-                            }else {
-                                redisService.set("exec_jmeter_count","0");
+                            if (redisExecCount > 0) {
+                                redisService.set("exec_jmeter_count", String.valueOf(redisExecCount - 1));
+                            } else {
+                                redisService.set("exec_jmeter_count", "0");
                             }
                         }
                     } catch (Exception e) {
                         log.error("执行build文件出错：" + e.getMessage());
                         redisService.remove("exec_jmeter_id_" + scriptId);
                         Integer redisExecCount = Integer.parseInt(redisService.get("exec_jmeter_count"));
-                        if (redisExecCount > 0){
-                            redisService.set("exec_jmeter_count",String.valueOf(redisExecCount-1));
-                        }else {
-                            redisService.set("exec_jmeter_count","0");
+                        if (redisExecCount > 0) {
+                            redisService.set("exec_jmeter_count", String.valueOf(redisExecCount - 1));
+                        } else {
+                            redisService.set("exec_jmeter_count", "0");
                         }
                         log.error("执行jmx文件出错:" + jmeterConfig.getJmxFilePath() + md5 + ".jmx");
                     }
 
                 }
             }).start();
-        }else if (protocolId == 2){
+        } else if (protocolId == 2) {
             Integer projectId = script.getProjectId();
             Project project = null;
             if (projectId != null && projectId > 0) {
                 project = projectMapper.selectByPrimaryKey(projectId);
             }
             if (project == null) {
+                history.setStatus("fail");
+                historyMapper.insertSelective(history);
                 return;
             }
             Integer envId = project.getEnv();
@@ -193,31 +497,33 @@ public class ExecJmeterScript {
                 projectEnv = projectEnvMapper.selectByPrimaryKey(envId);
             }
             if (projectEnv == null) {
+                history.setStatus("fail");
+                historyMapper.insertSelective(history);
                 return;
             }
             String zkAddress = projectEnv.getZk();
             log.info("开始创建文件");
             String fileContent = null;
             JSONObject jsonObject = JSONObject.parseObject(params);
-            if (!jsonObject.isEmpty()){
+            if (!jsonObject.isEmpty()) {
                 String requestId = jsonObject.getString("reqId");
-                if (requestId == null||requestId == ""){
-                    jsonObject.put("reqId","qa_${requestid}");
+                if (requestId == null || requestId == "") {
+                    jsonObject.put("reqId", "qa_${requestid}");
                 }
             }
             try {
                 fileContent = DubboJmeterScript.startSetting() + DubboJmeterScript.crontrolSetting(preNumber, preTime) +
                         DubboJmeterScript.dubboSetting(script.getName(), zkAddress, script.getTimeOut().toString(), script.getVersion(),
                                 script.getIns(), script.getMethod(), script.getParamType(), jsonObject.toJSONString()) +
-                        DubboJmeterScript.resultTreeSetting() + DubboJmeterScript.aggregateReportSetting()+
-                        DubboJmeterScript.responseAssertSetting(script.getAssertText())+DubboJmeterScript.preProccessorSetting()+
-                        DubboJmeterScript.backendListenerSetting()+DubboJmeterScript.endSetting();
-            }catch (Exception e){
+                        DubboJmeterScript.resultTreeSetting() + DubboJmeterScript.aggregateReportSetting() +
+                        DubboJmeterScript.responseAssertSetting(script.getAssertText()) + DubboJmeterScript.preProccessorSetting() +
+                        DubboJmeterScript.backendListenerSetting() + DubboJmeterScript.endSetting();
+            } catch (Exception e) {
                 log.info("创建文件失败");
                 log.info(e.getMessage());
             }
             String jmxFilePath = jmeterConfig.getJmxFilePath() + md5 + ".jmx";
-            log.info("jmeter file path:"+jmxFilePath);
+            log.info("jmeter file path:" + jmxFilePath);
             try {
                 OutputStream os = new FileOutputStream(new File(jmxFilePath));
                 os.write(fileContent.getBytes("utf-8"));
@@ -227,15 +533,14 @@ public class ExecJmeterScript {
                 log.error("创建jmx文件出错：" + e.getMessage());
                 redisService.remove("exec_jmeter_id_" + scriptId);
                 Integer redisExecCount = Integer.parseInt(redisService.get("exec_jmeter_count"));
-                if (redisExecCount > 0){
-                    redisService.set("exec_jmeter_count",String.valueOf(redisExecCount-1));
-                }else {
-                    redisService.set("exec_jmeter_count","0");
+                if (redisExecCount > 0) {
+                    redisService.set("exec_jmeter_count", String.valueOf(redisExecCount - 1));
+                } else {
+                    redisService.set("exec_jmeter_count", "0");
                 }
                 log.error("dubbo jmx文件：" + jmxFilePath + "创建失败");
                 history.setStatus("fail");
                 historyMapper.insertSelective(history);
-                log.error("创建meter文件失败");
                 return;
             }
             File file = new File(jmxFilePath);
@@ -243,28 +548,27 @@ public class ExecJmeterScript {
                 log.error("dubbo jmx文件不存在");
                 redisService.remove("exec_jmeter_id_" + scriptId);
                 Integer redisExecCount = Integer.parseInt(redisService.get("exec_jmeter_count"));
-                if (redisExecCount > 0){
-                    redisService.set("exec_jmeter_count",String.valueOf(redisExecCount-1));
-                }else {
-                    redisService.set("exec_jmeter_count","0");
+                if (redisExecCount > 0) {
+                    redisService.set("exec_jmeter_count", String.valueOf(redisExecCount - 1));
+                } else {
+                    redisService.set("exec_jmeter_count", "0");
                 }
                 log.error("dubbo jmx文件：" + jmxFilePath + "创建失败");
                 history.setStatus("fail");
                 historyMapper.insertSelective(history);
-                log.error("执行meter文件不存在");
                 return;
             }
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    File jmeterHtmlFilePath = new File(jmeterConfig.getJmeterHtmlPath()+md5);
-                    if (!(jmeterHtmlFilePath.exists() && jmeterHtmlFilePath.isDirectory())){
+                    File jmeterHtmlFilePath = new File(jmeterConfig.getJmeterHtmlPath() + md5);
+                    if (!(jmeterHtmlFilePath.exists() && jmeterHtmlFilePath.isDirectory())) {
                         jmeterHtmlFilePath.mkdir();
                     }
-                    String cmd = "%s -n -t %s -l %s -e -o %s" ;
-                    cmd = String.format(cmd,jmeterConfig.getJmeterBinPath(),jmeterConfig.getJmxFilePath()+md5+".jmx",
-                            jmeterConfig.getJtlFilePath()+md5+".jtl",jmeterHtmlFilePath.getAbsolutePath());
-                    log.info("执行的命令:"+cmd);
+                    String cmd = "%s -n -t %s -l %s -e -o %s";
+                    cmd = String.format(cmd, jmeterConfig.getJmeterBinPath(), jmeterConfig.getJmxFilePath() + md5 + ".jmx",
+                            jmeterConfig.getJtlFilePath() + md5 + ".jtl", jmeterHtmlFilePath.getAbsolutePath());
+                    log.info("执行的命令:" + cmd);
                     String[] listCmd = cmd.split(" ");
                     try {
                         Process process = Runtime.getRuntime().exec(listCmd);
@@ -280,20 +584,20 @@ public class ExecJmeterScript {
                             br.close();
                             redisService.remove("exec_jmeter_id_" + scriptId);
                             Integer redisExecCount = Integer.parseInt(redisService.get("exec_jmeter_count"));
-                            if (redisExecCount > 0){
-                                redisService.set("exec_jmeter_count",String.valueOf(redisExecCount-1));
-                            }else {
-                                redisService.set("exec_jmeter_count","0");
+                            if (redisExecCount > 0) {
+                                redisService.set("exec_jmeter_count", String.valueOf(redisExecCount - 1));
+                            } else {
+                                redisService.set("exec_jmeter_count", "0");
                             }
                         }
                     } catch (Exception e) {
                         log.error("执行shell命令出错：" + e.getMessage());
                         redisService.remove("exec_jmeter_id_" + scriptId);
                         Integer redisExecCount = Integer.parseInt(redisService.get("exec_jmeter_count"));
-                        if (redisExecCount > 0){
-                            redisService.set("exec_jmeter_count",String.valueOf(redisExecCount-1));
-                        }else {
-                            redisService.set("exec_jmeter_count","0");
+                        if (redisExecCount > 0) {
+                            redisService.set("exec_jmeter_count", String.valueOf(redisExecCount - 1));
+                        } else {
+                            redisService.set("exec_jmeter_count", "0");
                         }
                         log.error("执行jmx文件出错:" + jmeterConfig.getJmxFilePath() + md5 + ".jmx");
                     }

@@ -125,10 +125,10 @@ public class HttpClientUtil {
             return EntityUtils.toString(response.getEntity());
         }
         catch (ClientProtocolException e) {
-            throw new RuntimeException("postRequest -- Client protocol exception!", e);
+            throw new RuntimeException(e.getMessage());
         }
         catch (IOException e) {
-            throw new RuntimeException("postRequest -- IO error!", e);
+            throw new RuntimeException(e.getMessage());
         }
         finally {
             post.releaseConnection();

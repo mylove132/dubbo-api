@@ -6,7 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -207,20 +209,10 @@ public class HttpJmeterScript {
 
     public static String cookieSetting(String cookie, String url) {
         String tmpText = "";
-        String pattern = "^((http://)|(https://))?([a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,6}(/)";
-        Pattern p = Pattern.compile(pattern);
-        Matcher matcher = p.matcher(url);
-        matcher.find();
-        String domain = matcher.group();
-        if (domain.contains("http://")){
-            domain = domain.split("http://")[1].replace("/","");
-        }else if (domain.contains("https://")){
-            domain = domain.split("https://")[1].replace("/","");
-        }
         String tmp = " <elementProp name=\"%s\" elementType=\"Cookie\" testname=\"%s\">\n" +
                 "                <stringProp name=\"Cookie.value\">%s</stringProp>\n" +
                 "                <stringProp name=\"Cookie.domain\">%s</stringProp>\n" +
-                "                <stringProp name=\"Cookie.path\">/</stringProp>\n" +
+                "                <stringProp name=\"Cookie.path\">%s</stringProp>\n" +
                 "                <boolProp name=\"Cookie.secure\">false</boolProp>\n" +
                 "                <longProp name=\"Cookie.expires\">0</longProp>\n" +
                 "                <boolProp name=\"Cookie.path_specified\">true</boolProp>\n" +
@@ -233,18 +225,26 @@ public class HttpJmeterScript {
                 "            <boolProp name=\"CookieManager.clearEachIteration\">false</boolProp>\n" +
                 "          </CookieManager>\n" +
                 "<hashTree/>\n";
-        Map<String, String> formMap = new HashMap<>();
+
         if (StringUtils.isNoneBlank(cookie) && cookie != null) {
             if (cookie.contains("cookieKey") && cookie.contains("cookieValue")) {
                 JSONArray json = JSON.parseArray(cookie);
+                List<Map<String,String>> cookieList = new ArrayList<>();
                 for (int i = 0; i < json.size(); i++) {
+                    Map<String, String> formMap = new HashMap<>();
                     Map<String, String> js = (Map<String, String>) json.get(i);
                     String headerKey = js.get("cookieKey");
                     String headerValue = js.get("cookieValue");
-                    formMap.put(headerKey, headerValue);
+                    String domain = js.get("cookieDomain");
+                    String path = js.get("cookiePath");
+                    formMap.put("cookieKey", headerKey);
+                    formMap.put("cookieValue", headerValue);
+                    formMap.put("domain",domain);
+                    formMap.put("path",path);
+                    cookieList.add(formMap);
                 }
-                for (Map.Entry<String, String> entry : formMap.entrySet()) {
-                    tmpText += String.format(tmp, entry.getKey(), entry.getKey(),entry.getValue(), domain);
+                for (Map<String,String> map:cookieList) {
+                    tmpText += String.format(tmp, map.get("cookieKey"), map.get("cookieKey"),map.get("cookieValue"),  map.get("domain"),map.get("path"));
                 }
                 return String.format(text, tmpText);
             }

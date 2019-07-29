@@ -15,6 +15,8 @@ public class History {
 
     private Integer userId;
 
+    private Byte strategy;
+
     public Integer getId() {
         return id;
     }
@@ -61,5 +63,13 @@ public class History {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public Byte getStrategy() {
+        return strategy;
+    }
+
+    public void setStrategy(Byte strategy) {
+        this.strategy = strategy;
     }
 }

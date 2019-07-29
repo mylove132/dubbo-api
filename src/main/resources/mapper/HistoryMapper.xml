@@ -8,32 +8,31 @@
     <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="script_id" jdbcType="INTEGER" property="scriptId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="strategy" jdbcType="TINYINT" property="strategy" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, create_time, md5, status, script_id, user_id
+    id, create_time, md5, status, script_id, user_id, strategy
   </sql>
   <select id="listHistory" resultType="java.util.HashMap">
-  select eh.id,eh.script_id as scriptId, DATE_FORMAT(eh.create_time,'%Y-%m-%d %H:%i:%s') as createTime,eh.md5,eh.status,eh.user_name as userName,tmp.history_name as scriptName,tmp.project_name as projectName FROM (SELECT eh.id,eh.script_id,eh.create_time,eh.md5,eh.status,eu.name as user_name FROM entity_history eh JOIN entity_user eu on eh.user_id = eu.id) eh JOIN
-  (select es.id,es.name as history_name,ep.name as project_name FROM entity_script es JOIN entity_project ep on es.project_id = ep.id) tmp on eh.script_id=tmp.id
+    select eh.id,eh.script_id as scriptId, DATE_FORMAT(eh.create_time,'%Y-%m-%d %H:%i:%s') as createTime,eh.md5,eh.status,eh.user_name as userName,tmp.history_name as scriptName,eh.strategy,tmp.project_name as projectName FROM (SELECT eh.id,eh.strategy,eh.script_id,eh.create_time,eh.md5,eh.status,eu.name as user_name FROM entity_history eh JOIN entity_user eu on eh.user_id = eu.id) eh JOIN
+    (select es.id,es.name as history_name,ep.name as project_name FROM entity_script es JOIN entity_project ep on es.project_id = ep.id) tmp on eh.script_id=tmp.id
     ORDER BY createTime DESC
   </select>
-
   <select id="listHistoryByScriptId" parameterType="java.lang.Integer" resultType="java.util.HashMap">
-   select eh.id,eh.script_id as scriptId,DATE_FORMAT(eh.create_time,'%Y-%m-%d %H:%i:%s') as createTime,eh.md5,eh.status,eh.user_name as userName,tmp.history_name as scriptName,tmp.project_name as projectName FROM (SELECT eh.id,eh.script_id,eh.create_time,eh.md5,eh.status,eu.name as user_name FROM entity_history eh JOIN entity_user eu on eh.user_id = eu.id) eh JOIN
-  (select es.id,es.name as history_name,ep.name as project_name FROM entity_script es JOIN entity_project ep on es.project_id = ep.id) tmp on eh.script_id=tmp.id
-   where eh.script_id = #{scriptId,jdbcType=INTEGER}
+    select eh.id,eh.script_id as scriptId,DATE_FORMAT(eh.create_time,'%Y-%m-%d %H:%i:%s') as createTime,eh.md5,eh.status,eh.user_name as userName,tmp.history_name as scriptName,eh.strategy,tmp.project_name as projectName FROM (SELECT eh.id,eh.script_id,eh.create_time,eh.strategy,eh.md5,eh.status,eu.name as user_name FROM entity_history eh JOIN entity_user eu on eh.user_id = eu.id) eh JOIN
+    (select es.id,es.name as history_name,ep.name as project_name FROM entity_script es JOIN entity_project ep on es.project_id = ep.id) tmp on eh.script_id=tmp.id
+    where eh.script_id = #{scriptId,jdbcType=INTEGER}
     ORDER BY createTime DESC
   </select>
 
   <select id="searchScriptByKeyWord" parameterType="java.lang.String" resultType="java.util.HashMap">
-    select eh.id,eh.script_id as scriptId,DATE_FORMAT(eh.create_time,'%Y-%m-%d %H:%i:%s') as createTime,eh.md5,eh.status,eh.user_name as userName,tmp.history_name as scriptName,tmp.update_time,tmp.project_name as projectName FROM (SELECT eh.id,eh.script_id,eh.create_time,eh.md5,eh.status,eu.name as user_name FROM entity_history eh JOIN entity_user eu on eh.user_id = eu.id) eh JOIN
+    select eh.id,eh.script_id as scriptId,DATE_FORMAT(eh.create_time,'%Y-%m-%d %H:%i:%s') as createTime,eh.strategy,eh.md5,eh.status,eh.user_name as userName,tmp.history_name as scriptName,tmp.update_time,tmp.project_name as projectName FROM (SELECT eh.id,eh.script_id,eh.create_time,eh.md5,eh.status,eu.name as user_name FROM entity_history eh JOIN entity_user eu on eh.user_id = eu.id) eh JOIN
     (select es.id,es.update_time,es.name as history_name,ep.name as project_name FROM entity_script es JOIN entity_project ep on es.project_id = ep.id) tmp on eh.script_id=tmp.id
     <where>
       history_name LIKE concat(concat('%',#{keyword}),'%')
     </where>
     ORDER BY createTime DESC
   </select>
-
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -46,11 +45,11 @@
   </delete>
   <insert id="insert" parameterType="com.dubbo.api.vo.History">
     insert into entity_history (id, create_time, md5, 
-      status, script_id, user_id
-      )
+      status, script_id, user_id, 
+      strategy)
     values (#{id,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{md5,jdbcType=VARCHAR}, 
-      #{status,jdbcType=VARCHAR}, #{scriptId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}
-      )
+      #{status,jdbcType=VARCHAR}, #{scriptId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{strategy,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.dubbo.api.vo.History">
     insert into entity_history
@@ -73,6 +72,9 @@
       <if test="userId != null">
         user_id,
       </if>
+      <if test="strategy != null">
+        strategy,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -92,6 +94,9 @@
       </if>
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="strategy != null">
+        #{strategy,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -113,6 +118,9 @@
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
       </if>
+      <if test="strategy != null">
+        strategy = #{strategy,jdbcType=TINYINT},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -122,7 +130,8 @@
       md5 = #{md5,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},
       script_id = #{scriptId,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER}
+      user_id = #{userId,jdbcType=INTEGER},
+      strategy = #{strategy,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
