@@ -1,8 +1,9 @@
 package com.dubbo.api.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Script {
+public class Script implements Serializable{
     private Integer id;
 
     private String name;
@@ -25,8 +26,6 @@ public class Script {
 
     private String method;
 
-    private String params;
-
     private String paramType;
 
     private String cookie;
@@ -46,6 +45,12 @@ public class Script {
     private String ip;
 
     private Integer port;
+
+    private String username;
+
+    private String password;
+
+    private String params;
 
     public Integer getId() {
         return id;
@@ -135,14 +140,6 @@ public class Script {
         this.method = method == null ? null : method.trim();
     }
 
-    public String getParams() {
-        return params;
-    }
-
-    public void setParams(String params) {
-        this.params = params == null ? null : params.trim();
-    }
-
     public String getParamType() {
         return paramType;
     }
@@ -221,5 +218,59 @@ public class Script {
 
     public void setPort(Integer port) {
         this.port = port;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
+    }
+
+    public String getParams() {
+        return params;
+    }
+
+    public void setParams(String params) {
+        this.params = params == null ? null : params.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Script{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", preNumber=" + preNumber +
+                ", preTime=" + preTime +
+                ", url='" + url + '\'' +
+                ", timeOut=" + timeOut +
+                ", requestTypeId=" + requestTypeId +
+                ", protocolId=" + protocolId +
+                ", ins='" + ins + '\'' +
+                ", assertText='" + assertText + '\'' +
+                ", method='" + method + '\'' +
+                ", paramType='" + paramType + '\'' +
+                ", cookie='" + cookie + '\'' +
+                ", header='" + header + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", version='" + version + '\'' +
+                ", projectId=" + projectId +
+                ", userId=" + userId +
+                ", ip='" + ip + '\'' +
+                ", port=" + port +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", params='" + params + '\'' +
+                '}';
     }
 }

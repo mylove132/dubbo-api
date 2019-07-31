@@ -15,6 +15,7 @@ import com.dubbo.api.vo.Token;
 import com.dubbo.api.vo.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.HashMap;
@@ -42,6 +43,7 @@ public class UserController {
     @Autowired
     private TokenMapper tokenMapper;
 
+    @Transactional
     @RequestMapping(value = "",method = RequestMethod.POST)
     public BaseResponse addUserController(User user){
         System.out.println(user.getName());
@@ -65,6 +67,7 @@ public class UserController {
         }
     }
 
+    @Transactional
     @AuthPermission(PermissionConstant.ADMINISTRATOR)
     @RequestMapping(value = "",method = RequestMethod.PUT)
     public BaseResponse updateUserController(User user){
@@ -91,6 +94,7 @@ public class UserController {
         return new SuccessResponse(userService.getUserById(id));
     }
 
+    @Transactional
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     public BaseResponse deleteUserInfo(@PathVariable Integer id){
         return new SuccessResponse(userService.deleteUserById(id));

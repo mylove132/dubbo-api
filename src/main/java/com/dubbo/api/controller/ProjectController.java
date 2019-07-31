@@ -11,6 +11,7 @@ import com.dubbo.api.service.IProjectService;
 import com.dubbo.api.vo.Project;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
@@ -33,6 +34,7 @@ public class ProjectController {
         return new SuccessResponse(new PageInfo(projects));
     }
 
+    @Transactional
     @AuthPermission(PermissionConstant.VIP)
     @RequestMapping(value = "", method = RequestMethod.POST)
     public BaseResponse addProjectController(Project project) {
@@ -54,6 +56,7 @@ public class ProjectController {
         return new SuccessResponse(result);
     }
 
+    @Transactional
     @AuthPermission(PermissionConstant.VIP)
     @RequestMapping(value = "", method = RequestMethod.PUT)
     public BaseResponse updateProjectController(Project project) {
@@ -72,6 +75,7 @@ public class ProjectController {
         return new SuccessResponse(result);
     }
 
+    @Transactional
     @AuthPermission(PermissionConstant.VIP)
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public BaseResponse deleteProjectController(@PathVariable Integer id) {

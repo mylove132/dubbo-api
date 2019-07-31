@@ -13,9 +13,9 @@ public class HttpRequestEntity implements Serializable {
     private String url;
     private String username;
     private String password;
-    private String lt;
-    private String execution;
-    private String platformType;
+//    private String lt;
+//    private String execution;
+//    private String platformType;
 
     public String getUrl() {
         return url;
@@ -41,27 +41,27 @@ public class HttpRequestEntity implements Serializable {
         this.password = password;
     }
 
-    public String getLt() {
-        return lt;
-    }
-
-    public void setLt(String lt) {
-        this.lt = lt;
-    }
-
-    public String getExecution() {
-        return execution;
-    }
-
-    public void setExecution(String execution) {
-        this.execution = execution;
-    }
-
-    public String getPlatformType() {
-        return platformType == null?"teacher":platformType;
-    }
-
-    public void setPlatformType(String platformType) {
-        this.platformType = platformType;
-    }
+//    public String getLt() {
+//        return lt;
+//    }
+//
+//    public void setLt(String lt) {
+//        this.lt = lt;
+//    }
+//
+//    public String getExecution() {
+//        return execution;
+//    }
+//
+//    public void setExecution(String execution) {
+//        this.execution = execution;
+//    }
+//
+//    public String getPlatformType() {
+//        return platformType == null?"teacher":platformType;
+//    }
+//
+//    public void setPlatformType(String platformType) {
+//        this.platformType = platformType;
+//    }
 }

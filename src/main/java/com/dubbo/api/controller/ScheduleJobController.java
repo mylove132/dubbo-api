@@ -7,6 +7,7 @@ import com.dubbo.api.vo.ScheduleJob;
 import com.dubbo.api.service.IScheduleJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,6 +42,7 @@ public class ScheduleJobController {
 	 * @param scheduleJob
 	 * @return
 	 */
+	@Transactional
 	@AuthPermission(PermissionConstant.VIP)
 	@RequestMapping(value = "",method = RequestMethod.POST)
 	@ResponseBody
@@ -55,6 +57,7 @@ public class ScheduleJobController {
 	 * @param scheduleJob
 	 * @return
 	 */
+	@Transactional
 	@AuthPermission(PermissionConstant.VIP)
 	@RequestMapping(value = "/{id}",method = RequestMethod.PUT)
 	@ResponseBody
@@ -68,6 +71,7 @@ public class ScheduleJobController {
 	 * @param ids
 	 * @return
 	 */
+	@Transactional
 	@AuthPermission(PermissionConstant.VIP)
 	@RequestMapping(value = "/batchDel/{ids}",method = RequestMethod.DELETE)
 	@ResponseBody

@@ -39,9 +39,10 @@ import java.util.Map;
 public class HttpCasClient {
     private static Map<String, String> doCasLoginRequest(String url) {
         Map<String, String> map = new HashMap<>();
+        url = getUrl(url);
         try {
             Document doc = Jsoup.connect(url).get();
-            map.put("url", getUrl(url));
+            map.put("url", url);
             Elements ltNode = doc.select("input[name='lt']");
             map.put("lt", ltNode.val());
             Elements executionNode = doc.select("input[name='execution']");
@@ -60,6 +61,7 @@ public class HttpCasClient {
         int responseCode = 0;
         try {
             final HttpGet request = new HttpGet(url);
+//            request.addHeader("X-Requested-With","XMLHttpRequest");
             org.apache.http.params.HttpParams params = new BasicHttpParams();
             params.setParameter("http.protocol.handle-redirects", false); // 默认不让重定向
             request.setParams(params);
@@ -92,18 +94,22 @@ public class HttpCasClient {
         log.info("请求url:" + result.get("url"));
         HttpPost post = new HttpPost(result.get("url"));
         List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+        nvps.add(new BasicNameValuePair("loginType", "1"));
         nvps.add(new BasicNameValuePair("username", httpClientEntity.getUsername()));
         nvps.add(new BasicNameValuePair("password", httpClientEntity.getPassword()));
         nvps.add(new BasicNameValuePair("platformType", result.get("platformType")));
         nvps.add(new BasicNameValuePair("lt", result.get("lt")));
         nvps.add(new BasicNameValuePair("execution", result.get("execution")));
+        nvps.add(new BasicNameValuePair("pictureVerifyCode", result.get("performance")));
         nvps.add(new BasicNameValuePair("_eventId", "submit"));
+        log.info(nvps.toString());
         log.info("请求数据：" + new UrlEncodedFormEntity(nvps, "UTF-8").toString());
         post.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
         HttpResponse response = httpClient.execute(post);
         HttpEntity entity = response.getEntity();
         if (entity != null) {
             httpClient.getCookieStore().getCookies().forEach(c -> {
+                System.out.println("cookie信息------------------------");
                 System.out.println(c.getName() + "=>" + c.getValue());
             });
             entity.getContent().close();
@@ -203,5 +209,19 @@ public class HttpCasClient {
         } finally {
             post.releaseConnection();
         }
+    }
+
+    public static void main(String[] args) throws Exception {
+        HttpRequestEntity requestEntity = new HttpRequestEntity();
+        requestEntity.setUrl("https://sso-qa-dev.xk12.cn/login?service=https%3A%2F%2Fprivate.qa-dev.xk12.cn%2F");
+        requestEntity.setUsername("62951281078");
+        requestEntity.setPassword("Okay@123");
+        DefaultHttpClient client = casLogin(requestEntity);
+        Map<String,String> headerMap = new HashMap<>();
+        headerMap.put("X-Requested-With","XMLHttpRequest");
+        headerMap.put("Content-Type","application/json");
+        String path = "https://private.qa-dev.xk12.cn/privilege/get_menu";
+        String result = getRequest(client,headerMap,null,path,1000,null);
+        System.out.println(result);
     }
 }

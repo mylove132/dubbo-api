@@ -4,6 +4,7 @@ package com.dubbo.api.service;
 import com.dubbo.api.vo.Script;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IScriptService {
 

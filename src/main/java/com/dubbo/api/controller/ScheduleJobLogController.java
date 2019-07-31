@@ -4,6 +4,7 @@ import com.dubbo.api.common.bean.BaseResponse;
 import com.dubbo.api.vo.ScheduleJobLog;
 import com.dubbo.api.service.impl.ScheduleJobLogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -22,6 +23,7 @@ public class ScheduleJobLogController {
      * @param scheduleJobLog
      * @return
      */
+    @Transactional
     @RequestMapping(value = "",method = RequestMethod.POST)
     @ResponseBody
     public BaseResponse list(@RequestBody ScheduleJobLog scheduleJobLog){

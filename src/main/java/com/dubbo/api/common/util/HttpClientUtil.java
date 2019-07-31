@@ -12,7 +12,6 @@ import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -36,9 +35,7 @@ public class HttpClientUtil {
     public static String getRequest(Map<String,String> headers,Map<String,String> cookies, String path,Integer connTime, List<NameValuePair> parametersBody) throws URISyntaxException {
         if (connTime == null)
             connTime = 1000;
-        URIBuilder uriBuilder = new URIBuilder(path);
-        uriBuilder.setParameters(parametersBody);
-        HttpGet get = new HttpGet(uriBuilder.build());
+        HttpGet get = new HttpGet(path);
         RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(connTime).setConnectTimeout(connTime)
                 .setRedirectsEnabled(true)
                 .build();

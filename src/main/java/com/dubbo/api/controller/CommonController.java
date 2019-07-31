@@ -26,6 +26,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.quartz.impl.triggers.CronTriggerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -79,6 +80,7 @@ public class CommonController {
         return new SuccessResponse(projectTypeMapper.projectTypeList());
     }
 
+    @Transactional
     @AuthPermission(PermissionConstant.VIP)
     @RequestMapping(value = "/platform", method = RequestMethod.POST)
     public BaseResponse addPlatformController(ProjectType projectType) {
@@ -95,6 +97,7 @@ public class CommonController {
         return new SuccessResponse(result);
     }
 
+    @Transactional
     @AuthPermission(PermissionConstant.VIP)
     @RequestMapping(value = "/platform", method = RequestMethod.PUT)
     public BaseResponse editPlatformController(ProjectType projectType) {
@@ -109,6 +112,7 @@ public class CommonController {
         return new SuccessResponse(projectEnvMapper.listEnv());
     }
 
+    @Transactional
     @AuthPermission(PermissionConstant.VIP)
     @RequestMapping(value = "/env", method = RequestMethod.POST)
     public BaseResponse addEnvController(ProjectEnv projectEnv) {
@@ -117,6 +121,7 @@ public class CommonController {
         return new SuccessResponse(result);
     }
 
+    @Transactional
     @AuthPermission(PermissionConstant.VIP)
     @RequestMapping(value = "/env/{projectEnvId}", method = RequestMethod.DELETE)
     public BaseResponse delEnvController(@PathVariable Integer projectEnvId) {
@@ -125,6 +130,7 @@ public class CommonController {
         return new SuccessResponse(result);
     }
 
+    @Transactional
     @AuthPermission(PermissionConstant.VIP)
     @RequestMapping(value = "/env", method = RequestMethod.PUT)
     public BaseResponse delEnvController(ProjectEnv projectEnv) {
@@ -552,7 +558,6 @@ public class CommonController {
         Map<String, String> headerMap = new HashMap<>();
         Map<String, String> cookieMap = new HashMap<>();
         List<NameValuePair> paramMap = new ArrayList<>();
-        String jsonResult = "";
 
         if (StringUtils.isNotBlank(headers)) {
             if (headers.contains("headerKey")) {

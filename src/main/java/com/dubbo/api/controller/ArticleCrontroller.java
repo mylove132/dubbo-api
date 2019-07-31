@@ -8,6 +8,7 @@ import com.dubbo.api.service.IArticleService;
 import com.dubbo.api.vo.Article;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -38,6 +39,7 @@ public class ArticleCrontroller {
 
     }
 
+    @Transactional
     @RequestMapping(value = "",method = RequestMethod.POST)
     public BaseResponse addArticleCrontroller(Article article){
         if (article.getCreateTime() == null){
@@ -50,12 +52,14 @@ public class ArticleCrontroller {
         return new SuccessResponse(result);
     }
 
+    @Transactional
     @RequestMapping(value = "{id}",method = RequestMethod.DELETE)
     public BaseResponse deleteArticleCrontroller(@PathVariable Integer articleId){
         int result = articleMapper.deleteByPrimaryKey(articleId);
         return new SuccessResponse(result);
     }
 
+    @Transactional
     @RequestMapping(value = "",method = RequestMethod.PUT)
     public BaseResponse uArticleCrontroller(Article article){
         int result = articleMapper.updateByPrimaryKey(article);
