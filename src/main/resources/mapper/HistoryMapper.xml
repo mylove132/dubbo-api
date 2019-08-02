@@ -26,7 +26,7 @@
   </select>
 
   <select id="searchScriptByKeyWord" parameterType="java.lang.String" resultType="java.util.HashMap">
-    select eh.id,eh.script_id as scriptId,DATE_FORMAT(eh.create_time,'%Y-%m-%d %H:%i:%s') as createTime,eh.strategy,eh.md5,eh.status,eh.user_name as userName,tmp.history_name as scriptName,tmp.update_time,tmp.project_name as projectName FROM (SELECT eh.id,eh.script_id,eh.create_time,eh.md5,eh.status,eu.name as user_name FROM entity_history eh JOIN entity_user eu on eh.user_id = eu.id) eh JOIN
+    select eh.id,eh.script_id as scriptId,DATE_FORMAT(eh.create_time,'%Y-%m-%d %H:%i:%s') as createTime,eh.strategy,eh.md5,eh.status,eh.user_name as userName,tmp.history_name as scriptName,tmp.update_time,tmp.project_name as projectName FROM (SELECT eh.id,eh.script_id,eh.strategy,eh.create_time,eh.md5,eh.status,eu.name as user_name FROM entity_history eh JOIN entity_user eu on eh.user_id = eu.id) eh JOIN
     (select es.id,es.update_time,es.name as history_name,ep.name as project_name FROM entity_script es JOIN entity_project ep on es.project_id = ep.id) tmp on eh.script_id=tmp.id
     <where>
       history_name LIKE concat(concat('%',#{keyword}),'%')
@@ -34,7 +34,7 @@
     ORDER BY createTime DESC
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from entity_history
     where id = #{id,jdbcType=INTEGER}
@@ -44,11 +44,11 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.dubbo.api.vo.History">
-    insert into entity_history (id, create_time, md5, 
-      status, script_id, user_id, 
+    insert into entity_history (id, create_time, md5,
+      status, script_id, user_id,
       strategy)
-    values (#{id,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{md5,jdbcType=VARCHAR}, 
-      #{status,jdbcType=VARCHAR}, #{scriptId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{md5,jdbcType=VARCHAR},
+      #{status,jdbcType=VARCHAR}, #{scriptId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
       #{strategy,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.dubbo.api.vo.History">
