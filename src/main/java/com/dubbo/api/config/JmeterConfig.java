@@ -27,38 +27,11 @@ public class JmeterConfig {
     @Value("${server.url}")
     private String serverUrl;
 
-//    @Value("${RUN_LOG_PATH}")
-//    private String runLogPath;
-
-//    @Value("${REPORT_IMG_PATH}")
-//    private String reportImgPath;
-
-//    @Value("${REPORT_CSV_PATH}")
-//    private String reportCsvPath;
-
-//    @Value("${GENERATE_SCRIPT_PATH}")
-//    private String generateScriptPath;
-
     @Value("${STATIC_SERVER}")
     private String staticServer;
-//
-//    @Value("${JMX_BUILD_FILE_PATH}")
-//    private String jmeterBuildFilePath;
 
-//    @Value("${JMETER_PATH}")
-//    private String jmeterPath;
-
-    @Value("${JMETER_HTML_PATH}")
-    private String jmeterHtmlPath;
-
-//    @Value("${ANT_BIN_PATH}")
-//    private String antBinPath;
-
-    @Value("${IMG_PATH}")
-    private String imgSavePath;
-
-    @Value("${IMG_STATIC_URL}")
-    private String imgStaticServer;
+    @Value("${STATIC_PATH}")
+    private String staticPath;
 
     @Value("${BUCKET}")
     private String BUCKET;
@@ -99,28 +72,12 @@ public class JmeterConfig {
         this.staticServer = staticServer;
     }
 
-    public String getJmeterHtmlPath() {
-        return jmeterHtmlPath;
+    public String getStaticPath() {
+        return staticPath;
     }
 
-    public void setJmeterHtmlPath(String jmeterHtmlPath) {
-        this.jmeterHtmlPath = jmeterHtmlPath;
-    }
-
-    public String getImgSavePath() {
-        return imgSavePath;
-    }
-
-    public void setImgSavePath(String imgSavePath) {
-        this.imgSavePath = imgSavePath;
-    }
-
-    public String getImgStaticServer() {
-        return imgStaticServer;
-    }
-
-    public void setImgStaticServer(String imgStaticServer) {
-        this.imgStaticServer = imgStaticServer;
+    public void setStaticPath(String staticPath) {
+        this.staticPath = staticPath;
     }
 
     public String getBUCKET() {

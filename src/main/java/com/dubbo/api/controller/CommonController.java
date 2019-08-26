@@ -336,7 +336,7 @@ public class CommonController {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    File jmeterHtmlFilePath = new File(jmeterConfig.getJmeterHtmlPath() + md5);
+                    File jmeterHtmlFilePath = new File(jmeterConfig.getStaticPath() +"html/" + md5);
                     if (!(jmeterHtmlFilePath.exists() && jmeterHtmlFilePath.isDirectory())) {
                         jmeterHtmlFilePath.mkdir();
                     }
@@ -455,7 +455,7 @@ public class CommonController {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    File jmeterHtmlFilePath = new File(jmeterConfig.getJmeterHtmlPath() + md5);
+                    File jmeterHtmlFilePath = new File(jmeterConfig.getStaticPath()+"html/" + md5);
                     if (!(jmeterHtmlFilePath.exists() && jmeterHtmlFilePath.isDirectory())) {
                         jmeterHtmlFilePath.mkdir();
                     }
@@ -706,7 +706,7 @@ public class CommonController {
         if (md5 == null || md5.equals("")) {
             return new ErrorResponse(CommonConstant.WATCH_REPORT_NULL);
         }
-        String jmeterHtmlPath = jmeterConfig.getJmeterHtmlPath();
+        String jmeterHtmlPath = jmeterConfig.getStaticPath()+"html";
         File file = new File(jmeterHtmlPath);
         if (file.exists()) {
             File[] htmlFiles = file.listFiles(new FileFilter() {
@@ -795,12 +795,12 @@ public class CommonController {
         //重新生成文件名
         fileName = UUID.randomUUID() + suffixName;
         //指定本地文件夹存储图片
-        String filePath = jmeterConfig.getImgSavePath();
+        String filePath = jmeterConfig.getStaticPath()+"img";
         try {
             //将图片保存到static文件夹里
             fileUpload.transferTo(new File(filePath + fileName));
             Map<String, String> result = new HashMap<>();
-            result.put("url", jmeterConfig.getImgStaticServer() + "/" + fileName);
+            result.put("url", jmeterConfig.getStaticServer() + "/" + fileName);
             return new SuccessResponse(result);
         } catch (Exception e) {
             e.printStackTrace();

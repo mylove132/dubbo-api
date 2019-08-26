@@ -438,7 +438,7 @@ public class ExecJmeterScript {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    File jmeterHtmlFilePath = new File(jmeterConfig.getJmeterHtmlPath() + md5);
+                    File jmeterHtmlFilePath = new File(jmeterConfig.getStaticPath() +"html/" + md5);
                     if (!(jmeterHtmlFilePath.exists() && jmeterHtmlFilePath.isDirectory())) {
                         jmeterHtmlFilePath.mkdir();
                     }
@@ -561,7 +561,7 @@ public class ExecJmeterScript {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    File jmeterHtmlFilePath = new File(jmeterConfig.getJmeterHtmlPath() + md5);
+                    File jmeterHtmlFilePath = new File(jmeterConfig.getStaticPath() +"html/" + md5);
                     if (!(jmeterHtmlFilePath.exists() && jmeterHtmlFilePath.isDirectory())) {
                         jmeterHtmlFilePath.mkdir();
                     }
