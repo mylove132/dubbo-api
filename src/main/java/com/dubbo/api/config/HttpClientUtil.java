@@ -48,12 +48,12 @@ public class HttpClientUtil {
                 get.setHeader(entry.getKey(),entry.getValue());
             }
         }
-        String cookie = "";
+        String cs = "";
         if (MapUtils.isNotEmpty(cookies)){
-            for (Map.Entry<String,String> entry : headers.entrySet()){
-                cookie += entry.getKey()+"="+entry.getValue()+";";
+            for (Map.Entry<String,String> entry : cookies.entrySet()){
+                cs += entry.getKey()+"="+entry.getValue()+";";
             }
-            get.addHeader("Cookie",cookie);
+            get.addHeader("Cookie",cs);
         }
         HttpClient client = HttpClientBuilder.create().build();
         try {
@@ -67,6 +67,7 @@ public class HttpClientUtil {
             throw new RuntimeException("postRequest -- Client protocol exception!", e);
         }
         catch (IOException e) {
+            log.error("请求错误："+e.getMessage());
             throw new RuntimeException("postRequest -- IO error!", e);
         }
         finally {
@@ -108,12 +109,12 @@ public class HttpClientUtil {
                 post.setHeader(entry.getKey(),entry.getValue());
             }
         }
-        String cookie = "";
+        String cs = "";
         if (MapUtils.isNotEmpty(cookies)){
-            for (Map.Entry<String,String> entry : headers.entrySet()){
-                cookie += entry.getKey()+"="+entry.getValue()+";";
+            for (Map.Entry<String,String> entry : cookies.entrySet()){
+                cs += entry.getKey()+"="+entry.getValue()+";";
             }
-            post.addHeader("Cookie",cookie);
+            post.addHeader("Cookie",cs);
         }
         post.setEntity(entity);
         try {

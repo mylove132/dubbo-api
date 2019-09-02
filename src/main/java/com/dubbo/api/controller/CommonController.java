@@ -597,7 +597,6 @@ public class CommonController {
                     case "GET":
                         try {
                             result = HttpClientUtil.getRequest(headerMap, cookieMap, url, timeOut, paramMap);
-
                         } catch (URISyntaxException e) {
                             result = e.getMessage();
                             break;
