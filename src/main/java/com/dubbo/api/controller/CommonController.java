@@ -485,6 +485,8 @@ public class CommonController {
                                 redisService.set("exec_jmeter_count", "0");
                             }
                         }
+                        history.setStatus("success");
+                        historyMapper.insertSelective(history);
                     } catch (Exception e) {
                         log.error("执行shell命令出错：" + e.getMessage());
                         redisService.remove("exec_jmeter_id_" + scriptId);
@@ -495,30 +497,14 @@ public class CommonController {
                             redisService.set("exec_jmeter_count", "0");
                         }
                         log.error("执行jmx文件出错:" + jmeterConfig.getJmxFilePath() + md5 + ".jmx");
+                        history.setStatus("fail");
+                        historyMapper.insertSelective(history);
                     }
-
                 }
             }).start();
         }
-        history.setStatus("success");
-        historyMapper.insertSelective(history);
         return new SuccessResponse(CommonConstant.OP_SUCCESS);
     }
-
-//    private void modifyBuildFile(String resultTitle,String md5){
-//        Map<String,String> result = new HashMap<>();
-//        result.put("jmeter.home",jmeterConfig.getJmeterPath());
-//        result.put("report.title",resultTitle);
-//        result.put("jmeter.result.jtl.dir",jmeterConfig.getJtlFilePath());
-//        result.put("jmeter.result.html.dir",jmeterConfig.getJmeterHtmlPath());
-//        result.put("ReportName",md5);
-//        result.put("jmeter.result.html.dir",jmeterConfig.getJmeterHtmlPath());
-//        XmlUtil.modifyNodeXml(jmeterConfig.getJmeterBuildFilePath(),result);
-//        Map<String,String> selectMap = new HashMap<>();
-//        selectMap.put("dir",jmeterConfig.getJmxFilePath());
-//        selectMap.put("includes",md5+".jmx");
-//        XmlUtil.modifySelectNodeXml(jmeterConfig.getJmeterBuildFilePath(),selectMap);
-//    }
 
 
     @RequestMapping(value = "/testRequest", method = RequestMethod.POST)
