@@ -365,6 +365,8 @@ public class CommonController {
                                 redisService.set("exec_jmeter_count", "0");
                             }
                         }
+                        history.setStatus("success");
+                        historyMapper.insertSelective(history);
                     } catch (Exception e) {
                         log.error("执行build文件出错：" + e.getMessage());
                         redisService.remove("exec_jmeter_id_" + scriptId);
@@ -375,6 +377,8 @@ public class CommonController {
                             redisService.set("exec_jmeter_count", "0");
                         }
                         log.error("执行jmx文件出错:" + jmeterConfig.getJmxFilePath() + md5 + ".jmx");
+                        history.setStatus("fail");
+                        historyMapper.insert(history);
                     }
 
                 }
