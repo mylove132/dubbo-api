@@ -3,12 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2d5aad6e-fe86-43cb-8479-2e708b805cf8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jmeter.log" afterPath="$PROJECT_DIR$/jmeter.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dubbo/api/common/constant/CommonConstant.java" afterPath="$PROJECT_DIR$/src/main/java/com/dubbo/api/common/constant/CommonConstant.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dubbo/api/controller/CommonController.java" afterPath="$PROJECT_DIR$/src/main/java/com/dubbo/api/controller/CommonController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dubbo/api/dao/HistoryMapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/dubbo/api/dao/HistoryMapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/dubbo/api/task/ExecJmeterScript.java" afterPath="$PROJECT_DIR$/src/main/java/com/dubbo/api/task/ExecJmeterScript.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mapper/HistoryMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mapper/HistoryMapper.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -25,7 +19,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/dubbo/api/controller/CommonController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="332">
-              <caret line="95" column="73" lean-forward="true" selection-start-line="95" selection-start-column="73" selection-end-line="95" selection-end-column="73" />
+              <caret line="95" column="73" lean-forward="false" selection-start-line="95" selection-start-column="73" selection-end-line="95" selection-end-column="73" />
               <folding>
                 <element signature="method#watchReportLog#0;class#CommonController#0" expanded="false" />
                 <element signature="method#readToString#0;class#CommonController#0" expanded="false" />
@@ -42,8 +36,8 @@
       <file leaf-file-name="ExecJmeterScript.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/dubbo/api/task/ExecJmeterScript.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="627" column="0" lean-forward="true" selection-start-line="627" selection-start-column="0" selection-end-line="627" selection-end-column="0" />
+            <state relative-caret-position="730">
+              <caret line="627" column="0" lean-forward="false" selection-start-line="627" selection-start-column="0" selection-end-line="627" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -824,12 +818,12 @@
       <workItem from="1564738197958" duration="465000" />
       <workItem from="1566546066846" duration="530000" />
       <workItem from="1566785934625" duration="7567000" />
-      <workItem from="1567408363434" duration="13126000" />
+      <workItem from="1567408363434" duration="13509000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="510185000" />
+    <option name="totallyTimeSpent" value="510568000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -860,9 +854,9 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32979977" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32908162" sideWeight="0.49804142" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4757804" sideWeight="0.4915803" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4757804" sideWeight="0.4915803" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32993197" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0032292788" sideWeight="0.48851454" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.401507" sideWeight="0.48851454" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21983002" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -1325,7 +1319,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/dubbo/api/controller/CommonController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="332">
-          <caret line="95" column="73" lean-forward="true" selection-start-line="95" selection-start-column="73" selection-end-line="95" selection-end-column="73" />
+          <caret line="95" column="73" lean-forward="false" selection-start-line="95" selection-start-column="73" selection-end-line="95" selection-end-column="73" />
           <folding>
             <element signature="method#watchReportLog#0;class#CommonController#0" expanded="false" />
             <element signature="method#readToString#0;class#CommonController#0" expanded="false" />
@@ -1340,8 +1334,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/dubbo/api/task/ExecJmeterScript.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="627" column="0" lean-forward="true" selection-start-line="627" selection-start-column="0" selection-end-line="627" selection-end-column="0" />
+        <state relative-caret-position="730">
+          <caret line="627" column="0" lean-forward="false" selection-start-line="627" selection-start-column="0" selection-end-line="627" selection-end-column="0" />
           <folding />
         </state>
       </provider>
