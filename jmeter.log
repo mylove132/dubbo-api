@@ -1,208 +1,199 @@
-2019-07-29 13:58:02,237 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
-2019-07-29 13:58:02,289 INFO o.a.j.JMeter: Loading user properties from: /Users/liuzhanhui/Documents/jmeter/apache-jmeter-5.1.1/bin/user.properties
-2019-07-29 13:58:02,290 INFO o.a.j.JMeter: Loading system properties from: /Users/liuzhanhui/Documents/jmeter/apache-jmeter-5.1.1/bin/system.properties
-2019-07-29 13:58:02,302 INFO o.a.j.JMeter: Copyright (c) 1998-2019 The Apache Software Foundation
-2019-07-29 13:58:02,303 INFO o.a.j.JMeter: Version 5.1.1 r1855137
-2019-07-29 13:58:02,303 INFO o.a.j.JMeter: java.version=1.8.0_152
-2019-07-29 13:58:02,303 INFO o.a.j.JMeter: java.vm.name=Java HotSpot(TM) 64-Bit Server VM
-2019-07-29 13:58:02,303 INFO o.a.j.JMeter: os.name=Mac OS X
-2019-07-29 13:58:02,303 INFO o.a.j.JMeter: os.arch=x86_64
-2019-07-29 13:58:02,303 INFO o.a.j.JMeter: os.version=10.12.6
-2019-07-29 13:58:02,303 INFO o.a.j.JMeter: file.encoding=UTF-8
-2019-07-29 13:58:02,303 INFO o.a.j.JMeter: java.awt.headless=true
-2019-07-29 13:58:02,303 INFO o.a.j.JMeter: Max memory     =1073741824
-2019-07-29 13:58:02,303 INFO o.a.j.JMeter: Available Processors =4
-2019-07-29 13:58:02,307 INFO o.a.j.JMeter: Default Locale=English (EN)
-2019-07-29 13:58:02,308 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
-2019-07-29 13:58:02,308 INFO o.a.j.JMeter: JMeterHome=/Users/liuzhanhui/Documents/jmeter/apache-jmeter-5.1.1
-2019-07-29 13:58:02,308 INFO o.a.j.JMeter: user.dir  =/Users/liuzhanhui/workspace/dubbo-api
-2019-07-29 13:58:02,308 INFO o.a.j.JMeter: PWD       =/Users/liuzhanhui/workspace/dubbo-api
-2019-07-29 13:58:02,310 INFO o.a.j.JMeter: IP: 172.16.20.132 Name: liuzhanhuideMacBook-Air.local FullName: 172.16.20.132
-2019-07-29 13:58:02,313 INFO o.a.j.JMeter: Setting property 'jmeter.reportgenerator.outputdir' to:'/Users/liuzhanhui/Documents/jmeter/project/html/ba4d05aebbaac4897cb0ea7de3a9221a'
-2019-07-29 13:58:02,315 INFO o.a.j.s.FileServer: Default base='/Users/liuzhanhui/workspace/dubbo-api'
-2019-07-29 13:58:02,319 INFO o.a.j.s.FileServer: Set new base='/Users/liuzhanhui/Documents/jmeter/project/jmx'
-2019-07-29 13:58:02,653 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
-2019-07-29 13:58:02,675 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
-2019-07-29 13:58:02,684 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
-2019-07-29 13:58:02,695 INFO o.a.j.s.SaveService: Loading file: /Users/liuzhanhui/Documents/jmeter/project/jmx/ba4d05aebbaac4897cb0ea7de3a9221a.jmx
-2019-07-29 13:58:02,771 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
-2019-07-29 13:58:02,771 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
-2019-07-29 13:58:02,771 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
-2019-07-29 13:58:02,772 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
-2019-07-29 13:58:02,772 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser
-2019-07-29 13:58:02,772 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser
-2019-07-29 13:58:02,795 INFO o.a.j.p.h.c.CookieManager: Settings: Delete null: true Check: true Allow variable: true Save: false Prefix: COOKIE_
-2019-07-29 13:58:02,871 INFO o.a.j.s.SampleResult: Note: Sample TimeStamps are START times
-2019-07-29 13:58:02,872 INFO o.a.j.s.SampleResult: sampleresult.default.encoding is set to ISO-8859-1
-2019-07-29 13:58:02,872 INFO o.a.j.s.SampleResult: sampleresult.useNanoTime=true
-2019-07-29 13:58:02,872 INFO o.a.j.s.SampleResult: sampleresult.nanoThreadSleep=5000
-2019-07-29 13:58:02,905 INFO o.a.j.JMeter: Creating summariser <summary>
-2019-07-29 13:58:02,920 INFO o.a.j.r.d.ReportGenerator: ReportGenerator will use for Parsing the separator: ','
-2019-07-29 13:58:02,923 INFO o.a.j.r.d.ReportGenerator: Will generate report at end of test from  results file: /Users/liuzhanhui/Documents/jmeter/project/jtl/ba4d05aebbaac4897cb0ea7de3a9221a.jtl
-2019-07-29 13:58:02,924 INFO o.a.j.r.d.ReportGenerator: Reading report generator properties from: /Users/liuzhanhui/Documents/jmeter/apache-jmeter-5.1.1/bin/reportgenerator.properties
-2019-07-29 13:58:02,928 INFO o.a.j.r.d.ReportGenerator: Merging with JMeter properties
-2019-07-29 13:58:02,942 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.temp_dir' not found, using default value 'temp' instead.
-2019-07-29 13:58:02,947 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.apdex_per_transaction' not found, using default value 'null' instead.
-2019-07-29 13:58:02,947 INFO o.a.j.r.c.ReportGeneratorConfiguration: apdex_per_transaction : {} is empty, not APDEX per transaction customization
-2019-07-29 13:58:02,947 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.sample_filter' not found, using default value 'null' instead.
-2019-07-29 13:58:02,948 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.report_title' not found, using default value 'null' instead.
-2019-07-29 13:58:02,948 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.start_date' not found, using default value 'null' instead.
-2019-07-29 13:58:02,948 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.end_date' not found, using default value 'null' instead.
-2019-07-29 13:58:02,950 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.date_format' not found, using default value 'null' instead.
-2019-07-29 13:58:02,953 INFO o.a.j.r.c.ReportGeneratorConfiguration: Will use date range start date: null, end date: null
-2019-07-29 13:58:02,973 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.totalTPS.exclude_controllers' not found, using default value 'false' instead.
-2019-07-29 13:58:02,974 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.activeThreadsOverTime.exclude_controllers' not found, using default value 'false' instead.
-2019-07-29 13:58:02,974 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.timeVsThreads.exclude_controllers' not found, using default value 'false' instead.
-2019-07-29 13:58:02,974 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.responseTimeDistribution.exclude_controllers' not found, using default value 'false' instead.
-2019-07-29 13:58:02,975 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.transactionsPerSecond.exclude_controllers' not found, using default value 'false' instead.
-2019-07-29 13:58:02,975 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.responseTimePercentiles.exclude_controllers' not found, using default value 'false' instead.
-2019-07-29 13:58:02,976 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.responseTimePercentilesOverTime.exclude_controllers' not found, using default value 'false' instead.
-2019-07-29 13:58:02,976 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.responseTimesOverTime.exclude_controllers' not found, using default value 'false' instead.
-2019-07-29 13:58:02,976 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.connectTimeOverTime.exclude_controllers' not found, using default value 'false' instead.
-2019-07-29 13:58:02,976 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.latenciesOverTime.exclude_controllers' not found, using default value 'false' instead.
-2019-07-29 13:58:02,978 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.json.filters_only_sample_series' not found, using default value 'true' instead.
-2019-07-29 13:58:02,978 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.json.series_filter' not found, using default value '' instead.
-2019-07-29 13:58:02,978 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.json.show_controllers_only' not found, using default value 'false' instead.
-2019-07-29 13:58:02,979 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.html.filters_only_sample_series' not found, using default value 'true' instead.
-2019-07-29 13:58:02,979 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.html.series_filter' not found, using default value '' instead.
-2019-07-29 13:58:02,979 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.html.show_controllers_only' not found, using default value 'false' instead.
-2019-07-29 13:58:02,985 INFO o.a.j.e.StandardJMeterEngine: Running the test!
-2019-07-29 13:58:02,986 INFO o.a.j.s.SampleEvent: List of sample_variables: []
-2019-07-29 13:58:02,986 INFO o.a.j.s.SampleEvent: List of sample_variables: []
-2019-07-29 13:58:02,996 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must contain the string: '.functions.'
-2019-07-29 13:58:02,996 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must not contain the string: '.gui.'
-2019-07-29 13:58:04,276 INFO o.a.j.v.b.BackendListener: Backend Listener: Starting worker with class: class org.apache.jmeter.visualizers.backend.graphite.GraphiteBackendListenerClient and queue capacity: 5000
-2019-07-29 13:58:04,278 INFO o.a.j.v.b.BackendListener: Backend Listener: Started  worker with class: class org.apache.jmeter.visualizers.backend.graphite.GraphiteBackendListenerClient
-2019-07-29 13:58:04,307 INFO o.a.j.v.b.g.TextGraphiteMetricsSender: Created TextGraphiteMetricsSender with host: localhost, port: 2003, prefix: jmeter.
-2019-07-29 13:58:04,318 INFO o.a.j.JMeter: Running test (1564379884318)
-2019-07-29 13:58:04,383 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : 首评心智
-2019-07-29 13:58:04,384 INFO o.a.j.e.StandardJMeterEngine: Starting 10 threads for group 首评心智.
-2019-07-29 13:58:04,384 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
-2019-07-29 13:58:04,384 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=10 ramp-up=1 delayedStart=false
-2019-07-29 13:58:04,393 INFO o.a.j.t.JMeterThread: Thread started: 首评心智 1-1
-2019-07-29 13:58:04,403 INFO o.a.j.t.ThreadGroup: Started thread group number 1
-2019-07-29 13:58:04,403 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
-2019-07-29 13:58:04,491 INFO o.a.j.t.JMeterThread: Thread started: 首评心智 1-2
-2019-07-29 13:58:04,587 INFO o.a.j.t.JMeterThread: Thread started: 首评心智 1-3
-2019-07-29 13:58:04,691 INFO o.a.j.t.JMeterThread: Thread started: 首评心智 1-4
-2019-07-29 13:58:04,786 INFO o.a.j.t.JMeterThread: Thread started: 首评心智 1-5
-2019-07-29 13:58:04,887 INFO o.a.j.t.JMeterThread: Thread started: 首评心智 1-6
-2019-07-29 13:58:04,988 INFO o.a.j.t.JMeterThread: Thread started: 首评心智 1-7
-2019-07-29 13:58:05,093 INFO o.a.j.t.JMeterThread: Thread started: 首评心智 1-8
-2019-07-29 13:58:05,187 INFO o.a.j.t.JMeterThread: Thread started: 首评心智 1-9
-2019-07-29 13:58:05,239 INFO o.a.j.p.h.s.HTTPHCAbstractImpl: Local host = liuzhanhuideMacBook-Air.local
-2019-07-29 13:58:05,250 INFO o.a.j.p.h.s.HTTPHC4Impl: HTTP request retry count = 0
-2019-07-29 13:58:05,291 INFO o.a.j.t.JMeterThread: Thread started: 首评心智 1-10
-2019-07-29 13:58:05,352 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:05,664 INFO o.a.j.u.JsseSSLManager: Using default SSL protocol: TLS
-2019-07-29 13:58:05,664 INFO o.a.j.u.JsseSSLManager: SSL session context: per-thread
-2019-07-29 13:58:05,668 INFO o.a.j.r.Summariser: summary +      1 in 00:00:01 =    0.7/s Avg:   195 Min:   195 Max:   195 Err:     1 (100.00%) Active: 10 Started: 10 Finished: 0
-2019-07-29 13:58:06,314 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:07,310 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:08,309 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:09,316 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:10,311 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:11,312 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:12,310 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:13,314 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:14,311 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:15,314 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:16,313 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:17,312 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:18,311 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:19,314 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:20,310 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:21,310 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:22,312 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:23,312 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:24,312 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:25,312 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:26,314 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:27,315 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:28,314 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:29,310 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:30,004 INFO o.a.j.r.Summariser: summary +    706 in 00:00:24 =   29.0/s Avg:   337 Min:    35 Max:  5000 Err:   706 (100.00%) Active: 10 Started: 10 Finished: 0
-2019-07-29 13:58:30,004 INFO o.a.j.r.Summariser: summary =    707 in 00:00:26 =   27.5/s Avg:   337 Min:    35 Max:  5000 Err:   707 (100.00%)
-2019-07-29 13:58:30,310 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:31,313 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:32,314 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:33,312 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:34,313 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:35,313 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:36,312 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:37,311 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:38,315 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:39,312 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:40,313 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:41,310 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:42,312 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:43,310 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:44,313 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:44,401 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 首评心智 1-8
-2019-07-29 13:58:44,401 INFO o.a.j.t.JMeterThread: Thread finished: 首评心智 1-8
-2019-07-29 13:58:44,568 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 首评心智 1-4
-2019-07-29 13:58:44,568 INFO o.a.j.t.JMeterThread: Thread finished: 首评心智 1-4
-2019-07-29 13:58:44,679 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 首评心智 1-2
-2019-07-29 13:58:44,679 INFO o.a.j.t.JMeterThread: Thread finished: 首评心智 1-2
-2019-07-29 13:58:44,748 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 首评心智 1-5
-2019-07-29 13:58:44,748 INFO o.a.j.t.JMeterThread: Thread finished: 首评心智 1-5
-2019-07-29 13:58:44,750 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 首评心智 1-10
-2019-07-29 13:58:44,750 INFO o.a.j.t.JMeterThread: Thread finished: 首评心智 1-10
-2019-07-29 13:58:44,752 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 首评心智 1-6
-2019-07-29 13:58:44,752 INFO o.a.j.t.JMeterThread: Thread finished: 首评心智 1-6
-2019-07-29 13:58:45,084 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 首评心智 1-3
-2019-07-29 13:58:45,085 INFO o.a.j.t.JMeterThread: Thread finished: 首评心智 1-3
-2019-07-29 13:58:45,092 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 首评心智 1-1
-2019-07-29 13:58:45,092 INFO o.a.j.t.JMeterThread: Thread finished: 首评心智 1-1
-2019-07-29 13:58:45,315 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:45,319 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 首评心智 1-9
-2019-07-29 13:58:45,319 INFO o.a.j.t.JMeterThread: Thread finished: 首评心智 1-9
-2019-07-29 13:58:45,364 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 首评心智 1-7
-2019-07-29 13:58:45,364 INFO o.a.j.t.JMeterThread: Thread finished: 首评心智 1-7
-2019-07-29 13:58:45,365 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
-2019-07-29 13:58:45,365 INFO o.a.j.v.b.BackendListener: Worker ended
-2019-07-29 13:58:45,368 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
-2019-07-29 13:58:45,370 INFO o.a.j.r.Summariser: summary +    413 in 00:00:15 =   26.9/s Avg:   371 Min:    35 Max:  3947 Err:   413 (100.00%) Active: 0 Started: 10 Finished: 10
-2019-07-29 13:58:45,370 INFO o.a.j.r.Summariser: summary =   1120 in 00:00:41 =   27.3/s Avg:   350 Min:    35 Max:  5000 Err:  1120 (100.00%)
-2019-07-29 13:58:45,371 INFO o.a.j.JMeter: Generating Dashboard
-2019-07-29 13:58:45,371 INFO o.a.j.r.d.ReportGenerator: Flushing result collector before report Generation
-2019-07-29 13:58:45,399 INFO o.a.j.r.p.NormalizerSampleConsumer: Using format, 'ms', to parse timeStamp field
-2019-07-29 13:58:46,041 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.AggregateConsumer#stopProducing(): beginDate produced 0 samples
-2019-07-29 13:58:46,041 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.AggregateConsumer#stopProducing(): endDate produced 0 samples
-2019-07-29 13:58:46,052 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.ApdexSummaryConsumer#stopProducing(): apdexSummary produced 0 samples
-2019-07-29 13:58:46,052 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.RequestsSummaryConsumer#stopProducing(): requestsSummary produced 0 samples
-2019-07-29 13:58:46,053 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.StatisticsSummaryConsumer#stopProducing(): statisticsSummary produced 0 samples
-2019-07-29 13:58:46,060 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.Top5ErrorsBySamplerConsumer#stopProducing(): top5ErrorsBySampler produced 0 samples
-2019-07-29 13:58:46,060 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.ErrorsSummaryConsumer#stopProducing(): errorsSummary produced 0 samples
-2019-07-29 13:58:46,060 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.HitsPerSecondGraphConsumer#stopProducing(): hitsPerSecond produced 0 samples
-2019-07-29 13:58:46,256 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.LatencyVSRequestGraphConsumer#stopProducing(): latencyVsRequest produced 0 samples
-2019-07-29 13:58:46,256 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.SyntheticResponseTimeDistributionGraphConsumer#stopProducing(): syntheticResponseTimeDistribution produced 0 samples
-2019-07-29 13:58:46,257 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.BytesThroughputGraphConsumer#stopProducing(): bytesThroughputOverTime produced 0 samples
-2019-07-29 13:58:46,257 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.CodesPerSecondGraphConsumer#stopProducing(): codesPerSecond produced 0 samples
-2019-07-29 13:58:46,353 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ResponseTimeVSRequestGraphConsumer#stopProducing(): responseTimeVsRequest produced 0 samples
-2019-07-29 13:58:46,354 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.FilterConsumer#stopProducing(): startIntervalControlerFilter produced 7840 samples
-2019-07-29 13:58:46,354 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.TotalTPSGraphConsumer#stopProducing(): totalTPS produced 0 samples
-2019-07-29 13:58:46,355 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ActiveThreadsGraphConsumer#stopProducing(): activeThreadsOverTime produced 0 samples
-2019-07-29 13:58:46,355 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.TimeVSThreadGraphConsumer#stopProducing(): timeVsThreads produced 0 samples
-2019-07-29 13:58:46,356 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ResponseTimeDistributionGraphConsumer#stopProducing(): responseTimeDistribution produced 0 samples
-2019-07-29 13:58:46,356 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.TransactionsPerSecondGraphConsumer#stopProducing(): transactionsPerSecond produced 0 samples
-2019-07-29 13:58:46,356 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ResponseTimePercentilesGraphConsumer#stopProducing(): responseTimePercentiles produced 0 samples
-2019-07-29 13:58:46,360 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ResponseTimePercentilesOverTimeGraphConsumer#stopProducing(): responseTimePercentilesOverTime produced 0 samples
-2019-07-29 13:58:46,360 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ResponseTimeOverTimeGraphConsumer#stopProducing(): responseTimesOverTime produced 0 samples
-2019-07-29 13:58:46,361 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ConnectTimeOverTimeGraphConsumer#stopProducing(): connectTimeOverTime produced 0 samples
-2019-07-29 13:58:46,361 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.LatencyOverTimeGraphConsumer#stopProducing(): latenciesOverTime produced 0 samples
-2019-07-29 13:58:46,361 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.FilterConsumer#stopProducing(): nameFilter produced 16800 samples
-2019-07-29 13:58:46,361 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.FilterConsumer#stopProducing(): dateRangeFilter produced 3360 samples
-2019-07-29 13:58:46,361 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.NormalizerSampleConsumer#stopProducing(): normalizer produced 1120 samples
-2019-07-29 13:58:46,364 INFO o.a.j.r.p.CsvFileSampleSource: produce(): 1120 samples produced in 826ms on channel 0
-2019-07-29 13:58:46,365 INFO o.a.j.r.d.ReportGenerator: Exporting data using exporter:'json' of className:'org.apache.jmeter.report.dashboard.JsonExporter'
-2019-07-29 13:58:46,368 INFO o.a.j.r.d.JsonExporter: Found data for consumer statisticsSummary in context
-2019-07-29 13:58:46,368 INFO o.a.j.r.d.JsonExporter: Creating statistics for overall
-2019-07-29 13:58:46,371 INFO o.a.j.r.d.JsonExporter: Creating statistics for other transactions
-2019-07-29 13:58:46,372 INFO o.a.j.r.d.JsonExporter: Checking output folder
-2019-07-29 13:58:46,373 INFO o.a.j.r.d.JsonExporter: Writing statistics JSON to /Users/liuzhanhui/Documents/jmeter/project/html/ba4d05aebbaac4897cb0ea7de3a9221a/statistics.json
-2019-07-29 13:58:47,351 INFO o.a.j.r.d.ReportGenerator: Exporting data using exporter:'html' of className:'org.apache.jmeter.report.dashboard.HtmlTemplateExporter'
-2019-07-29 13:58:47,357 INFO o.a.j.r.d.HtmlTemplateExporter: Will generate dashboard in folder: /Users/liuzhanhui/Documents/jmeter/project/html/ba4d05aebbaac4897cb0ea7de3a9221a
-2019-07-29 13:58:47,661 INFO o.a.j.r.d.HtmlTemplateExporter: Report will be generated in: /Users/liuzhanhui/Documents/jmeter/project/html/ba4d05aebbaac4897cb0ea7de3a9221a, creating folder structure
-2019-07-29 13:58:47,669 INFO o.a.j.r.d.TemplateVisitor: Copying folder from '/Users/liuzhanhui/Documents/jmeter/apache-jmeter-5.1.1/bin/report-template' to '/Users/liuzhanhui/Documents/jmeter/project/html/ba4d05aebbaac4897cb0ea7de3a9221a', got message:[/Users/liuzhanhui/Documents/jmeter/project/html/ba4d05aebbaac4897cb0ea7de3a9221a/statistics.json], found non empty folder with following content {}, will be ignored
-2019-07-29 13:58:48,934 INFO o.a.j.JMeter: Dashboard generated
+2019-09-03 09:59:45,896 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
+2019-09-03 09:59:45,941 INFO o.a.j.JMeter: Loading user properties from: /Users/liuzhanhui/Documents/jmeter/apache-jmeter-5.1.1/bin/user.properties
+2019-09-03 09:59:45,942 INFO o.a.j.JMeter: Loading system properties from: /Users/liuzhanhui/Documents/jmeter/apache-jmeter-5.1.1/bin/system.properties
+2019-09-03 09:59:45,953 INFO o.a.j.JMeter: Copyright (c) 1998-2019 The Apache Software Foundation
+2019-09-03 09:59:45,953 INFO o.a.j.JMeter: Version 5.1.1 r1855137
+2019-09-03 09:59:45,953 INFO o.a.j.JMeter: java.version=1.8.0_152
+2019-09-03 09:59:45,954 INFO o.a.j.JMeter: java.vm.name=Java HotSpot(TM) 64-Bit Server VM
+2019-09-03 09:59:45,954 INFO o.a.j.JMeter: os.name=Mac OS X
+2019-09-03 09:59:45,954 INFO o.a.j.JMeter: os.arch=x86_64
+2019-09-03 09:59:45,954 INFO o.a.j.JMeter: os.version=10.12.6
+2019-09-03 09:59:45,954 INFO o.a.j.JMeter: file.encoding=UTF-8
+2019-09-03 09:59:45,954 INFO o.a.j.JMeter: java.awt.headless=true
+2019-09-03 09:59:45,954 INFO o.a.j.JMeter: Max memory     =1073741824
+2019-09-03 09:59:45,954 INFO o.a.j.JMeter: Available Processors =4
+2019-09-03 09:59:45,959 INFO o.a.j.JMeter: Default Locale=English (EN)
+2019-09-03 09:59:45,959 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
+2019-09-03 09:59:45,960 INFO o.a.j.JMeter: JMeterHome=/Users/liuzhanhui/Documents/jmeter/apache-jmeter-5.1.1
+2019-09-03 09:59:45,960 INFO o.a.j.JMeter: user.dir  =/Users/liuzhanhui/workspace/jmeter-web
+2019-09-03 09:59:45,960 INFO o.a.j.JMeter: PWD       =/Users/liuzhanhui/workspace/jmeter-web
+2019-09-03 09:59:45,967 INFO o.a.j.JMeter: IP: 172.16.20.132 Name: liuzhanhuideMacBook-Air.local FullName: 172.16.20.132
+2019-09-03 09:59:45,970 INFO o.a.j.JMeter: Setting property 'jmeter.reportgenerator.outputdir' to:'/Users/liuzhanhui/Documents/jmeter/project/static/html/b5cf598805d9a3d138183dbdb9bdca8e'
+2019-09-03 09:59:45,972 INFO o.a.j.s.FileServer: Default base='/Users/liuzhanhui/workspace/jmeter-web'
+2019-09-03 09:59:45,978 INFO o.a.j.s.FileServer: Set new base='/Users/liuzhanhui/Documents/jmeter/project/jmx'
+2019-09-03 09:59:46,328 INFO o.a.j.s.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2
+2019-09-03 09:59:46,354 INFO o.a.j.s.SaveService: Using SaveService properties file encoding UTF-8
+2019-09-03 09:59:46,364 INFO o.a.j.s.SaveService: Using SaveService properties version 5.0
+2019-09-03 09:59:46,387 INFO o.a.j.s.SaveService: Loading file: /Users/liuzhanhui/Documents/jmeter/project/jmx/b5cf598805d9a3d138183dbdb9bdca8e.jmx
+2019-09-03 09:59:46,508 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/html is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2019-09-03 09:59:46,509 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xhtml+xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2019-09-03 09:59:46,509 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for application/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2019-09-03 09:59:46,512 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/xml is org.apache.jmeter.protocol.http.parser.LagartoBasedHtmlParser
+2019-09-03 09:59:46,512 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser
+2019-09-03 09:59:46,514 INFO o.a.j.p.h.s.HTTPSamplerBase: Parser for text/css is org.apache.jmeter.protocol.http.parser.CssParser
+2019-09-03 09:59:46,530 INFO o.a.j.p.h.c.CookieManager: Settings: Delete null: true Check: true Allow variable: true Save: false Prefix: COOKIE_
+2019-09-03 09:59:46,667 INFO o.a.j.s.SampleResult: Note: Sample TimeStamps are START times
+2019-09-03 09:59:46,667 INFO o.a.j.s.SampleResult: sampleresult.default.encoding is set to ISO-8859-1
+2019-09-03 09:59:46,667 INFO o.a.j.s.SampleResult: sampleresult.useNanoTime=true
+2019-09-03 09:59:46,667 INFO o.a.j.s.SampleResult: sampleresult.nanoThreadSleep=5000
+2019-09-03 09:59:46,758 INFO o.a.j.JMeter: Creating summariser <summary>
+2019-09-03 09:59:46,783 INFO o.a.j.r.d.ReportGenerator: ReportGenerator will use for Parsing the separator: ','
+2019-09-03 09:59:46,791 INFO o.a.j.r.d.ReportGenerator: Will generate report at end of test from  results file: /Users/liuzhanhui/Documents/jmeter/project/jtl/b5cf598805d9a3d138183dbdb9bdca8e.jtl
+2019-09-03 09:59:46,792 INFO o.a.j.r.d.ReportGenerator: Reading report generator properties from: /Users/liuzhanhui/Documents/jmeter/apache-jmeter-5.1.1/bin/reportgenerator.properties
+2019-09-03 09:59:46,796 INFO o.a.j.r.d.ReportGenerator: Merging with JMeter properties
+2019-09-03 09:59:46,808 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.temp_dir' not found, using default value 'temp' instead.
+2019-09-03 09:59:46,814 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.apdex_per_transaction' not found, using default value 'null' instead.
+2019-09-03 09:59:46,814 INFO o.a.j.r.c.ReportGeneratorConfiguration: apdex_per_transaction : {} is empty, not APDEX per transaction customization
+2019-09-03 09:59:46,814 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.sample_filter' not found, using default value 'null' instead.
+2019-09-03 09:59:46,814 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.report_title' not found, using default value 'null' instead.
+2019-09-03 09:59:46,814 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.start_date' not found, using default value 'null' instead.
+2019-09-03 09:59:46,815 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.end_date' not found, using default value 'null' instead.
+2019-09-03 09:59:46,815 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.date_format' not found, using default value 'null' instead.
+2019-09-03 09:59:46,816 INFO o.a.j.r.c.ReportGeneratorConfiguration: Will use date range start date: null, end date: null
+2019-09-03 09:59:46,829 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.totalTPS.exclude_controllers' not found, using default value 'false' instead.
+2019-09-03 09:59:46,830 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.activeThreadsOverTime.exclude_controllers' not found, using default value 'false' instead.
+2019-09-03 09:59:46,830 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.timeVsThreads.exclude_controllers' not found, using default value 'false' instead.
+2019-09-03 09:59:46,830 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.responseTimeDistribution.exclude_controllers' not found, using default value 'false' instead.
+2019-09-03 09:59:46,830 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.transactionsPerSecond.exclude_controllers' not found, using default value 'false' instead.
+2019-09-03 09:59:46,831 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.responseTimePercentiles.exclude_controllers' not found, using default value 'false' instead.
+2019-09-03 09:59:46,831 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.responseTimePercentilesOverTime.exclude_controllers' not found, using default value 'false' instead.
+2019-09-03 09:59:46,831 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.responseTimesOverTime.exclude_controllers' not found, using default value 'false' instead.
+2019-09-03 09:59:46,833 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.connectTimeOverTime.exclude_controllers' not found, using default value 'false' instead.
+2019-09-03 09:59:46,833 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.graph.latenciesOverTime.exclude_controllers' not found, using default value 'false' instead.
+2019-09-03 09:59:46,834 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.json.filters_only_sample_series' not found, using default value 'true' instead.
+2019-09-03 09:59:46,835 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.json.series_filter' not found, using default value '' instead.
+2019-09-03 09:59:46,836 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.json.show_controllers_only' not found, using default value 'false' instead.
+2019-09-03 09:59:46,836 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.html.filters_only_sample_series' not found, using default value 'true' instead.
+2019-09-03 09:59:46,837 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.html.series_filter' not found, using default value '' instead.
+2019-09-03 09:59:46,837 INFO o.a.j.r.c.ReportGeneratorConfiguration: Property 'jmeter.reportgenerator.exporter.html.show_controllers_only' not found, using default value 'false' instead.
+2019-09-03 09:59:46,847 INFO o.a.j.e.StandardJMeterEngine: Running the test!
+2019-09-03 09:59:46,848 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2019-09-03 09:59:46,848 INFO o.a.j.s.SampleEvent: List of sample_variables: []
+2019-09-03 09:59:46,860 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must contain the string: '.functions.'
+2019-09-03 09:59:46,861 INFO o.a.j.e.u.CompoundVariable: Note: Function class names must not contain the string: '.gui.'
+2019-09-03 09:59:48,570 INFO o.a.j.v.b.BackendListener: Backend Listener: Starting worker with class: class org.apache.jmeter.visualizers.backend.graphite.GraphiteBackendListenerClient and queue capacity: 5000
+2019-09-03 09:59:48,572 INFO o.a.j.v.b.BackendListener: Backend Listener: Started  worker with class: class org.apache.jmeter.visualizers.backend.graphite.GraphiteBackendListenerClient
+2019-09-03 09:59:48,604 INFO o.a.j.v.b.g.TextGraphiteMetricsSender: Created TextGraphiteMetricsSender with host: localhost, port: 2003, prefix: jmeter.
+2019-09-03 09:59:48,614 INFO o.a.j.JMeter: Running test (1567475988614)
+2019-09-03 09:59:48,689 INFO o.a.j.e.StandardJMeterEngine: Starting ThreadGroup: 1 : 首评心智
+2019-09-03 09:59:48,689 INFO o.a.j.e.StandardJMeterEngine: Starting 10 threads for group 首评心智.
+2019-09-03 09:59:48,690 INFO o.a.j.e.StandardJMeterEngine: Thread will continue on error
+2019-09-03 09:59:48,690 INFO o.a.j.t.ThreadGroup: Starting thread group... number=1 threads=10 ramp-up=1 delayedStart=false
+2019-09-03 09:59:48,702 INFO o.a.j.t.JMeterThread: Thread started: 首评心智 1-1
+2019-09-03 09:59:48,714 INFO o.a.j.t.ThreadGroup: Started thread group number 1
+2019-09-03 09:59:48,714 INFO o.a.j.e.StandardJMeterEngine: All thread groups have been started
+2019-09-03 09:59:48,798 INFO o.a.j.t.JMeterThread: Thread started: 首评心智 1-2
+2019-09-03 09:59:48,893 INFO o.a.j.t.JMeterThread: Thread started: 首评心智 1-3
+2019-09-03 09:59:48,997 INFO o.a.j.t.JMeterThread: Thread started: 首评心智 1-4
+2019-09-03 09:59:49,093 INFO o.a.j.t.JMeterThread: Thread started: 首评心智 1-5
+2019-09-03 09:59:49,195 INFO o.a.j.t.JMeterThread: Thread started: 首评心智 1-6
+2019-09-03 09:59:49,297 INFO o.a.j.t.JMeterThread: Thread started: 首评心智 1-7
+2019-09-03 09:59:49,393 INFO o.a.j.t.JMeterThread: Thread started: 首评心智 1-8
+2019-09-03 09:59:49,494 INFO o.a.j.t.JMeterThread: Thread started: 首评心智 1-9
+2019-09-03 09:59:49,594 INFO o.a.j.t.JMeterThread: Thread started: 首评心智 1-10
+2019-09-03 09:59:49,648 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 09:59:49,649 INFO o.a.j.p.h.s.HTTPHCAbstractImpl: Local host = liuzhanhuideMacBook-Air.local
+2019-09-03 09:59:49,661 INFO o.a.j.p.h.s.HTTPHC4Impl: HTTP request retry count = 0
+2019-09-03 09:59:49,922 INFO o.a.j.p.h.s.h.LazyLayeredConnectionSocketFactory: Setting up HTTPS TrustAll Socket Factory
+2019-09-03 09:59:49,934 INFO o.a.j.u.JsseSSLManager: Using default SSL protocol: TLS
+2019-09-03 09:59:49,934 INFO o.a.j.u.JsseSSLManager: SSL session context: per-thread
+2019-09-03 09:59:50,150 INFO o.a.j.u.SSLManager: JmeterKeyStore Location:  type JKS
+2019-09-03 09:59:50,152 INFO o.a.j.u.SSLManager: KeyStore created OK
+2019-09-03 09:59:50,152 WARN o.a.j.u.SSLManager: Keystore file not found, loading empty keystore
+2019-09-03 09:59:50,608 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 09:59:51,612 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 09:59:52,610 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 09:59:53,609 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 09:59:54,607 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 09:59:55,610 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 09:59:56,607 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 09:59:57,610 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 09:59:58,613 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 09:59:59,610 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 10:00:00,003 INFO o.a.j.r.Summariser: summary +    188 in 00:00:11 =   16.5/s Avg:   517 Min:   259 Max:  1183 Err:   188 (100.00%) Active: 10 Started: 10 Finished: 0
+2019-09-03 10:00:00,607 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 10:00:01,608 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 10:00:02,611 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 10:00:03,609 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 10:00:04,610 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 10:00:05,610 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 10:00:06,608 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 10:00:07,607 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 10:00:08,605 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 10:00:09,674 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 10:00:10,610 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 10:00:11,609 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 10:00:12,611 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 10:00:13,609 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 10:00:14,610 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 10:00:15,607 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 10:00:16,609 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 10:00:17,608 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 10:00:18,605 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 10:00:18,839 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 首评心智 1-8
+2019-09-03 10:00:18,839 INFO o.a.j.t.JMeterThread: Thread finished: 首评心智 1-8
+2019-09-03 10:00:18,992 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 首评心智 1-4
+2019-09-03 10:00:18,992 INFO o.a.j.t.JMeterThread: Thread finished: 首评心智 1-4
+2019-09-03 10:00:19,028 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 首评心智 1-2
+2019-09-03 10:00:19,029 INFO o.a.j.t.JMeterThread: Thread finished: 首评心智 1-2
+2019-09-03 10:00:19,049 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 首评心智 1-5
+2019-09-03 10:00:19,050 INFO o.a.j.t.JMeterThread: Thread finished: 首评心智 1-5
+2019-09-03 10:00:19,051 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 首评心智 1-7
+2019-09-03 10:00:19,051 INFO o.a.j.t.JMeterThread: Thread finished: 首评心智 1-7
+2019-09-03 10:00:19,159 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 首评心智 1-9
+2019-09-03 10:00:19,159 INFO o.a.j.t.JMeterThread: Thread finished: 首评心智 1-9
+2019-09-03 10:00:19,161 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 首评心智 1-1
+2019-09-03 10:00:19,161 INFO o.a.j.t.JMeterThread: Thread finished: 首评心智 1-1
+2019-09-03 10:00:19,176 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 首评心智 1-6
+2019-09-03 10:00:19,176 INFO o.a.j.t.JMeterThread: Thread finished: 首评心智 1-6
+2019-09-03 10:00:19,190 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 首评心智 1-3
+2019-09-03 10:00:19,190 INFO o.a.j.t.JMeterThread: Thread finished: 首评心智 1-3
+2019-09-03 10:00:19,226 INFO o.a.j.t.JMeterThread: Stopping because end time detected by thread: 首评心智 1-10
+2019-09-03 10:00:19,227 INFO o.a.j.t.JMeterThread: Thread finished: 首评心智 1-10
+2019-09-03 10:00:19,228 INFO o.a.j.e.StandardJMeterEngine: Notifying test listeners of end of test
+2019-09-03 10:00:19,228 INFO o.a.j.v.b.BackendListener: Worker ended
+2019-09-03 10:00:19,231 ERROR o.a.j.v.b.g.TextGraphiteMetricsSender: Error writing to Graphite: Connection refused (Connection refused)
+2019-09-03 10:00:19,233 INFO o.a.j.r.Summariser: summary +    363 in 00:00:19 =   18.9/s Avg:   532 Min:   254 Max:  1687 Err:   363 (100.00%) Active: 0 Started: 10 Finished: 10
+2019-09-03 10:00:19,234 INFO o.a.j.r.Summariser: summary =    551 in 00:00:31 =   18.0/s Avg:   527 Min:   254 Max:  1687 Err:   551 (100.00%)
+2019-09-03 10:00:19,234 INFO o.a.j.JMeter: Generating Dashboard
+2019-09-03 10:00:19,234 INFO o.a.j.r.d.ReportGenerator: Flushing result collector before report Generation
+2019-09-03 10:00:19,262 INFO o.a.j.r.p.NormalizerSampleConsumer: Using format, 'ms', to parse timeStamp field
+2019-09-03 10:00:19,614 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.AggregateConsumer#stopProducing(): beginDate produced 0 samples
+2019-09-03 10:00:19,615 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.AggregateConsumer#stopProducing(): endDate produced 0 samples
+2019-09-03 10:00:19,623 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.ApdexSummaryConsumer#stopProducing(): apdexSummary produced 0 samples
+2019-09-03 10:00:19,623 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.RequestsSummaryConsumer#stopProducing(): requestsSummary produced 0 samples
+2019-09-03 10:00:19,624 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.StatisticsSummaryConsumer#stopProducing(): statisticsSummary produced 0 samples
+2019-09-03 10:00:19,633 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.Top5ErrorsBySamplerConsumer#stopProducing(): top5ErrorsBySampler produced 0 samples
+2019-09-03 10:00:19,633 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.ErrorsSummaryConsumer#stopProducing(): errorsSummary produced 0 samples
+2019-09-03 10:00:19,633 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.HitsPerSecondGraphConsumer#stopProducing(): hitsPerSecond produced 0 samples
+2019-09-03 10:00:19,701 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.LatencyVSRequestGraphConsumer#stopProducing(): latencyVsRequest produced 0 samples
+2019-09-03 10:00:19,702 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.SyntheticResponseTimeDistributionGraphConsumer#stopProducing(): syntheticResponseTimeDistribution produced 0 samples
+2019-09-03 10:00:19,703 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.BytesThroughputGraphConsumer#stopProducing(): bytesThroughputOverTime produced 0 samples
+2019-09-03 10:00:19,703 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.CodesPerSecondGraphConsumer#stopProducing(): codesPerSecond produced 0 samples
+2019-09-03 10:00:19,724 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ResponseTimeVSRequestGraphConsumer#stopProducing(): responseTimeVsRequest produced 0 samples
+2019-09-03 10:00:19,724 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.FilterConsumer#stopProducing(): startIntervalControlerFilter produced 3857 samples
+2019-09-03 10:00:19,724 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.TotalTPSGraphConsumer#stopProducing(): totalTPS produced 0 samples
+2019-09-03 10:00:19,725 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ActiveThreadsGraphConsumer#stopProducing(): activeThreadsOverTime produced 0 samples
+2019-09-03 10:00:19,725 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.TimeVSThreadGraphConsumer#stopProducing(): timeVsThreads produced 0 samples
+2019-09-03 10:00:19,725 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ResponseTimeDistributionGraphConsumer#stopProducing(): responseTimeDistribution produced 0 samples
+2019-09-03 10:00:19,725 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.TransactionsPerSecondGraphConsumer#stopProducing(): transactionsPerSecond produced 0 samples
+2019-09-03 10:00:19,726 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ResponseTimePercentilesGraphConsumer#stopProducing(): responseTimePercentiles produced 0 samples
+2019-09-03 10:00:19,729 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ResponseTimePercentilesOverTimeGraphConsumer#stopProducing(): responseTimePercentilesOverTime produced 0 samples
+2019-09-03 10:00:19,729 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ResponseTimeOverTimeGraphConsumer#stopProducing(): responseTimesOverTime produced 0 samples
+2019-09-03 10:00:19,729 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.ConnectTimeOverTimeGraphConsumer#stopProducing(): connectTimeOverTime produced 0 samples
+2019-09-03 10:00:19,729 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.graph.impl.LatencyOverTimeGraphConsumer#stopProducing(): latenciesOverTime produced 0 samples
+2019-09-03 10:00:19,729 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.FilterConsumer#stopProducing(): nameFilter produced 8265 samples
+2019-09-03 10:00:19,729 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.FilterConsumer#stopProducing(): dateRangeFilter produced 1653 samples
+2019-09-03 10:00:19,730 INFO o.a.j.r.p.AbstractSampleConsumer: class org.apache.jmeter.report.processor.NormalizerSampleConsumer#stopProducing(): normalizer produced 551 samples
+2019-09-03 10:00:19,730 INFO o.a.j.r.p.CsvFileSampleSource: produce(): 551 samples produced in 429ms on channel 0
+2019-09-03 10:00:19,731 INFO o.a.j.r.d.ReportGenerator: Exporting data using exporter:'json' of className:'org.apache.jmeter.report.dashboard.JsonExporter'
+2019-09-03 10:00:19,734 INFO o.a.j.r.d.JsonExporter: Found data for consumer statisticsSummary in context
+2019-09-03 10:00:19,735 INFO o.a.j.r.d.JsonExporter: Creating statistics for overall
+2019-09-03 10:00:19,736 INFO o.a.j.r.d.JsonExporter: Creating statistics for other transactions
+2019-09-03 10:00:19,737 INFO o.a.j.r.d.JsonExporter: Checking output folder
+2019-09-03 10:00:19,738 INFO o.a.j.r.d.JsonExporter: Writing statistics JSON to /Users/liuzhanhui/Documents/jmeter/project/static/html/b5cf598805d9a3d138183dbdb9bdca8e/statistics.json
+2019-09-03 10:00:20,347 INFO o.a.j.r.d.ReportGenerator: Exporting data using exporter:'html' of className:'org.apache.jmeter.report.dashboard.HtmlTemplateExporter'
+2019-09-03 10:00:20,352 INFO o.a.j.r.d.HtmlTemplateExporter: Will generate dashboard in folder: /Users/liuzhanhui/Documents/jmeter/project/static/html/b5cf598805d9a3d138183dbdb9bdca8e
+2019-09-03 10:00:20,614 INFO o.a.j.r.d.HtmlTemplateExporter: Report will be generated in: /Users/liuzhanhui/Documents/jmeter/project/static/html/b5cf598805d9a3d138183dbdb9bdca8e, creating folder structure
+2019-09-03 10:00:20,618 INFO o.a.j.r.d.TemplateVisitor: Copying folder from '/Users/liuzhanhui/Documents/jmeter/apache-jmeter-5.1.1/bin/report-template' to '/Users/liuzhanhui/Documents/jmeter/project/static/html/b5cf598805d9a3d138183dbdb9bdca8e', got message:[/Users/liuzhanhui/Documents/jmeter/project/static/html/b5cf598805d9a3d138183dbdb9bdca8e/statistics.json], found non empty folder with following content {}, will be ignored
+2019-09-03 10:00:21,394 INFO o.a.j.JMeter: Dashboard generated

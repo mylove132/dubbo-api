@@ -235,8 +235,8 @@ public class HttpJmeterScript {
                     Map<String, String> js = (Map<String, String>) json.get(i);
                     String headerKey = js.get("cookieKey");
                     String headerValue = js.get("cookieValue");
-                    String domain = js.get("cookieDomain");
-                    String path = js.get("cookiePath");
+                    String domain = js.get("domain");
+                    String path = js.get("path");
                     formMap.put("cookieKey", headerKey);
                     formMap.put("cookieValue", headerValue);
                     formMap.put("domain",domain);

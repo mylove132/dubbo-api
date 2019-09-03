@@ -337,6 +337,7 @@ public class CommonController {
                 @Override
                 public void run() {
                     File jmeterHtmlFilePath = new File(jmeterConfig.getStaticPath() +"html/" + md5);
+                    log.info("jmeter报告的目录:"+jmeterHtmlFilePath.getAbsolutePath());
                     if (!(jmeterHtmlFilePath.exists() && jmeterHtmlFilePath.isDirectory())) {
                         jmeterHtmlFilePath.mkdir();
                     }
@@ -364,6 +365,8 @@ public class CommonController {
                                 redisService.set("exec_jmeter_count", "0");
                             }
                         }
+                        history.setStatus("success");
+                        historyMapper.insertSelective(history);
                     } catch (Exception e) {
                         log.error("执行build文件出错：" + e.getMessage());
                         redisService.remove("exec_jmeter_id_" + scriptId);
@@ -374,6 +377,8 @@ public class CommonController {
                             redisService.set("exec_jmeter_count", "0");
                         }
                         log.error("执行jmx文件出错:" + jmeterConfig.getJmxFilePath() + md5 + ".jmx");
+                        history.setStatus("fail");
+                        historyMapper.insert(history);
                     }
 
                 }
@@ -456,7 +461,7 @@ public class CommonController {
                 @Override
                 public void run() {
                     File jmeterHtmlFilePath = new File(jmeterConfig.getStaticPath()+"html/" + md5);
-                    if (!(jmeterHtmlFilePath.exists() && jmeterHtmlFilePath.isDirectory())) {
+                    if (!jmeterHtmlFilePath.exists()) {
                         jmeterHtmlFilePath.mkdir();
                     }
                     String cmd = "%s -n -t %s -l %s -e -o %s";
@@ -484,6 +489,8 @@ public class CommonController {
                                 redisService.set("exec_jmeter_count", "0");
                             }
                         }
+                        history.setStatus("success");
+                        historyMapper.insertSelective(history);
                     } catch (Exception e) {
                         log.error("执行shell命令出错：" + e.getMessage());
                         redisService.remove("exec_jmeter_id_" + scriptId);
@@ -494,30 +501,26 @@ public class CommonController {
                             redisService.set("exec_jmeter_count", "0");
                         }
                         log.error("执行jmx文件出错:" + jmeterConfig.getJmxFilePath() + md5 + ".jmx");
+                        history.setStatus("fail");
+                        historyMapper.insertSelective(history);
                     }
-
                 }
             }).start();
         }
-        history.setStatus("success");
-        historyMapper.insertSelective(history);
-        return new SuccessResponse(CommonConstant.OP_SUCCESS);
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("md5",md5);
+        return new SuccessResponse(result);
     }
 
-//    private void modifyBuildFile(String resultTitle,String md5){
-//        Map<String,String> result = new HashMap<>();
-//        result.put("jmeter.home",jmeterConfig.getJmeterPath());
-//        result.put("report.title",resultTitle);
-//        result.put("jmeter.result.jtl.dir",jmeterConfig.getJtlFilePath());
-//        result.put("jmeter.result.html.dir",jmeterConfig.getJmeterHtmlPath());
-//        result.put("ReportName",md5);
-//        result.put("jmeter.result.html.dir",jmeterConfig.getJmeterHtmlPath());
-//        XmlUtil.modifyNodeXml(jmeterConfig.getJmeterBuildFilePath(),result);
-//        Map<String,String> selectMap = new HashMap<>();
-//        selectMap.put("dir",jmeterConfig.getJmxFilePath());
-//        selectMap.put("includes",md5+".jmx");
-//        XmlUtil.modifySelectNodeXml(jmeterConfig.getJmeterBuildFilePath(),selectMap);
-//    }
+    @RequestMapping(value = "/findResult", method = RequestMethod.GET)
+    public BaseResponse findResult(String md5) {
+        History history = historyMapper.selectByMd5(md5);
+        if (null == history){
+            return new ErrorResponse(CommonConstant.EXEC_NO_END);
+        }
+        return new SuccessResponse(history);
+    }
+
 
 
     @RequestMapping(value = "/testRequest", method = RequestMethod.POST)
@@ -597,7 +600,6 @@ public class CommonController {
                     case "GET":
                         try {
                             result = HttpClientUtil.getRequest(headerMap, cookieMap, url, timeOut, paramMap);
-
                         } catch (URISyntaxException e) {
                             result = e.getMessage();
                             break;
@@ -725,7 +727,7 @@ public class CommonController {
             if (result) {
                 Map<String, String> map = new HashMap<>();
                 map.put("md5", md5);
-                map.put("staticUrl", jmeterConfig.getStaticServer());
+                map.put("staticUrl", jmeterConfig.getStaticServer()+"/html");
                 return new SuccessResponse(map);
             }
         }
@@ -800,7 +802,7 @@ public class CommonController {
             //将图片保存到static文件夹里
             fileUpload.transferTo(new File(filePath + fileName));
             Map<String, String> result = new HashMap<>();
-            result.put("url", jmeterConfig.getStaticServer() + "/" + fileName);
+            result.put("url", jmeterConfig.getStaticServer() + "/img/" + fileName);
             return new SuccessResponse(result);
         } catch (Exception e) {
             e.printStackTrace();
@@ -931,7 +933,9 @@ public class CommonController {
     }
 
     public static void main(String[] args) {
-        boolean resilt = timerTask("/Users/liuzhanhui/Documents/jmeter/project/csv/adc55973b87f237d09a5db2792339d48.csv");
-        System.out.println(resilt);
+        File jmeterHtmlFilePath = new File("/Users/liuzhanhui/Documents/jmeter/project/static/a4ba09db3ac6c022756f25cc3ddcc178");
+        if (!jmeterHtmlFilePath.exists()){
+            jmeterHtmlFilePath.mkdir();
+        }
     }
 }

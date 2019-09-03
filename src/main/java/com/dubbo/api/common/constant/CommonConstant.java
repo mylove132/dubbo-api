@@ -18,6 +18,7 @@ public enum CommonConstant {
     WATCH_REPORT_NULL(6003,"报告不存在"),
     EXEC_FILE_EXIST(8001,"执行的jmeter文件已存在"),
     EXEC_COUNT_MAX(8002,"执行的jmeter文件最多同时执行2个"),
+    EXEC_NO_END(8003,"执行未结束"),
     CREATE_JMETER_FILE_FAIL(8003,"创建jmeter文件失败"),
     MODIFY_BUILD_FILE(8006,"修改构建文件失败"),
     REPORT_LOG_NOT_EXIST(8004,"日志文件不存在，可能已删除"),

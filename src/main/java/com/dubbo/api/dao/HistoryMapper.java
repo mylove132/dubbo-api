@@ -16,6 +16,8 @@ public interface HistoryMapper {
 
     History selectByPrimaryKey(Integer id);
 
+    History selectByMd5(String md5);
+
     int updateByPrimaryKeySelective(History record);
 
     int updateByPrimaryKey(History record);

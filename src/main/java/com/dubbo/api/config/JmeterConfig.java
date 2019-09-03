@@ -27,23 +27,11 @@ public class JmeterConfig {
     @Value("${server.url}")
     private String serverUrl;
 
-    @Value("${STATIC_SERVER}")
-    private String staticServer;
-
     @Value("${STATIC_PATH}")
     private String staticPath;
 
-    @Value("${BUCKET}")
-    private String BUCKET;
-
-    @Value("${ACCESSKEY}")
-    private String ACCESSKEY;
-
-    @Value("${PATH}")
-    private String PATH;
-
-    @Value("${SECRETKEY}")
-    private String SECRETKEY;
+    @Value("${STATIC_SERVER}")
+    private String staticServer;
 
     @Value("${server.port}")
     private String port;
@@ -64,13 +52,6 @@ public class JmeterConfig {
         this.jtlFilePath = jtlFilePath;
     }
 
-    public String getStaticServer() {
-        return staticServer;
-    }
-
-    public void setStaticServer(String staticServer) {
-        this.staticServer = staticServer;
-    }
 
     public String getStaticPath() {
         return staticPath;
@@ -80,37 +61,6 @@ public class JmeterConfig {
         this.staticPath = staticPath;
     }
 
-    public String getBUCKET() {
-        return BUCKET;
-    }
-
-    public void setBUCKET(String BUCKET) {
-        this.BUCKET = BUCKET;
-    }
-
-    public String getACCESSKEY() {
-        return ACCESSKEY;
-    }
-
-    public void setACCESSKEY(String ACCESSKEY) {
-        this.ACCESSKEY = ACCESSKEY;
-    }
-
-    public String getPATH() {
-        return PATH;
-    }
-
-    public void setPATH(String PATH) {
-        this.PATH = PATH;
-    }
-
-    public String getSECRETKEY() {
-        return SECRETKEY;
-    }
-
-    public void setSECRETKEY(String SECRETKEY) {
-        this.SECRETKEY = SECRETKEY;
-    }
 
     public String getJmxFilePath() {
         return jmxFilePath;
@@ -121,6 +71,13 @@ public class JmeterConfig {
     }
 
 
+    public String getStaticServer() {
+        return staticServer;
+    }
+
+    public void setStaticServer(String staticServer) {
+        this.staticServer = staticServer;
+    }
 
     public String getServerUrl() {
         return serverUrl;
