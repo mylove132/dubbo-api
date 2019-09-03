@@ -507,8 +507,20 @@ public class CommonController {
                 }
             }).start();
         }
-        return new SuccessResponse(CommonConstant.OP_SUCCESS);
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("md5",md5);
+        return new SuccessResponse(result);
     }
+
+    @RequestMapping(value = "/findResult", method = RequestMethod.GET)
+    public BaseResponse findResult(String md5) {
+        History history = historyMapper.selectByMd5(md5);
+        if (null == history){
+            return new ErrorResponse(CommonConstant.EXEC_NO_END);
+        }
+        return new SuccessResponse(history);
+    }
+
 
 
     @RequestMapping(value = "/testRequest", method = RequestMethod.POST)
