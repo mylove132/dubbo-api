@@ -521,6 +521,151 @@ public class CommonController {
         return new SuccessResponse(history);
     }
 
+    @RequestMapping(value = "/testRequests", method = RequestMethod.POST)
+    public BaseResponse testRequests(int[] scriptIds){
+        if (scriptIds.length == 0 || scriptIds == null){
+            return new SuccessResponse(CommonConstant.OP_SUCCESS);
+        }
+        List<Map<String,Object>> resultList = new ArrayList<>();
+        for (int i=0;i<scriptIds.length;i++){
+            Map<String,Object> resultMap = new HashMap<>();
+            Script script = scriptMapper.selectByPrimaryKey(scriptIds[i]);
+            if (script != null){
+                int id = script.getId();
+                String headers = script.getHeader();
+                String cookies = script.getCookie();
+                Integer timeOut = script.getTimeOut();
+                Integer requestTypeId = script.getRequestTypeId();
+                Integer protocolId = script.getProtocolId();
+                String url = script.getUrl();
+                String params = script.getParams();
+
+                String protocolName = "HTTP";
+                String requestTypeName = "GET";
+
+                RequestType requestType = requestTypeMapper.selectByPrimaryKey(requestTypeId);
+                if (requestType != null) {
+                    requestTypeName = requestType.getName();
+                }
+
+                Protocol protocol = protocolMapper.selectByPrimaryKey(protocolId);
+                if (protocol != null) {
+                    protocolName = protocol.getName();
+                }
+
+
+                Map<String, String> headerMap = new HashMap<>();
+                Map<String, String> cookieMap = new HashMap<>();
+                List<NameValuePair> paramMap = new ArrayList<>();
+
+                if (StringUtils.isNotBlank(headers)) {
+                    if (headers.contains("headerKey")) {
+                        JSONArray json = JSON.parseArray(headers);
+                        for (int f = 0; f < json.size(); f++) {
+                            Map<String, String> js = (Map<String, String>) json.get(f);
+                            String headerKey = js.get("headerKey");
+                            String headerValue = js.get("headerValue");
+                            headerMap.put(headerKey, headerValue);
+                        }
+                    } else {
+                        headers = null;
+                    }
+                }
+
+                if (StringUtils.isNotBlank(cookies)) {
+                    if (cookies.contains("cookieKey")) {
+                        JSONArray json = JSON.parseArray(cookies);
+                        for (int z = 0; z < json.size(); z++) {
+                            Map<String, String> js = (Map<String, String>) json.get(z);
+                            String cookieKey = js.get("cookieKey");
+                            String cookieValue = js.get("cookieValue");
+                            cookieMap.put(cookieKey, cookieValue);
+                        }
+                    } else {
+                        cookies = null;
+                    }
+                }
+
+                if (StringUtils.isNoneBlank(params)) {
+                    if (params.contains("paramskey")) {
+                        JSONArray json = JSON.parseArray(params);
+                        for (int k = 0; k < json.size(); k++) {
+                            Map<String, String> js = (Map<String, String>) json.get(k);
+                            String paramskey = js.get("paramskey");
+                            String paramsvalue = js.get("paramsvalue");
+                            NameValuePair np = new BasicNameValuePair(paramskey, paramsvalue);
+                            paramMap.add(np);
+                        }
+                    }
+                }
+                String result = "";
+                switch (protocolName.toUpperCase()) {
+                    case "HTTP":
+                        switch (requestTypeName.toUpperCase()) {
+                            case "GET":
+                                try {
+                                    result = HttpClientUtil.getRequest(headerMap, cookieMap, url, timeOut, paramMap);
+                                } catch (URISyntaxException e) {
+                                    result = e.getMessage();
+                                    break;
+                                } catch (RuntimeException e) {
+                                    result = e.getMessage();
+                                    break;
+                                }
+                                break;
+                            case "POST":
+                                if (paramMap != null && paramMap.size() > 0) {
+                                    try {
+                                        result = HttpClientUtil.postForm(url, paramMap, headerMap, cookieMap, timeOut);
+
+                                    } catch (RuntimeException e) {
+                                        result = e.getMessage();
+                                        break;
+                                    }
+                                } else if (StringUtils.isNoneBlank(params)) {
+                                    log.info("json格式请求接口:" + params);
+                                    try {
+                                        result = HttpClientUtil.postJSON(url, params, headerMap, cookieMap, timeOut);
+                                    } catch (RuntimeException e) {
+                                        result = e.getMessage();
+                                        break;
+                                    }
+                                } else {
+                                    try {
+                                        result = HttpClientUtil.postForm(url, paramMap, headerMap, cookieMap, timeOut);
+                                    } catch (RuntimeException e) {
+                                        result = e.getMessage();
+                                        break;
+                                    }
+                                }
+                                break;
+                            default:
+                                try {
+                                    result = HttpClientUtil.getRequest(headerMap, cookieMap, url, timeOut, paramMap);
+
+                                } catch (URISyntaxException e) {
+                                    result = e.getMessage();
+                                    break;
+                                } catch (RuntimeException e) {
+                                    result = e.getMessage();
+                                    break;
+                                }
+                                break;
+
+                        }
+                        break;
+                    case "DUBBO":
+                        break;
+
+                }
+                resultMap.put("id",id);
+                resultMap.put("result",result);
+                resultList.add(resultMap);
+            }
+
+        }
+        return new SuccessResponse(resultList);
+    }
 
 
     @RequestMapping(value = "/testRequest", method = RequestMethod.POST)
